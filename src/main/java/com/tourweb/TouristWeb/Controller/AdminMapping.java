@@ -55,8 +55,8 @@ public class AdminMapping {
 			return "Admin/editbooking";
 		}
 		
-		@GetMapping("/viewBooking")
-		public String viewBooking() {
-			return "Admin/viewbooking";
-		}
+//		@GetMapping("/viewBooking")
+//		public String viewBooking() {
+//			return "Admin/viewbooking";
+//		}
 }
