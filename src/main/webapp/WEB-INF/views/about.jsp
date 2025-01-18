@@ -65,12 +65,12 @@
 	               </div>
 	               <div class="col-lg-4 text-center text-lg-end">
 	                   <div class="d-inline-flex align-items-center" style="height: 45px;">
-	                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-twitter fw-normal"></i></a>
 	                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-facebook-f fw-normal"></i></a>
-	                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-linkedin-in fw-normal"></i></a>
 	                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-instagram fw-normal"></i></a>
-	                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href=""><i class="fab fa-youtube fw-normal"></i></a>
-	                   </div>
+	                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-youtube fw-normal"></i></a>
+						   <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-google fw-normal"></i></a>
+
+					      </div>
 	               </div>
 	           </div>
 	       </div>
@@ -90,8 +90,8 @@
 	            </button>
 	            <div class="collapse navbar-collapse" id="navbarCollapse">
 	                <div class="navbar-nav ms-auto py-0">
-	                    <a href="/TouristWebsite" class="nav-item nav-link active" style="font-family: 'Poppins', sans-serif;">Home</a>
-	                    <a href="/TouristWebsite/about" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">About</a>
+	                    <a href="/TouristWebsite" class="nav-item nav-link " style="font-family: 'Poppins', sans-serif;">Home</a>
+	                    <a href="/TouristWebsite/about" class="nav-item nav-link active" style="font-family: 'Poppins', sans-serif;">About</a>
 
 	                    <!-- All Tours India (Domestic) Dropdown -->
 	                    <div class="nav-item dropdown">
@@ -325,7 +325,8 @@
 			
 		<br>	
         <hr>
-
+</div>
+</div>
 			<!-- Footer Start -->
 		<div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s" style="padding-left: 0; padding-right: 0;">
 		    <div class="container py-5">
@@ -343,12 +344,29 @@
 		                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Shree Gajanan Yatra Company Pvt. Ltd, 123 Pilgrimage Road, Mumbai, India</p>
 		                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9552014476</p>
 		                <p class="mb-2"><i class="fa fa-envelope me-3"></i>shrigajananyatracompany@gmail.com</p>
-		                <div class="d-flex pt-2">
-		                    <a class="btn btn-outline-light btn-social rounded-circle me-2" href=""><i class="fab fa-twitter"></i></a>
-		                    <a class="btn btn-outline-light btn-social rounded-circle me-2" href=""><i class="fab fa-facebook-f"></i></a>
-		                    <a class="btn btn-outline-light btn-social rounded-circle me-2" href=""><i class="fab fa-youtube"></i></a>
-		                    <a class="btn btn-outline-light btn-social rounded-circle me-2" href=""><i class="fab fa-linkedin-in"></i></a>
-		                </div>
+						
+						<div class="d-flex pt-2">
+						    <!-- Google Link -->
+						    <a class="btn btn-outline-light btn-social" href="https://g.co/kgs/rL9UQJa" target="_blank">
+						        <i class="fab fa-google fw-normal"></i>
+						    </a>
+
+						    <!-- Facebook Link -->
+						    <a class="btn btn-outline-light btn-social" href="https://facebook.com" target="_blank">
+						        <i class="fab fa-facebook-f"></i>
+						    </a>
+
+						    <!-- YouTube Link -->
+						    <a class="btn btn-outline-light btn-social" href="https://youtu.be/chsYbQpY-cU" target="_blank">
+						        <i class="fab fa-youtube"></i>
+						    </a>
+
+						    <!-- Instagram Link -->
+						    <a class="btn btn-outline-light btn-social" href="https://instagram.com/shriajanan_yatra_company" target="_blank">
+						        <i class="fab fa-instagram fw-normal"></i>
+						    </a>
+						</div>
+
 		            </div>
 
 		            <!-- Gallery Section -->
@@ -380,7 +398,7 @@
 		            <div class="col-lg-3 col-md-6">
 		                <h4 class="text-white mb-3">Travel Inspiration</h4>
 		                <p>Exploring new places helps break away from daily routines, reduces stress, and fosters mental clarity.</p>
-		                <p>Discover the joy of traveling and embark on unforgettable journeys with us!</p>
+		            
 		            </div>
 		        </div>
 		    </div>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,8 +24,8 @@
         /* Dashboard Styling */
         .dashboard {
             display: flex;
-            flex-direction: column;
             height: 100%;
+            flex-direction: row; /* Side by side */
         }
 
         /* Header Styling */
@@ -37,10 +36,14 @@
             background-color: #2c3e50;
             color: #ecf0f1;
             padding: 10px 20px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 900;
         }
 
         .header .logo img {
-            width: 100px;
+            width: 80px;
         }
 
         .header .actions img {
@@ -55,54 +58,64 @@
         }
 
         /* Sidebar Styling */
-        .sidebar {
-            width: 250px;
-            height: calc(100vh - 50px);
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            padding: 20px;
-            position: fixed;
-        }
+		/* Sidebar Styling */
+		        .sidebar {
+		            width: 250px;
+		            background-color: #2c3e50;
+		            color: #ecf0f1;
+		            padding: 11px;
+					align:left;
+		            position: fixed;
+		            top: 90px; /* Align below the header */
+		            height: calc(100vh - 50px);
+		            overflow-y: auto; /* Ensure sidebar scrolls if needed */
+		        }
 
-        .sidebar h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+		        .sidebar h2 {
+		            text-align: left;
+		            margin-bottom: 15px;
+		        }
 
-        .sidebar nav ul {
-            list-style: none;
-        }
+		        .sidebar nav ul {
+		            list-style: none;
+		            padding-top:10px;
+		            margin-right: 10px;
+		        }
 
-        .sidebar nav ul li {
-            margin: 15px 0;
-        }
+		        .sidebar nav ul li {
+		            margin: 0;
+		        }
 
-        .sidebar nav ul li a {
-            color: #ecf0f1;
-            text-decoration: none;
-            font-size: 1.1em;
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
+		        .sidebar nav ul li a {
+		            display: block;
+					margin-top:21px;
+		            color: #ecf0f1;
+		            text-decoration: none;
+		            font-size: 1.1em;
+		            padding: 5px 7px;
+		            border-radius: 3px;
+		            transition: background-color 0.3s;
+		            text-align: left;
+					
+		        }
 
-        .sidebar nav ul li a:hover {
-            background-color: #34495e;
-        }
+		        .sidebar nav ul li a:hover {
+		            background-color: #34495e;
+		        }
 
-        .sidebar nav ul li a i {
-            margin-right: 10px;
-        }
+		        .sidebar nav ul li a i {
+		            margin-right: 8px;
+		        }
 
-        /* Main Content Styling */
-        .main-content {
-            margin-left: 250px;
-            padding: 20px;
-            background-color: #f8f9fa;
-            flex: 1;
-        }
+		        /* Main Content Styling */
+		        .main-content {
+		            margin-left: 250px;
+		            margin-top: 80px; /* Space for fixed header */
+		            padding: 20px;
+		            background-color: #f8f9fa;
+		            flex: 1;
+					width:500px;
+		        }
 
         /* Table Styling */
         .table-container {
@@ -125,75 +138,73 @@
 <body>
     <div class="dashboard">
         <!-- Header -->
-       <header class="header">
-			<div class="logo">
-				<img src="../img/ShreeGajanan.png" alt=" ">
-			</div>
-			<h2 class="companyname">Shri Gajanan Yatra Company Pvt. Ltd</h2>
-			<div class="actions">
-				<img src="../img/profile.png" alt="Profile"> <img
-					src="../img/setting.png" alt="Setting"> <img src="../img/logout.png"
-					alt="Logout">
-			</div>
-		</header>
+        <header class="header">
+            <div class="logo">
+                <img src="../img/ShreeGajanan.png" alt="Shree Gajanan Logo">
+            </div>
+         
+			
+			<h2 class="companyname" style="font-family: 'Georgia', serif; font-size: 24px; font-weight: bold; color: #fff;">Shri Gajanan Yatra Company Pvt. Ltd</h2>
 
-         <div style="display: flex;">
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <!-- <h2>Shree Gajanan Yatra</h2> -->
-                <nav>
-                    <ul>
-						<li><a href="/TouristWebsite/auth/notification">Enquiry</a></li>
-                        <li><a href="/TouristWebsite/auth/dashboard" >Dashboard</a></li>
-                        <li><a href="/TouristWebsite/auth/packageType">Packages Type</a></li>
-                        <li><a href="/TouristWebsite/auth/managePackage" class="active" style="background-color: #87be29;">Manage Packages</a></li>
-                        <li><a href="#bookings">Manage Bookings</a></li>
-                   <li><a href="#payments">Manage Gallary</a></li>
-<!--                        <li><a href="#users">User Management</a></li>-->
-                        
-<!--                        <li><a href="#settings">Settings</a></li>-->
-                    </ul>
-                </nav>
-            </aside>
+            <div class="actions">
+                <img src="../img/logout.png" alt="Logout" title="Logout">
+            </div>
+        </header>
 
-            <!-- Main Content -->
-            <main class="main-content">
-                <div class="container mt-5" style="max-width: 900px;">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 class="text-center" style="color: #2c3e50; font-weight: bold;">Manage Travel Packages</h2>
-                        <div>
-                            <button class="btn btn-success" onclick="window.location.href='/TouristWebsite/auth/addPackageType'" style="background-color: #86B817; border-color: #86B817;">+ Add New Package</button>
-                            <button class="btn btn-primary"  style="background-color: #86B817; border-color: #86B817;">Export to Excel</button>
-                        </div>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="/TouristWebsite/auth/notification">Enquiry</a></li>
+                    <li><a href="/TouristWebsite/auth/dashboard">Dashboard</a></li>
+                    <li><a href="/TouristWebsite/auth/packageType">Packages Type</a></li>
+                    <li><a href="/TouristWebsite/auth/managePackage" class="active" style="background-color: #87be29;">Manage Packages</a></li>
+                    <li><a href="/TouristWebsite/auth/bookingView">Manage Bookings</a></li>
+                    <li><a href="/TouristWebsite/auth/manageGallary">Manage Gallery</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container mt-5" style="max-width: 1200px;">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="text-center" style="color: #2c3e50; font-weight: bold;">Manage Travel Packages</h2>
+                    <div>
+                        <button class="btn btn-success" onclick="window.location.href='/TouristWebsite/auth/addPackageType'" style="background-color: #86B817; border-color: #86B817;">+ Add New Package</button>
+                        <button class="btn btn-primary" style="background-color: #86B817; border-color: #86B817;">Export to Excel</button>
                     </div>
-
-                    <!-- Search Bar -->
-                    <div class="mb-3">
-                        <input type="text" id="search" class="form-control" placeholder="Search Packages..." style="border: 2px solid #86B817; border-radius: 5px;">
-                    </div>
-
-                    <!-- Table -->
-                    <table id="packageTable" class="table table-striped" style="background: #ffffff; border-radius: 10px; overflow: hidden;">
-    <thead style="background-color: #86B817 !important; color: white !important;">
-        <tr>
-            <th>ID</th>
-            <th>Package Name</th>
-            <th>Duration</th>
-            <th>Price</th>
-            <th>Type</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Data will be dynamically loaded here -->
-    </tbody>
-</table>
-
                 </div>
-            </main>
-        </div>
+
+                <!-- Search Bar -->
+                <div class="mb-3">
+                    <input type="text" id="search" class="form-control" placeholder="Search Packages..." style="border: 2px solid #86B817; border-radius: 5px;">
+                </div>
+
+                <!-- Table -->
+                <table id="packageTable" class="table table-striped" style="background: #ffffff; border-radius: 10px; overflow: hidden;">
+                    <thead style="background-color: #86B817 !important; color: white !important;">
+                        <tr>
+                            <th>ID</th>
+                            <th>Package Name</th>
+                            <th>Duration</th>
+                            <th>Price</th>
+                            <th>Type</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be dynamically loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
     </div>
-<!-- Modal for Update -->
+
+    <!-- Modal for Update (if required) -->
+    <!-- Add your modal structure here -->
+</body>
+</html>
 
 <script>
 $(document).ready(function () {
