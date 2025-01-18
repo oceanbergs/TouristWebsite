@@ -138,6 +138,12 @@
         grid-template-columns: 1fr; /* 1 column on mobile */
     }
 }
+<!--gallary-->
+	
+	       #mainGallery {
+	           cursor: pointer; /* Make thumbnails appear interactive */
+	       }
+	   
 </style>
 </head>
 </head>
@@ -164,9 +170,8 @@
 		               </div>
 		               <div class="col-lg-4 text-center text-lg-end">
 		                   <div class="d-inline-flex align-items-center" style="height: 45px;">
-		                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-twitter fw-normal"></i></a>
 		                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-facebook-f fw-normal"></i></a>
-		                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-linkedin-in fw-normal"></i></a>
+		                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-google fw-normal"></i></a>
 		                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-instagram fw-normal"></i></a>
 		                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href=""><i class="fab fa-youtube fw-normal"></i></a>
 		                   </div>
@@ -188,13 +193,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="/TouristWebsite" class="nav-item nav-link active" style="font-family: 'Poppins', sans-serif;">Home</a>
+                <a href="/TouristWebsite" class="nav-item nav-link " style="font-family: 'Poppins', sans-serif;">Home</a>
                 <a href="/TouristWebsite/about" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">About</a>
                 
 
                 <!-- All Tours India (Domestic) Dropdown -->
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" id="packageDropdownToggle" data-bs-toggle="dropdown" style="font-family: 'Poppins', sans-serif;">India</a>
+                    <a href="#" class="nav-link active dropdown-toggle" id="packageDropdownToggle" data-bs-toggle="dropdown" style="font-family: 'Poppins', sans-serif;">India</a>
                     <div class="dropdown-menu" id="packageDropdown">
                         <!-- Dynamic package names will be added here -->
                     </div>
@@ -303,144 +308,198 @@
 
 
 	<!-- Booking Start -->
-	<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-		<div class="container">
-			<div class="booking p-5">
-				<div class="row g-5 align-items-center">
-					<div class="col-md-6 text-white">
-						<h1 class="text-white mb-4">Online Booking</h1>
-						
-					</div>
-					<div class="col-md-6 mx-auto" id="bookForm">
-        <h1 class="text-white mb-4">Book A Tour</h1>
-        <form>
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <input type="text" class="form-control bg-transparent" id="name" placeholder="Your Name">
-                        <label for="name">Your Name</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <input type="email" class="form-control bg-transparent" id="email" placeholder="Your Email">
-                        <label for="email">Your Email</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-floating date" id="date3" data-target-input="nearest">
-                        <input type="text" class="form-control bg-transparent datetimepicker-input" id="datetime" placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" />
-                        <label for="datetime">Date & Time</label>
-                    </div>
-                </div>
-                <div class="col-md-6"> 
-    <div class="form-floating">
-        <select class="form-select bg-transparent" id="designationDropdown">
-            <!-- Options will be dynamically loaded -->
-        </select>
-       <label for="designationDropdown">Destination</label>
-    </div>
+	<!-- <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+	    <div class="container">
+	        <div class="booking p-5">
+	            <div class="row g-5 align-items-center">
+	                <div class="col-md-6 text-white">
+	                    <h1 class="text-white mb-4">Online Booking</h1>
+						<h1 class="text-white mb-4">Plan Your Tour </h1>
+	                </div>
+	                <div class="col-md-6 mx-auto" id="bookForm">
+	                    
+	                    <form id="bookingForm">
+	                        <div class="row g-3">
+	                            <div class="col-12">
+	                                <div class="form-floating">
+	                                    <input type="text" class="form-control bg-transparent" id="name" placeholder="Your Name" required>
+	                                    <label for="name">Your Name</label>
+	                                </div>
+	                            </div>
+	                            <div class="col-12">
+	                                <div class="form-floating">
+	                                    <input type="email" class="form-control bg-transparent" id="email" placeholder="Your Email" required>
+	                                    <label for="email">Your Email</label>
+	                                </div>
+	                            </div>
+								<div class="col-12">
+								                                <div class="form-floating">
+								                                    <input type="email" class="form-control bg-transparent" id="address" placeholder="Your Address" required>
+								                                    <label for="Adress">Your Address</label>
+								                                </div>
+								                            </div>
+	                           
+	                            <div class="col-md-6">
+	                                <div class="form-floating">
+	                                    <input type="tel" class="form-control bg-transparent" id="mobile" placeholder="Your Mobile" pattern="[0-9]{10}" required>
+	                                    <label for="mobile">Your Mobile</label>
+	                                </div>
+	                            </div>
+	                           
+	                            <div class="col-md-6">
+	                                <div class="form-floating">
+	                                    <select class="form-select bg-transparent" id="destinationDropdown">
+	                                        <option value="Destination 1">Destination 1</option>
+	                                        <option value="Destination 2">Destination 2</option>
+	                                        <option value="Destination 3">Destination 3</option>
+	                                    </select>
+	                                    <label for="destinationDropdown">Destination</label>
+	                                </div>
+	                            </div>
+	                        
+	                            <div class="col-md-6">
+	                                <div class="form-floating">
+	                                    <input type="date" class="form-control bg-transparent" id="startDate" required>
+	                                    <label for="startDate">Start Date</label>
+	                                </div>
+	                            </div>
+	                          
+	                            <div class="col-md-6">
+	                                <div class="form-floating">
+	                                    <input type="date" class="form-control bg-transparent" id="endDate" required>
+	                                    <label for="endDate">End Date</label>
+	                                </div>
+	                            </div>
+	                         
+	                            <div class="col-12">
+	                                <div class="form-floating">
+	                                    <textarea class="form-control bg-transparent" placeholder="Special Request" id="message" style="height: 100px"></textarea>
+	                                    <label for="message">Special Request</label>
+	                                </div>
+	                            </div>
+	                       
+	                            <div class="col-12">
+	                                <button type="button" class="btn btn-outline-light w-100 py-3" id="bookNowBtn">Book Now</button>
+	                            </div>
+	                        </div>
+	                    </form>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>!-->
+	<!-- Booking End -->
 </div>
-                <div class="col-12">
-                    <div class="form-floating">
-                        <textarea class="form-control bg-transparent" placeholder="Special Request" id="message" style="height: 100px"></textarea>
-                        <label for="message">Special Request</label>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <button class="btn btn-outline-light w-100 py-3" type="submit">Book Now</button>
-                </div>
-            </div>
-        </form>
-    </div>
-				</div>
-			</div>
-		</div>
+</div>
+</diV>
+		<!-- Footer Start -->
+		   <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+		       <div class="container py-5">
+		           <div class="row g-5">
+		               <div class="col-lg-3 col-md-6">
+		                   <h4 class="text-white mb-3">Company</h4>
+		                   <a class="btn btn-link" href="">About Us</a>
+		                   <a class="btn btn-link" href="">Contact Us</a>
+		                  
+		               </div>
+		               <div class="col-lg-3 col-md-6">
+		                   <h4 class="text-white mb-3">Contact</h4>
+						<p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Shree Gajanan Yatra Company Pvt. Ltd, 123 Pilgrimage Road, Mumbai, India</p>
+						                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9552014476</p>
+						                <p class="mb-2"><i class="fa fa-envelope me-3"></i>shrigajananyatracompany@gmail.com</p>
+		                   <div class="d-flex pt-2">
+							<a class="btn btn-outline-light btn-social" href="https://g.co/kgs/rL9UQJa"><i class="fab fa-google fw-normal"></i>	  
+				<a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+		                       <a class="btn btn-outline-light btn-social" href="https://youtu.be/chsYbQpY-cU"><i class="fab fa-youtube"></i></a>
+		                       <a class="btn btn-outline-light btn-social" href="https://instagram.com/shriajanan_yatra_company?"><i class="fab fa-instagram fw-normal"></i></a>
+		                   </div>
+		               </div>
+					   
+					   
+					   <div class="col-lg-3 col-md-6">
+					       <h4 class="text-white mb-3">Gallery</h4>
+					       <div class="row g-2 pt-2">
+					           <div class="col-4">
+					                <a href='/TouristWebsite/about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
+					               </a>
+					           </div>
+					           <div class="col-4">
+					                <a href='/TouristWebsite/about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
+					               </a>
+					           </div>
+					           <div class="col-4">
+					                <a href='/TouristWebsite/about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
+					               </a>
+					           </div>
+					           <div class="col-4">
+					                <a href='/TouristWebsite/about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
+					               </a>
+					           </div>
+					           <div class="col-4">
+					               <a href='/TouristWebsite/about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
+					               </a>
+					           </div>
+					           <div class="col-4">
+					               <a href='/TouristWebsite/about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
+					               </a>
+					           </div>
+					       </div>
+					   </div>
+
+					  
+
+		               <!-- Travel Inspiration Section -->
+	<div class="col-lg-3 col-md-6">
+	    <h4 class="text-white mb-3">Travel Inspiration</h4>
+	    <p class="text-light">
+	        Exploring new places helps break away from daily routines, reduces stress, and fosters mental clarity.
+	    </p>
+	   <!-- <a href="packages.html" class="btn btn-link text-decoration-underline text-light">Explore More</a>-->
 	</div>
-	<!-- Booking Start -->
 
+	    </div>
+		               </div>
+		       <div class="container">
+		           <div class="copyright">
+					<div class="row">
+					    <div class="col-md-12 text-center text-md-start mb-3 mb-md-0">
+					        &copy; <a class="border-bottom" href="#">Shree Gajanan Yatra Company Pvt. Ltd.</a> All Rights Reserved. Designed By 
+					        <a class="border-bottom" href="https://oceanberg.org">OCEANBERG TECHNOLOGIES PRIVATE LIMITED</a>
+					        <!--
+					        /*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. 
+					        If you'd like to use the template without the footer author’s credit link/attribution link/backlink, 
+					        you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/
+					        -->
+					    </div>
+		                  
+		               </div>
+		           </div>
+		       </div>
+		   </div>
+		   <!-- Footer End -->
 
-	<!-- Footer Start -->
-	   <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-	       <div class="container py-5">
-	           <div class="row g-5">
-	               <div class="col-lg-3 col-md-6">
-	                   <h4 class="text-white mb-3">Company</h4>
-	                   <a class="btn btn-link" href="">About Us</a>
-	                   <a class="btn btn-link" href="">Contact Us</a>
-	                   <a class="btn btn-link" href="">Privacy Policy</a>
-	                   <a class="btn btn-link" href="">Terms & Condition</a>
-	                   <a class="btn btn-link" href="">FAQs & Help</a>
-	               </div>
-	               <div class="col-lg-3 col-md-6">
-	                   <h4 class="text-white mb-3">Contact</h4>
-					<p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Shree Gajanan Yatra Company Pvt. Ltd, 123 Pilgrimage Road, Mumbai, India</p>
-					                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9552014476</p>
-					                <p class="mb-2"><i class="fa fa-envelope me-3"></i>shrigajananyatracompany@gmail.comom</p>
-	                   <div class="d-flex pt-2">
-	                       <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-	                       <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-	                       <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-	                       <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
-	                   </div>
-	               </div>
-	               <div class="col-lg-3 col-md-6">
-	                   <h4 class="text-white mb-3">Gallery</h4>
-	                   <div class="row g-2 pt-2">
-	                       <div class="col-4">
-	                           <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
-	                       </div>
-	                       <div class="col-4">
-	                           <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
-	                       </div>
-	                       <div class="col-4">
-	                           <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
-	                       </div>
-	                       <div class="col-4">
-	                           <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
-	                       </div>
-	                       <div class="col-4">
-	                           <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
-	                       </div>
-	                       <div class="col-4">
-	                           <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
-	                       </div>
-	                   </div>
-	               </div>
-	               <div class="col-lg-3 col-md-6">
-	                   <h4 class="text-white mb-3">Newsletter</h4>
-	                   <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
-	                   <div class="position-relative mx-auto" style="max-width: 400px;">
-	                       <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-	                       <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-	                   </div>
-	               </div>
-	           </div>
-	       </div>
-	       <div class="container">
-	           <div class="copyright">
-	               <div class="row">
-	                   <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-						&copy; <a class="border-bottom" href="#">Shree Gajanan Yatra Company Pvt. Ltd.</a>, All Rights Reserved.
+		   <script>
+		   	   				       document.addEventListener('DOMContentLoaded', function () {
+		   	   				           // Check if the page has a hash value for smooth scrolling
+		   	   				           if (window.location.hash === '#detailedGallery') {
+		   	   				               const detailedGallerySection = document.getElementById('detailedGallery');
 
-						                   <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-						                   Designed By <a class="border-bottom" href="https://htmlcodex.com">OCEANBERG TECHNOLOGIES</a>
-	                   </div>
-	                   <div class="col-md-6 text-center text-md-end">
-	                       <div class="footer-menu">
-	                           <a href="">Home</a>
-	                           <a href="">Cookies</a>
-	                           <a href="">Help</a>
-	                           <a href="">FQAs</a>
-	                       </div>
-	                   </div>
-	               </div>
-	           </div>
-	       </div>
-	   </div>
-	   <!-- Footer End -->
-	    <!-- Footer End -->
-
+		   	   				               // If the section exists, smoothly scroll to it
+		   	   				               if (detailedGallerySection) {
+		   	   				                   detailedGallerySection.scrollIntoView({
+		   	   				                       behavior: 'smooth',
+		   	   				                       block: 'start'
+		   	   				                   });
+		   	   				               }
+		   	   				           }
+		   	   				       });
+		   	   				   </script>
 
 	<!-- Back to Top -->
 	<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i

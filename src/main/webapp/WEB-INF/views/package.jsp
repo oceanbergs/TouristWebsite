@@ -118,6 +118,7 @@
     margin-right: 5px;
 }
 
+
 #all-highlights {
     display: none;
     position: absolute;
@@ -142,6 +143,12 @@
         grid-template-columns: 1fr; /* 1 column on mobile */
     }
 }
+<!--gallary-->
+	
+	       #mainGallery {
+	           cursor: pointer; /* Make thumbnails appear interactive */
+	       }
+	  
 </style>
 </head>
 </head>
@@ -166,14 +173,14 @@
 		                       <small class="text-light"><i class="fa fa-envelope-open me-2"></i>shrigajananyatracompany@gmail.com</small>
 		                   </div>
 		               </div>
-		               <div class="col-lg-4 text-center text-lg-end">
-		                   <div class="d-inline-flex align-items-center" style="height: 45px;">
-		                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-twitter fw-normal"></i></a>
-		                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-facebook-f fw-normal"></i></a>
-		                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-linkedin-in fw-normal"></i></a>
-		                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-instagram fw-normal"></i></a>
-		                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle" href=""><i class="fab fa-youtube fw-normal"></i></a>
-		                   </div>
+						<div class="col-lg-4 text-center text-lg-end">
+						                   <div class="d-inline-flex align-items-center" style="height: 45px;">
+						                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-facebook-f fw-normal"></i></a>
+						                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-instagram fw-normal"></i></a>
+						                       <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-youtube fw-normal"></i></a>
+											   <a class="btn btn-sm btn-outline-light btn-sm-square rounded-circle me-2" href=""><i class="fab fa-google fw-normal"></i></a>
+
+										      </div>
 		               </div>
 		           </div>
 		       </div>
@@ -192,7 +199,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="/TouristWebsite" class="nav-item nav-link active" style="font-family: 'Poppins', sans-serif;">Home</a>
+                <a href="/TouristWebsite" class="nav-item nav-link " style="font-family: 'Poppins', sans-serif;">Home</a>
                 <a href="/TouristWebsite/about" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">About</a>
                 <!-- All Tours India (Domestic) Dropdown -->
                 <div class="nav-item dropdown">
@@ -205,7 +212,7 @@
                 <!-- All World Tours (International) Dropdown -->
                 <a href="/TouristWebsite/GetInternation" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">World</a>
 
-                <a href="/TouristWebsite/packages" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Packages</a>
+                <a href="/TouristWebsite/packages" class="nav-item nav-link active" style="font-family: 'Poppins', sans-serif;">Packages</a>
                 <a href="/TouristWebsite/contact" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Contact</a>
             </div>
         </div>
@@ -303,39 +310,46 @@
 		</div>
 	</div>
 
-
+	
 	<!-- Booking Start -->
-	<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+	<!-- <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
 	    <div class="container">
 	        <div class="booking p-5">
 	            <div class="row g-5 align-items-center">
 	                <div class="col-md-6 text-white">
 	                    <h1 class="text-white mb-4">Online Booking</h1>
+						<h1 class="text-white mb-4">Plan Your Tour </h1>
 	                </div>
 	                <div class="col-md-6 mx-auto" id="bookForm">
-	                    <h1 class="text-white mb-4">Book A Tour</h1>
+	                    
 	                    <form id="bookingForm">
 	                        <div class="row g-3">
-	                            <div class="col-md-6">
+	                            <div class="col-12">
 	                                <div class="form-floating">
 	                                    <input type="text" class="form-control bg-transparent" id="name" placeholder="Your Name" required>
 	                                    <label for="name">Your Name</label>
 	                                </div>
 	                            </div>
-	                            <div class="col-md-6">
+	                            <div class="col-12">
 	                                <div class="form-floating">
 	                                    <input type="email" class="form-control bg-transparent" id="email" placeholder="Your Email" required>
 	                                    <label for="email">Your Email</label>
 	                                </div>
 	                            </div>
-	                            <!-- Mobile Number -->
+								<div class="col-12">
+								                                <div class="form-floating">
+								                                    <input type="email" class="form-control bg-transparent" id="address" placeholder="Your Address" required>
+								                                    <label for="Adress">Your Address</label>
+								                                </div>
+								                            </div>
+	                           
 	                            <div class="col-md-6">
 	                                <div class="form-floating">
 	                                    <input type="tel" class="form-control bg-transparent" id="mobile" placeholder="Your Mobile" pattern="[0-9]{10}" required>
 	                                    <label for="mobile">Your Mobile</label>
 	                                </div>
 	                            </div>
-	                            <!-- Destination Dropdown -->
+	                           
 	                            <div class="col-md-6">
 	                                <div class="form-floating">
 	                                    <select class="form-select bg-transparent" id="destinationDropdown">
@@ -346,28 +360,28 @@
 	                                    <label for="destinationDropdown">Destination</label>
 	                                </div>
 	                            </div>
-	                            <!-- Start Date -->
+	                        
 	                            <div class="col-md-6">
 	                                <div class="form-floating">
 	                                    <input type="date" class="form-control bg-transparent" id="startDate" required>
 	                                    <label for="startDate">Start Date</label>
 	                                </div>
 	                            </div>
-	                            <!-- End Date -->
+	                          
 	                            <div class="col-md-6">
 	                                <div class="form-floating">
 	                                    <input type="date" class="form-control bg-transparent" id="endDate" required>
 	                                    <label for="endDate">End Date</label>
 	                                </div>
 	                            </div>
-	                            <!-- Special Request -->
+	                         
 	                            <div class="col-12">
 	                                <div class="form-floating">
 	                                    <textarea class="form-control bg-transparent" placeholder="Special Request" id="message" style="height: 100px"></textarea>
 	                                    <label for="message">Special Request</label>
 	                                </div>
 	                            </div>
-	                            <!-- Submit Button -->
+	                       
 	                            <div class="col-12">
 	                                <button type="button" class="btn btn-outline-light w-100 py-3" id="bookNowBtn">Book Now</button>
 	                            </div>
@@ -377,21 +391,15 @@
 	            </div>
 	        </div>
 	    </div>
-	</div>
+	</div>!-->
 	<!-- Booking End -->
+	
 
 
 
+</div>
 
-
-	<!-- Add jQuery and datetimepicker library -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap-datetime-picker@5.39.0/build/js/bootstrap-datetimepicker.min.js"></script>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap-datetime-picker@5.39.0/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-
-
-
+</div>
 		<!-- Footer Start -->
 		   <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
 		       <div class="container py-5">
@@ -414,29 +422,46 @@
 		                       <a class="btn btn-outline-light btn-social" href="https://instagram.com/shriajanan_yatra_company?"><i class="fab fa-instagram fw-normal"></i></a>
 		                   </div>
 		               </div>
-		               <div class="col-lg-3 col-md-6">
-		                   <h4 class="text-white mb-3">Gallery</h4>
-		                   <div class="row g-2 pt-2">
-		                       <div class="col-4">
-		                           <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
-		                       </div>
-		                       <div class="col-4">
-		                           <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
-		                       </div>
-		                       <div class="col-4">
-		                           <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
-		                       </div>
-		                       <div class="col-4">
-		                           <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
-		                       </div>
-		                       <div class="col-4">
-		                           <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
-		                       </div>
-		                       <div class="col-4">
-		                           <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
-		                       </div>
-		                   </div>
-		               </div>
+					   
+					   
+					   <div class="col-lg-3 col-md-6">
+					       <h4 class="text-white mb-3">Gallery</h4>
+					       <div class="row g-2 pt-2">
+					           <div class="col-4">
+					                <a href='/TouristWebsite/about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
+					               </a>
+					           </div>
+					           <div class="col-4">
+					                <a href='/TouristWebsite/about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
+					               </a>
+					           </div>
+					           <div class="col-4">
+					                <a href='/TouristWebsite/about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
+					               </a>
+					           </div>
+					           <div class="col-4">
+					                <a href='/TouristWebsite/about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
+					               </a>
+					           </div>
+					           <div class="col-4">
+					               <a href='/TouristWebsite/about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
+					               </a>
+					           </div>
+					           <div class="col-4">
+					               <a href='/TouristWebsite/about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
+					               </a>
+					           </div>
+					       </div>
+					   </div>
+
+					  
+
 		               <!-- Travel Inspiration Section -->
 	<div class="col-lg-3 col-md-6">
 	    <h4 class="text-white mb-3">Travel Inspiration</h4>
@@ -450,19 +475,38 @@
 		               </div>
 		       <div class="container">
 		           <div class="copyright">
-		               <div class="row">
-		                   <div class="col-md-12 text-center text-md-start mb-3 mb-md-0">
-							&copy; <a class="border-bottom" href="#">Shree Gajanan Yatra Company Pvt. Ltd.</a>, All Rights Reserved. Designed By <u>OCEANBERG TECHNOLOGIES PRIVATE LIMITED</u>
-
-							                   <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-							                    <a class="border-bottom" href="https://htmlcodex.com"></a>
-		                   </div>
+					<div class="row">
+					    <div class="col-md-12 text-center text-md-start mb-3 mb-md-0">
+					        &copy; <a class="border-bottom" href="#">Shree Gajanan Yatra Company Pvt. Ltd.</a> All Rights Reserved. Designed By 
+					        <a class="border-bottom" href="https://oceanberg.org">OCEANBERG TECHNOLOGIES PRIVATE LIMITED</a>
+					        <!--
+					        /*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. 
+					        If you'd like to use the template without the footer author’s credit link/attribution link/backlink, 
+					        you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/
+					        -->
+					    </div>
 		                  
 		               </div>
 		           </div>
 		       </div>
 		   </div>
 		   <!-- Footer End -->
+		   <script>
+		   	   				       document.addEventListener('DOMContentLoaded', function () {
+		   	   				           // Check if the page has a hash value for smooth scrolling
+		   	   				           if (window.location.hash === '#detailedGallery') {
+		   	   				               const detailedGallerySection = document.getElementById('detailedGallery');
+
+		   	   				               // If the section exists, smoothly scroll to it
+		   	   				               if (detailedGallerySection) {
+		   	   				                   detailedGallerySection.scrollIntoView({
+		   	   				                       behavior: 'smooth',
+		   	   				                       block: 'start'
+		   	   				                   });
+		   	   				               }
+		   	   				           }
+		   	   				       });
+		   	   				   </script>
 
  <!-- Back to Top -->
  <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -610,7 +654,7 @@ function getAllPackages() {
 <!--                                    highlightsPreview +-->
 <!--                                    '<a href="#" class="text-success" data-id="' + pkg.id + '" style="margin-left: 10px; cursor: pointer;">More...</a>' +-->
 <!--                                '</p>' +-->
-                                '<div id="all-highlights-' + pkg.id + '" style="display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; padding: 10px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 10;">' +
+                                '<div id="all-hifaceghlights-' + pkg.id + '" style="display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; padding: 10px; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); z-index: 10;">' +
 <!--                                    '<h5>All Tour Highlights</h5>' +-->
                                     '<ul>' + pkg.packagename + '</ul>' +
                                     '<button class="btn btn-sm btn-danger" data-id="' + pkg.id + '" style="margin-top: 10px;">Close</button>' +
@@ -687,6 +731,15 @@ Please confirm availability.
             window.open(whatsappURL, '_blank');
         });
     });
+
+	<!-- Add jQuery and datetimepicker library -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-datetime-picker@5.39.0/build/js/bootstrap-datetimepicker.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-datetime-picker@5.39.0/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+
+	
 </script>
  
 </body>

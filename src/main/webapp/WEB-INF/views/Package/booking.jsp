@@ -20,85 +20,97 @@
             height: 100%;
         }
 
-        /* Dashboard Styling */
+        /* Dashboard Layout */
         .dashboard {
             display: flex;
-            flex-direction: column;
-            height: 100%;
+            height: 100vh;
+            flex-direction: row;
         }
 
         /* Header Styling */
-        .header {
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background-color: #2c3e50;
             color: #ecf0f1;
             padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
         }
 
-        .header .logo img {
-            width: 100px;
+        header .logo img {
+            width: 80px;
         }
 
-        .header .actions img {
+        header .companyname {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        header .actions img {
             width: 35px;
-            margin: 0 10px;
             cursor: pointer;
+            margin-left: 10px;
             transition: transform 0.3s;
         }
 
-        .header .actions img:hover {
+        header .actions img:hover {
             transform: scale(1.2);
         }
 
         /* Sidebar Styling */
-        .sidebar {
+        aside {
             width: 250px;
-            height: calc(100vh - 50px);
             background-color: #2c3e50;
             color: #ecf0f1;
             padding: 20px;
             position: fixed;
+            top: 50px;
+            left: 0;
+            height: calc(100vh - 50px);
+            overflow-y: auto;
         }
 
-        .sidebar h2 {
+        aside h2 {
             text-align: center;
             margin-bottom: 20px;
+            font-size: 1.5rem;
         }
 
-        .sidebar nav ul {
+        aside nav ul {
             list-style: none;
-            padding-left: 0;
+            padding: 0;
         }
 
-        .sidebar nav ul li {
-            margin: 15px 0;
+        aside nav ul li {
+            margin-bottom: 15px;
         }
 
-        .sidebar nav ul li a {
+        aside nav ul li a {
+            display: block;
             color: #ecf0f1;
-            text-decoration: none;
-            font-size: 1.1em;
-            display: flex;
-            align-items: center;
             padding: 10px;
+            text-decoration: none;
             border-radius: 5px;
             transition: background-color 0.3s;
         }
 
-        .sidebar nav ul li a:hover {
+        aside nav ul li a:hover {
             background-color: #34495e;
         }
 
-        .sidebar nav ul li a i {
-            margin-right: 10px;
+        aside nav ul li a.active {
+            background-color: #87be29;
         }
 
         /* Main Content Styling */
         .main-content {
             margin-left: 250px;
-            padding: 20px;
+            padding: 80px 20px 20px 20px;
             background-color: #f8f9fa;
             flex: 1;
         }
@@ -131,101 +143,100 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                align-items: flex-start;
+            header .companyname {
+                font-size: 1.2rem;
             }
 
-            .sidebar {
-                width: 220px;
+            aside {
+                width: 200px;
             }
 
             .main-content {
-                margin-left: 200px;
+                margin-left: 220px;
             }
         }
-
     </style>
 </head>
 <body>
     <div class="dashboard">
         <!-- Header -->
-        <header class="header">
+        <header>
             <div class="logo">
                 <img src="../img/ShreeGajanan.png" alt="Logo">
-            </div>
-            <h2 class="companyname">Shri Gajanan Yatra Company Pvt. Ltd</h2>
+            </div>            
+			<h2 class="companyname" style="font-family: 'Georgia', serif; font-size: 24px; font-weight: bold; color: #fff;">Shri Gajanan Yatra Company Pvt. Ltd</h2>
+
+
             <div class="actions">
-               
-                <img src="../img/logout.png" alt="Logout">
+                <img src="../img/logout.png" alt="Logout" title="Logout" 
+                     onmouseover="this.style.transform='scale(1.2)'" 
+                     onmouseout="this.style.transform='scale(1)'">
             </div>
         </header>
-        <div style="display: flex;">
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <nav>
-                    <ul>
-                        <li><a href="/TouristWebsite/auth/notification">Enquiry</a></li>
-                        <li><a href="/TouristWebsite/auth/dashboard">Dashboard</a></li>
-                        <li><a href="/TouristWebsite/auth/packageType">Packages Type</a></li>
-                        <li><a href="/TouristWebsite/auth/managePackage" class="active" style="background-color: #87be29;">Manage Packages</a></li>
-                        <li><a href="#bookings">Manage Bookings</a></li>
-                        <li><a href="#payments">Manage Gallery</a></li>
-                    </ul>
-                </nav>
-            </aside>
+        
+        <!-- Sidebar -->
+		<aside class="sidebar">
+		            <nav>
+		                <ul>
+		                    <li><a href="/TouristWebsite/auth/notification">Enquiry</a></li>
+		                    <li><a href="/TouristWebsite/auth/dashboard">Dashboard</a></li>
+		                    <li><a href="/TouristWebsite/auth/packageType">Packages Type</a></li>
+		                    <li><a href="/TouristWebsite/auth/managePackage">Manage Packages</a></li>
+		                    <li><a href="/TouristWebsite/auth/bookingView" class="active" style="background-color: #87be29;">Manage Bookings</a></li>
+		                    <li><a href="/TouristWebsite/auth/manageGallary">Manage Gallery</a></li>
+		                </ul>
+		            </nav>
+		        </aside>
 
-            <!-- Main Content -->
-            <main class="main-content">
-                <div class="container mt-5" style="max-width: 900px;">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 class="text-center" style="color: #2c3e50; font-weight: bold;">Booking Packages</h2>
-                        <div>
-                            <button class="btn btn-success" onclick="window.location.href='/TouristWebsite/auth/addPackageType'" style="background-color: #86B817; border-color: #86B817;">+ Book New Package</button>
-                            <button class="btn btn-primary" style="background-color: #86B817; border-color: #86B817;">Export to Excel</button>
-                        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container mt-5">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="text-center" style="color: #2c3e50; font-weight: bold;">Booking Packages</h2>
+                    <div>
+                        <button class="btn btn-success" onclick="window.location.href='/TouristWebsite/auth/addPackageType'" style="background-color: #86B817; border-color: #86B817;">+ Book New Package</button>
+                        <button class="btn btn-primary" style="background-color: #86B817; border-color: #86B817;">Export to Excel</button>
                     </div>
-
-                    <!-- Search Bars -->
-                    <div class="d-flex mb-3 gap-3">
-                        <select id="modeOfBooking" class="form-select" style="border: 2px solid #86B817; border-radius: 5px;">
-                            <option value="">Mode of Booking</option>
-                            <option value="online">Online</option>
-                            <option value="offline">Offline</option>
-                        </select>
-                        <input type="text" id="search" class="form-control" placeholder="Search" style="border: 2px solid #86B817; border-radius: 5px;">
-                        <input type="date" id="startDate" class="form-control datepicker" placeholder="Start Date" style="border: 2px solid #86B817; border-radius: 5px;">
-                        <input type="date" id="endDate" class="form-control datepicker" placeholder="End Date" style="border: 2px solid #86B817; border-radius: 5px;">
-                        <button class="btn btn-success" style="background-color: #86B817; border-color: #86B817;">Search</button>
-                     
-                    </div>
-
-                    <!-- Table -->
-                    <table id="packageTable" class="table table-striped" style="background: #ffffff; border-radius: 10px; overflow: hidden;">
-                        <thead style="background-color: #86B817 !important; color: white !important;">
-                            <tr>
-                                <th style="width: 10%; background-color: #86B817; color: white;">B_Id</th>
-                                <th style="width: 20%; background-color: #86B817; color: white;">Customer_Name</th>
-                                <th style="width: 20%; background-color: #86B817; color: white;">Email</th>
-                                <th style="width: 15%; background-color: #86B817; color: white;">Contact</th>
-                                <th style="width: 20%; background-color: #86B817; color: white;">Destination</th>
-                                <th style="width: 15%; background-color: #86B817; color: white;">Start_Date</th>
-                                <th style="width: 15%; background-color: #86B817; color: white;">End_Date</th>
-                                <th style="width: 20%; background-color: #86B817; color: white;">Special_Request</th>
-                                <th style="width: 15%; background-color: #86B817; color: white;">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Data will be dynamically loaded here -->
-                        </tbody>
-                    </table>
                 </div>
-            </main>
-        </div>
+
+                <!-- Search Bars -->
+                <div class="d-flex mb-3 gap-3">
+                    <select id="modeOfBooking" class="form-select" style="border: 2px solid #86B817; border-radius: 5px;">
+                        <option value="">Mode of Booking</option>
+                        <option value="online">Online</option>
+                        <option value="offline">Offline</option>
+                    </select>
+                    <input type="text" id="search" class="form-control" placeholder="Search" style="border: 2px solid #86B817; border-radius: 5px;">
+                    <input type="date" id="startDate" class="form-control datepicker" placeholder="Start Date" style="border: 2px solid #86B817; border-radius: 5px;">
+                    <input type="date" id="endDate" class="form-control datepicker" placeholder="End Date" style="border: 2px solid #86B817; border-radius: 5px;">
+                    <button class="btn btn-success" style="background-color: #86B817; border-color: #86B817;">Search</button>
+                </div>
+
+                <!-- Table -->
+                <table id="packageTable" class="table table-striped" style="background: #ffffff; border-radius: 10px; overflow: hidden;">
+                    <thead>
+                        <tr>
+                            <th>B_Id</th>
+                            <th>Customer_Name</th>
+                            <th>Email</th>
+                            <th>Contact</th>
+                            <th>Destination</th>
+                            <th>Start_Date</th>
+                            <th>End_Date</th>
+                            <th>Special_Request</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data will be dynamically loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
     </div>
 </body>
 </html>
-
 
 
 <!-- Modal for Update -->

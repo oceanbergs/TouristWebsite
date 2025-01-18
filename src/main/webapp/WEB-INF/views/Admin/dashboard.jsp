@@ -58,9 +58,9 @@
 }
 
 .sidebar h2 {
-	text-align: center;
+	text-align: left;
 	margin-bottom: 20px;
-	font-size: 1.4em;
+	font-size: 1.8em;
 }
 
 .sidebar nav ul {
@@ -101,7 +101,7 @@
 }
 
 .card {
-	background-color: #61b515;
+	background-color: #86B817;
 	color: #fff;
 	flex: 1;
 	min-width: 250px;
@@ -289,7 +289,7 @@ tbody td .fa-eye {
 }
 
 tbody td .fa-pen-to-square {
-	color: #12e068;
+	color: #86B817;
 }
 
 tbody td .fa-trash {
@@ -317,6 +317,7 @@ tbody td .fa-trash {
         padding-left: 0px; 
     }      
 	}
+	
 }
 </style>
 </head>
@@ -329,8 +330,7 @@ tbody td .fa-trash {
 			</div>
 			<h2 class="companyname">Shri Gajanan Yatra Company Pvt. Ltd</h2>
 			<div class="actions">
-				<img src="../img/profile.png" alt="Profile"> <img
-					src="../img/setting.png" alt="Setting"> <img src="../img/logout.png"
+			 <img src="../img/logout.png"
 					alt="Logout">
 			</div>
 		</header>
@@ -347,7 +347,7 @@ tbody td .fa-trash {
                         <li><a href="/TouristWebsite/auth/packageType">Packages Type</a></li>
                         <li><a href="/TouristWebsite/auth/managePackage">Manage Packages</a></li>
                 <li><a href="/TouristWebsite/auth/bookingView">Manage Bookings</a></li>
-                  <li><a href="#payments">Manage Gallary</a></li>
+                  <li><a href="/TouristWebsite/auth/manageGallary">Manage Gallary</a></li>
 <!--                        <li><a href="#users">User Management</a></li>-->
                        
 <!--                        <li><a href="#settings">Settings</a></li>-->
