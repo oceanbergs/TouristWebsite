@@ -36,13 +36,17 @@ public class PackageDetails {
     @OneToMany(mappedBy = "packageDetails",cascade = CascadeType.ALL)
     private List<Location> locations;
 
-    @OneToOne(mappedBy = "packageDetails",cascade = CascadeType.ALL)
-    private AllInclude allInclude;
+    @OneToMany(mappedBy = "packageDetails",cascade = CascadeType.ALL)
+    private List<AllInclude> allIncludes;
     
     @OneToMany(mappedBy = "packageDetails", cascade = CascadeType.ALL)
     private List<Iternary> iternary;
     
+    @OneToMany(mappedBy = "packageDetails", cascade = CascadeType.ALL)
+    private List<AllExclude> allExcludes;
     
+    @OneToMany(mappedBy="packageDetails",cascade = CascadeType.ALL)
+    private List<Gallery> gallery;
    
     
 
@@ -108,15 +112,24 @@ public class PackageDetails {
 		this.locations = locations;
 	}
 
-	public AllInclude getAllInclude() {
-		return allInclude;
-	}
-
-	public void setAllInclude(AllInclude allInclude) {
-		this.allInclude = allInclude;
-	}
-
 	
+	
+
+	public List<AllInclude> getAllIncludes() {
+		return allIncludes;
+	}
+
+	public void setAllIncludes(List<AllInclude> allIncludes) {
+		this.allIncludes = allIncludes;
+	}
+
+	public List<AllExclude> getAllExcludes() {
+		return allExcludes;
+	}
+
+	public void setAllExcludes(List<AllExclude> allExcludes) {
+		this.allExcludes = allExcludes;
+	}
 
 	public List<Iternary> getIternary() {
 		return iternary;
@@ -132,6 +145,14 @@ public class PackageDetails {
 
 	public void setImagePreview(String imagePreview) {
 		this.imagePreview = imagePreview;
+	}
+
+	public List<Gallery> getGallery() {
+		return gallery;
+	}
+
+	public void setGallery(List<Gallery> gallery) {
+		this.gallery = gallery;
 	}
 
 

@@ -6,23 +6,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class AllInclude {
+public class AllExclude {
 	
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	
+	private Long id;
+	private String excludes;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String includes;
-
-    @ManyToOne
-    @JoinColumn(name = "package_id")
-    @JsonIgnore
-    private PackageDetails packageDetails;
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "package_id")
+	private PackageDetails packageDetails;
 
 	public Long getId() {
 		return id;
@@ -31,13 +30,13 @@ public class AllInclude {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	public String getIncludes() {
-		return includes;
+
+	public String getExcludes() {
+		return excludes;
 	}
 
-	public void setIncludes(String includes) {
-		this.includes = includes;
+	public void setExcludes(String excludes) {
+		this.excludes = excludes;
 	}
 
 	public PackageDetails getPackageDetails() {
@@ -47,5 +46,6 @@ public class AllInclude {
 	public void setPackageDetails(PackageDetails packageDetails) {
 		this.packageDetails = packageDetails;
 	}
-
+	
+	
 }

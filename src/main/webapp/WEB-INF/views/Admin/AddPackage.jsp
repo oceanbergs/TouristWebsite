@@ -12,6 +12,8 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+	<!-- Add this to your HTML <head> section -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -408,121 +410,173 @@ tbody td .fa-trash {
               <input type="text" id="price" name="price" placeholder="Enter price" required
                 style="width: 67.5%; padding: 8px; margin-top: 5px;">
             </div>
+			
+			<div style="min-width: 100%;">
+			            <label for="packageImage">Package Image</label>
+			            <input type="file" id="packageImage" name="packageImage" accept="image/jpeg" required
+			              style="width: 100%; padding: 8px; margin-top: 5px;">
+			            <p id="imageError" style="color: red; font-size: 14px; margin-top: 5px;"></p>
+			          </div>
+			        </div>
 
-        <!-- Image Upload Section -->
-<div style="min-width: 100%; margin-bottom: 20px;">
-    <label for="packageImage" style="font-size: 16px; font-weight: bold; display: block; margin-bottom: 10px;">
-      Upload Images
-    </label>
-    <div id="imageUploadContainer" style="display: flex; align-items: center;">
-      <input type="file" id="packageImage" name="packageImage[]" accept="image/jpeg, image/png" multiple 
-        style="display: none;">
-      <button type="button" id="uploadButton" 
-        style="padding: 10px; border: none; border-radius: 50%; background: #6b9e12; color: white; font-size: 20px; cursor: pointer; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
-        +
-      </button>
-      <p id="uploadHint" style="margin-left: 15px; font-size: 14px; color: #6c757d;">
-        Click "+" to upload images
-      </p>
-    </div>
-    <p id="imageError" style="color: red; font-size: 14px; margin-top: 10px;"></p>
-  </div>
-  
-  <!-- Image Previews -->
-  <div id="imagePreviewContainer" 
-    style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; align-items: center;">
-    <!-- Preview images will be dynamically added here -->
-  </div>
-  
-  <script>
-    const uploadButton = document.getElementById('uploadButton');
-    const packageImageInput = document.getElementById('packageImage');
-    const imagePreviewContainer = document.getElementById('imagePreviewContainer');
-  
-    // Open file dialog when "+" button is clicked
-    uploadButton.addEventListener('click', () => packageImageInput.click());
-  
-    // Handle image selection
-    packageImageInput.addEventListener('change', () => {
-      handleImagePreview(packageImageInput);
-    });
-  
-    // Function to create image previews
-    function handleImagePreview(fileInput) {
-      const files = fileInput.files;
-  
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
-  
-        reader.onload = function (e) {
-          // Create preview card
-          const previewCard = document.createElement('div');
-          previewCard.style.cssText = `
-            width: 100px; height: 100px; position: relative; 
-            border: 1px solid #ddd; border-radius: 6px; 
-            overflow: hidden; display: flex; 
-            justify-content: center; align-items: center; 
-            background: #f9f9f9; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-          `;
-  
-          const img = document.createElement('img');
-          img.src = e.target.result;
-          img.style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
-          previewCard.appendChild(img);
-  
-          // Add delete button
-          const deleteButton = document.createElement('button');
-          deleteButton.textContent = '×';
-          deleteButton.style.cssText = `
-            position: absolute; top: 5px; right: 5px; 
-            background: rgba(0, 0, 0, 0.5); 
-            color: white; border: none; 
-            border-radius: 50%; cursor: pointer; 
-            width: 20px; height: 20px; font-size: 14px; 
-            display: flex; justify-content: center; 
-            align-items: center; transition: background 0.2s;
-          `;
-          deleteButton.onmouseover = () => (deleteButton.style.background = '#d9534f');
-          deleteButton.onmouseout = () => (deleteButton.style.background = 'rgba(0, 0, 0, 0.5)');
-          deleteButton.onclick = function () {
-            previewCard.remove();
-          };
-          previewCard.appendChild(deleteButton);
-  
-          // Append the preview card to the container
-          imagePreviewContainer.appendChild(previewCard);
-        };
-  
-        reader.readAsDataURL(file);
-      }
-    }
-  </script>
-  
+			        <!-- Image Preview -->
+			        <div
+			          style="width: 200px; height: 200px; border: 1px solid #ccc; border-radius: 4px; display: flex; justify-content: center; align-items: center; overflow: hidden; margin-left: 20px;">
+			          <img id="imagePreview" src="" alt="Image Preview"
+			            style="display: none; width: 100%; height: 100%; object-fit: cover;">
+			        </div>
+			      </div>
 
-        <!-- Additional Options: Hotel, Inclusions, Transport, Flight, Sightseeing -->
-        <div style="margin-top: 10px; min-width: 100%;">
-        <label for="note" style="font-weight: bold; color: #34495e;">Include</label>
-        <textarea id="note" name="note" placeholder="Enter additional information"
-          style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; height: 40px;">
-        </textarea>
-      </div>
+				  
+				  <div style="min-width: 100%; margin-bottom: 20px;">
+				    <!-- Label and Button container -->
+					<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+					  <label for="fileUploads" style="font-size: 16px; font-weight: bold; margin: 0;">
+					    Gallery Images
+					  </label>
+					  <button 
+					    type="button" 
+					    id="addFileButton" 
+					    style="background-color: #007bff; color: white; border: none; padding: 4px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
+					    <i class="fas fa-plus"></i>
+					  </button>
+					</div>
 
-      <div style="margin-top: 10px; min-width: 100%;">
-        <label for="note" style="font-weight: bold; color: #34495e;">Exclude</label>
-        <textarea id="note" name="note" placeholder="Enter additional information"
-          style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; height: 40px;">
-        </textarea>
-      </div>
+				    <!-- File Upload Inputs -->
+				    <div id="fileUploadContainer" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+				      <!-- File inputs with delete buttons will be dynamically added here -->
+				    </div>
 
-        <!-- Additional Info Textarea -->
-        <div style="margin-top: 10px; min-width: 100%;">
-          <label for="note" style="font-weight: bold; color: #34495e;">Additional Info:</label>
-          <textarea id="note" name="note" placeholder="Enter additional information"
-            style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; height: 40px;">
-          </textarea>
-        </div>
+				    <!-- Image Preview Section -->
+				    <div id="imagePreviewContainer" 
+				      style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+				      <!-- Image previews will appear here -->
+				    </div>
+				  </div>
 
+				  <script>
+					const addFileButton = document.getElementById('addFileButton');
+					const fileUploadContainer = document.getElementById('fileUploadContainer');
+					const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+
+					addFileButton.addEventListener('click', () => {
+					  // Create a container for the file input and delete button
+					  const fileInputWrapper = document.createElement('div');
+					  fileInputWrapper.style.cssText = 'display: flex; align-items: center; gap: 10px; margin-bottom: 10px;';
+
+					  // Create a new file input
+					  const fileInput = document.createElement('input');
+					  fileInput.type = 'file';
+					  fileInput.name = 'gallery[]';
+					  fileInput.accept = 'image/jpeg';
+					  fileInput.required = true;
+					  fileInput.style.cssText = 'flex: 1; padding: 8px; margin-right: 10px;';
+
+					  // Create a delete button for the file input
+					  const deleteButton = document.createElement('button');
+					  deleteButton.textContent = 'Delete';
+					  deleteButton.style.cssText = `
+					    padding: 4px 8px;
+					    background: #d9534f;
+					    color: white;
+					    border: none;
+					    border-radius: 4px;
+					    cursor: pointer;
+					    font-size: 14px;
+					    height: 30px;
+					    width: auto; /* Adjust width dynamically based on content */
+					    display: flex;
+					    justify-content: center;
+					    align-items: center;
+					  `;
+
+					  // Append file input and delete button to the wrapper
+					  fileInputWrapper.appendChild(fileInput);
+					  fileInputWrapper.appendChild(deleteButton);
+
+					  // Add the wrapper to the file upload container
+					  fileUploadContainer.appendChild(fileInputWrapper);
+
+					  // Handle image preview
+					  fileInput.addEventListener('change', (event) => {
+					    const files = event.target.files;
+
+					    // Clear existing previews for this input if any
+					    if (fileInput.previewElements) {
+					      fileInput.previewElements.forEach(preview => preview.remove());
+					    }
+					    fileInput.previewElements = [];
+
+					    for (let i = 0; i < files.length; i++) {
+					      const file = files[i];
+					      const reader = new FileReader();
+
+					      reader.onload = function (e) {
+					        // Create a preview container for the image
+					        const preview = document.createElement('div');
+					        preview.style.cssText = `
+					          width: 100px; 
+					          height: 100px; 
+					          border: 1px solid #ddd; 
+					          border-radius: 5px; 
+					          overflow: hidden; 
+					          display: flex; 
+					          justify-content: center; 
+					          align-items: center; 
+					          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+					          margin-right: 10px;
+					        `;
+
+					        const img = document.createElement('img');
+					        img.src = e.target.result;
+					        img.style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
+					        preview.appendChild(img);
+
+					        // Add the preview to the container and associate it with the input
+					        imagePreviewContainer.appendChild(preview);
+					        fileInput.previewElements.push(preview);
+					      };
+
+					      reader.readAsDataURL(file);
+					    }
+					  });
+
+					  // Handle deletion of file input and its associated previews
+					  deleteButton.onclick = () => {
+					    if (fileInput.previewElements) {
+					      fileInput.previewElements.forEach(preview => preview.remove()); // Remove all associated previews
+					    }
+					    fileInputWrapper.remove(); // Remove the file input container
+					  };
+					});
+
+				  </script>
+
+       
+
+
+		<div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; width: 100%;">
+		    <label for="includes" style="font-weight: bold; color: #34495e;">Includes:</label>
+		    <button type="button" id="addIncludesBtn"
+		      style="background-color: #007bff; color: white; border: none; padding: 4px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
+		      <i class="fas fa-plus"></i>
+		    </button>
+		</div>
+
+		<div id="IncludesContainer" style="margin-top: 10px;"></div>
+
+		<div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; width: 100%;">
+		  <label for="location" style="font-weight: bold; color: #34495e;">Excludes:</label>
+		  <button type="button" id="addExcludesBtn"
+		    style="background-color: #007bff; color: white; border: none; padding: 4px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
+		    <i class="fas fa-plus"></i>
+		  </button>
+		</div>
+
+		<!-- Container for dynamically added Excludes input fields -->
+		<div id="excludesContainer" style="margin-top: 10px;"></div>
+
+ 
         <!-- Location Section -->
         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; width: 100%;">
           <label for="location" style="font-weight: bold; color: #34495e;">Location:</label>
@@ -650,6 +704,7 @@ getCourseData();
         
         locationInput.id = 'location'; // Set a unique id if needed
         locationInput.name = 'location[]'; // Set name attribute to match model API
+		locationInput.style.marginRight = '5px';
 
         // Create the delete button
        const deleteBtn = document.createElement('button');
@@ -689,6 +744,118 @@ deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift
 
 
 <script>
+  const addIncludesBtn = document.getElementById('addIncludesBtn');
+  const includesContainer = document.getElementById('IncludesContainer');
+
+  addIncludesBtn.addEventListener('click', () => {
+    // Create the wrapper div for input and delete button
+    const locationWrapper = document.createElement('div');
+    locationWrapper.style.display = 'flex';
+    locationWrapper.style.alignItems = 'center';
+    locationWrapper.style.marginBottom = '10px'; // Space between inputs
+
+    // Create the input field
+    const locationInput = document.createElement('input');
+    locationInput.type = 'text';
+    locationInput.placeholder = 'Enter Includes';
+    locationInput.style.padding = '8px';
+    locationInput.style.border = '1px solid #ccc';
+    locationInput.style.borderRadius = '3px';
+    locationInput.style.fontSize = '0.9rem';
+    locationInput.style.flex = '1';  // Make the input take available space
+    locationInput.name = 'includes[]'; // Name attribute for API compatibility
+	locationInput.style.marginRight = '10px';
+
+    // Create the delete button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+    deleteBtn.style.backgroundColor = '#e74c3c';
+    deleteBtn.style.color = 'white';
+    deleteBtn.style.border = 'none';
+    deleteBtn.style.padding = '10px';
+    deleteBtn.style.borderRadius = '3px';
+    deleteBtn.style.cursor = 'pointer';
+    deleteBtn.style.fontSize = '1rem';
+    deleteBtn.style.height = '30px';
+    deleteBtn.style.width = '30px';
+    deleteBtn.style.display = 'flex';
+    deleteBtn.style.alignItems = 'center';
+    deleteBtn.style.justifyContent = 'center';
+    deleteBtn.style.position = 'relative';
+    deleteBtn.style.top = '-7px'; 
+
+    // Delete functionality
+    deleteBtn.addEventListener('click', () => {
+      includesContainer.removeChild(locationWrapper);
+    });
+
+    // Append input and delete button to the wrapper
+    locationWrapper.appendChild(locationInput);
+    locationWrapper.appendChild(deleteBtn);
+
+    // Append the wrapper to the container
+    includesContainer.appendChild(locationWrapper);
+  });
+</script>
+
+
+<script>
+  const addExcludesBtn = document.getElementById('addExcludesBtn');
+  const excludesContainer = document.getElementById('excludesContainer');
+
+  addExcludesBtn.addEventListener('click', () => {
+    // Create a wrapper div
+    const locationWrapper = document.createElement('div');
+    locationWrapper.style.display = 'flex';
+    locationWrapper.style.alignItems = 'center';
+    locationWrapper.style.gap = '10px'; // Added padding between input and delete button
+    locationWrapper.style.marginBottom = '10px'; // Space between inputs
+
+    // Create the input field
+    const locationInput = document.createElement('input');
+    locationInput.type = 'text';
+    locationInput.placeholder = 'Enter Excludes';
+    locationInput.style.padding = '8px';
+    locationInput.style.border = '1px solid #ccc';
+    locationInput.style.borderRadius = '3px';
+    locationInput.style.fontSize = '0.9rem';
+    locationInput.style.flex = '1'; // Ensure the input takes available space
+    locationInput.name = 'excludes[]'; // Name attribute for API compatibility
+
+    // Create the delete button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+    deleteBtn.style.backgroundColor = '#e74c3c';
+    deleteBtn.style.color = 'white';
+    deleteBtn.style.border = 'none';
+    deleteBtn.style.padding = '8px';
+    deleteBtn.style.borderRadius = '3px';
+    deleteBtn.style.cursor = 'pointer';
+    deleteBtn.style.fontSize = '1rem';
+    deleteBtn.style.height = '30px';
+    deleteBtn.style.width = '30px';
+    deleteBtn.style.display = 'flex';
+    deleteBtn.style.alignItems = 'center';
+    deleteBtn.style.justifyContent = 'center';
+	deleteBtn.style.position = 'relative';
+		deleteBtn.style.top = '-7px';
+
+    // Delete functionality
+    deleteBtn.addEventListener('click', () => {
+      excludesContainer.removeChild(locationWrapper);
+    });
+
+    // Append input and delete button to the wrapper
+    locationWrapper.appendChild(locationInput);
+    locationWrapper.appendChild(deleteBtn);
+
+    // Append wrapper to the container
+    excludesContainer.appendChild(locationWrapper);
+  });
+</script>
+
+
+<script>
     const addDayBtn = document.getElementById('addDayBtn');
     const daysContainer = document.getElementById('days-container');
 
@@ -722,6 +889,12 @@ deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift
                 <input type="text" id="destination`+dayCount+`" name="destination[]" placeholder="E.g., Amravati - Pune"
                     style="width: 100%; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
             </div>
+			<div style="margin-top: 10px; min-width: 100%;">
+			    <label for="details`+dayCount+`" style="font-weight: bold; color: #34495e;">Enter Details</label>
+			    <textarea id="details`+dayCount+`" name="details[]" placeholder="Enter additional information"
+			      style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; resize: none; overflow: hidden;"
+			      rows="1" oninput="adjustHeight(this)"></textarea>
+			</div>				 
             <div style="flex: 1 1 100%; margin: 5px;">
                 <div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px;">
                     <label for="sightseeing`+dayCount+`" style="font-weight: bold; margin-right: 10px;">
@@ -734,12 +907,8 @@ deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift
                 </div>
                 <div class="sightseeingContainer" style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
                 </div>
-               <div style="margin-top: 10px; min-width: 100%;">
-        <label for="note" style="font-weight: bold; color: #34495e;">Enter Details</label>
-        <textarea id="note" name="note" placeholder="Enter additional information"
-          style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; height: 40px;">
-        </textarea>
-      </div>
+               
+	  <br>
                 <div style="width: 100%; display: flex; align-items: center;">
                     <button class="deleteDayBtn" style="background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; height: 30px; width: 100px; display: flex; justify-content: center; align-items: center; font-size: 1rem; margin-left: auto;">
                         Delete Day
@@ -762,7 +931,7 @@ deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift
 
             const sightseeingInput = document.createElement('input');
             sightseeingInput.type = 'text';
-            sightseeingInput.placeholder = 'Enter details of sightseeing...';
+            sightseeingInput.placeholder = 'Enter Meals';
             sightseeingInput.style.flex = '1 1 calc(85% - 10px)';
             sightseeingInput.style.height = '40px';
             sightseeingInput.style.padding = '10px';
@@ -811,113 +980,178 @@ deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift
         }
     });
 </script>
-
-
-
-			<script type="text/javascript">
-    // Initialize an empty array to store locations
-  
-
-    document.getElementById('submitBtn').addEventListener('click', function() {
-   
-    const fileInput = document.getElementById('packageImage');
-    const file = fileInput.files[0];
-    
-    const locationInputs = document.querySelectorAll('input[name="location[]"]');
-    let locations = [];
-
-    locationInputs.forEach(input => {
-        const locationName = input.value.trim();
-        if (locationName) {
-            locations.push({ locationName });
-        }
-    });
-
-   // console.log(locations)
-
-   const itinerary = [];
-const dayBlocks = document.querySelectorAll('.day-block');
-
-dayBlocks.forEach((dayBlock, index) => {
-    const day = dayBlock.querySelector('input[id="day'+(index + 1)+'"]').value;
-    const destination = dayBlock.querySelector('input[id="destination'+(index + 1)+'"]').value;
-    const breakfast = dayBlock.querySelector('input[name="breakfast['+(index + 1)+']"]').checked;
-    const lunch = dayBlock.querySelector('input[name="lunch['+(index + 1)+']"]').checked;
-    const dinner = dayBlock.querySelector('input[name="dinner['+(index + 1)+']"]').checked;
-    const nightStay = dayBlock.querySelector('input[name="nightStay['+(index + 1)+']"]').checked;
-    const hiTea = dayBlock.querySelector('input[name="hiTea['+(index + 1)+']"]').checked;
-
-    const sightseeingEntries = [];
-    const sightseeingWrappers = dayBlock.querySelectorAll('.sightseeingWrapper');
-
-    sightseeingWrappers.forEach(wrapper => {
-        const sightseeingLocation = wrapper.querySelector('input[name="sightseeingLocation['+(index + 1)+'][]"]').value;
-        sightseeingEntries.push({ location: sightseeingLocation, day: 'Day '+day });
-    });
-
-    itinerary.push({
-        day: 'Day '+day,
-        destination: destination,
-        dinner: dinner,
-        breakfast: breakfast,
-        hiTea: hiTea,
-        nightStay: nightStay,
-        lunch: lunch,
-        sightseeingEntrie: sightseeingEntries
-    });
-});
-  
-
-    if (file) {
-        const reader = new FileReader();
-        reader.onloadend = function() {
-            const base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
-
-            const packageData = {
-                packageName: $('#packageName').val(),
-                duration: $('#duration').val(),
-                price: $('#price').val(),
-                packageType: $('#packageType').val(),
-                packageImage: base64String,
-                locations: locations,
-                allInclude : {
-                	hotel: document.getElementById('hotel').checked,
-                    meals: document.getElementById('meals').checked,
-                    transportation: document.getElementById('transport').checked,
-                    flight: document.getElementById('flight').checked,
-                    sightseeing: document.getElementById('sightseeing').checked,
-                    visa: document.getElementById('visa').checked,
-                    note: $('#note').val()
-                },
-                iternary : itinerary
-            };
-
-           
-            
-            // Convert packageData to JSON string
-            const jsonData = JSON.stringify(packageData);
-            //console.log(jsonData);
-
-            // Send data via AJAX
-            $.ajax({
-                url: '/TouristWebsite/auth/addPackageDetails', // Replace with your API endpoint
-                type: 'POST',
-                contentType: 'application/json',
-                data: jsonData,
-                success: function(response) {
-                    alert(response);
-                    //windows.href='addPackageType';
-                },
-                error: function(error) {
-                    console.error('Error sending data:', error);
-                }
-            });
-        };
-        reader.readAsDataURL(file);
-    } else {
-        alert("Please select an image file first.");
+<script>
+    function adjustHeight(element) {
+        element.style.height = 'auto'; // Reset the height to auto to calculate the new height
+        element.style.height = element.scrollHeight + 'px'; // Set height based on scrollHeight
     }
-});
+</script>
+
+
+
+<script type="text/javascript">
+	document.getElementById('submitBtn').addEventListener('click', function () {
+	    const fileInput = document.getElementById('packageImage');
+	    const file = fileInput.files[0];
+
+	    // Collect includes
+	    const includesInputs = document.querySelectorAll('input[name="includes[]"]');
+	    let allIncludes = [];
+	    includesInputs.forEach(input => {
+	        const includes = input.value.trim();
+	        if (includes) {
+	            allIncludes.push({ includes });
+	        }
+	    });
+
+	    // Collect excludes
+	    const excludeInputs = document.querySelectorAll('input[name="excludes[]"]');
+	    let allExcludes = [];
+	    excludeInputs.forEach(input => {
+	        const excludes = input.value.trim();
+	        if (excludes) {
+	            allExcludes.push({ excludes });
+	        }
+	    });
+
+	    // Collect locations
+	    const locationInputs = document.querySelectorAll('input[name="location[]"]');
+	    let locations = [];
+	    locationInputs.forEach(input => {
+	        const locationName = input.value.trim();
+	        if (locationName) {
+	            locations.push({ locationName });
+	        }
+	    });
+
+	    // Collect itinerary
+	    const itinerary = [];
+	    const dayBlocks = document.querySelectorAll('.day-block');
+	    dayBlocks.forEach((dayBlock, index) => {
+	        const day = dayBlock.querySelector('input[id="day' + (index + 1) + '"]').value;
+	        const destination = dayBlock.querySelector('input[id="destination' + (index + 1) + '"]').value;
+	        const details = dayBlock.querySelector('input[id="details' + (index + 1) + '"]').value;
+
+	        const sightseeingEntries = [];
+	        const sightseeingWrappers = dayBlock.querySelectorAll('.sightseeingWrapper');
+	        sightseeingWrappers.forEach(wrapper => {
+	            const sightseeingLocation = wrapper.querySelector('input[name="sightseeingLocation[' + (index + 1) + '][]"]').value;
+	            sightseeingEntries.push({ location: sightseeingLocation, day: 'Day ' + day });
+	        });
+
+	        itinerary.push({
+	            day: 'Day ' + day,
+	            destination: destination,
+	            details: details,
+	            sightseeingEntrie: sightseeingEntries,
+	        });
+	    });
+
+	    // Collect gallery images
+		const galleryInputs = document.querySelectorAll('input[name="gallery[]"]');
+		let gallery = [];
+
+		const processGalleryImages = () => {
+		    let galleryFiles = [];
+
+		    // Collect files from all gallery inputs
+		    galleryInputs.forEach(input => {
+		        galleryFiles = galleryFiles.concat(Array.from(input.files));
+		    });
+
+		    if (galleryFiles.length > 0) {
+		        const promises = galleryFiles.map(file => {
+		            return new Promise((resolve, reject) => {
+		                const reader = new FileReader();
+		                reader.onloadend = function () {
+		                    resolve(reader.result.split(",")[1]); // Extract Base64
+		                };
+		                reader.onerror = reject;
+		                reader.readAsDataURL(file);
+		            });
+		        });
+
+		        return Promise.all(promises)
+		            .then(base64Images => {
+		                base64Images.forEach(base64 => {
+		                    gallery.push({ gallery: base64 }); // Push each image into the gallery array
+		                });
+
+		                // Create a detailed alert message
+		                const imageCount = gallery.length;
+		                let alertMessage = `Total Images Uploaded: ${imageCount}\n\nImage Details:\n`;
+
+		                gallery.forEach((image, index) => {
+		                    //alertMessage += `Image ${index + 1}: ${image.gallery.slice(0, 50)}... (Base64 Truncated)\n`;
+		                });
+
+		                // Show alert with details and count
+		                //alert(alertMessage);
+
+		                // Log data to console for further debugging if needed
+		                console.log("Processed Gallery Data:", gallery);
+		            })
+		            .catch(error => {
+		                console.error('Error processing gallery images:', error);
+		                alert('Failed to process gallery images. Please try again.');
+		            });
+		    } else {
+		        alert("No gallery images selected.");
+		        return Promise.resolve(); // No gallery images to process
+		    }
+		};
+
+		// Example usage
+		document.getElementById('submitBtn').addEventListener('click', function () {
+		    processGalleryImages().then(() => {
+		        console.log("Final Gallery Data:", gallery);
+		        // Additional processing or submission logic can be added here
+		    });
+		});
+
+	    // Process gallery and file image, then send data
+	    processGalleryImages().then(() => {
+	        if (file) {
+	            const reader = new FileReader();
+	            reader.onloadend = function () {
+	                const base64String = reader.result.split(",")[1]; // Extract base64 part
+
+	                const packageData = {
+	                    packageName: document.getElementById('packageName').value.trim(),
+	                    duration: document.getElementById('duration').value.trim(),
+	                    price: document.getElementById('price').value.trim(),
+	                    packageType: document.getElementById('packageType').value.trim(),
+	                    packageImage: base64String,
+	                    gallery: gallery,
+	                    locations: locations,
+	                    allIncludes: allIncludes,
+	                    allExcludes: allExcludes,
+	                    iternary: itinerary
+	                };
+
+	                // Send data via AJAX
+	                $.ajax({
+	                    url: '/TouristWebsite/auth/addPackageDetails',
+	                    type: 'POST',
+	                    contentType: 'application/json',
+	                    data: JSON.stringify(packageData),
+	                    success: function (response) {
+	                        alert('Package added successfully!');
+	                        	window.location.href = 'managePackage';
+	                    },
+	                    error: function (error) {
+	                        console.error('Error sending data:', error);
+	                        alert('Failed to add package. Please try again.');
+	                    }
+	                });
+	            };
+	            reader.readAsDataURL(file);
+	        } else {
+	            alert("Please select an image file first.");
+	        }
+	    });
+	});
+
 </script>
 
 </body>

@@ -62,7 +62,7 @@ public class PackageDetailsService  implements PackageDetailsServiceInterface{
 	
 	@Override
 	public String UpdatePackage(PackageDetails packageDetails, AllInclude allInclude, List<Location> locations, List<Iternary> iternaries) {
-	    packageDetails.setAllInclude(allInclude);
+	   // packageDetails.setAllInclude(allInclude);
 	    packageDetails.setLocations(locations);
 	    packageDetails.setIternary(iternaries);
 
@@ -76,30 +76,43 @@ public class PackageDetailsService  implements PackageDetailsServiceInterface{
 	}
 
 	public PackageDetails saveThePackageDetails(PackageDetails packageDetails) {
-		// Set packageDetails reference in Locations
-		if (packageDetails.getLocations() != null) {
-			packageDetails.getLocations().forEach(location -> location.setPackageDetails(packageDetails));
-		}
+	    // Ensure packageDetails is set in Locations
+	    if (packageDetails.getLocations() != null) {
+	        packageDetails.getLocations().forEach(location -> location.setPackageDetails(packageDetails));
+	    }
+	    
+	 // Ensure packageDetails is set in Gallery
+	    if (packageDetails.getGallery() != null) {
+	        packageDetails.getGallery().forEach(gallery -> gallery.setPackageDetails(packageDetails));
+	    }
 
-		// Set packageDetails reference in AllInclude
-		if (packageDetails.getAllInclude() != null) {
-			packageDetails.getAllInclude().setPackageDetails(packageDetails);
-		}
 
-		// Set packageDetails reference in Iternary
-		if (packageDetails.getIternary() != null) {
-			packageDetails.getIternary().forEach(iternary -> {
-				iternary.setPackageDetails(packageDetails);
+	    // Ensure packageDetails is set in AllInclude
+	    if (packageDetails.getAllIncludes() != null) {
+	        packageDetails.getAllIncludes().forEach(include -> include.setPackageDetails(packageDetails));
+	    }
 
-				// Set Iternary reference in SightseeingEntrie
-				if (iternary.getSightseeingEntrie() != null) {
-					iternary.getSightseeingEntrie().forEach(sightseeingEntry -> sightseeingEntry.setIternary(iternary));
-				}
-			});
-		}
+	    // Ensure packageDetails is set in AllExcludes
+	    if (packageDetails.getAllExcludes() != null) {
+	        packageDetails.getAllExcludes().forEach(exclude -> exclude.setPackageDetails(packageDetails));
+	    }
 
-		return packageDetailsRepo.save(packageDetails);
+	    // Ensure packageDetails and SightseeingEntrie references are set in Iternary
+	    if (packageDetails.getIternary() != null) {
+	        packageDetails.getIternary().forEach(itinerary -> {
+	            itinerary.setPackageDetails(packageDetails);
+
+	            // Set Iternary reference in SightseeingEntrie
+	            if (itinerary.getSightseeingEntrie() != null) {
+	                itinerary.getSightseeingEntrie().forEach(sightseeing -> sightseeing.setIternary(itinerary));
+	            }
+	        });
+	    }
+
+	    // Save the complete package details
+	    return packageDetailsRepo.save(packageDetails);
 	}
+
 
 	
 	
@@ -124,7 +137,7 @@ public class PackageDetailsService  implements PackageDetailsServiceInterface{
         existingPackageDetails.setPackageType(packageDetails.getPackageType());
         existingPackageDetails.setPackageImage(packageDetails.getPackageImage());
         existingPackageDetails.setLocations(packageDetails.getLocations());
-        existingPackageDetails.setAllInclude(packageDetails.getAllInclude());
+       // existingPackageDetails.setAllInclude(packageDetails.getAllInclude());
         existingPackageDetails.setIternary(packageDetails.getIternary());
 
         // Set relationships
@@ -132,9 +145,9 @@ public class PackageDetailsService  implements PackageDetailsServiceInterface{
             existingPackageDetails.getLocations().forEach(location -> location.setPackageDetails(existingPackageDetails));
         }
 
-        if (existingPackageDetails.getAllInclude() != null) {
-            existingPackageDetails.getAllInclude().setPackageDetails(existingPackageDetails);
-        }
+//        if (existingPackageDetails.getAllInclude() != null) {
+//            existingPackageDetails.getAllInclude().setPackageDetails(existingPackageDetails);
+//        }
 
         if (existingPackageDetails.getIternary() != null) {
             existingPackageDetails.getIternary().forEach(iternary -> {

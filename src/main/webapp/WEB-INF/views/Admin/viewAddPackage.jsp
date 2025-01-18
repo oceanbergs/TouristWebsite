@@ -425,44 +425,35 @@ tbody td .fa-trash {
               style="display: none; width: 100%; height: 100%; object-fit: cover;">
           </div>
         </div>
+		<div style="min-width: 100%; margin-bottom: 20px;">
+						    <!-- Label and Button container -->
+							<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+							  <label for="fileUploads" style="font-size: 16px; font-weight: bold; margin: 0;">
+							    Gallery Images
+							  </label>
+							 
+							</div>
+		<div id="galleryContainer" 
+					      style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+					      <!-- Image previews will appear here -->
+					    </div>
 
-       
-<!-- Additional Options: Hotel, Inclusions, Transport, Flight, Sightseeing -->
-<div style="flex: 1; min-width: 90%; margin-top: 10px;"> 
-  <label>Package Includes:</label>
-  <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 5px;">
-    <label>
-      <input type="checkbox" id="hotel" name="hotel" style="margin-right: 5px;"  > Hotel
-    </label>
-    <label>
-      <input type="checkbox" id="meals" name="meals" style="margin-right: 5px;"  > Meal
-    </label>
-    <label>
-      <input type="checkbox" id="transportation" name="transportation" style="margin-right: 5px;"  > Transport
-    </label>
-    <label>
-      <input type="checkbox" id="flight" name="flight" style="margin-right: 5px;"  > Flight
-    </label>
-    <label>
-      <input type="checkbox" id="sightseeing" name="sightseeing" style="margin-right: 5px;"  > Sightseeing
-    </label>
-    <label>
-      <input type="checkbox" id="visa" name="visa" style="margin-right: 5px;"  > Visa
-    </label>
-  </div>
-</div>
+		<div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; width: 100%;">
+				    <label for="includes" style="font-weight: bold; color: #34495e;">Includes:</label>
+				</div>
 
+				<div id="IncludesContainer" style="margin-top: 10px;"></div>
+				
+				<div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; width: 100%;">
+						  <label for="location" style="font-weight: bold; color: #34495e;">Excludes:</label>
+						 
+						</div>
 
+						<!-- Container for dynamically added Excludes input fields -->
+						<div id="excludesContainer" style="margin-top: 10px;"></div>
 
 
-        <!-- Additional Info Textarea -->
-        <div style="margin-top: 10px; min-width: 100%;">
-          <label for="note" style="font-weight: bold; color: #34495e;">Additional Info:</label>
-          <textarea id="note" name="note" placeholder="Enter additional information"
-            style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; height: 40px;" readonly>
-          </textarea>
-        </div>
-
+		
         <!-- Location Section -->
         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; width: 100%;">
           <label for="location" style="font-weight: bold; color: #34495e;">Location:</label>
@@ -584,25 +575,48 @@ $(document).ready(function () {
             url: "/TouristWebsite/auth/getPackageDetails/" + id,
             type: "GET",
             contentType: "application/json",
-            success: function (response) {
-                console.log(response); // Inspect the response
-                if (response) {
-                    populateForm(response);
-                    if (response.locations && Array.isArray(response.locations)) {
-                        populateLocations(response.locations);
-                    } else {
-                        $('#locationContainer').html('<p>No locations available for this package.</p>');
-                    }
-                    if (response.iternary && Array.isArray(response.iternary)) {
-                        populateItinerary(response.iternary);
-                        
-                    } else {
-                        $('#itineraryContainer').html('<p>No itinerary available for this package.</p>');
-                    }
-                } else {
-                    alert("No Package data found");
-                }
-            },
+			success: function (response) {
+			    console.log(response); // Inspect the response
+
+			    if (response) {
+			        populateForm(response);
+
+			        // Populate Locations
+			        if (response.locations && Array.isArray(response.locations)) {
+			            populateLocations(response.locations);
+			        } else {
+			            $('#locationContainer').html('<p>No locations available for this package.</p>');
+			        }
+
+			        // Populate Itinerary
+			        if (response.iternary && Array.isArray(response.iternary)) {
+			            populateItinerary(response.iternary);
+			        } else {
+			            $('#itineraryContainer').html('<p>No itinerary available for this package.</p>');
+			        }
+
+					if (response.allIncludes && Array.isArray(response.allIncludes)) {
+					    populateIncludes(response.allIncludes);
+					} else {
+					    $('#IncludesContainer').html('<p>No includes available for this package.</p>');
+					}
+
+
+					if (response.allExcludes && Array.isArray(response.allExcludes)) {
+					    populateExcludes(response.allExcludes);
+					} else {
+					    $('#excludesContainer').html('<p>No excludes available for this package.</p>');
+					}
+					if (response.gallery && Array.isArray(response.gallery)) {
+					    populateGallery(response.gallery);
+					} else {
+					    $('#galleryContainer').html('<p>No gallery images available for this package.</p>');
+					}
+			    } else {
+			        alert("No Package data found");
+			    }
+			},
+
             error: function (jqXHR, status, errorThrown) {
                 if (jqXHR.status === 403) {
                     alert("YOU DON'T HAVE PERMISSION");
@@ -622,22 +636,10 @@ $(document).ready(function () {
 	    document.getElementById("duration").value = packageDetails.duration || '';
 	    document.getElementById("packageType").value = packageDetails.packageType || '';
 	    document.getElementById("price").value = packageDetails.price || '';
-	    document.getElementById("note").value = packageDetails.allInclude?.note || '';
+	    
 
 	    // Populate checkboxes
-	    if (packageDetails.allInclude) {
-	        console.log("All Include Data:", packageDetails.allInclude); // Debugging the data
-
-	        setCheckbox("hotel", packageDetails.allInclude.hotel);
-	        setCheckbox("meals", packageDetails.allInclude.meals);
-	        setCheckbox("transportation", packageDetails.allInclude.transportation);
-	        setCheckbox("flight", packageDetails.allInclude.flight);
-	        setCheckbox("sightseeing", packageDetails.allInclude.sightseeing);
-	        setCheckbox("visa", packageDetails.allInclude.visa);
-	    } else {
-	        console.warn("AllInclude data is missing or undefined");
-	        resetCheckboxes();
-	    }
+	   
 
 	    // Display image if present
 	    const imagePreview = document.getElementById("imagePreview"); // Target the img tag for preview
@@ -675,7 +677,8 @@ $(document).ready(function () {
                 locationInput.style.borderRadius = '3px';
                 locationInput.style.flex = '1';
                 locationInput.style.fontSize = '0.9rem';
-                locationInput.name = 'location[]'; // Ensure proper naming for API
+                locationInput.name = 'location[]'; 
+				locationInput.disabled = true;
 
                 locationWrapper.appendChild(locationInput);
                 locationContainer.appendChild(locationWrapper);
@@ -684,6 +687,114 @@ $(document).ready(function () {
             locationContainer.innerHTML = '<p>No locations available for this package.</p>';
         }
     }
+	
+	function populateIncludes(allIncludes) {
+	    const includesContainer = document.getElementById('IncludesContainer');
+	    includesContainer.innerHTML = ''; // Clear existing includes
+
+	    // Check if allIncludes is an array and has items
+	    if (Array.isArray(allIncludes) && allIncludes.length > 0) {
+	        allIncludes.forEach((include) => {
+	            // Create a wrapper for each include input
+	            const includesWrapper = document.createElement('div');
+	            includesWrapper.style.marginBottom = '10px';
+
+	            // Create the input field for the include
+	            const includesInput = document.createElement('input');
+	            includesInput.type = 'text';
+	            includesInput.value = include.includes || ''; // Access the 'includes' property
+	            includesInput.placeholder = 'Enter Includes';
+	            includesInput.style.padding = '8px';
+	            includesInput.style.border = '1px solid #ccc';
+	            includesInput.style.borderRadius = '3px';
+	            includesInput.style.fontSize = '0.9rem';
+	            includesInput.style.width = '100%'; // Ensure it spans the container width
+	            includesInput.name = 'includes[]'; // Correct name for server compatibility
+				includesInput.disabled = true;
+
+	            // Append the input field to the wrapper
+	            includesWrapper.appendChild(includesInput);
+
+	            // Append the wrapper to the includes container
+	            includesContainer.appendChild(includesWrapper);
+	        });
+	    } else {
+	        // If no data, show a message
+	        includesContainer.innerHTML = '<p>No includes available for this package.</p>';
+	    }
+	}
+
+	function populateExcludes(allExcludes) {
+	    const excludesContainer = document.getElementById('excludesContainer');
+	    excludesContainer.innerHTML = ''; // Clear existing excludes
+
+	    // Check if allExcludes is an array and has items
+	    if (Array.isArray(allExcludes) && allExcludes.length > 0) {
+	        allExcludes.forEach((exclude) => {
+	            // Create a wrapper for each exclude input
+	            const excludeWrapper = document.createElement('div');
+	            excludeWrapper.style.marginBottom = '10px';
+
+	            // Create the input field for the exclude
+	            const excludeInput = document.createElement('input');
+	            excludeInput.type = 'text';
+	            excludeInput.value = exclude.excludes || ''; // Access the 'excludes' property
+	            excludeInput.placeholder = 'Enter Excludes';
+	            excludeInput.style.padding = '8px';
+	            excludeInput.style.border = '1px solid #ccc';
+	            excludeInput.style.borderRadius = '3px';
+	            excludeInput.style.fontSize = '0.9rem';
+	            excludeInput.style.width = '100%'; // Ensure it spans the container width
+	            excludeInput.name = 'excludes[]'; // Name attribute for API compatibility
+				excludeInput.disabled = true;
+	            // Append the input field to the wrapper
+	            excludeWrapper.appendChild(excludeInput);
+
+	            // Append the wrapper to the excludes container
+	            excludesContainer.appendChild(excludeWrapper);
+	        });
+	    } else {
+	        // If no data, show a message
+	        excludesContainer.innerHTML = '<p>No excludes available for this package.</p>';
+	    }
+	}
+	
+	function populateGallery(gallery) {
+	    const galleryContainer = document.getElementById('galleryContainer');
+	    galleryContainer.innerHTML = ''; // Clear existing gallery images
+
+	    if (Array.isArray(gallery) && gallery.length > 0) { // Check for valid gallery array
+	        gallery.forEach(image => {
+	            console.log(image); // Inspect each image object to verify structure
+
+	            const imageWrapper = document.createElement('div');
+	            imageWrapper.style.marginBottom = '15px';
+	            imageWrapper.style.display = 'inline-block';
+	            imageWrapper.style.width = '100px';
+	            imageWrapper.style.height = '100px';
+
+	            const imgElement = document.createElement('img');
+
+	            // Handle the gallery field as a string or object
+	            if (typeof image.gallery === 'string') {
+	                imgElement.src = "data:image/jpeg;base64," + image.gallery;
+	            } else {
+	                console.error('Invalid gallery format:', image.gallery);
+	                imgElement.src = 'placeholder.png'; // Fallback for invalid data
+	            }
+
+	            imgElement.alt = 'Gallery Image';
+	            imgElement.style.width = '100%';
+	            imgElement.style.height = '100%';
+	            imgElement.style.borderRadius = 'px';
+
+	            imageWrapper.appendChild(imgElement);
+	            galleryContainer.appendChild(imageWrapper);
+	        });
+	    } else {
+	        galleryContainer.innerHTML = '<p>No gallery images available for this package.</p>';
+	    }
+	}
 
 	function populateItinerary(itinerary) {
 	    const itineraryContainer = document.getElementById('itineraryContainer');
@@ -697,14 +808,18 @@ $(document).ready(function () {
 	            dayWrapper.style.border = '1px solid #ddd';
 	            dayWrapper.style.borderRadius = '5px';
 
-	            // Day Number and Destination
+	            // Day Number and Destination container (side by side)
 	            const dayDiv = document.createElement('div');
 	            dayDiv.style.display = 'flex';
-	            dayDiv.style.flexDirection = 'column';
-	            dayDiv.style.gap = '10px';
+	            dayDiv.style.flexDirection = 'row'; // Align Day Number and Destination side by side
+	            dayDiv.style.gap = '20px'; // Add some space between the fields
 	            dayDiv.style.marginBottom = '10px';
 
 	            // Day Number
+	            const dayNumberWrapper = document.createElement('div');
+	            dayNumberWrapper.style.display = 'flex';
+	            dayNumberWrapper.style.flexDirection = 'column';
+
 	            const dayNumberLabel = document.createElement('label');
 	            dayNumberLabel.innerText = 'Day Number:';
 	            dayNumberLabel.style.fontWeight = 'bold';
@@ -717,8 +832,16 @@ $(document).ready(function () {
 	            dayNumberInput.style.padding = '10px';
 	            dayNumberInput.style.border = '1px solid #ccc';
 	            dayNumberInput.style.borderRadius = '5px';
+	            dayNumberInput.disabled = true;
+
+	            dayNumberWrapper.appendChild(dayNumberLabel);
+	            dayNumberWrapper.appendChild(dayNumberInput);
 
 	            // Destination
+	            const destinationWrapper = document.createElement('div');
+	            destinationWrapper.style.display = 'flex';
+	            destinationWrapper.style.flexDirection = 'column';
+
 	            const destinationLabel = document.createElement('label');
 	            destinationLabel.innerText = 'Destination:';
 	            destinationLabel.style.fontWeight = 'bold';
@@ -731,18 +854,43 @@ $(document).ready(function () {
 	            destinationInput.style.padding = '10px';
 	            destinationInput.style.border = '1px solid #ccc';
 	            destinationInput.style.borderRadius = '5px';
+	            destinationInput.disabled = true;
 
-	            dayDiv.appendChild(dayNumberLabel);
-	            dayDiv.appendChild(dayNumberInput);
-	            dayDiv.appendChild(destinationLabel);
-	            dayDiv.appendChild(destinationInput);
+	            destinationWrapper.appendChild(destinationLabel);
+	            destinationWrapper.appendChild(destinationInput);
+
+	            // Append both Day and Destination to the main div
+	            dayDiv.appendChild(dayNumberWrapper);
+	            dayDiv.appendChild(destinationWrapper);
+
+	            // Details
+	            const detailsWrapper = document.createElement('div');
+	            detailsWrapper.style.display = 'flex';
+	            detailsWrapper.style.flexDirection = 'column';
+
+	            const detailsLabel = document.createElement('label');
+	            detailsLabel.innerText = 'Details:';
+	            detailsLabel.style.fontWeight = 'bold';
+
+	            const detailsInput = document.createElement('textarea');
+	            detailsInput.name = 'details[]';
+	            detailsInput.value = dayDetails.details || '';
+	            detailsInput.placeholder = 'Details about the day';
+	            detailsInput.style.padding = '10px';
+	            detailsInput.style.border = '1px solid #ccc';
+	            detailsInput.style.borderRadius = '5px';
+	            detailsInput.style.resize = 'vertical';
+	            detailsInput.disabled = true;
+
+	            detailsWrapper.appendChild(detailsLabel);
+	            detailsWrapper.appendChild(detailsInput);
+
+	            // Append inputs to the main container
 	            dayWrapper.appendChild(dayDiv);
+	            dayWrapper.appendChild(detailsWrapper);
 
 	            // Sightseeing Details
 	            const sightseeingContainer = document.createElement('div');
-	            sightseeingContainer.style.display = 'flex';
-	            sightseeingContainer.style.flexDirection = 'column';
-	            sightseeingContainer.style.gap = '10px';
 	            sightseeingContainer.style.marginTop = '10px';
 
 	            const sightseeingLabel = document.createElement('label');
@@ -760,85 +908,33 @@ $(document).ready(function () {
 	                    sightInput.style.padding = '8px';
 	                    sightInput.style.border = '1px solid #ccc';
 	                    sightInput.style.borderRadius = '3px';
+	                    sightInput.style.marginTop = '5px';
+	                    sightInput.disabled = true;
 
 	                    sightseeingContainer.appendChild(sightInput);
 	                });
 	            } else {
 	                const noSightseeing = document.createElement('p');
 	                noSightseeing.innerText = 'No sightseeing details available for this day.';
+	                noSightseeing.style.marginTop = '5px';
 	                sightseeingContainer.appendChild(noSightseeing);
 	            }
 
 	            dayWrapper.appendChild(sightseeingContainer);
-
-	            // Inclusions (checkboxes)
-	            const inclusionsDiv = document.createElement('div');
-	            inclusionsDiv.innerHTML = `
-	                <label><strong>Inclusions:</strong></label>
-	                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 5px;">
-	                    <label><input type="checkbox" id="breakfast_${index}" name="inclusions[${index}][breakfast]"> Breakfast</label>
-	                    <label><input type="checkbox" id="lunch_${index}" name="inclusions[${index}][lunch]"> Lunch</label>
-	                    <label><input type="checkbox" id="dinner_${index}" name="inclusions[${index}][dinner]"> Dinner</label>
-	                    <label><input type="checkbox" id="nightStay_${index}" name="inclusions[${index}][nightStay]"> Night Stay</label>
-	                    <label><input type="checkbox" id="hiTea_${index}" name="inclusions[${index}][hiTea]"> Hi-Tea</label>
-	                </div>
-	            `;
-	            dayWrapper.appendChild(inclusionsDiv);
 	            itineraryContainer.appendChild(dayWrapper);
-
-	            // Set checkbox values dynamically for each day
-	            setCheckbox(`breakfast_${index}`, dayDetails.breakfast);
-	            setCheckbox(`lunch_${index}`, dayDetails.lunch);
-	            setCheckbox(`dinner_${index}`, dayDetails.dinner);
-	            setCheckbox(`nightStay_${index}`, dayDetails.nightStay);
-	            setCheckbox(`hiTea_${index}`, dayDetails.hiTea);
 	        });
 	    } else {
-	        itineraryContainer.innerHTML = '<p>No itinerary available for this package.</p>';
+	        itineraryContainer.innerHTML = '<p>No itinerary data available.</p>';
 	    }
 	}
-
-	// Utility function to set checkbox based on value
-	function setCheckbox(id, value) {
-	    const checkbox = document.getElementById(id);
-	    if (checkbox) {
-	        checkbox.checked = Boolean(value);
-	    } else {
-	        console.warn(`Checkbox with id '${id}' not found`);
-	    }
-	}
-
-
 
 	// Call the function to populate itinerary
 	populateItinerary(itineraryData);
 
+	
 
-
-
-    // Utility function to safely set checkbox
-    function setCheckbox(id, value) {
-    const checkbox = document.getElementById(id);
-    if (checkbox) {
-      checkbox.checked = Boolean(value);
-      
-      // Disable checkbox if not checked
-      checkbox.disabled = !Boolean(value);
-    } else {
-      console.warn(`Checkbox with id '${id}' not found`);
-    }
-  }
-
-    // Utility function to reset all checkboxes
-    function resetCheckboxes() {
-    ["hotel", "meals", "transportation", "flight", "sightseeing", "visa"].forEach(id => {
-      const checkbox = document.getElementById(id);
-      if (checkbox) {
-        checkbox.checked = false;
-        checkbox.disabled = true;  // Disable all checkboxes if no data is available
-      }
-        });
-    }
+    
+    
 
     // Utility function to get URL parameters
     function getUrlParameter(name) {
@@ -847,12 +943,6 @@ $(document).ready(function () {
     }
 });
 
-function getInclusions() {
-    const selectedCheckboxes = document.querySelectorAll('input[name="inclusions"]:checked');
-    const inclusions = Array.from(selectedCheckboxes).map(checkbox => checkbox.value);
-    console.log("Selected Inclusions:", inclusions);
-    return inclusions;
-}
 
 
 

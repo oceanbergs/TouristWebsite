@@ -28,14 +28,9 @@ public class Iternary {
 	private long id;
 	private String day;
 	private String destination;
-
-	// Checkbox options for meals/stay
-	private boolean dinner;
-	private boolean breakfast;
-	private boolean hiTea;
-	private boolean nightStay;
-	private boolean lunch;
-
+	 @Column(length = 1000000) 
+	private String details;
+	
 	@OneToMany(mappedBy = "iternary", cascade = CascadeType.ALL)
 	private List<SightseeingEntry> sightseeingEntrie;
 
@@ -75,45 +70,13 @@ public class Iternary {
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
-
-	public boolean isDinner() {
-		return dinner;
+	
+	public String getDetails() {
+		return details;
 	}
 
-	public void setDinner(boolean dinner) {
-		this.dinner = dinner;
-	}
-
-	public boolean isBreakfast() {
-		return breakfast;
-	}
-
-	public void setBreakfast(boolean breakfast) {
-		this.breakfast = breakfast;
-	}
-
-	public boolean isHiTea() {
-		return hiTea;
-	}
-
-	public void setHiTea(boolean hiTea) {
-		this.hiTea = hiTea;
-	}
-
-	public boolean isNightStay() {
-		return nightStay;
-	}
-
-	public void setNightStay(boolean nightStay) {
-		this.nightStay = nightStay;
-	}
-
-	public boolean isLunch() {
-		return lunch;
-	}
-
-	public void setLunch(boolean lunch) {
-		this.lunch = lunch;
+	public void setDetails(String details) {
+		this.details = details;
 	}
 
 	public PackageDetails getPackageDetails() {
