@@ -1153,5 +1153,67 @@ deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift
 	});
 
 </script>
+<script>
+    const addLocationBtn = document.getElementById('addLocationBtn');
+    const locationContainer = document.getElementById('locationContainer');
+
+    addLocationBtn.addEventListener('click', () => {
+        // Create a wrapper div
+        const locationWrapper = document.createElement('div');
+        locationWrapper.style.display = 'flex';
+        locationWrapper.style.alignItems = 'center';
+        locationWrapper.style.gap = '5px';
+        locationWrapper.style.marginTop = '0px';
+
+        // Create the input field
+        const locationInput = document.createElement('input');
+        locationInput.type = 'text';
+        locationInput.placeholder = 'Enter location';
+        locationInput.style.padding = '8px';
+        locationInput.style.border = '1px solid #ccc';
+        locationInput.style.borderRadius = '3px';
+        locationInput.style.flex = '1';
+        locationInput.style.fontSize = '0.9rem';
+        
+        locationInput.id = 'location'; // Set a unique id if needed
+        locationInput.name = 'location[]'; // Set name attribute to match model API
+		locationInput.style.marginRight = '5px';
+
+        // Create the delete button
+       const deleteBtn = document.createElement('button');
+deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+deleteBtn.style.backgroundColor = '#e74c3c';
+deleteBtn.style.color = 'white';
+deleteBtn.style.border = 'none';
+deleteBtn.style.padding = '8px';
+deleteBtn.style.borderRadius = '3px';
+deleteBtn.style.cursor = 'pointer';
+deleteBtn.style.display = 'flex';
+deleteBtn.style.alignItems = 'center';
+deleteBtn.style.justifyContent = 'center';
+deleteBtn.style.fontSize = '1rem';
+
+// Align the delete button correctly
+deleteBtn.style.height = '30px';
+deleteBtn.style.width = '30px';
+
+// Shift the button slightly upward
+deleteBtn.style.position = 'relative';
+deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift
+
+        // Delete functionality
+        deleteBtn.addEventListener('click', () => {
+            locationContainer.removeChild(locationWrapper);
+        });
+
+        // Append input and delete button to wrapper
+        locationWrapper.appendChild(locationInput);
+        locationWrapper.appendChild(deleteBtn);
+
+        // Append wrapper to the container
+        locationContainer.appendChild(locationWrapper);
+    });
+</script>
+
 
 </body>

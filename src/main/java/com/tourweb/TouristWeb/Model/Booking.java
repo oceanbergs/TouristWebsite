@@ -36,6 +36,7 @@ public class Booking {
 	private boolean status;
 	
 	private Date  start_Date;
+	private Date  end_Date;
 	@CreationTimestamp
     private LocalDateTime createdOn;
 	
@@ -47,7 +48,7 @@ public class Booking {
 
 	public Booking(Long id, String customer_Name, String email, String address, String mobile_Number,
 			String destination, String special_Request, String modOffBooking, boolean status, Date start_Date,
-			LocalDateTime createdOn) {
+			Date end_Date,LocalDateTime createdOn) {
 		super();
 		this.id = id;
 		this.customer_Name = customer_Name;
@@ -59,6 +60,7 @@ public class Booking {
 		this.modOffBooking = modOffBooking;
 		this.status = status;
 		this.start_Date = start_Date;
+		this.end_Date = end_Date;
 		this.createdOn = createdOn;
 	}
 
@@ -156,6 +158,18 @@ public class Booking {
 
 	public void setCreatedOn(LocalDateTime createdOn) {
 		this.createdOn = createdOn;
+	}
+
+
+
+	public Date getEnd_Date() {
+		return end_Date;
+	}
+
+
+
+	public void setEnd_Date(Date end_Date) {
+		this.end_Date = end_Date;
 	}
 
 	

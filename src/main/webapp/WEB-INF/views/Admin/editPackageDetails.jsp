@@ -431,169 +431,346 @@ tbody td .fa-trash {
 						          </div>
 						        </div>
 
-						        <!-- Additional Options: Hotel, Inclusions, Transport, Flight, Sightseeing -->
-						        <div style="flex: 1; min-width: 90%; margin-top: 10px;">
-						          <label>Package Includes:</label>
-						          <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 5px;">
-						            <label><input type="checkbox" id="hotel" name="hotel" style="margin-right: 5px;"> Hotel</label>
-						            <label><input type="checkbox" id="meals" name="meals" style="margin-right: 5px;"> Meal</label>
-						            <label><input type="checkbox" id="transport" name="transport" style="margin-right: 5px;"> Transport</label>
-						            <label><input type="checkbox" id="flight" name="flight" style="margin-right: 5px;"> Flight</label>
-						            <label><input type="checkbox" id="sightseeing" name="sightseeing" style="margin-right: 5px;"> Sightseeing</label>
-						            <label><input type="checkbox" id="visa" name="visa" style="margin-right: 5px;"> Visa</label>
-						          </div>
-						        </div>
+						       <div style="min-width: 100%; margin-bottom: 20px;">
+				    <!-- Label and Button container -->
+					<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+					  <label for="fileUploads" style="font-size: 16px; font-weight: bold; margin: 0;">
+					    Gallery Images
+					  </label>
+					  <button 
+					    type="button" 
+					    id="addFileButton" 
+					    style="background-color: #007bff; color: white; border: none; padding: 4px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
+					    <i class="fas fa-plus"></i>
+					  </button>
+					</div>
 
-						        <!-- Additional Info Textarea -->
-						        <div style="margin-top: 10px; min-width: 100%;">
-						          <label for="note" style="font-weight: bold; color: #34495e;">Additional Info:</label>
-						          <textarea id="note" name="note" placeholder="Enter additional information"
-						            style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; height: 40px;">
-						          </textarea>
-						        </div>
+				    <!-- File Upload Inputs -->
+				    <div id="fileUploadContainer" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+				      <!-- File inputs with delete buttons will be dynamically added here -->
+				    </div>
 
-						        <!-- Location Section -->
-						        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; width: 100%;">
-						          <label for="location" style="font-weight: bold; color: #34495e;">Location:</label>
-						          <button type="button" id="addLocationBtn"
-						            style="background-color: #007bff; color: white; border: none; padding: 4px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
-						            <i class="fas fa-plus"></i>
-						          </button>
-						        </div>
-						        <div id="locationContainer" style="margin-top: 10px;"></div>
+				    <!-- Image Preview Section -->
+				    <div id="imagePreviewContainer" 
+				      style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+				      <!-- Image previews will appear here -->
+				    </div>
+				  </div>
 
-						        <!-- Itinerary Section -->
-						        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; width: 100%;">
-						          <label for="itinerary" style="font-weight: bold; color: #34495e;">Itinerary:</label>
-						          <button type="button" id="addDayBtn"
-						            style="background-color: #87be29; color: white; border: none; padding: 4px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; width: 80px; height: 30px; display: flex; align-items: center; justify-content: center;">
-						            Add Day
-						          </button>
-						        </div>
-						        <br>
-						         <div id="days-container"></div>
+				  <script>
+					const addFileButton = document.getElementById('addFileButton');
+					const fileUploadContainer = document.getElementById('fileUploadContainer');
+					const imagePreviewContainer = document.getElementById('imagePreviewContainer');
 
+					addFileButton.addEventListener('click', () => {
+					  // Create a container for the file input and delete button
+					  const fileInputWrapper = document.createElement('div');
+					  fileInputWrapper.style.cssText = 'display: flex; align-items: center; gap: 10px; margin-bottom: 10px;';
+
+					  // Create a new file input
+					  const fileInput = document.createElement('input');
+					  fileInput.type = 'file';
+					  fileInput.name = 'gallery[]';
+					  fileInput.accept = 'image/jpeg';
+					  fileInput.required = true;
+					  fileInput.style.cssText = 'flex: 1; padding: 8px; margin-right: 10px;';
+
+					  // Create a delete button for the file input
+					  const deleteButton = document.createElement('button');
+					  deleteButton.textContent = 'Delete';
+					  deleteButton.style.cssText = `
+					    padding: 4px 8px;
+					    background: #d9534f;
+					    color: white;
+					    border: none;
+					    border-radius: 4px;
+					    cursor: pointer;
+					    font-size: 14px;
+					    height: 30px;
+					    width: auto; /* Adjust width dynamically based on content */
+					    display: flex;
+					    justify-content: center;
+					    align-items: center;
+					  `;
+
+					  // Append file input and delete button to the wrapper
+					  fileInputWrapper.appendChild(fileInput);
+					  fileInputWrapper.appendChild(deleteButton);
+
+					  // Add the wrapper to the file upload container
+					  fileUploadContainer.appendChild(fileInputWrapper);
+
+					  // Handle image preview
+					  fileInput.addEventListener('change', (event) => {
+					    const files = event.target.files;
+
+					    // Clear existing previews for this input if any
+					    if (fileInput.previewElements) {
+					      fileInput.previewElements.forEach(preview => preview.remove());
+					    }
+					    fileInput.previewElements = [];
+
+					    for (let i = 0; i < files.length; i++) {
+					      const file = files[i];
+					      const reader = new FileReader();
+
+					      reader.onload = function (e) {
+					        // Create a preview container for the image
+					        const preview = document.createElement('div');
+					        preview.style.cssText = `
+					          width: 100px; 
+					          height: 100px; 
+					          border: 1px solid #ddd; 
+					          border-radius: 5px; 
+					          overflow: hidden; 
+					          display: flex; 
+					          justify-content: center; 
+					          align-items: center; 
+					          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+					          margin-right: 10px;
+					        `;
+
+					        const img = document.createElement('img');
+					        img.src = e.target.result;
+					        img.style.cssText = 'width: 100%; height: 100%; object-fit: cover;';
+					        preview.appendChild(img);
+
+					        // Add the preview to the container and associate it with the input
+					        imagePreviewContainer.appendChild(preview);
+					        fileInput.previewElements.push(preview);
+					      };
+
+					      reader.readAsDataURL(file);
+					    }
+					  });
+
+					  // Handle deletion of file input and its associated previews
+					  deleteButton.onclick = () => {
+					    if (fileInput.previewElements) {
+					      fileInput.previewElements.forEach(preview => preview.remove()); // Remove all associated previews
+					    }
+					    fileInputWrapper.remove(); // Remove the file input container
+					  };
+					});
+
+				  </script>
+
+       
+
+		<div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; width: 100%;">
+				    <label for="includes" style="font-weight: bold; color: #34495e;">Includes:</label>
+				    <button type="button" id="addIncludesBtn"
+		      style="background-color: #007bff; color: white; border: none; padding: 4px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
+		      <i class="fas fa-plus"></i>
+		    </button>
+				</div>
+
+				<div id="IncludesContainer" style="margin-top: 10px;"></div>
+				
+				<div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; width: 100%;">
+						  <label for="location" style="font-weight: bold; color: #34495e;">Excludes:</label>
+						    <button type="button" id="addExcludesBtn"
+		    style="background-color: #007bff; color: white; border: none; padding: 4px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
+		    <i class="fas fa-plus"></i>
+		  </button>
+						 
+						</div>
+
+						<!-- Container for dynamically added Excludes input fields -->
+						<div id="excludesContainer" style="margin-top: 10px;"></div>
+
+
+		
+        <!-- Location Section -->
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; width: 100%;">
+          <label for="location" style="font-weight: bold; color: #34495e;">Location:</label>
+           <button type="button" id="addLocationBtn"
+		    style="background-color: #007bff; color: white; border: none; padding: 4px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
+		    <i class="fas fa-plus"></i>
+		  </button>
+        </div>
+        <div id="locationContainer" style="margin-top: 10px;"></div>
+
+        <!-- Itinerary Section -->
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; width: 100%;">
+          <label for="itinerary" style="font-weight: bold; color: #34495e;">Itinerary:</label>
+          <button type="button" id="addDayBtn"
+            style="background-color: #87be29; color: white; border: none; padding: 4px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; width: 80px; height: 30px; display: flex; align-items: center; justify-content: center;">
+            Add Day
+          </button>
+        </div>
+        <br>
+         <div id="itineraryContainer"></div>
 						        <!-- Submit Button -->
-								<div style="margin-top: 20px;">
+								
 								    <button id="submitBtn"
 								        style="width: 100%; background-color: #87be29; color: white; padding: 14px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem;">
 								        Update Package
 								    </button>
 								</div>
 								<script type="text/javascript">
-									document.addEventListener('DOMContentLoaded', function () {
-									    document.getElementById('submitBtn').addEventListener('click', function (event) {
-									        event.preventDefault(); // Prevent default form submission
-									       // alert('Button clicked!');
+								document.addEventListener('DOMContentLoaded', function () {
+								    document.getElementById('submitBtn').addEventListener('click', function (event) {
+								        event.preventDefault(); // Prevent default form submission
 
-									        // ✅ Get Package ID (Make sure it's present in your HTML form)
-									        const id = document.getElementById('id') ? document.getElementById('id').value : null;
-									        if (!id) {
-									            alert('Error: Package ID not found!');
-									            return;
-									        }
-									       // alert('Package ID: ' + id);
+								        // Get Package ID
+								        const id = document.getElementById('id') ? document.getElementById('id').value : null;
+								        if (!id) {
+								            alert('Error: Package ID not found!');
+								            return;
+								        }
 
-									        const fileInput = document.getElementById('packageImage');
-									        const file = fileInput.files[0];
-									       // alert('File selected: ' + (file ? file.name : 'None'));
+								        const fileInput = document.getElementById('packageImage');
+								        const file = fileInput.files[0]; // Get the first file (if any)
 
-									        const locationInputs = document.querySelectorAll('input[name="location[]"]');
-									        let locations = [];
-									        locationInputs.forEach(input => {
-									            const locationName = input.value.trim();
-									            if (locationName) {
-									                locations.push({ locationName });
-									            }
-									        });
-									       // alert('Locations collected: ' + locations.length);
+								        // Collect includes
+								        const includesInputs = document.querySelectorAll('input[name="includes[]"]');
+								        let allIncludes = [];
+								        includesInputs.forEach(input => {
+								            const includes = input.value.trim();
+								            if (includes) {
+								                allIncludes.push({ includes });
+								            }
+								        });
 
-									        const itinerary = [];
-									        const dayBlocks = document.querySelectorAll('.day-block');
-									       // alert('Day blocks count: ' + dayBlocks.length);
+								        // Collect excludes
+								        const excludeInputs = document.querySelectorAll('input[name="excludes[]"]');
+								        let allExcludes = [];
+								        excludeInputs.forEach(input => {
+								            const excludes = input.value.trim();
+								            if (excludes) {
+								                allExcludes.push({ excludes });
+								            }
+								        });
 
-									        dayBlocks.forEach((dayBlock, index) => {
-									            const day = dayBlock.querySelector('input[id="day' + (index + 1) + '"]').value;
-									            const destination = dayBlock.querySelector('input[id="destination' + (index + 1) + '"]').value;
-									            const breakfast = dayBlock.querySelector('input[name="breakfast[' + (index + 1) + ']"]').checked;
-									            const lunch = dayBlock.querySelector('input[name="lunch[' + (index + 1) + ']"]').checked;
-									            const dinner = dayBlock.querySelector('input[name="dinner[' + (index + 1) + ']"]').checked;
-									            const nightStay = dayBlock.querySelector('input[name="nightStay[' + (index + 1) + ']"]').checked;
-									            const hiTea = dayBlock.querySelector('input[name="hiTea[' + (index + 1) + ']"]').checked;
+								        // Collect locations
+								        const locationInputs = document.querySelectorAll('input[name="location[]"]');
+								        let locations = [];
+								        locationInputs.forEach(input => {
+								            const locationName = input.value.trim();
+								            const locationId = input.getAttribute('data-id'); // Assuming you have `data-id` for existing entries
+								            if (locationName) {
+								                locations.push({
+								                    id: locationId || null, // Use null for new entries
+								                    locationName
+								                });
+								            }
+								        });
 
-									            const sightseeingEntries = [];
-									            const sightseeingWrappers = dayBlock.querySelectorAll('.sightseeingWrapper');
-									            alert('Sightseeing wrappers in day ' + (index + 1) + ': ' + sightseeingWrappers.length);
+								        // Collect itinerary
+								        const itinerary = [];
+								        const dayBlocks = document.querySelectorAll('.day-block');
+								        dayBlocks.forEach((dayBlock, index) => {
+								            const day = dayBlock.querySelector('input[id="day' + (index + 1) + '"]').value;
+								            const destination = dayBlock.querySelector('input[id="destination' + (index + 1) + '"]').value;
+								            const details = dayBlock.querySelector('input[id="details' + (index + 1) + '"]').value;
 
-									            sightseeingWrappers.forEach(wrapper => {
-									                const sightseeingLocation = wrapper.querySelector('input[name="sightseeingLocation[' + (index + 1) + '][]"]').value;
-									                sightseeingEntries.push({ location: sightseeingLocation, day: 'Day ' + day });
-									            });
+								            const sightseeingEntries = [];
+								            const sightseeingWrappers = dayBlock.querySelectorAll('.sightseeingWrapper');
+								            sightseeingWrappers.forEach(wrapper => {
+								                const sightseeingLocation = wrapper.querySelector('input[name="sightseeingLocation[' + (index + 1) + '][]"]').value;
+								                sightseeingEntries.push({ location: sightseeingLocation, day: 'Day ' + day });
+								            });
 
-									            itinerary.push({
-									                day: 'Day ' + day,
-									                destination: destination,
-									                dinner: dinner,
-									                breakfast: breakfast,
-									                hiTea: hiTea,
-									                nightStay: nightStay,
-									                lunch: lunch,
-									                sightseeingEntries: sightseeingEntries
-									            });
-									        });
-									       // alert('Itinerary created with ' + itinerary.length + ' days');
+								            itinerary.push({
+								                day: 'Day ' + day,
+								                destination: destination,
+								                details: details,
+								                sightseeingEntrie: sightseeingEntries,
+								            });
+								        });
 
-									        if (file) {
-									            const reader = new FileReader();
-									            reader.onloadend = function () {
-									                const base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
-									                alert('Image file loaded as base64');
+								        // Collect gallery images
+								        const galleryInputs = document.querySelectorAll('input[name="gallery[]"]');
+								        let gallery = [];
 
-									                const packageData = {
-									                    id: id, // ✅ Ensure ID is included in the data
-									                    packageName: $('#packageName').val(),
-									                    duration: $('#duration').val(),
-									                    price: $('#price').val(),
-									                    packageType: $('#packageType').val(),
-									                    packageImage: base64String,
-									                    //locations: locations,
-<!--									                    allInclude: {-->
-<!--									                        hotel: document.getElementById('hotel').checked,-->
-<!--									                        meals: document.getElementById('meals').checked,-->
-<!--									                        transportation: document.getElementById('transport').checked,-->
-<!--									                        flight: document.getElementById('flight').checked,-->
-<!--									                        sightseeing: document.getElementById('sightseeing').checked,-->
-<!--									                        visa: document.getElementById('visa').checked,-->
-<!--									                        note: $('#note').val()-->
-<!--									                    },-->
-									                    itinerary: itinerary
-									                };
+								        const processGalleryImages = () => {
+								            let galleryFiles = [];
+								            galleryInputs.forEach(input => {
+								                galleryFiles = galleryFiles.concat(Array.from(input.files));
+								            });
 
-									                // ✅ Send data via AJAX for update
-									                alert('Sending data via AJAX');
-									                $.ajax({
-									                    url: "/TouristWebsite/auth/updatePackageDetails/"+id, // Ensure ID is in the URL
-									                    type: 'PUT',
-									                    contentType: 'application/json',
-									                    data: JSON.stringify(packageData),
-									                    success: function (response) {
-									                        alert('Update successful! Response: ' + response);
-															window.location.href = '/TouristWebsite/auth/managePackage';
-									                    },
-									                    error: function (error) {
-									                        console.error('Error sending data:', error);
-									                        alert('Error: Could not update package details.');
-									                    }
-									                });
-									            };
-									            reader.readAsDataURL(file);
-									        } else {
-									            alert("Please select an image file first.");
-									        }
-									    });
-									});
+								            if (galleryFiles.length > 0) {
+								                const promises = galleryFiles.map(file => {
+								                    return new Promise((resolve, reject) => {
+								                        const reader = new FileReader();
+								                        reader.onloadend = function () {
+								                            resolve(reader.result.split(",")[1]); // Extract Base64
+								                        };
+								                        reader.onerror = reject;
+								                        reader.readAsDataURL(file);
+								                    });
+								                });
 
-								</script>
+								                return Promise.all(promises)
+								                    .then(base64Images => {
+								                        base64Images.forEach(base64 => {
+								                            gallery.push({ gallery: base64 });
+								                        });
+								                    })
+								                    .catch(error => {
+								                        console.error('Error processing gallery images:', error);
+								                        alert('Failed to process gallery images. Please try again.');
+								                    });
+								            } else {
+								                return Promise.resolve(); // No gallery images to process
+								            }
+								        };
+
+								        // Process gallery and file image, then send data
+								        processGalleryImages().then(() => {
+								            const packageData = {
+								                packageName: document.getElementById('packageName').value.trim(),
+								                duration: document.getElementById('duration').value.trim(),
+								                price: document.getElementById('price').value.trim(),
+								                packageType: document.getElementById('packageType').value.trim(),
+								                gallery: gallery,
+								                locations: locations, // Includes `id` for updates
+								                allIncludes: allIncludes,
+								                allExcludes: allExcludes,
+								                iternary: itinerary
+								            };
+
+								            // If file is selected, include it in the data
+								            if (file) {
+								                const reader = new FileReader();
+								                reader.onloadend = function () {
+								                    const base64String = reader.result.split(",")[1]; // Extract base64 part
+								                    packageData.packageImage = base64String;
+
+								                    // Send data via AJAX for update
+								                    sendUpdateRequest(packageData, id);
+								                };
+								                reader.readAsDataURL(file);
+								            } else {
+								                // Send data without the image file
+								                sendUpdateRequest(packageData, id);
+								            }
+								        });
+								    });
+
+								    // Function to send update request
+								    function sendUpdateRequest(packageData, id) {
+								        $.ajax({
+								            url: "/TouristWebsite/auth/updatePackageDetails/" + id,
+								            type: 'PUT',
+								            contentType: 'application/json',
+								            data: JSON.stringify(packageData),
+								            success: function (response) {
+								                alert('Update successful! Response: ' + response);
+								                window.location.href = '/TouristWebsite/auth/managePackage';
+								            },
+								            error: function (error) {
+								                console.error('Error sending data:', error);
+								                alert('Error: Could not update package details.');
+								            }
+								        });
+								    }
+								});
+
+
+</script>
+
 					</div>
 				</section>
 			</main>
@@ -668,71 +845,533 @@ getCourseData();
     });
 </script>
 
+
+
 <script>
-<!--    const addLocationBtn = document.getElementById('addLocationBtn');-->
-<!--    const locationContainer = document.getElementById('locationContainer');-->
+//     const addDayBtn = document.getElementById('addDayBtn');
+//     const daysContainer = document.getElementById('days-container');
 
-<!--    addLocationBtn.addEventListener('click', () => {-->
-<!--        // Create a wrapper div-->
-<!--        const locationWrapper = document.createElement('div');-->
-<!--        locationWrapper.style.display = 'flex';-->
-<!--        locationWrapper.style.alignItems = 'center';-->
-<!--        locationWrapper.style.gap = '5px';-->
-<!--        locationWrapper.style.marginTop = '0px';-->
+//     let dayCount = 0;
 
-<!--        // Create the input field-->
-<!--        const locationInput = document.createElement('input');-->
-<!--        locationInput.type = 'text';-->
-<!--        locationInput.placeholder = 'Enter location';-->
-<!--        locationInput.style.padding = '8px';-->
-<!--        locationInput.style.border = '1px solid #ccc';-->
-<!--        locationInput.style.borderRadius = '3px';-->
-<!--        locationInput.style.flex = '1';-->
-<!--        locationInput.style.fontSize = '0.9rem';-->
-        
-<!--        locationInput.id = 'location'; // Set a unique id if needed-->
-<!--        locationInput.name = 'location[]'; // Set name attribute to match model API-->
+//     addDayBtn.addEventListener('click', () => {
+//         const newDayBlock = document.createElement('div');
+//         newDayBlock.classList.add('day-block');
+//         newDayBlock.style.display = 'flex';
+//         newDayBlock.style.flexWrap = 'wrap';
+//         newDayBlock.style.justifyContent = 'space-between';
+//         newDayBlock.style.border = '1px solid #ccc';
+//         newDayBlock.style.padding = '10px';
+//         newDayBlock.style.marginBottom = '10px';
+//         newDayBlock.style.borderRadius = '5px';
+//         newDayBlock.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
+//         newDayBlock.style.position = 'relative';
 
-<!--        // Create the delete button-->
-<!--       const deleteBtn = document.createElement('button');-->
-<!--deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';-->
-<!--deleteBtn.style.backgroundColor = '#e74c3c';-->
-<!--deleteBtn.style.color = 'white';-->
-<!--deleteBtn.style.border = 'none';-->
-<!--deleteBtn.style.padding = '8px';-->
-<!--deleteBtn.style.borderRadius = '3px';-->
-<!--deleteBtn.style.cursor = 'pointer';-->
-<!--deleteBtn.style.display = 'flex';-->
-<!--deleteBtn.style.alignItems = 'center';-->
-<!--deleteBtn.style.justifyContent = 'center';-->
-<!--deleteBtn.style.fontSize = '1rem';-->
+//         // Increment day count
+//         dayCount++;
 
-<!--// Align the delete button correctly-->
-<!--deleteBtn.style.height = '30px';-->
-<!--deleteBtn.style.width = '30px';-->
+//         // Add fields for Day Number and Destination
+//         newDayBlock.innerHTML = `
+//             <div style="flex: 1 1 calc(50% - 10px); margin: 5px;">
+//                 <label for="day`+dayCount+`" style="display: block; margin-bottom: 5px; font-weight: bold;">Day Number:</label>
+//                 <input type="text" id="day`+dayCount+`" name="day[]" placeholder="E.g., 1"
+//                     style="width: 100%; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
+//             </div>
+//             <div style="flex: 1 1 calc(50% - 10px); margin: 5px;">
+//                 <label for="destination`+dayCount+`" style="display: block; margin-bottom: 5px; font-weight: bold;">Destination:</label>
+//                 <input type="text" id="destination`+dayCount+`" name="destination[]" placeholder="E.g., Amravati - Pune"
+//                     style="width: 100%; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
+//             </div>
+//             <div style="flex: 1 1 100%; margin: 5px;">
+//                 <div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px;">
+//                     <label for="sightseeing`+dayCount+`" style="font-weight: bold; margin-right: 10px;">
+//                         Sightseeing Details:
+//                     </label>
+//                     <button type="button" class="addSightseeingBtn"
+//                         style="background-color: #007bff; color: white; border: none; padding: 4px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
+//                         <i class="fas fa-plus"></i>
+//                     </button>
+//                 </div>
+//                 <div class="sightseeingContainer" style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+//                 </div>
+//                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+//                     <label><input type="checkbox" name="breakfast[`+dayCount+`]" value="1">Breakfast</label>
+//                     <label><input type="checkbox" name="lunch[`+dayCount+`]" value="1">Lunch</label>
+//                     <label><input type="checkbox" name="dinner[`+dayCount+`]" value="1">Dinner</label>
+//                     <label><input type="checkbox" name="nightStay[`+dayCount+`]" value="1">Night Stay</label>
+//                     <label><input type="checkbox" name="hiTea[`+dayCount+`]" value="1">Hi-Tea</label>
+//                 </div>
+//                 <div style="width: 100%; display: flex; align-items: center;">
+//                     <button class="deleteDayBtn" style="background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; height: 30px; width: 100px; display: flex; justify-content: center; align-items: center; font-size: 1rem; margin-left: auto;">
+//                         Delete Day
+//                     </button>
+//                 </div>
+//             </div>
+//         `;
 
-<!--// Shift the button slightly upward-->
-<!--deleteBtn.style.position = 'relative';-->
-<!--deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift-->
+//         daysContainer.appendChild(newDayBlock);
 
-<!--        // Delete functionality-->
-<!--        deleteBtn.addEventListener('click', () => {-->
-<!--            locationContainer.removeChild(locationWrapper);-->
-<!--        });-->
+//         const addSightseeingBtn = newDayBlock.querySelector('.addSightseeingBtn');
+//         const sightseeingContainer = newDayBlock.querySelector('.sightseeingContainer');
 
-<!--        // Append input and delete button to wrapper-->
-<!--        locationWrapper.appendChild(locationInput);-->
-<!--        locationWrapper.appendChild(deleteBtn);-->
+//         addSightseeingBtn.addEventListener('click', () => {
+//             const sightseeingWrapper = document.createElement('div');
+//             sightseeingWrapper.classList.add('sightseeingWrapper');
+//             sightseeingWrapper.style.display = 'flex';
+//             sightseeingWrapper.style.gap = '10px';
+//             sightseeingWrapper.style.alignItems = 'center';
 
-<!--        // Append wrapper to the container-->
-<!--        locationContainer.appendChild(locationWrapper);-->
-<!--    });-->
-<!--</script>-->
+//             const sightseeingInput = document.createElement('input');
+//             sightseeingInput.type = 'text';
+//             sightseeingInput.placeholder = 'Enter details of sightseeing...';
+//             sightseeingInput.style.flex = '1 1 calc(85% - 10px)';
+//             sightseeingInput.style.height = '40px';
+//             sightseeingInput.style.padding = '10px';
+//             sightseeingInput.style.fontSize = '1rem';
+//             sightseeingInput.style.border = '1px solid #ccc';
+//             sightseeingInput.style.borderRadius = '5px';
+//             sightseeingInput.style.boxSizing = 'border-box';
+//             sightseeingInput.name = `sightseeingLocation[`+dayCount+`][]`;
 
+//             const deleteBtn = document.createElement('button');
+//             deleteBtn.classList.add('deleteBtn');
+//             deleteBtn.style.backgroundColor = '#e74c3c';
+//             deleteBtn.style.color = 'white';
+//             deleteBtn.style.border = 'none';
+//             deleteBtn.style.padding = '10px';
+//             deleteBtn.style.borderRadius = '5px';
+//             deleteBtn.style.cursor = 'pointer';
+//             deleteBtn.style.height = '30px';
+//             deleteBtn.style.width = '30px';
+//             deleteBtn.style.display = 'flex';
+//             deleteBtn.style.justifyContent = 'center';
+//             deleteBtn.style.alignItems = 'center';
+//             deleteBtn.style.fontSize = '1rem';
+//             deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+
+//             deleteBtn.style.position = 'relative';
+//             deleteBtn.style.top = '-7px';
+
+//             deleteBtn.addEventListener('click', () => {
+//                 sightseeingContainer.removeChild(sightseeingWrapper);
+//             });
+
+//             sightseeingWrapper.appendChild(sightseeingInput);
+//             sightseeingWrapper.appendChild(deleteBtn);
+//             sightseeingContainer.appendChild(sightseeingWrapper);
+//         });
+//     });
+
+//     document.getElementById('days-container').addEventListener('click', function(e) {
+//         if (e.target && e.target.classList.contains('deleteDayBtn')) {
+//             e.target.closest('.day-block').remove();
+//         }
+
+//         if (e.target && e.target.classList.contains('deleteBtn')) {
+//             e.target.closest('.sightseeingWrapper').remove();
+//         }
+//     });
+</script>
+
+
+
+		
+
+
+
+<script type="text/javascript">
+$(document).ready(function () {
+    // Get packageId from the URL parameter
+	
+	
+    var packageId = getUrlParameter('id');
+
+    if (packageId) {
+        getPackageDetails(packageId);
+    } else {
+        alert("Package ID is missing");
+    }
+
+    // Function to fetch package details (including locations, days, and itinerary)
+    function getPackageDetails(id) {
+        $.ajax({
+            url: "/TouristWebsite/auth/getPackageDetails/" + id,
+            type: "GET",
+            contentType: "application/json",
+			success: function (response) {
+			    console.log(response); // Inspect the response
+
+			    if (response) {
+			        populateForm(response);
+
+			        // Populate Locations
+			        if (response.locations && Array.isArray(response.locations)) {
+			            populateLocations(response.locations);
+			        } else {
+			            $('#locationContainer').html('<p>No locations available for this package.</p>');
+			        }
+
+			        // Populate Itinerary
+			        if (response.iternary && Array.isArray(response.iternary)) {
+			            populateItinerary(response.iternary);
+			        } else {
+			            $('#itineraryContainer').html('<p>No itinerary available for this package.</p>');
+			        }
+
+					if (response.allIncludes && Array.isArray(response.allIncludes)) {
+					    populateIncludes(response.allIncludes);
+					} else {
+					    $('#IncludesContainer').html('<p>No includes available for this package.</p>');
+					}
+
+
+					if (response.allExcludes && Array.isArray(response.allExcludes)) {
+					    populateExcludes(response.allExcludes);
+					} else {
+					    $('#excludesContainer').html('<p>No excludes available for this package.</p>');
+					}
+					if (response.gallery && Array.isArray(response.gallery)) {
+					    populateGallery(response.gallery);
+					} else {
+					    $('#galleryContainer').html('<p>No gallery images available for this package.</p>');
+					}
+			    } else {
+			        alert("No Package data found");
+			    }
+			},
+
+            error: function (jqXHR, status, errorThrown) {
+                if (jqXHR.status === 403) {
+                    alert("YOU DON'T HAVE PERMISSION");
+                } else {
+                    alert("Failed to communicate with the server");
+                }
+            }
+        });
+    }
+
+	function populateForm(packageDetails) {
+	    console.log("Package Data:", packageDetails); // Debugging
+
+	    // Populate text fields
+	    document.getElementById("id").value = packageDetails.id || '';
+	    document.getElementById("packageName").value = packageDetails.packageName || '';
+	    document.getElementById("duration").value = packageDetails.duration || '';
+	    document.getElementById("packageType").value = packageDetails.packageType || '';
+	    document.getElementById("price").value = packageDetails.price || '';
+	    
+
+	    // Populate checkboxes
+	   
+
+	    // Display image if present
+	    const imagePreview = document.getElementById("imagePreview"); // Target the img tag for preview
+
+	    if (packageDetails.packageImage) { 
+	        imagePreview.src = "data:image/jpeg;base64," + packageDetails.packageImage;  // Use directly without re-adding the prefix
+	        imagePreview.style.display = 'block'; // Show the image preview container
+	    } else {
+	        imagePreview.src = ''; // Clear the previous image
+	        imagePreview.style.display = 'none'; // Hide if no image
+	    }
+	}
+
+
+    // Function to dynamically populate locations
+    function populateLocations(locations) {
+        const locationContainer = document.getElementById('locationContainer');
+        locationContainer.innerHTML = ''; // Clear existing locations
+
+        // Check if locations are provided
+        if (Array.isArray(locations) && locations.length > 0) {
+            locations.forEach(location => {
+                const locationWrapper = document.createElement('div');
+                locationWrapper.style.display = 'flex';
+                locationWrapper.style.alignItems = 'center';
+                locationWrapper.style.gap = '5px';
+                locationWrapper.style.marginTop = '5px';
+
+                const locationInput = document.createElement('input');
+                locationInput.type = 'text';
+                locationInput.value = location.locationName || ''; // Access the correct location name field
+                locationInput.placeholder = 'Enter location';
+                locationInput.style.padding = '8px';
+                locationInput.style.border = '1px solid #ccc';
+                locationInput.style.borderRadius = '3px';
+                locationInput.style.flex = '1';
+                locationInput.style.fontSize = '0.9rem';
+                //locationInput.name = 'location[]'; 
+				//locationInput.disabled = true;
+
+                locationWrapper.appendChild(locationInput);
+                locationContainer.appendChild(locationWrapper);
+            });
+        } else {
+            locationContainer.innerHTML = '<p>No locations available for this package.</p>';
+        }
+    }
+    
+
+	
+	function populateIncludes(allIncludes) {
+	    const includesContainer = document.getElementById('IncludesContainer');
+	    includesContainer.innerHTML = ''; // Clear existing includes
+
+	    // Check if allIncludes is an array and has items
+	    if (Array.isArray(allIncludes) && allIncludes.length > 0) {
+	        allIncludes.forEach((include) => {
+	            // Create a wrapper for each include input
+	            const includesWrapper = document.createElement('div');
+	            includesWrapper.style.marginBottom = '10px';
+
+	            // Create the input field for the include
+	            const includesInput = document.createElement('input');
+	            includesInput.type = 'text';
+	            includesInput.value = include.includes || ''; // Access the 'includes' property
+	            includesInput.placeholder = 'Enter Includes';
+	            includesInput.style.padding = '8px';
+	            includesInput.style.border = '1px solid #ccc';
+	            includesInput.style.borderRadius = '3px';
+	            includesInput.style.fontSize = '0.9rem';
+	            includesInput.style.width = '100%'; // Ensure it spans the container width
+	           // includesInput.name = 'includes[]'; // Correct name for server compatibility
+				//includesInput.disabled = true;
+
+	            // Append the input field to the wrapper
+	            includesWrapper.appendChild(includesInput);
+
+	            // Append the wrapper to the includes container
+	            includesContainer.appendChild(includesWrapper);
+	        });
+	    } else {
+	        // If no data, show a message
+	        includesContainer.innerHTML = '<p>No includes available for this package.</p>';
+	    }
+	}
+
+	function populateExcludes(allExcludes) {
+	    const excludesContainer = document.getElementById('excludesContainer');
+	    excludesContainer.innerHTML = ''; // Clear existing excludes
+
+	    // Check if allExcludes is an array and has items
+	    if (Array.isArray(allExcludes) && allExcludes.length > 0) {
+	        allExcludes.forEach((exclude) => {
+	            // Create a wrapper for each exclude input
+	            const excludeWrapper = document.createElement('div');
+	            excludeWrapper.style.marginBottom = '10px';
+
+	            // Create the input field for the exclude
+	            const excludeInput = document.createElement('input');
+	            excludeInput.type = 'text';
+	            excludeInput.value = exclude.excludes || ''; // Access the 'excludes' property
+	            excludeInput.placeholder = 'Enter Excludes';
+	            excludeInput.style.padding = '8px';
+	            excludeInput.style.border = '1px solid #ccc';
+	            excludeInput.style.borderRadius = '3px';
+	            excludeInput.style.fontSize = '0.9rem';
+	            excludeInput.style.width = '100%'; // Ensure it spans the container width
+	            //excludeInput.name = 'excludes[]'; // Name attribute for API compatibility
+				//excludeInput.disabled = true;
+	            // Append the input field to the wrapper
+	            excludeWrapper.appendChild(excludeInput);
+
+	            // Append the wrapper to the excludes container
+	            excludesContainer.appendChild(excludeWrapper);
+	        });
+	    } else {
+	        // If no data, show a message
+	        excludesContainer.innerHTML = '<p>No excludes available for this package.</p>';
+	    }
+	}
+	
+	function populateGallery(gallery) {
+	    const galleryContainer = document.getElementById('imagePreviewContainer');
+	    galleryContainer.innerHTML = ''; // Clear existing gallery images
+
+	    if (Array.isArray(gallery) && gallery.length > 0) { // Check for valid gallery array
+	        gallery.forEach(image => {
+	            const imageWrapper = document.createElement('div');
+	            imageWrapper.style.marginBottom = '15px';
+	            imageWrapper.style.display = 'inline-block';
+	            imageWrapper.style.width = '100px';
+	            imageWrapper.style.height = '100px';
+
+	            const imgElement = document.createElement('img');
+
+	            // Handle the gallery field as a string or object
+	            if (typeof image.gallery === 'string') {
+	                imgElement.src = "data:image/jpeg;base64," + image.gallery;
+	            } else {
+	                console.error('Invalid gallery format:', image.gallery);
+	                imgElement.src = 'placeholder.png'; // Fallback for invalid data
+	            }
+
+	            imgElement.alt = 'Gallery Image';
+	            imgElement.style.width = '100%';
+	            imgElement.style.height = '100%';
+	            imgElement.style.borderRadius = '5px';
+
+	            imageWrapper.appendChild(imgElement);
+	            galleryContainer.appendChild(imageWrapper);
+	        });
+	    } else {
+	        galleryContainer.innerHTML = '<p>No gallery images available for this package.</p>';
+	    }
+	}
+
+	// Function to handle image addition
+		function populateItinerary(itinerary) {
+	    const itineraryContainer = document.getElementById('itineraryContainer');
+	    itineraryContainer.innerHTML = ''; // Clear existing itinerary data
+
+	    if (Array.isArray(itinerary) && itinerary.length > 0) {
+	        itinerary.forEach((dayDetails, index) => {
+	            const dayWrapper = document.createElement('div');
+	            dayWrapper.style.marginBottom = '20px';
+	            dayWrapper.style.padding = '10px';
+	            dayWrapper.style.border = '1px solid #ddd';
+	            dayWrapper.style.borderRadius = '5px';
+
+	            // Day Number and Destination container (side by side)
+	            const dayDiv = document.createElement('div');
+	            dayDiv.style.display = 'flex';
+	            dayDiv.style.flexDirection = 'row'; // Align Day Number and Destination side by side
+	            dayDiv.style.gap = '20px'; // Add some space between the fields
+	            dayDiv.style.marginBottom = '10px';
+
+	            // Day Number
+	            const dayNumberWrapper = document.createElement('div');
+	            dayNumberWrapper.style.display = 'flex';
+	            dayNumberWrapper.style.flexDirection = 'column';
+
+	            const dayNumberLabel = document.createElement('label');
+	            dayNumberLabel.innerText = 'Day Number:';
+	            dayNumberLabel.style.fontWeight = 'bold';
+
+	            const dayNumberInput = document.createElement('input');
+	            dayNumberInput.type = 'text';
+	            dayNumberInput.name = 'day[]';
+	            dayNumberInput.value = dayDetails.day || '';
+	            dayNumberInput.placeholder = 'Day Number';
+	            dayNumberInput.style.padding = '10px';
+	            dayNumberInput.style.border = '1px solid #ccc';
+	            dayNumberInput.style.borderRadius = '5px';
+	            dayNumberInput.disabled = true;
+
+	            dayNumberWrapper.appendChild(dayNumberLabel);
+	            dayNumberWrapper.appendChild(dayNumberInput);
+
+	            // Destination
+	            const destinationWrapper = document.createElement('div');
+	            destinationWrapper.style.display = 'flex';
+	            destinationWrapper.style.flexDirection = 'column';
+
+	            const destinationLabel = document.createElement('label');
+	            destinationLabel.innerText = 'Destination:';
+	            destinationLabel.style.fontWeight = 'bold';
+
+	            const destinationInput = document.createElement('input');
+	            destinationInput.type = 'text';
+	            destinationInput.name = 'destination[]';
+	            destinationInput.value = dayDetails.destination || '';
+	            destinationInput.placeholder = 'Destination';
+	            destinationInput.style.padding = '10px';
+	            destinationInput.style.border = '1px solid #ccc';
+	            destinationInput.style.borderRadius = '5px';
+	            destinationInput.disabled = true;
+
+	            destinationWrapper.appendChild(destinationLabel);
+	            destinationWrapper.appendChild(destinationInput);
+
+	            // Append both Day and Destination to the main div
+	            dayDiv.appendChild(dayNumberWrapper);
+	            dayDiv.appendChild(destinationWrapper);
+
+	            // Details
+	            const detailsWrapper = document.createElement('div');
+	            detailsWrapper.style.display = 'flex';
+	            detailsWrapper.style.flexDirection = 'column';
+
+	            const detailsLabel = document.createElement('label');
+	            detailsLabel.innerText = 'Details:';
+	            detailsLabel.style.fontWeight = 'bold';
+
+	            const detailsInput = document.createElement('textarea');
+	            detailsInput.name = 'details[]';
+	            detailsInput.value = dayDetails.details || '';
+	            detailsInput.placeholder = 'Details about the day';
+	            detailsInput.style.padding = '10px';
+	            detailsInput.style.border = '1px solid #ccc';
+	            detailsInput.style.borderRadius = '5px';
+	            detailsInput.style.resize = 'vertical';
+	            detailsInput.disabled = true;
+
+	            detailsWrapper.appendChild(detailsLabel);
+	            detailsWrapper.appendChild(detailsInput);
+
+	            // Append inputs to the main container
+	            dayWrapper.appendChild(dayDiv);
+	            dayWrapper.appendChild(detailsWrapper);
+
+	            // Sightseeing Details
+	            const sightseeingContainer = document.createElement('div');
+	            sightseeingContainer.style.marginTop = '10px';
+
+	            const sightseeingLabel = document.createElement('label');
+	            sightseeingLabel.innerText = 'Meals:';
+	            sightseeingLabel.style.fontWeight = 'bold';
+	            sightseeingContainer.appendChild(sightseeingLabel);
+
+	            if (Array.isArray(dayDetails.sightseeingEntrie) && dayDetails.sightseeingEntrie.length > 0) {
+	                dayDetails.sightseeingEntrie.forEach((sight, sIndex) => {
+	                    const sightInput = document.createElement('input');
+	                    sightInput.type = 'text';
+	                    sightInput.name = `sightseeingDay[${index}][]`;
+	                    sightInput.value = sight.location || '';
+	                    sightInput.placeholder = `Sightseeing Location ${sIndex + 1}`;
+	                    sightInput.style.padding = '8px';
+	                    sightInput.style.border = '1px solid #ccc';
+	                    sightInput.style.borderRadius = '3px';
+	                    sightInput.style.marginTop = '5px';
+	                    sightInput.disabled = true;
+
+	                    sightseeingContainer.appendChild(sightInput);
+	                });
+	            } else {
+	                const noSightseeing = document.createElement('p');
+	                noSightseeing.innerText = 'No sightseeing details available for this day.';
+	                noSightseeing.style.marginTop = '5px';
+	                sightseeingContainer.appendChild(noSightseeing);
+	            }
+
+	            dayWrapper.appendChild(sightseeingContainer);
+	            itineraryContainer.appendChild(dayWrapper);
+	        });
+	    } else {
+	        itineraryContainer.innerHTML = '<p>No itinerary data available.</p>';
+	    }
+	}
+
+	// Call the function to populate itinerary
+	populateItinerary(itineraryData);
+
+	
+
+    
+    
+
+    // Utility function to get URL parameters
+    function getUrlParameter(name) {
+        var results = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.href);
+        return results ? decodeURIComponent(results[1]) : null;
+    }
+});
+
+
+</script>
 
 <script>
     const addDayBtn = document.getElementById('addDayBtn');
-    const daysContainer = document.getElementById('days-container');
+    const daysContainer = document.getElementById('itineraryContainer');
 
     let dayCount = 0;
 
@@ -764,10 +1403,16 @@ getCourseData();
                 <input type="text" id="destination`+dayCount+`" name="destination[]" placeholder="E.g., Amravati - Pune"
                     style="width: 100%; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
             </div>
+			<div style="margin-top: 10px; min-width: 100%;">
+			    <label for="details`+dayCount+`" style="font-weight: bold; color: #34495e;">Enter Details</label>
+			    <textarea id="details`+dayCount+`" name="details[]" placeholder="Enter additional information"
+			      style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; resize: none; overflow: hidden;"
+			      rows="1" oninput="adjustHeight(this)"></textarea>
+			</div>				 
             <div style="flex: 1 1 100%; margin: 5px;">
                 <div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px;">
                     <label for="sightseeing`+dayCount+`" style="font-weight: bold; margin-right: 10px;">
-                        Sightseeing Details:
+                        Meals
                     </label>
                     <button type="button" class="addSightseeingBtn"
                         style="background-color: #007bff; color: white; border: none; padding: 4px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
@@ -776,13 +1421,8 @@ getCourseData();
                 </div>
                 <div class="sightseeingContainer" style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
                 </div>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <label><input type="checkbox" name="breakfast[`+dayCount+`]" value="1">Breakfast</label>
-                    <label><input type="checkbox" name="lunch[`+dayCount+`]" value="1">Lunch</label>
-                    <label><input type="checkbox" name="dinner[`+dayCount+`]" value="1">Dinner</label>
-                    <label><input type="checkbox" name="nightStay[`+dayCount+`]" value="1">Night Stay</label>
-                    <label><input type="checkbox" name="hiTea[`+dayCount+`]" value="1">Hi-Tea</label>
-                </div>
+               
+	  <br>
                 <div style="width: 100%; display: flex; align-items: center;">
                     <button class="deleteDayBtn" style="background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; height: 30px; width: 100px; display: flex; justify-content: center; align-items: center; font-size: 1rem; margin-left: auto;">
                         Delete Day
@@ -805,7 +1445,7 @@ getCourseData();
 
             const sightseeingInput = document.createElement('input');
             sightseeingInput.type = 'text';
-            sightseeingInput.placeholder = 'Enter details of sightseeing...';
+            sightseeingInput.placeholder = 'Enter Meals';
             sightseeingInput.style.flex = '1 1 calc(85% - 10px)';
             sightseeingInput.style.height = '40px';
             sightseeingInput.style.padding = '10px';
@@ -844,7 +1484,7 @@ getCourseData();
         });
     });
 
-    document.getElementById('days-container').addEventListener('click', function(e) {
+    document.getElementById('itineraryContainer').addEventListener('click', function(e) {
         if (e.target && e.target.classList.contains('deleteDayBtn')) {
             e.target.closest('.day-block').remove();
         }
@@ -855,496 +1495,176 @@ getCourseData();
     });
 </script>
 
+<script>
+    const addLocationBtn = document.getElementById('addLocationBtn');
+    const locationContainer = document.getElementById('locationContainer');
 
+    addLocationBtn.addEventListener('click', () => {
+        // Create a wrapper div
+        const locationWrapper = document.createElement('div');
+        locationWrapper.style.display = 'flex';
+        locationWrapper.style.alignItems = 'center';
+        locationWrapper.style.gap = '5px';
+        locationWrapper.style.marginTop = '0px';
 
-			<script type="text/javascript">
-    // Initialize an empty array to store locations
-  
+        // Create the input field
+        const locationInput = document.createElement('input');
+        locationInput.type = 'text';
+        locationInput.placeholder = 'Enter location';
+        locationInput.style.padding = '8px';
+        locationInput.style.border = '1px solid #ccc';
+        locationInput.style.borderRadius = '3px';
+        locationInput.style.flex = '1';
+        locationInput.style.fontSize = '0.9rem';
+        
+        locationInput.id = 'location'; // Set a unique id if needed
+        locationInput.name = 'location[]'; // Set name attribute to match model API
+		locationInput.style.marginRight = '5px';
 
-<!--    document.getElementById('submitBtn').addEventListener('click', function() {-->
-<!--		alert(hii);-->
-   
-<!--    const fileInput = document.getElementById('packageImage');-->
-<!--    const file = fileInput.files[0];-->
-    
-<!--    const locationInputs = document.querySelectorAll('input[name="location[]"]');-->
-<!--    let locations = [];-->
+        // Create the delete button
+       const deleteBtn = document.createElement('button');
+deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+deleteBtn.style.backgroundColor = '#e74c3c';
+deleteBtn.style.color = 'white';
+deleteBtn.style.border = 'none';
+deleteBtn.style.padding = '8px';
+deleteBtn.style.borderRadius = '3px';
+deleteBtn.style.cursor = 'pointer';
+deleteBtn.style.display = 'flex';
+deleteBtn.style.alignItems = 'center';
+deleteBtn.style.justifyContent = 'center';
+deleteBtn.style.fontSize = '1rem';
 
-<!--    locationInputs.forEach(input => {-->
-<!--        const locationName = input.value.trim();-->
-<!--        if (locationName) {-->
-<!--            locations.push({ locationName });-->
-<!--        }-->
-<!--    });-->
+// Align the delete button correctly
+deleteBtn.style.height = '30px';
+deleteBtn.style.width = '30px';
 
-<!--   // console.log(locations)-->
+// Shift the button slightly upward
+deleteBtn.style.position = 'relative';
+deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift
 
-<!--   const itinerary = [];-->
-<!--const dayBlocks = document.querySelectorAll('.day-block');-->
-
-<!--dayBlocks.forEach((dayBlock, index) => {-->
-<!--    const day = dayBlock.querySelector('input[id="day'+(index + 1)+'"]').value;-->
-<!--    const destination = dayBlock.querySelector('input[id="destination'+(index + 1)+'"]').value;-->
-<!--    const breakfast = dayBlock.querySelector('input[name="breakfast['+(index + 1)+']"]').checked;-->
-<!--    const lunch = dayBlock.querySelector('input[name="lunch['+(index + 1)+']"]').checked;-->
-<!--    const dinner = dayBlock.querySelector('input[name="dinner['+(index + 1)+']"]').checked;-->
-<!--    const nightStay = dayBlock.querySelector('input[name="nightStay['+(index + 1)+']"]').checked;-->
-<!--    const hiTea = dayBlock.querySelector('input[name="hiTea['+(index + 1)+']"]').checked;-->
-
-<!--    const sightseeingEntries = [];-->
-<!--    const sightseeingWrappers = dayBlock.querySelectorAll('.sightseeingWrapper');-->
-
-<!--    sightseeingWrappers.forEach(wrapper => {-->
-<!--        const sightseeingLocation = wrapper.querySelector('input[name="sightseeingLocation['+(index + 1)+'][]"]').value;-->
-<!--        sightseeingEntries.push({ location: sightseeingLocation, day: 'Day '+day });-->
-<!--    });-->
-
-<!--    itinerary.push({-->
-<!--        day: 'Day '+day,-->
-<!--        destination: destination,-->
-<!--        dinner: dinner,-->
-<!--        breakfast: breakfast,-->
-<!--        hiTea: hiTea,-->
-<!--        nightStay: nightStay,-->
-<!--        lunch: lunch,-->
-<!--        sightseeingEntrie: sightseeingEntries-->
-<!--    });-->
-<!--});-->
-  
-
-<!--    if (file) {-->
-<!--        const reader = new FileReader();-->
-<!--        reader.onloadend = function() {-->
-<!--            const base64String = reader.result.replace("data:", "").replace(/^.+,/, "");-->
-
-<!--            const packageData = {-->
-<!--                packageName: $('#packageName').val(),-->
-<!--                duration: $('#duration').val(),-->
-<!--                price: $('#price').val(),-->
-<!--                packageType: $('#packageType').val(),-->
-<!--                packageImage: base64String,-->
-<!--                locations: locations,-->
-<!--                allInclude : {-->
-<!--                	hotel: document.getElementById('hotel').checked,-->
-<!--                    meals: document.getElementById('meals').checked,-->
-<!--                    transportation: document.getElementById('transport').checked,-->
-<!--                    flight: document.getElementById('flight').checked,-->
-<!--                    sightseeing: document.getElementById('sightseeing').checked,-->
-<!--                    visa: document.getElementById('visa').checked,-->
-<!--                    note: $('#note').val()-->
-<!--                },-->
-<!--                iternary : itinerary-->
-<!--            };-->
-
-           
-            
-<!--            // Convert packageData to JSON string-->
-<!--            const jsonData = JSON.stringify(packageData);-->
-<!--            //console.log(jsonData);-->
-
-<!--            // Send data via AJAX-->
-<!--            $.ajax({-->
-<!--                url: '/TouristWebsite/auth/updatePackageDetails/'+id, // Replace with your API endpoint-->
-<!--                type: 'POST',-->
-<!--                contentType: 'application/json',-->
-<!--                data: jsonData,-->
-<!--                success: function(response) {-->
-<!--                    alert(response);-->
-<!--                    //windows.href='addPackageType';-->
-<!--                },-->
-<!--                error: function(error) {-->
-<!--                    console.error('Error sending data:', error);-->
-<!--                }-->
-<!--            });-->
-<!--        };-->
-<!--        reader.readAsDataURL(file);-->
-<!--    } else {-->
-<!--        alert("Please select an image file first.");-->
-<!--    }-->
-<!--});-->
-</script>
-
-
-
-<script type="text/javascript">
-	
-	
-	
-	
-	
-$(document).ready(function () {
-    // Get packageId from the URL parameter
-	
-	
-    var packageId = getUrlParameter('id');
-
-    if (packageId) {
-        getPackageDetails(packageId);
-    } else {
-        alert("Package ID is missing");
-    }
-
-    // Function to fetch package details (including locations, days, and itinerary)
-    function getPackageDetails(id) {
-        $.ajax({
-            url: "/TouristWebsite/auth/getPackageDetails/" + id,
-            type: "GET",
-            contentType: "application/json",
-            success: function (response) {
-                console.log(response); // Inspect the response
-                if (response) {
-                    populateForm(response);
-                    if (response.locations && Array.isArray(response.locations)) {
-                        populateLocations(response.locations);
-                    } else {
-                        $('#locationContainer').html('<p>No locations available for this package.</p>');
-                    }
-                    if (response.iternary && Array.isArray(response.iternary)) {
-                        populateItinerary(response.iternary);
-                        
-                    } else {
-                        $('#days-container').html('<p>No itinerary available for this package.</p>');
-                    }
-                } else {
-                    alert("No Package data found");
-                }
-            },
-            error: function (jqXHR, status, errorThrown) {
-                if (jqXHR.status === 403) {
-                    alert("YOU DON'T HAVE PERMISSION");
-                } else {
-                    alert("Failed to communicate with the server");
-                }
-            }
+        // Delete functionality
+        deleteBtn.addEventListener('click', () => {
+            locationContainer.removeChild(locationWrapper);
         });
-    }
 
-	function populateForm(packageDetails) {
-	    console.log("Package Data:", packageDetails); // Debugging
+        // Append input and delete button to wrapper
+        locationWrapper.appendChild(locationInput);
+        locationWrapper.appendChild(deleteBtn);
 
-	    // Populate text fields
-	    document.getElementById("id").value = packageDetails.id || '';
-	    document.getElementById("packageName").value = packageDetails.packageName || '';
-	    document.getElementById("duration").value = packageDetails.duration || '';
-	    document.getElementById("packageType").value = packageDetails.packageType || '';
-	    document.getElementById("price").value = packageDetails.price || '';
-	    document.getElementById("note").value = packageDetails.allInclude?.note || '';
+        // Append wrapper to the container
+        locationContainer.appendChild(locationWrapper);
+    });
+</script>
+<script>
+  const addIncludesBtn = document.getElementById('addIncludesBtn');
+  const includesContainer = document.getElementById('IncludesContainer');
 
-	    // Populate checkboxes
-	    if (packageDetails.allInclude) {
-	        console.log("All Include Data:", packageDetails.allInclude); // Debugging the data
+  addIncludesBtn.addEventListener('click', () => {
+    // Create the wrapper div for input and delete button
+    const locationWrapper = document.createElement('div');
+    locationWrapper.style.display = 'flex';
+    locationWrapper.style.alignItems = 'center';
+    locationWrapper.style.marginBottom = '10px'; // Space between inputs
 
-	        setCheckbox("hotel", packageDetails.allInclude.hotel);
-	        setCheckbox("meals", packageDetails.allInclude.meals);
-	        setCheckbox("transportation", packageDetails.allInclude.transportation);
-	        setCheckbox("flight", packageDetails.allInclude.flight);
-	        setCheckbox("sightseeing", packageDetails.allInclude.sightseeing);
-	        setCheckbox("visa", packageDetails.allInclude.visa);
-	    } else {
-	        console.warn("AllInclude data is missing or undefined");
-	        resetCheckboxes();
-	    }
+    // Create the input field
+    const locationInput = document.createElement('input');
+    locationInput.type = 'text';
+    locationInput.placeholder = 'Enter Includes';
+    locationInput.style.padding = '8px';
+    locationInput.style.border = '1px solid #ccc';
+    locationInput.style.borderRadius = '3px';
+    locationInput.style.fontSize = '0.9rem';
+    locationInput.style.flex = '1';  // Make the input take available space
+    locationInput.name = 'includes[]'; // Name attribute for API compatibility
+	locationInput.style.marginRight = '10px';
 
-	    // Display image if present
-	    const imagePreview = document.getElementById("imagePreview"); // Target the img tag for preview
+    // Create the delete button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+    deleteBtn.style.backgroundColor = '#e74c3c';
+    deleteBtn.style.color = 'white';
+    deleteBtn.style.border = 'none';
+    deleteBtn.style.padding = '10px';
+    deleteBtn.style.borderRadius = '3px';
+    deleteBtn.style.cursor = 'pointer';
+    deleteBtn.style.fontSize = '1rem';
+    deleteBtn.style.height = '30px';
+    deleteBtn.style.width = '30px';
+    deleteBtn.style.display = 'flex';
+    deleteBtn.style.alignItems = 'center';
+    deleteBtn.style.justifyContent = 'center';
+    deleteBtn.style.position = 'relative';
+    deleteBtn.style.top = '-7px'; 
 
-	    if (packageDetails.packageImage) { 
-	        imagePreview.src = "data:image/jpeg;base64," + packageDetails.packageImage;  // Use directly without re-adding the prefix
-	        imagePreview.style.display = 'block'; // Show the image preview container
-	    } else {
-	        imagePreview.src = ''; // Clear the previous image
-	        imagePreview.style.display = 'none'; // Hide if no image
-	    }
-	}
+    // Delete functionality
+    deleteBtn.addEventListener('click', () => {
+      includesContainer.removeChild(locationWrapper);
+    });
 
+    // Append input and delete button to the wrapper
+    locationWrapper.appendChild(locationInput);
+    locationWrapper.appendChild(deleteBtn);
 
-    // Function to dynamically populate locations
-	function populateLocations(locations) {
-	    const locationContainer = document.getElementById('locationContainer');
-	    locationContainer.innerHTML = ''; // Clear existing locations
-
-	    // Check if locations are provided
-	    if (Array.isArray(locations) && locations.length > 0) {
-	        locations.forEach((location) => {
-	            const locationWrapper = document.createElement('div');
-	            locationWrapper.style.display = 'flex';
-	            locationWrapper.style.alignItems = 'center';
-	            locationWrapper.style.gap = '5px';
-	            locationWrapper.style.marginTop = '5px';
-
-	            // Location Input
-	            const locationInput = document.createElement('input');
-	            locationInput.type = 'text';
-	            locationInput.value = location.locationName || '';
-	            locationInput.placeholder = 'Enter location';
-	            locationInput.style.padding = '8px';
-	            locationInput.style.border = '1px solid #ccc';
-	            locationInput.style.borderRadius = '3px';
-	            locationInput.style.flex = '1';
-	            locationInput.style.fontSize = '0.9rem';
-				locationInput.id = 'location'; // Set a unique id if needed
-	            locationInput.name = 'location[]';
-
-	            // Create the delete button
-	            const deleteBtn = document.createElement('button');
-	            deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-	            deleteBtn.style.backgroundColor = '#e74c3c';
-	            deleteBtn.style.color = 'white';
-	            deleteBtn.style.border = 'none';
-	            deleteBtn.style.padding = '8px';
-	            deleteBtn.style.borderRadius = '3px';
-	            deleteBtn.style.cursor = 'pointer';
-	            deleteBtn.style.display = 'flex';
-	            deleteBtn.style.alignItems = 'center';
-	            deleteBtn.style.justifyContent = 'center';
-	            deleteBtn.style.fontSize = '1rem';
-
-	            // Align the delete button correctly
-	            deleteBtn.style.height = '30px';
-	            deleteBtn.style.width = '30px';
-
-	            // Shift the button slightly upward
-	            deleteBtn.style.position = 'relative';
-	            deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift
-
-	            // Delete functionality
-	            deleteBtn.addEventListener('click', () => {
-	                locationContainer.removeChild(locationWrapper);
-	            });
-
-	            // Append input and delete button to wrapper
-	            locationWrapper.appendChild(locationInput);
-	            locationWrapper.appendChild(deleteBtn);
-
-	            // Append wrapper to container
-	            locationContainer.appendChild(locationWrapper);
-	        });
-	    } else {
-	        locationContainer.innerHTML = '<p>No locations available for this package.</p>';
-	    }
-	}
-
-
-	function populateItinerary(itinerary) {
-	    const daysContainer = document.getElementById('days-container');
-	    let dayCount = 0;
-
-	    // Clear the previous content (in case the function is called multiple times)
-	    daysContainer.innerHTML = '';
-
-	    // Loop through the fetched data to populate each day
-	    itinerary.forEach(day => {
-	        dayCount++;
-
-	        const newDayBlock = document.createElement('div');
-	        newDayBlock.classList.add('day-block');
-	        newDayBlock.style.display = 'flex';
-	        newDayBlock.style.flexWrap = 'wrap';
-	        newDayBlock.style.justifyContent = 'space-between';
-	        newDayBlock.style.border = '1px solid #ccc';
-	        newDayBlock.style.padding = '10px';
-	        newDayBlock.style.marginBottom = '10px';
-	        newDayBlock.style.borderRadius = '5px';
-	        newDayBlock.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
-	        newDayBlock.style.position = 'relative';
-
-	        // Add fields for Day Number and Destination
-	        newDayBlock.innerHTML = `
-	            <div style="flex: 1 1 calc(50% - 10px); margin: 5px;">
-	                <label for="day${dayCount}" style="display: block; margin-bottom: 5px; font-weight: bold;">Day Number:</label>
-	                <input type="text" id="day`+dayCount+`" name="day[]" value="${day.day ? day.day : ''}" placeholder="E.g., 1"
-	                    style="width: 100%; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
-	            </div>
-	            <div style="flex: 1 1 calc(50% - 10px); margin: 5px;">
-	                <label for="destination${dayCount}" style="display: block; margin-bottom: 5px; font-weight: bold;">Destination:</label>
-	                <input type="text" id="destination`+dayCount+`" name="destination[]" value="${day.destination || ''}" placeholder="E.g., Amravati - Pune"
-	                    style="width: 100%; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
-	            </div>
-	            <div style="flex: 1 1 100%; margin: 5px;">
-	                <div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px;">
-	                    <label for="sightseeing${dayCount}" style="font-weight: bold; margin-right: 10px;">
-	                        Sightseeing Details:
-	                    </label>
-	                    <button type="button" class="addSightseeingBtn"
-	                        style="background-color: #007bff; color: white; border: none; padding: 4px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
-	                        <i class="fas fa-plus"></i>
-	                    </button>
-	                </div>
-	                <div class="sightseeingContainer" style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
-	                </div>
-	                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-	                    <label><input type="checkbox" name="breakfast[`+dayCount+`]" value="1" ${day.meals.breakfast ? 'checked' : ''}>Breakfast</label>
-	                    <label><input type="checkbox"  name="lunch[`+dayCount+`]" value="1" ${day.meals.lunch ? 'checked' : ''}>Lunch</label>
-	                    <label><input type="checkbox" name="dinner[${dayCount}]" value="1" ${day.meals.dinner ? 'checked' : ''}>Dinner</label>
-	                    <label><input type="checkbox" name="nightStay[`+dayCount+`]" value="1" ${day.nightStay ? 'checked' : ''}>Night Stay</label>
-	                    <label><input type="checkbox" name="hiTea[`+dayCount+`]" value="1" ${day.hiTea ? 'checked' : ''}>Hi-Tea</label>
-	                </div>
-	                <div style="width: 100%; display: flex; align-items: center;">
-	                    <button class="deleteDayBtn" style="background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; height: 30px; width: 100px; display: flex; justify-content: center; align-items: center; font-size: 1rem; margin-left: auto;">
-	                        Delete Day
-	                    </button>
-	                </div>
-	            </div>
-	        `;
-
-	        // Append the new day block to the container
-	        daysContainer.appendChild(newDayBlock);
-
-	        const addSightseeingBtn = newDayBlock.querySelector('.addSightseeingBtn');
-	        const sightseeingContainer = newDayBlock.querySelector('.sightseeingContainer');
-
-	        // Loop through and add sightseeing details if any
-	        if (Array.isArray(day.sightseeing)) {
-	            day.sightseeing.forEach(sight => {
-	                const sightseeingWrapper = document.createElement('div');
-	                sightseeingWrapper.classList.add('sightseeingWrapper');
-	                sightseeingWrapper.style.display = 'flex';
-	                sightseeingWrapper.style.gap = '10px';
-	                sightseeingWrapper.style.alignItems = 'center';
-
-	                const sightseeingInput = document.createElement('input');
-	                sightseeingInput.type = 'text';
-	                sightseeingInput.value = sight;
-	                sightseeingInput.placeholder = 'Enter details of sightseeing...';
-	                sightseeingInput.style.flex = '1 1 calc(85% - 10px)';
-	                sightseeingInput.style.height = '40px';
-	                sightseeingInput.style.padding = '10px';
-	                sightseeingInput.style.fontSize = '1rem';
-	                sightseeingInput.style.border = '1px solid #ccc';
-	                sightseeingInput.style.borderRadius = '5px';
-	                sightseeingInput.style.boxSizing = 'border-box';
-	                sightseeingInput.name = `sightseeingLocation[`+dayCount+`][]`;
-
-	                const deleteBtn = document.createElement('button');
-	                deleteBtn.classList.add('deleteBtn');
-	                deleteBtn.style.backgroundColor = '#e74c3c';
-	                deleteBtn.style.color = 'white';
-	                deleteBtn.style.border = 'none';
-	                deleteBtn.style.padding = '10px';
-	                deleteBtn.style.borderRadius = '5px';
-	                deleteBtn.style.cursor = 'pointer';
-	                deleteBtn.style.height = '30px';
-	                deleteBtn.style.width = '30px';
-	                deleteBtn.style.display = 'flex';
-	                deleteBtn.style.justifyContent = 'center';
-	                deleteBtn.style.alignItems = 'center';
-	                deleteBtn.style.fontSize = '1rem';
-	                deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-
-	                deleteBtn.style.position = 'relative';
-	                deleteBtn.style.top = '-7px';
-
-	                deleteBtn.addEventListener('click', () => {
-	                    sightseeingContainer.removeChild(sightseeingWrapper);
-	                });
-
-	                sightseeingWrapper.appendChild(sightseeingInput);
-	                sightseeingWrapper.appendChild(deleteBtn);
-	                sightseeingContainer.appendChild(sightseeingWrapper);
-	            });
-	        }
-
-	        // Add a new sightseeing entry if the button is clicked
-	        addSightseeingBtn.addEventListener('click', () => {
-	            const sightseeingWrapper = document.createElement('div');
-	            sightseeingWrapper.classList.add('sightseeingWrapper');
-	            sightseeingWrapper.style.display = 'flex';
-	            sightseeingWrapper.style.gap = '10px';
-	            sightseeingWrapper.style.alignItems = 'center';
-
-	            const sightseeingInput = document.createElement('input');
-	            sightseeingInput.type = 'text';
-	            sightseeingInput.placeholder = 'Enter details of sightseeing...';
-	            sightseeingInput.style.flex = '1 1 calc(85% - 10px)';
-	            sightseeingInput.style.height = '40px';
-	            sightseeingInput.style.padding = '10px';
-	            sightseeingInput.style.fontSize = '1rem';
-	            sightseeingInput.style.border = '1px solid #ccc';
-	            sightseeingInput.style.borderRadius = '5px';
-	            sightseeingInput.style.boxSizing = 'border-box';
-	            sightseeingInput.name = `sightseeingLocation[${dayCount}][]`;
-
-	            const deleteBtn = document.createElement('button');
-	            deleteBtn.classList.add('deleteBtn');
-	            deleteBtn.style.backgroundColor = '#e74c3c';
-	            deleteBtn.style.color = 'white';
-	            deleteBtn.style.border = 'none';
-	            deleteBtn.style.padding = '10px';
-	            deleteBtn.style.borderRadius = '5px';
-	            deleteBtn.style.cursor = 'pointer';
-	            deleteBtn.style.height = '30px';
-	            deleteBtn.style.width = '30px';
-	            deleteBtn.style.display = 'flex';
-	            deleteBtn.style.justifyContent = 'center';
-	            deleteBtn.style.alignItems = 'center';
-	            deleteBtn.style.fontSize = '1rem';
-	            deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-
-	            deleteBtn.style.position = 'relative';
-	            deleteBtn.style.top = '-7px';
-
-	            deleteBtn.addEventListener('click', () => {
-	                sightseeingContainer.removeChild(sightseeingWrapper);
-	            });
-
-	            sightseeingWrapper.appendChild(sightseeingInput);
-	            sightseeingWrapper.appendChild(deleteBtn);
-	            sightseeingContainer.appendChild(sightseeingWrapper);
-	        });
-
-	        // Add delete day functionality
-	        const deleteDayBtn = newDayBlock.querySelector('.deleteDayBtn');
-	        deleteDayBtn.addEventListener('click', () => {
-	            daysContainer.removeChild(newDayBlock);
-	        });
-	    });
-	}
-
-
-
-	// Utility function to safely set checkbox
-	function setCheckbox(id, value) {
-	    const checkbox = document.getElementById(id);
-	    if (checkbox) {
-	        checkbox.checked = Boolean(value);
-
-	        // Disable checkbox if not checked
-	       
-	    } else {
-	        console.warn(`Checkbox with id '${id}' not found`);
-	    }
-	}
-
-	// Utility function to reset all checkboxes
-	function resetCheckboxes() {
-	    // Enable all checkboxes
-	    ["hotel", "meals", "transportation", "flight", "sightseeing", "visa"].forEach(id => {
-	        const checkbox = document.getElementById(id);
-	        if (checkbox) {
-	            checkbox.disabled = false;  // Enable the checkbox
-	        }
-	    });
-	}
-
-
-    // Utility function to get URL parameters
-    function getUrlParameter(name) {
-        var results = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.href);
-        return results ? decodeURIComponent(results[1]) : null;
-    }
-});
-
-function getInclusions() {
-    const selectedCheckboxes = document.querySelectorAll('input[name="inclusions"]:checked');
-    const inclusions = Array.from(selectedCheckboxes).map(checkbox => checkbox.value);
-    console.log("Selected Inclusions:", inclusions);
-    return inclusions;
-}
-
-
- 
-
+    // Append the wrapper to the container
+    includesContainer.appendChild(locationWrapper);
+  });
 </script>
 
+
+<script>
+  const addExcludesBtn = document.getElementById('addExcludesBtn');
+  const excludesContainer = document.getElementById('excludesContainer');
+
+  addExcludesBtn.addEventListener('click', () => {
+    // Create a wrapper div
+    const locationWrapper = document.createElement('div');
+    locationWrapper.style.display = 'flex';
+    locationWrapper.style.alignItems = 'center';
+    locationWrapper.style.gap = '10px'; // Added padding between input and delete button
+    locationWrapper.style.marginBottom = '10px'; // Space between inputs
+
+    // Create the input field
+    const locationInput = document.createElement('input');
+    locationInput.type = 'text';
+    locationInput.placeholder = 'Enter Excludes';
+    locationInput.style.padding = '8px';
+    locationInput.style.border = '1px solid #ccc';
+    locationInput.style.borderRadius = '3px';
+    locationInput.style.fontSize = '0.9rem';
+    locationInput.style.flex = '1'; // Ensure the input takes available space
+    locationInput.name = 'excludes[]'; // Name attribute for API compatibility
+
+    // Create the delete button
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+    deleteBtn.style.backgroundColor = '#e74c3c';
+    deleteBtn.style.color = 'white';
+    deleteBtn.style.border = 'none';
+    deleteBtn.style.padding = '8px';
+    deleteBtn.style.borderRadius = '3px';
+    deleteBtn.style.cursor = 'pointer';
+    deleteBtn.style.fontSize = '1rem';
+    deleteBtn.style.height = '30px';
+    deleteBtn.style.width = '30px';
+    deleteBtn.style.display = 'flex';
+    deleteBtn.style.alignItems = 'center';
+    deleteBtn.style.justifyContent = 'center';
+	deleteBtn.style.position = 'relative';
+		deleteBtn.style.top = '-7px';
+
+    // Delete functionality
+    deleteBtn.addEventListener('click', () => {
+      excludesContainer.removeChild(locationWrapper);
+    });
+
+    // Append input and delete button to the wrapper
+    locationWrapper.appendChild(locationInput);
+    locationWrapper.appendChild(deleteBtn);
+
+    // Append wrapper to the container
+    excludesContainer.appendChild(locationWrapper);
+  });
+</script>
 
 

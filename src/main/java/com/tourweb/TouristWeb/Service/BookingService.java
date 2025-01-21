@@ -27,6 +27,8 @@ public interface BookingService {
 	//search
 	List<Booking> searchBooking(String keyword);
 	
+	List<Booking> searBymodOffBooking(String modOffBooking);
+	
 	List<Booking> globalSearchh(String keyword);
 	//modeofBooking d
 	

@@ -8,10 +8,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tourweb.TouristWeb.Model.AllExclude;
 import com.tourweb.TouristWeb.Model.AllInclude;
 import com.tourweb.TouristWeb.Model.Iternary;
 import com.tourweb.TouristWeb.Model.Location;
 import com.tourweb.TouristWeb.Model.PackageDetails;
+import com.tourweb.TouristWeb.Model.SightseeingEntry;
 import com.tourweb.TouristWeb.Repository.PackageDetailsRepo;
 import com.tourweb.TouristWeb.Service.Interface.PackageDetailsServiceInterface;
 
@@ -117,53 +119,91 @@ public class PackageDetailsService  implements PackageDetailsServiceInterface{
 	
 	
 	@Override
-    @Transactional
-    public PackageDetails updatePackageDetails(Long id, PackageDetails packageDetails) {
-        System.out.println("Fetching package details with ID: " + id);
-        Optional<PackageDetails> optionalDetails = packageDetailsRepo.findById(id);
+	@Transactional
+	public PackageDetails updatePackageDetails(Long id, PackageDetails packageDetails) {
+	    System.out.println("Fetching package details with ID: " + id);
+	    Optional<PackageDetails> optionalDetails = packageDetailsRepo.findById(id);
 
-        if (optionalDetails.isEmpty()) {
-            System.out.println("Package not found with ID: " + id);
-            return null;
-        }
+	    if (optionalDetails.isEmpty()) {
+	        System.out.println("Package not found with ID: " + id);
+	        return null;
+	    }
 
-        PackageDetails existingPackageDetails = optionalDetails.get();
-        System.out.println("Existing Package Details: " + existingPackageDetails);
+	    PackageDetails existingPackageDetails = optionalDetails.get();
+	    System.out.println("Existing Package Details: " + existingPackageDetails);
 
-        // Update fields
-        existingPackageDetails.setPackageName(packageDetails.getPackageName());
-        existingPackageDetails.setDuration(packageDetails.getDuration());
-        existingPackageDetails.setPrice(packageDetails.getPrice());
-        existingPackageDetails.setPackageType(packageDetails.getPackageType());
-        existingPackageDetails.setPackageImage(packageDetails.getPackageImage());
-        existingPackageDetails.setLocations(packageDetails.getLocations());
-       // existingPackageDetails.setAllInclude(packageDetails.getAllInclude());
-        existingPackageDetails.setIternary(packageDetails.getIternary());
+	    // Update fields
+	    existingPackageDetails.setPackageName(packageDetails.getPackageName());
+	    existingPackageDetails.setDuration(packageDetails.getDuration());
+	    existingPackageDetails.setPrice(packageDetails.getPrice());
+	    existingPackageDetails.setPackageType(packageDetails.getPackageType());
+	    existingPackageDetails.setPackageImage(packageDetails.getPackageImage());
 
-        // Set relationships
-        if (existingPackageDetails.getLocations() != null) {
-            existingPackageDetails.getLocations().forEach(location -> location.setPackageDetails(existingPackageDetails));
-        }
+	    // Ensure packageDetails is set in Locations
+	
+	    if (packageDetails.getLocations() != null) {
+	        existingPackageDetails.getLocations().clear();
+	        for (Location location : packageDetails.getLocations()) {
+	            location.setPackageDetails(existingPackageDetails); // Set parent reference
+	            existingPackageDetails.getLocations().add(location);
+	        }
+	    }
 
-//        if (existingPackageDetails.getAllInclude() != null) {
-//            existingPackageDetails.getAllInclude().setPackageDetails(existingPackageDetails);
-//        }
+	    // Ensure packageDetails is set in Gallery
+	    if (packageDetails.getGallery() != null) {
+	        existingPackageDetails.getGallery().clear();
+	        packageDetails.getGallery().forEach(gallery -> {
+	            gallery.setPackageDetails(existingPackageDetails);
+	            existingPackageDetails.getGallery().add(gallery);
+	        });
+	    }
 
-        if (existingPackageDetails.getIternary() != null) {
-            existingPackageDetails.getIternary().forEach(iternary -> {
-                iternary.setPackageDetails(existingPackageDetails);
-                if (iternary.getSightseeingEntrie() != null) {
-                    iternary.getSightseeingEntrie().forEach(sightseeingEntry -> sightseeingEntry.setIternary(iternary));
-                }
-            });
-        }
+	    if (packageDetails.getAllIncludes() != null) {
+	        existingPackageDetails.getAllIncludes().clear();
+	        for (AllInclude include : packageDetails.getAllIncludes()) {
+	            include.setPackageDetails(existingPackageDetails); // Set parent reference
+	            existingPackageDetails.getAllIncludes().add(include);
+	        }
+	    }
 
-        // Save updated details
-        PackageDetails updatedPackage = packageDetailsRepo.save(existingPackageDetails);
-        System.out.println("Updated Package Details Saved: " + updatedPackage);
+	    // Update AllExcludes
+	    if (packageDetails.getAllExcludes() != null) {
+	        existingPackageDetails.getAllExcludes().clear();
+	        for (AllExclude exclude : packageDetails.getAllExcludes()) {
+	            exclude.setPackageDetails(existingPackageDetails); // Set parent reference
+	            existingPackageDetails.getAllExcludes().add(exclude);
+	        }
+	    }
 
-        return updatedPackage;
-    }
+	    // Ensure packageDetails and SightseeingEntrie references are set in Iternary
+	    if (packageDetails.getIternary() != null) {
+	        existingPackageDetails.getIternary().clear();
+	        for (Iternary itinerary : packageDetails.getIternary()) {
+	            itinerary.setPackageDetails(existingPackageDetails); // Set parent reference
+
+	            if (itinerary.getSightseeingEntrie() != null) {
+	                for (SightseeingEntry sightseeing : itinerary.getSightseeingEntrie()) {
+	                    sightseeing.setIternary(itinerary); // Set itinerary reference
+	                }
+	            }
+
+	            existingPackageDetails.getIternary().add(itinerary);
+	        }
+	    }
+
+	    // Save the updated package details
+	    PackageDetails updatedPackage = packageDetailsRepo.save(existingPackageDetails);
+	    System.out.println("Updated Package Details Saved: " + updatedPackage);
+
+	    return updatedPackage;
+	}
+
+//        // Save updated details
+//        PackageDetails updatedPackage = packageDetailsRepo.save(existingPackageDetails);
+//        System.out.println("Updated Package Details Saved: " + updatedPackage);
+//
+//        return updatedPackage;
+//    }
 
 	
 	public List<PackageDetails> findbypackageType(String packageType) {

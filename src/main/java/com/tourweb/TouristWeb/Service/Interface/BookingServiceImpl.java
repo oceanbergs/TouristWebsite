@@ -45,7 +45,7 @@ public class BookingServiceImpl implements BookingService{
 		post.setMobile_Number(booking.getMobile_Number());
 		post.setSpecial_Request(booking.getSpecial_Request());
 		post.setStart_Date(booking.getStart_Date());
-		//post.setend(booking.getStart_Date());
+		post.setEnd_Date(booking.getEnd_Date());
 		
 		return post;
 	}
@@ -86,6 +86,7 @@ public class BookingServiceImpl implements BookingService{
 		row.createCell(6).setCellValue("ModOffBooking");
 		row.createCell(7).setCellValue("Special_Request");
 		row.createCell(7).setCellValue("Start_Date");
+		row.createCell(7).setCellValue("End_Date");
 		int dataRowIndex=1;
 		
 		for(Booking book: booking) {
@@ -112,7 +113,7 @@ public class BookingServiceImpl implements BookingService{
 
 	@Override
 	public List<Booking> searchBooking(String keyword) {
-		 //List<Booking> search = this.repo.searchBooking("%" + keyword + "%");
+		
 		List<Booking> search = repo.searchByCustomer_Name(keyword);
 		return search;
 	}
@@ -121,6 +122,12 @@ public class BookingServiceImpl implements BookingService{
 	public List<Booking> globalSearchh(String keyword) {
 		
 		return repo.globalSearch(keyword);
+	}
+	
+	@Override
+	public List<Booking> searBymodOffBooking(String modOffBooking) {
+		
+		return repo.findByModOffBooking(modOffBooking);
 	}
 	
 }

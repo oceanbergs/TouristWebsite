@@ -894,7 +894,7 @@ $(document).ready(function () {
 	            sightseeingContainer.style.marginTop = '10px';
 
 	            const sightseeingLabel = document.createElement('label');
-	            sightseeingLabel.innerText = 'Sightseeing Details:';
+	            sightseeingLabel.innerText = 'Meals:';
 	            sightseeingLabel.style.fontWeight = 'bold';
 	            sightseeingContainer.appendChild(sightseeingLabel);
 
