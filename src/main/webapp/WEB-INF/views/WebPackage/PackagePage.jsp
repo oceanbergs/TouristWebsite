@@ -54,16 +54,16 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Create a 3-column layout */
     gap: 20px; /* Space between items */
-    justify-items: center; /* Center items within each grid cell */
-    align-items: center; /* Vertically center items */
-    width: 100%;
-    max-width: 1200px; /* Limit maximum width of the grid */
-    margin: 0 auto; /* Center the grid within the container */
+/*     justify-items: center; /* Center items within each grid cell */ */
+/*     align-items: center; /* Vertically center items */ */
+/*     width: 100%; */
+/*     max-width: 1200px; /* Limit maximum width of the grid */ */
+/*     margin: 0 auto; /* Center the grid within the container */ */
 }
 
 /* Image Container */
 .image-container {
-    width: 350px; /* Fixed width for uniform images */
+    width: 400px; /* Fixed width for uniform images */
     height: 200px; /* Fixed height for uniform images */
     overflow: hidden;
     border-radius: 5px; /* Rounded corners for the image container */
@@ -143,6 +143,62 @@
 	       #mainGallery {
 	           cursor: pointer; /* Make thumbnails appear interactive */
 	       }
+	       
+	        body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Popup Overlay */
+/* Popup Overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Full screen width */
+    height: 100vh; /* Full screen height */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay */
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-end; /* Align content to the right */
+    align-items: stretch;
+}
+
+/* Popup Content (40% of the screen) */
+.popup-content {
+    width: 40%; /* 40% of the screen width */
+    height: 100%; /* Full height */
+    background: white; /* Solid white background */
+    border-left: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border for separation */
+    padding: 30px;
+    color: black; /* Adjusted text color for readability */
+    overflow-y: auto; /* Prevent overflow */
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+}
+
+/* Close Button */
+.btn-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: black; /* Adjusted for visibility on white background */
+    cursor: pointer;
+}
+
+/* Form Styling */
+.form-control {
+    border: 1px solid #ddd; /* Subtle border for input fields */
+    color: black; /* Adjusted text color */
+}
+label {
+    color: #555; /* Slightly darker label color */
+}
+button {
+    cursor: pointer;
+}
 	   
 </style>
 </head>
@@ -193,8 +249,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="/TouristWebsite" class="nav-item nav-link " style="font-family: 'Poppins', sans-serif;">Home</a>
-                <a href="/TouristWebsite/about" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">About</a>
+                <a href="login" class="nav-item nav-link " style="font-family: 'Poppins', sans-serif;">Home</a>
+                <a href="about" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">About</a>
                 
 
                 <!-- All Tours India (Domestic) Dropdown -->
@@ -206,10 +262,10 @@
                 </div>
 
                 <!-- All World Tours (International) Dropdown -->
-                <a href="/TouristWebsite/GetInternation" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">World</a>
+                <a href="GetInternation" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">World</a>
 
-                <a href="/TouristWebsite/packages" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Packages</a>
-                <a href="/TouristWebsite/contact" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Contact</a>
+                <a href="packages" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Packages</a>
+                <a href="contact" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Contact</a>
             </div>
         </div>
     </nav>
@@ -307,182 +363,193 @@
 	</div>
 
 
-	<!-- Booking Start -->
-	<!-- <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-	    <div class="container">
-	        <div class="booking p-5">
-	            <div class="row g-5 align-items-center">
-	                <div class="col-md-6 text-white">
-	                    <h1 class="text-white mb-4">Online Booking</h1>
-						<h1 class="text-white mb-4">Plan Your Tour </h1>
-	                </div>
-	                <div class="col-md-6 mx-auto" id="bookForm">
-	                    
-	                    <form id="bookingForm">
-	                        <div class="row g-3">
-	                            <div class="col-12">
-	                                <div class="form-floating">
-	                                    <input type="text" class="form-control bg-transparent" id="name" placeholder="Your Name" required>
-	                                    <label for="name">Your Name</label>
-	                                </div>
-	                            </div>
-	                            <div class="col-12">
-	                                <div class="form-floating">
-	                                    <input type="email" class="form-control bg-transparent" id="email" placeholder="Your Email" required>
-	                                    <label for="email">Your Email</label>
-	                                </div>
-	                            </div>
-								<div class="col-12">
-								                                <div class="form-floating">
-								                                    <input type="email" class="form-control bg-transparent" id="address" placeholder="Your Address" required>
-								                                    <label for="Adress">Your Address</label>
-								                                </div>
-								                            </div>
-	                           
-	                            <div class="col-md-6">
-	                                <div class="form-floating">
-	                                    <input type="tel" class="form-control bg-transparent" id="mobile" placeholder="Your Mobile" pattern="[0-9]{10}" required>
-	                                    <label for="mobile">Your Mobile</label>
-	                                </div>
-	                            </div>
-	                           
-	                            <div class="col-md-6">
-	                                <div class="form-floating">
-	                                    <select class="form-select bg-transparent" id="destinationDropdown">
-	                                        <option value="Destination 1">Destination 1</option>
-	                                        <option value="Destination 2">Destination 2</option>
-	                                        <option value="Destination 3">Destination 3</option>
-	                                    </select>
-	                                    <label for="destinationDropdown">Destination</label>
-	                                </div>
-	                            </div>
-	                        
-	                            <div class="col-md-6">
-	                                <div class="form-floating">
-	                                    <input type="date" class="form-control bg-transparent" id="startDate" required>
-	                                    <label for="startDate">Start Date</label>
-	                                </div>
-	                            </div>
-	                          
-	                            <div class="col-md-6">
-	                                <div class="form-floating">
-	                                    <input type="date" class="form-control bg-transparent" id="endDate" required>
-	                                    <label for="endDate">End Date</label>
-	                                </div>
-	                            </div>
-	                         
-	                            <div class="col-12">
-	                                <div class="form-floating">
-	                                    <textarea class="form-control bg-transparent" placeholder="Special Request" id="message" style="height: 100px"></textarea>
-	                                    <label for="message">Special Request</label>
-	                                </div>
-	                            </div>
-	                       
-	                            <div class="col-12">
-	                                <button type="button" class="btn btn-outline-light w-100 py-3" id="bookNowBtn">Book Now</button>
-	                            </div>
-	                        </div>
-	                    </form>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
-	</div>!-->
+	<div id="bookForm" class="popup-overlay" style="display: none;">
+    <div class="popup-content">
+        <button id="closePopup" class="btn-close">&times;</button>
+        <h2 class="mb-4">Book Your Package</h2>
+<!--         <form id="bookingForm"> -->
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input type="text" class="form-control bg-transparent" id="customer_Name"  name ="customer_Name" placeholder="Your Name" required>
+                        <label for="name">Your Name</label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input type="email" class="form-control bg-transparent" id="email" name="email"  placeholder="Your Email" required>
+                        <label for="email">Your Email</label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-floating">
+                        <input type="text" class="form-control bg-transparent" id="address" name="address" placeholder="Your Address" required>
+                        <label for="address">Your Address</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="tel" class="form-control bg-transparent" id="mobile_Number" name="mobile_Number" placeholder="Your Mobile" pattern="[0-9]{10}" required>
+                        <label for="mobile_Number">Your Mobile</label>
+                    </div>
+                </div>
+
+                <!-- Replace Destination Dropdown with Text Input for Destination -->
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control bg-transparent" id="destination" name="destination" placeholder="Destination" required>
+                        <label for="destination">Destination</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="date" class="form-control bg-transparent" id="start_Date"  name="start_Date" required>
+                        <label for="start_Date">Start Date</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="date" class="form-control bg-transparent" id="end_Date" name="end_Date" required>
+                        <label for="end_Date">End Date</label>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="hidden" class="form-control bg-transparent" id="modOffBooking" name="modOffBooking" value="online" >
+                        
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-floating">
+                        <textarea class="form-control bg-transparent" placeholder="Special Request" id="special_Request" name="special_Request" style="height: 100px"></textarea>
+                        <label for="special_Request">Special Request</label>
+                    </div>
+                </div>
+                
+                
+
+                <div class="col-12">
+                    <button id="saveButton" class="btn btn-outline-light w-100 py-3" style="background-color: #87be29;" >Book Now</button>
+                </div>
+            </div>
+<!--         </form> -->
+    </div>
+</div>
+
 	<!-- Booking End -->
 </div>
 </div>
-</diV>
+</div>
+</div>
 		<!-- Footer Start -->
-		   <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-		       <div class="container py-5">
-		           <div class="row g-5">
-		               <div class="col-lg-3 col-md-6">
-		                   <h4 class="text-white mb-3">Company</h4>
-		                   <a class="btn btn-link" href="">About Us</a>
-		                   <a class="btn btn-link" href="">Contact Us</a>
-		                  
-		               </div>
-		               <div class="col-lg-3 col-md-6">
-		                   <h4 class="text-white mb-3">Contact</h4>
-						<p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Shree Gajanan Yatra Company Pvt. Ltd, 123 Pilgrimage Road, Mumbai, India</p>
-						                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9552014476</p>
-						                <p class="mb-2"><i class="fa fa-envelope me-3"></i>shrigajananyatracompany@gmail.com</p>
-		                   <div class="d-flex pt-2">
-							<a class="btn btn-outline-light btn-social" href="https://g.co/kgs/rL9UQJa"><i class="fab fa-google fw-normal"></i>	  
-				<a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-		                       <a class="btn btn-outline-light btn-social" href="https://youtu.be/chsYbQpY-cU"><i class="fab fa-youtube"></i></a>
-		                       <a class="btn btn-outline-light btn-social" href="https://instagram.com/shriajanan_yatra_company?"><i class="fab fa-instagram fw-normal"></i></a>
-		                   </div>
-		               </div>
-					   
-					   
-					   <div class="col-lg-3 col-md-6">
-					       <h4 class="text-white mb-3">Gallery</h4>
-					       <div class="row g-2 pt-2">
-					           <div class="col-4">
-					                <a href='/TouristWebsite/about#detailedGallery'>
-					                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
-					               </a>
-					           </div>
-					           <div class="col-4">
-					                <a href='/TouristWebsite/about#detailedGallery'>
-					                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
-					               </a>
-					           </div>
-					           <div class="col-4">
-					                <a href='/TouristWebsite/about#detailedGallery'>
-					                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
-					               </a>
-					           </div>
-					           <div class="col-4">
-					                <a href='/TouristWebsite/about#detailedGallery'>
-					                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
-					               </a>
-					           </div>
-					           <div class="col-4">
-					               <a href='/TouristWebsite/about#detailedGallery'>
-					                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
-					               </a>
-					           </div>
-					           <div class="col-4">
-					               <a href='/TouristWebsite/about#detailedGallery'>
-					                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
-					               </a>
-					           </div>
-					       </div>
-					   </div>
+		<div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s" style="padding-left: 0; padding-right: 0;">
+		    <div class="container py-5">
+		        <div class="row g-5">
+		            <!-- Company Section -->
+		            <div class="col-lg-3 col-md-6">
+		                <h4 class="text-white mb-3">Company</h4>
+		               <a class="btn btn-link" href="about">About Us</a>
+		                   <a class="btn btn-link" href="contact">Contact Us</a>
 
-					  
+		            </div>
 
-		               <!-- Travel Inspiration Section -->
-	<div class="col-lg-3 col-md-6">
-	    <h4 class="text-white mb-3">Travel Inspiration</h4>
-	    <p class="text-light">
-	        Exploring new places helps break away from daily routines, reduces stress, and fosters mental clarity.
-	    </p>
-	   <!-- <a href="packages.html" class="btn btn-link text-decoration-underline text-light">Explore More</a>-->
-	</div>
+		            <!-- Contact Section -->
+		            <div class="col-lg-3 col-md-6">
+		                <h4 class="text-white mb-3">Contact</h4>
+		                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Shree Gajanan Yatra Company Pvt. Ltd, Front Of Allahbad Bank Mil Colony Stop Paratwada 444805</p>
+		                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9552014476</p>
+		                <p class="mb-2"><i class="fa fa-envelope me-3"></i>shrigajananyatracompany@gmail.com</p>
+						
+						<div class="d-flex pt-2">
+						    <!-- Google Link -->
+						    <a class="btn btn-outline-light btn-social" href="https://g.co/kgs/rL9UQJa" target="_blank">
+						        <i class="fab fa-google fw-normal"></i>
+						    </a>
 
-	    </div>
-		               </div>
-		       <div class="container">
-		           <div class="copyright">
-					<div class="row">
-					    <div class="col-md-12 text-center text-md-start mb-3 mb-md-0">
-					        &copy; <a class="border-bottom" href="#">Shree Gajanan Yatra Company Pvt. Ltd.</a> All Rights Reserved. Designed By 
-					        <a class="border-bottom" href="https://oceanberg.org">OCEANBERG TECHNOLOGIES PRIVATE LIMITED</a>
-					        <!--
-					        /*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. 
-					        If you'd like to use the template without the footer author’s credit link/attribution link/backlink, 
-					        you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/
-					        -->
-					    </div>
-		                  
-		               </div>
-		           </div>
-		       </div>
-		   </div>
-		   <!-- Footer End -->
+						    <!-- Facebook Link -->
+						    <a class="btn btn-outline-light btn-social" href="https://facebook.com" target="_blank">
+						        <i class="fab fa-facebook-f"></i>
+						    </a>
+
+						    <!-- YouTube Link -->
+						    <a class="btn btn-outline-light btn-social" href="https://youtu.be/chsYbQpY-cU" target="_blank">
+						        <i class="fab fa-youtube"></i>
+						    </a>
+
+						    <!-- Instagram Link -->
+						    <a class="btn btn-outline-light btn-social" href="https://instagram.com/shriajanan_yatra_company" target="_blank">
+						        <i class="fab fa-instagram fw-normal"></i>
+						    </a>
+						</div>
+
+		            </div>
+
+					<div class="col-lg-3 col-md-6">
+								       <h4 class="text-white mb-3">Gallery</h4>
+								       <div class="row g-2 pt-2">
+								           <div class="col-4">
+								                <a href='about#detailedGallery'>
+								                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
+								               </a>
+								           </div>
+								           <div class="col-4">
+								                <a href='about#detailedGallery'>
+								                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
+								               </a>
+								           </div>
+								           <div class="col-4">
+								                <a href='about#detailedGallery'>
+								                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
+								               </a>
+								           </div>
+								           <div class="col-4">
+								                <a href='about#detailedGallery'>
+								                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
+								               </a>
+								           </div>
+								           <div class="col-4">
+								               <a href='about#detailedGallery'>
+								                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
+								               </a>
+								           </div>
+								           <div class="col-4">
+								               <a href='about#detailedGallery'>
+								                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
+								               </a>
+								           </div>
+								       </div>
+								   </div>
+
+
+		            <!-- Travel Inspiration Section -->
+		            <div class="col-lg-3 col-md-6">
+		                <h4 class="text-white mb-3">Travel Inspiration</h4>
+		                <p>Exploring new places helps break away from daily routines, reduces stress, and fosters mental clarity.</p>
+		                
+		            </div>
+		        </div>
+		    </div>
+
+		    <!-- Copyright Section -->
+		    <div class="container-fluid bg-dark text-light py-3">
+		        <div class="row">
+		            <div class="col-md-12 text-center mb-2 mb-md-0">
+		                &copy; <a class="border-bottom text-light" href="#">Shree Gajanan Yatra Company Pvt. Ltd.</a>, All Rights Reserved Designed By
+		                <u>OCEANBERG TECHNOLOGIES PRIVATE LIMITED.</u>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	
+
+	<!-- Footer End -->
 
 		   <script>
 		   	   				       document.addEventListener('DOMContentLoaded', function () {
@@ -572,33 +639,33 @@
         });
     </script>
      <script type="text/javascript">
-    $(document).ready(function() {
-        // Function to load destinations into the dropdown
-        function loadDestinations() {
-            $.ajax({
-                type: "GET",
-                url: '/TouristWebsite/destination',
-                dataType: 'json',
-                success: function(response) {
-                    const designationDropdown = $("#designationDropdown");
-                    designationDropdown.empty(); // Clear existing options
-                    designationDropdown.append('<option value="">Select Destination</option>');
-                    response.forEach(function(destination) {
-                        designationDropdown.append($('<option>', {
-                            value: destination.id, // Assuming 'id' field exists in the response
-                            text: destination.destination // Assuming 'name' field exists in the response
-                        }));
-                    });
-                },
-                error: function(jqXHR, status, errorThrown) {
-                    alert("Failed to load destinations: " + errorThrown);
-                }
-            });
-        }
+//     $(document).ready(function() {
+//         // Function to load destinations into the dropdown
+//         function loadDestinations() {
+//             $.ajax({
+//                 type: "GET",
+//                 url: '/TouristWebsite/destination',
+//                 dataType: 'json',
+//                 success: function(response) {
+//                     const designationDropdown = $("#designationDropdown");
+//                     designationDropdown.empty(); // Clear existing options
+//                     designationDropdown.append('<option value="">Select Destination</option>');
+//                     response.forEach(function(destination) {
+//                         designationDropdown.append($('<option>', {
+//                             value: destination.id, // Assuming 'id' field exists in the response
+//                             text: destination.destination // Assuming 'name' field exists in the response
+//                         }));
+//                     });
+//                 },
+//                 error: function(jqXHR, status, errorThrown) {
+//                     alert("Failed to load destinations: " + errorThrown);
+//                 }
+//             });
+//         }
         
-        // Call the function to load destinations
-        loadDestinations();
-    });
+//         // Call the function to load destinations
+//         loadDestinations();
+//     });
 </script>
 
 <script type="text/javascript">
@@ -646,12 +713,12 @@
 		                            '<img class="img-fluid" src="data:image/jpeg;base64,' + pkg.packageImage + '" alt="Package Image">' +
 		                        '</div>' +
 		                        '<div class="d-flex border-bottom">' +
-		                            '<small class="flex-fill text-center border-end py-2">' +
-		                                '<i class="fa fa-map-marker-alt text-primary me-2"></i>' + pkg.packageName +
-		                            '</small>' +
-		                            '<small class="flex-fill text-center border-end py-2">' +
-		                                '<i class="fa fa-calendar-alt text-primary me-2"></i>' + pkg.duration + ' days' +
-		                            '</small>' +
+		                        '<small class="flex-fill text-center border-end py-2">' +
+                                '<i class="fa fa-calendar-alt text-primary me-2"></i>' + pkg.duration + ' days' +
+                            '</small>' +
+                           ' <small class="flex-fill text-center border-end py-2">'+
+                           ' <i class="fa fa-rupee-sign text-primary me-2"></i>'+ pkg.price + 
+                       ' </small>'+
 		<!--                            '<small class="flex-fill text-center py-2" style="position: relative; display: inline-block; cursor: pointer;">' +-->
 		<!--                                '<i class="fa fa-globe text-primary me-2"></i>' +-->
 		<!--                                '<span>' + pkg.locations + ' Country <i class="fa fa-building text-primary me-2"></i>' + pkg.cities + ' Cities</span>' +-->
@@ -661,7 +728,8 @@
 		<!--                            '</small>' +-->
 		                        '</div>' +
 		                        '<div class="text-center p-4">' +
-		                            '<h3 class="mb-0">&#8377;' + pkg.price + '</h3>' +
+		                        '<h5 class="mb-0">' + pkg.packageName + '</h5>' +
+// 		                            '<h3 class="mb-0">&#8377;' + pkg.price + '</h3>' +
 		                           '<div class="mb-3" style="display: none;" type="hidden">' + pkg.id + '</div>' +
 		                            '<div style="position: relative;">' +
 		<!--                                '<h5 class="text-center">Tour Highlights</h5>' +-->
@@ -676,8 +744,9 @@
 		                                '</div>' +
 		                            '</div>' +
 		                            '<div class="d-flex justify-content-center mb-2">' +
-		                                '<a   href="/TouristWebsite/delhiInformation" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">View Tour Details</a>' +
-		                                '<a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>' +
+		                            '<a href="delhiInformation?id=' + pkg.id + '" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;" >View Tour Details</a>'+
+
+		                                '<a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;" onclick="showBookingForm(\'' + pkg.packageName + '\')">Book Now</a>' +
 		                            '</div>' +
 		                        '</div>' +
 		                    '</div>';
@@ -693,6 +762,19 @@
 		    });
 		}
 
+		function showBookingForm(packageName) {
+		    // Show the booking form
+		    document.getElementById('bookForm').style.display = 'flex';
+
+		    // Set the destination (package name) in the form
+		    document.getElementById('destination').value = packageName;
+		}
+
+		// Close the popup
+		document.getElementById('closePopup').addEventListener('click', function () {
+		    document.getElementById('bookForm').style.display = 'none';
+		});
+
 
 
 <!--$(document).ready(function() {-->
@@ -700,6 +782,64 @@
 <!--});-->
 
 </script>
+
+<script>
+$(document).ready(function() {
+    // Click event handler for the save button
+    $("#saveButton").click(function() {
+        const customer_Name = $("#customer_Name").val();
+        const email = $("#email").val();
+        const address = $("#address").val();
+        const mobile_Number = $("#mobile_Number").val();
+        const destination = $("#destination").val();
+        const special_Request = $("#special_Request").val();
+        const modOffBooking = $("#modOffBooking").val();
+        
+        const start_Date = $("#start_Date").val();
+        const end_Date = $("#end_Date").val();
+        
+        
+       
+        // Construct batch data object
+        const batchData = {
+        		customer_Name: customer_Name,
+        		email: email,
+        		address: address,
+        		mobile_Number: mobile_Number,
+        		destination: destination,
+        		special_Request: special_Request,
+        		modOffBooking: modOffBooking,
+        		start_Date: start_Date,
+        		end_Date: end_Date
+        };
+        
+        if (!customer_Name || !email || !address || !mobile_Number || !destination || !special_Request  || !modOffBooking|| !start_Date || !end_Date) {
+            alert("Please fill all required fields.");
+            return;
+        }
+
+        // Send AJAX request to save batch data
+        $.ajax({
+            url: "auth/saveBooking",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(batchData),
+            success: function(response) {
+                alert("Booking Successfull...");
+                window.location.href = "packages";
+            },
+            error: function(jqXHR, status, errorThrown) {
+                if (jqXHR.status === 403) {
+                    alert("YOU DON'T HAVE THE PERMISSION");
+                } else {
+                    alert("Failed to communicate with the server");
+                }
+            }
+        });
+    });
+});
+
+	</script>
 </body>
 
 </html>

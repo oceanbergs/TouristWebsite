@@ -335,9 +335,9 @@ tbody td .fa-trash {
 			</div>
 			<h2 class="companyname">Shri Gajanan Yatra Company Pvt. Ltd</h2>
 			<div class="actions">
-				<img src="../img/profile.png" alt="Profile"> <img
-					src="../img/setting.png" alt="Setting"> <img src="../img/logout.png"
-					alt="Logout">
+				<a href="logout">
+        <img src="../img/logout.png" alt="Logout">
+    </a>
 			</div>
 		</header>
 
@@ -348,12 +348,13 @@ tbody td .fa-trash {
                 <!-- <h2>Shree Gajanan Yatra</h2> -->
                 <nav>
                     <ul>
-						<li><a href="/TouristWebsite/auth/notification" class="active" style="background-color: #87be29;">Enquiry</a></li>
-                        <li><a href="/TouristWebsite/auth/dashboard">Dashboard</a></li>
-                        <li><a href="/TouristWebsite/auth/packageType" >Packages Type</a></li>
-                        <li><a href="/TouristWebsite/auth/managePackage">Manage Packages</a></li>
-						<li><a href="/TouristWebsite/auth/viewAddPackage">Manage Bookings</a></li>
-						<li><a href="#payments">Manage Gallary</a></li>
+						<li><a href="notification" class="active" style="background-color: #87be29;">Enquiry</a></li>
+                        <li><a href="dashboard">Dashboard</a></li>
+                        <li><a href="packageType" >Packages Type</a></li>
+                        <li><a href="managePackage">Manage Packages</a></li>
+						<li><a href="bookingView">Manage Bookings</a></li>
+						<li><a href="manageGallery">Manage Gallary</a></li>
+						  <li><a href="bannerManagement">Banner Management</a></li>
 <!--                        <li><a href="#users">User Management</a></li>-->
                      
 <!--                        <li><a href="#settings">Settings</a></li>-->
@@ -429,7 +430,7 @@ tbody td .fa-trash {
 
 		    function fetchAllBatches() {
 		        $.ajax({
-		            url: "/TouristWebsite/auth/getAllNotification", // Ensure this endpoint is correct
+		            url: "getAllNotification", // Ensure this endpoint is correct
 		            type: "GET",
 		            contentType: "application/json",
 		            success: function (response) {
@@ -488,7 +489,7 @@ tbody td .fa-trash {
 
 		    function deleteBatch(packageTypeId) {
 		        $.ajax({
-		            url: "/TouristWebsite/auth/deletePackageType/" + packageTypeId,
+		            url: "deletePackageType/" + packageTypeId,
 		            type: "POST",
 		            contentType: "application/json",
 		            success: function (response) {
@@ -524,7 +525,7 @@ tbody td .fa-trash {
 					        }
 
 					        $.ajax({
-					            url: "/TouristWebsite/auth/searchNotification",
+					            url: "searchNotification",
 					            type: "GET",
 					            data: { fromDate: fromDate, toDate: toDate },
 					            contentType: "application/json",

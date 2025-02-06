@@ -1,9 +1,9 @@
-p<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
 <meta charset="utf-8">
-<title>World Packages</title>
+<title>All Packages</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -36,8 +36,7 @@ p<!DOCTYPE html>
     <link href="css/style.css" rel="stylesheet">
 
 <style>
-x/* Parent Container for Packages */
-	.parent-container {
+.parent-container {
 	    display: flex;
 	    justify-content: center; /* Center the grid horizontally */
 	    align-items: center; /* Center the grid vertically */
@@ -58,16 +57,16 @@ x/* Parent Container for Packages */
 	    display: grid;
 	    grid-template-columns: repeat(3, 1fr); /* Create a 3-column layout */
 	    gap: 20px; /* Space between items */
-	    justify-items: center; /* Center items within each grid cell */
-	    align-items: center; /* Vertically center items */
-	    width: 100%;
-	    max-width: 1200px; /* Limit maximum width of the grid */
-	    margin: 0 auto; /* Center the grid within the container */
+/* 	    justify-items: center; /* Center items within each grid cell */ */
+/* 	    align-items: center; /* Vertically center items */ */
+/* 	    width: 100%; */
+/* 	    max-width: 1200px; /* Limit maximum width of the grid */ */
+/* 	    margin: 0 auto; /* Center the grid within the container */ */
 	}
 
 	/* Image Container */
 	.image-container {
-	    width: 350px; /* Fixed width for uniform images */
+	    width: 400px; /* Fixed width for uniform images */
 	    height: 200px; /* Fixed height for uniform images */
 	    overflow: hidden;
 	    border-radius: 5px; /* Rounded corners for the image container */
@@ -89,25 +88,25 @@ x/* Parent Container for Packages */
 	    gap: 5px;
 	}
 
-	/* Hover Content Styling */
-	.hover-content {
-	    display: none;
-	    position: absolute;
-	    top: 100%;
-	    left: 50%;
-	    transform: translateX(-50%);
-	    background-color: #fff;
-	    padding: 10px;
-	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	    border-radius: 5px;
-	    width: 250px;
-	    text-align: left;
-	    z-index: 10;
-	}
+/* 	/* Hover Content Styling */ */
+/* 	.hover-content { */
+/* 	    display: none; */
+/* 	    position: absolute; */
+/* 	    top: 100%; */
+/* 	    left: 50%; */
+/* 	    transform: translateX(-50%); */
+/* 	    background-color: #fff; */
+/* 	    padding: 10px; */
+/* 	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+/* 	    border-radius: 5px; */
+/* 	    width: 250px; */
+/* 	    text-align: left; */
+/* 	    z-index: 10; */
+/* 	} */
 
-	.flex-fill:hover .hover-content {
-	    display: block;
-	}
+/* 	.flex-fill:hover .hover-content { */
+/* 	    display: block; */
+/* 	} */
 
 	/* Additional Spacing Adjustments */
 	.justify-content-center {
@@ -203,6 +202,51 @@ label {
 button {
     cursor: pointer;
 }
+#loading-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8); /* Light overlay effect */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Ensure it appears above all other content */
+}
+
+.spinner-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px; /* Space between spinner and text */
+}
+
+.spinner-container p {
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 
 </style>
 </head>
@@ -253,8 +297,8 @@ button {
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="/TouristWebsite" class="nav-item nav-link " style="font-family: 'Poppins', sans-serif;">Home</a>
-                <a href="/TouristWebsite/about" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">About</a>
+                <a href="login" class="nav-item nav-link " style="font-family: 'Poppins', sans-serif;">Home</a>
+                <a href="about" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">About</a>
                 <!-- All Tours India (Domestic) Dropdown -->
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" id="packageDropdownToggle" data-bs-toggle="dropdown" style="font-family: 'Poppins', sans-serif;">India</a>
@@ -264,10 +308,10 @@ button {
                 </div>
 
                 <!-- All World Tours (International) Dropdown -->
-                <a href="/TouristWebsite/GetInternation" class="nav-item nav-link " style="font-family: 'Poppins', sans-serif;">World</a>
+                <a href="GetInternation" class="nav-item nav-link " style="font-family: 'Poppins', sans-serif;">World</a>
 
-                <a href="/TouristWebsite/packages" class="nav-item nav-link active" style="font-family: 'Poppins', sans-serif;">Packages</a>
-                <a href="/TouristWebsite/contact" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Contact</a>
+                <a href="packages" class="nav-item nav-link active" style="font-family: 'Poppins', sans-serif;">Packages</a>
+                <a href="contact" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Contact</a>
             </div>
         </div>
     </nav>
@@ -305,63 +349,7 @@ button {
 			<div class="row g-2 justify-content-center">
 				<div class="parent-container">
 					<div id="packages-container">
-						<!-- Example Package Item -->
-<!--						<div class="package-item">-->
-<!--							<div class="image-container">-->
-<!--								<img class="fixed-size-image" src="img/agra.jpg" alt="Agra">-->
-<!--							</div>-->
-<!--							<div class="d-flex border-bottom">-->
-<!--								<small class="flex-fill text-center border-end py-2">-->
-<!--									<i class="fa fa-map-marker-alt text-primary me-2"></i>Delhi Agra-->
-<!--								</small>-->
-<!--								<small class="flex-fill text-center border-end py-2">-->
-<!--									<i class="fa fa-calendar-alt text-primary me-2"></i>5 days-->
-<!--								</small>-->
-<!--								<small class="flex-fill text-center py-2" style="position: relative;">-->
-<!--									<i class="fa fa-globe text-primary me-2"></i>-->
-<!--									<span>1 Country <i class="fa fa-building text-primary me-2"></i>4 Cities</span>-->
-<!--									<div class="hover-content">-->
-<!--										<p class="with-symbol"><span class="symbol"></span>You Will Visit 1 Country, 4 Cities</p>-->
-<!--										<p class="route-title india"><span class="symbol"></span>India</p>-->
-<!--										<p class="route-item">Agra</p>-->
-<!--										<p class="route-item">Mathura</p>-->
-<!--										<p class="route-item">Delhi</p>-->
-<!--										<p class="route-item">Vrindavan</p>-->
-<!--									</div>-->
-<!--								</small>-->
-<!--							</div>-->
-<!--							<div class="text-center p-4">-->
-<!--								<h3 class="mb-0">&#8377;36,000</h3>-->
-<!--								<div class="mb-3">-->
-<!--									<small class="fa fa-star text-primary"></small>-->
-<!--									<small class="fa fa-star text-primary"></small>-->
-<!--									<small class="fa fa-star text-primary"></small>-->
-<!--									<small class="fa fa-star text-primary"></small>-->
-<!--									<small class="fa fa-star text-primary"></small>-->
-<!--								</div>-->
-<!--								<h5 class="text-center">Tour Highlights</h5>-->
-<!--								<p class="tour-highlights">-->
-<!--									<span>Taj Mahal</span>, -->
-<!--									<span>Red Fort</span>, -->
-<!--									<span>Mathura</span>, -->
-<!--									<span>Vrindavan</span>-->
-<!--									<a href="#" id="more-highlights" style="color: #3CB371; margin-left: 10px;">More...</a>-->
-<!--								</p>-->
-<!--								<div id="all-highlights">-->
-<!--									<h5>All Tour Highlights</h5>-->
-<!--									<ul>-->
-<!--										<li>Taj Mahal</li>-->
-<!--										<li>Red Fort</li>-->
-<!--										<li>Mathura</li>-->
-<!--										<li>Vrindavan</li>-->
-<!--									</ul>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--						 End of Example Package Item -->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
+					
 		</div>
 	</div>
 	</div>
@@ -369,6 +357,13 @@ button {
 	</div>
 	</div>
 	
+<div id="loading-spinner" style="display: none;">
+    <div class="spinner-container">
+        <div class="spinner"></div>
+        <p>Loading packages....</p>
+    </div>
+</div>
+<div id="packages-container"></div>
 
 
 	<!-- Booking Start -->
@@ -377,70 +372,79 @@ button {
     <div class="popup-content">
         <button id="closePopup" class="btn-close">&times;</button>
         <h2 class="mb-4">Book Your Package</h2>
-        <form id="bookingForm">
+<!--         <form id="bookingForm"> -->
             <div class="row g-3">
                 <div class="col-12">
                     <div class="form-floating">
-                        <input type="text" class="form-control bg-transparent" id="name" placeholder="Your Name" required>
+                        <input type="text" class="form-control bg-transparent" id="customer_Name"  name ="customer_Name" placeholder="Your Name" required>
                         <label for="name">Your Name</label>
                     </div>
                 </div>
 
                 <div class="col-12">
                     <div class="form-floating">
-                        <input type="email" class="form-control bg-transparent" id="email" placeholder="Your Email" required>
+                        <input type="email" class="form-control bg-transparent" id="email" name="email"  placeholder="Your Email" required>
                         <label for="email">Your Email</label>
                     </div>
                 </div>
 
                 <div class="col-12">
                     <div class="form-floating">
-                        <input type="text" class="form-control bg-transparent" id="address" placeholder="Your Address" required>
+                        <input type="text" class="form-control bg-transparent" id="address" name="address" placeholder="Your Address" required>
                         <label for="address">Your Address</label>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input type="tel" class="form-control bg-transparent" id="mobile" placeholder="Your Mobile" pattern="[0-9]{10}" required>
-                        <label for="mobile">Your Mobile</label>
+                        <input type="tel" class="form-control bg-transparent" id="mobile_Number" name="mobile_Number" placeholder="Your Mobile" pattern="[0-9]{10}" required>
+                        <label for="mobile_Number">Your Mobile</label>
                     </div>
                 </div>
 
                 <!-- Replace Destination Dropdown with Text Input for Destination -->
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input type="text" class="form-control bg-transparent" id="destination" placeholder="Destination" required>
+                        <input type="text" class="form-control bg-transparent" id="destination" name="destination" placeholder="Destination" required>
                         <label for="destination">Destination</label>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input type="date" class="form-control bg-transparent" id="startDate" required>
-                        <label for="startDate">Start Date</label>
+                        <input type="date" class="form-control bg-transparent" id="start_Date"  name="start_Date" required>
+                        <label for="start_Date">Start Date</label>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input type="date" class="form-control bg-transparent" id="endDate" required>
-                        <label for="endDate">End Date</label>
+                        <input type="date" class="form-control bg-transparent" id="end_Date" name="end_Date" required>
+                        <label for="end_Date">End Date</label>
                     </div>
                 </div>
-
+                
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="hidden" class="form-control bg-transparent" id="modOffBooking" name="modOffBooking" value="online" >
+                        
+                    </div>
+                </div>
+      
                 <div class="col-12">
                     <div class="form-floating">
-                        <textarea class="form-control bg-transparent" placeholder="Special Request" id="message" style="height: 100px"></textarea>
-                        <label for="message">Special Request</label>
+                        <textarea class="form-control bg-transparent" placeholder="Special Request" id="special_Request" name="special_Request" style="height: 100px"></textarea>
+                        <label for="special_Request">Special Request</label>
                     </div>
                 </div>
+                
+                
 
                 <div class="col-12">
-                    <button type="button" class="btn btn-outline-light w-100 py-3" style="background-color: #87be29;" id="bookNowBtn">Book Now</button>
+                    <button id="saveButton" class="btn btn-outline-light w-100 py-3" style="background-color: #87be29;" >Book Now</button>
                 </div>
             </div>
-        </form>
+<!--         </form> -->
     </div>
 </div>
 
@@ -451,14 +455,14 @@ button {
 		            <!-- Company Section -->
 		            <div class="col-lg-3 col-md-6">
 		                <h4 class="text-white mb-3">Company</h4>
-		                <a class="btn btn-link text-light" href="" style="text-decoration: none;">About Us</a><br>
-		                <a class="btn btn-link text-light" href="" style="text-decoration: none;">Contact Us</a>
+		                <a class="btn btn-link text-light" href="about" style="text-decoration: none;">About Us</a><br>
+		                <a class="btn btn-link text-light" href="contact" style="text-decoration: none;">Contact Us</a>
 		            </div>
 
 		            <!-- Contact Section -->
 		            <div class="col-lg-3 col-md-6">
 		                <h4 class="text-white mb-3">Contact</h4>
-		                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Shree Gajanan Yatra Company Pvt. Ltd, 123 Pilgrimage Road, Mumbai, India</p>
+		                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Shree Gajanan Yatra Company Pvt. Ltd, Front Of Allahbad Bank Mil Colony Stop Paratwada 444805</p>
 		                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9552014476</p>
 		                <p class="mb-2"><i class="fa fa-envelope me-3"></i>shrigajananyatracompany@gmail.com</p>
 						
@@ -490,32 +494,32 @@ button {
 								       <h4 class="text-white mb-3">Gallery</h4>
 								       <div class="row g-2 pt-2">
 								           <div class="col-4">
-								                <a href='/TouristWebsite/about#detailedGallery'>
+								                <a href='about#detailedGallery'>
 								                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
 								               </a>
 								           </div>
 								           <div class="col-4">
-								                <a href='/TouristWebsite/about#detailedGallery'>
+								                <a href='about#detailedGallery'>
 								                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
 								               </a>
 								           </div>
 								           <div class="col-4">
-								                <a href='/TouristWebsite/about#detailedGallery'>
+								                <a href='about#detailedGallery'>
 								                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
 								               </a>
 								           </div>
 								           <div class="col-4">
-								                <a href='/TouristWebsite/about#detailedGallery'>
+								                <a href='about#detailedGallery'>
 								                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
 								               </a>
 								           </div>
 								           <div class="col-4">
-								               <a href='/TouristWebsite/about#detailedGallery'>
+								               <a href='about#detailedGallery'>
 								                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
 								               </a>
 								           </div>
 								           <div class="col-4">
-								               <a href='/TouristWebsite/about#detailedGallery'>
+								               <a href='about#detailedGallery'>
 								                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
 								               </a>
 								           </div>
@@ -631,38 +635,15 @@ button {
             bookForm.scrollIntoView({ behavior: "smooth" }); // Scroll into view
         });
     </script>
-     <script type="text/javascript">
-    $(document).ready(function() {
-        // Function to load destinations into the dropdown
-        function loadDestinations() {
-            $.ajax({
-                type: "GET",
-                url: '/TouristWebsite/destination',
-                dataType: 'json',
-                success: function(response) {
-                    const designationDropdown = $("#designationDropdown");
-                    designationDropdown.empty(); // Clear existing options
-                    designationDropdown.append('<option value="">Select Destination</option>');
-                    response.forEach(function(destination) {
-                        designationDropdown.append($('<option>', {
-                            value: destination.id, // Assuming 'id' field exists in the response
-                            text: destination.destination // Assuming 'name' field exists in the response
-                        }));
-                    });
-                },
-                error: function(jqXHR, status, errorThrown) {
-                    alert("Failed to load destinations: " + errorThrown);
-                }
-            });
-        }
-        
-        // Call the function to load destinations
-        loadDestinations();
-    });
-</script>
-
+    
 <script type="text/javascript">
 	function getAllPackages() {
+		const spinner = document.getElementById('loading-spinner');
+	    const packagesContainer = document.getElementById('packages-container');
+	    
+	    // Show spinner before AJAX call
+	    spinner.style.display = 'flex';
+
 		    $.ajax({
 		        url: "getpackagetype",
 		        type: 'GET',
@@ -677,6 +658,13 @@ button {
 		                const ratingStars = `<span>â­â­â­â­</span>`; // Placeholder for rating stars
 		                const highlightsPreview = pkg.highlights ? `${pkg.highlights.substring(0, 50)}...` : 'No highlights available';
 		                const fullHighlights = pkg.highlights || 'No highlights available';
+		                
+// 		                const locationsInfo = pkg.locations && pkg.locations.length > 0
+// 		                ? pkg.locations.map(location => location.locationName).join(', ')
+// 		                : 'No locations available';
+
+// 		            alert("Package Name: " + pkg.packageName + "\nLocations: " + locationsInfo);
+
 
 		                // Using template literals for HTML generation
 		                const packageHtml = ''
@@ -695,7 +683,12 @@ button {
 		                           ' <small class="flex-fill text-center border-end py-2">'+
 		                           ' <i class="fa fa-rupee-sign text-primary me-2"></i>'+ pkg.price + 
 		                       ' </small>'+
-
+		                       
+// 		                       ' <small class="flex-fill text-center border-end py-2">'+
+// 	                           ' <i class="fa fa-map-marker-alt text-primary me-2"></i>'+ pkg.locationsInfo + 
+// 	                       ' </small>'+
+		                       
+		                     
 		<!--                            '<small class="flex-fill text-center py-2" style="position: relative; display: inline-block; cursor: pointer;">' +-->
 		<!--                                '<i class="fa fa-globe text-primary me-2"></i>' +-->
 		<!--                                '<span>' + pkg.locations + ' Country <i class="fa fa-building text-primary me-2"></i>' + pkg.cities + ' Cities</span>' +-->
@@ -722,7 +715,8 @@ button {
 		                                '</div>' +
 		                            '</div>' +
 		                            '<div class="d-flex justify-content-center mb-2">' +
-		                                '<a   href="/TouristWebsite/delhiInformation" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">View Tour Details</a>' +
+		                            '<a href="delhiInformation?id=' + pkg.id + '" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;" >View Tour Details</a>'+
+
 		                                '<a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;" onclick="showBookingForm(\'' + pkg.packageName + '\')">Book Now</a>' +
 
 		                            '</div>' +
@@ -732,10 +726,12 @@ button {
 		                // Append the generated HTML to the container
 		                packagesContainer.innerHTML += packageHtml;
 		            });
+		            spinner.style.display = 'none';
 		        },
 		        error: function(xhr, status, error) {
 		            console.error('Error fetching package details:', status, error);
 		            alert('Failed to fetch package details.');
+		            spinner.style.display = 'none';
 		        }
 		    });
 		}
@@ -761,6 +757,64 @@ button {
 
 
 </script>
+
+<script>
+$(document).ready(function() {
+    // Click event handler for the save button
+    $("#saveButton").click(function() {
+        const customer_Name = $("#customer_Name").val();
+        const email = $("#email").val();
+        const address = $("#address").val();
+        const mobile_Number = $("#mobile_Number").val();
+        const destination = $("#destination").val();
+        const special_Request = $("#special_Request").val();
+        const modOffBooking = $("#modOffBooking").val();
+        
+        const start_Date = $("#start_Date").val();
+        const end_Date = $("#end_Date").val();
+        
+        
+       
+        // Construct batch data object
+        const batchData = {
+        		customer_Name: customer_Name,
+        		email: email,
+        		address: address,
+        		mobile_Number: mobile_Number,
+        		destination: destination,
+        		special_Request: special_Request,
+        		modOffBooking: modOffBooking,
+        		start_Date: start_Date,
+        		end_Date: end_Date
+        };
+        
+        if (!customer_Name || !email || !address || !mobile_Number || !destination || !special_Request  || !modOffBooking|| !start_Date || !end_Date) {
+            alert("Please fill all required fields.");
+            return;
+        }
+
+        // Send AJAX request to save batch data
+        $.ajax({
+            url: "auth/saveBooking",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(batchData),
+            success: function(response) {
+                alert("Booking Successfull...");
+                window.location.href = "packages";
+            },
+            error: function(jqXHR, status, errorThrown) {
+                if (jqXHR.status === 403) {
+                    alert("YOU DON'T HAVE THE PERMISSION");
+                } else {
+                    alert("Failed to communicate with the server");
+                }
+            }
+        });
+    });
+});
+
+	</script>
 <script>
 	   				       document.addEventListener('DOMContentLoaded', function () {
 	   				           // Check if the page has a hash value for smooth scrolling

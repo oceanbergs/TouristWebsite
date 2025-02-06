@@ -25,6 +25,7 @@
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -90,8 +91,8 @@
 	            </button>
 	            <div class="collapse navbar-collapse" id="navbarCollapse">
 	                <div class="navbar-nav ms-auto py-0">
-	                    <a href="/TouristWebsite" class="nav-item nav-link " style="font-family: 'Poppins', sans-serif;">Home</a>
-	                    <a href="/TouristWebsite/about" class="nav-item nav-link active" style="font-family: 'Poppins', sans-serif;">About</a>
+	                    <a href="login" class="nav-item nav-link " style="font-family: 'Poppins', sans-serif;">Home</a>
+	                    <a href="about" class="nav-item nav-link active" style="font-family: 'Poppins', sans-serif;">About</a>
 
 	                    <!-- All Tours India (Domestic) Dropdown -->
 	                    <div class="nav-item dropdown">
@@ -102,10 +103,10 @@
 	                    </div>
 
 	                    <!-- All World Tours (International) Dropdown -->
-	                    <a href="/TouristWebsite/GetInternation" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">World</a>
+	                    <a href="GetInternation" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">World</a>
 
-	                    <a href="/TouristWebsite/packages" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Packages</a>
-	                    <a href="/TouristWebsite/contact" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Contact</a>
+	                    <a href="packages" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Packages</a>
+	                    <a href="contact" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Contact</a>
 	                </div>
 	            </div>
 	        </nav>
@@ -233,69 +234,74 @@
         </div>
 
 		<!-- Carousel Start -->
-		<div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
-		    <div class="carousel-inner">
-		        <!-- Slide 2 (Now Active) -->
-		        <div class="carousel-item active">
-		            <div class="row g-4">
-		                <!-- Image 5 -->
-		                <div class="col-lg-3 col-md-4 col-sm-6">
-		                    <div class="gallery-item">
-		                        <img class="img-fluid" src="img/people1.jpg" alt="Gallery Image 5" style="width: 100%; height: 300px; object-fit: cover;">
-		                    </div>
-		                </div>
-		                <!-- Image 6 -->
-		                <div class="col-lg-3 col-md-4 col-sm-6">
-		                    <div class="gallery-item">
-		                        <img class="img-fluid" src="img/people2.jpg" alt="Gallery Image 6" style="width: 100%; height: 300px; object-fit: cover;">
-		                    </div>
-		                </div>
-		                <!-- Image 7 -->
-		                <div class="col-lg-3 col-md-4 col-sm-6">
-		                    <div class="gallery-item">
-		                        <img class="img-fluid" src="img/people3.jpg" alt="Gallery Image 7" style="width: 100%; height: 300px; object-fit: cover;">
-		                    </div>
-		                </div>
-		                <!-- Image 8 -->
-		                <div class="col-lg-3 col-md-4 col-sm-6">
-		                    <div class="gallery-item">
-		                        <img class="img-fluid" src="img/people4.jpg" alt="Gallery Image 8" style="width: 100%; height: 300px; object-fit: cover;">
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
+<!-- 		<div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel"> -->
+<!-- 		    <div class="carousel-inner"> -->
+<!-- 		        Slide 2 (Now Active) -->
+<!-- 		        <div class="carousel-item active"> -->
+<!-- 		            <div class="row g-4"> -->
+<!-- 		                Image 5 -->
+<!-- 		                <div class="col-lg-3 col-md-4 col-sm-6"> -->
+<!-- 		                    <div class="gallery-item"> -->
+<!-- 		                        <img class="img-fluid" src="img/people1.jpg" alt="Gallery Image 5" style="width: 100%; height: 300px; object-fit: cover;"> -->
+<!-- 		                    </div> -->
+<!-- 		                </div> -->
+<!-- 		                Image 6 -->
+<!-- 		                <div class="col-lg-3 col-md-4 col-sm-6"> -->
+<!-- 		                    <div class="gallery-item"> -->
+<!-- 		                        <img class="img-fluid" src="img/people2.jpg" alt="Gallery Image 6" style="width: 100%; height: 300px; object-fit: cover;"> -->
+<!-- 		                    </div> -->
+<!-- 		                </div> -->
+<!-- 		                Image 7 -->
+<!-- 		                <div class="col-lg-3 col-md-4 col-sm-6"> -->
+<!-- 		                    <div class="gallery-item"> -->
+<!-- 		                        <img class="img-fluid" src="img/people3.jpg" alt="Gallery Image 7" style="width: 100%; height: 300px; object-fit: cover;"> -->
+<!-- 		                    </div> -->
+<!-- 		                </div> -->
+<!-- 		                Image 8 -->
+<!-- 		                <div class="col-lg-3 col-md-4 col-sm-6"> -->
+<!-- 		                    <div class="gallery-item"> -->
+<!-- 		                        <img class="img-fluid" src="img/people4.jpg" alt="Gallery Image 8" style="width: 100%; height: 300px; object-fit: cover;"> -->
+<!-- 		                    </div> -->
+<!-- 		                </div> -->
+<!-- 		            </div> -->
+<!-- 		        </div> -->
 
 		        <!-- Slide 1 -->
-		        <div class="carousel-item">
-		            <div class="row g-4">
-		                <!-- Image 1 -->
-		                <div class="col-lg-3 col-md-4 col-sm-6">
-		                    <div class="gallery-item">
-		                        <img class="img-fluid" src="img/mountain.jpg" alt="Gallery Image 1" style="width: 100%; height: 300px; object-fit: cover;">
-		                    </div>
-		                </div>
-		                <!-- Image 2 -->
-		                <div class="col-lg-3 col-md-4 col-sm-6">
-		                    <div class="gallery-item">
-		                        <img class="img-fluid" src="img/destination-2.jpg" alt="Gallery Image 2" style="width: 100%; height: 300px; object-fit: cover;">
-		                    </div>
-		                </div>
-		                <!-- Image 3 -->
-		                <div class="col-lg-3 col-md-4 col-sm-6">
-		                    <div class="gallery-item">
-		                        <img class="img-fluid" src="img/destination-3.jpg" alt="Gallery Image 3" style="width: 100%; height: 300px; object-fit: cover;">
-		                    </div>
-		                </div>
-		                <!-- Image 4 -->
-		                <div class="col-lg-3 col-md-4 col-sm-6">
-		                    <div class="gallery-item">
-		                        <img class="img-fluid" src="img/destination-4.jpg" alt="Gallery Image 4" style="width: 100%; height: 300px; object-fit: cover;">
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
+<!-- 		        <div class="carousel-item"> -->
+<!-- 		            <div class="row g-4"> -->
+<!-- 		                Image 1 -->
+<!-- 		                <div class="col-lg-3 col-md-4 col-sm-6"> -->
+<!-- 		                    <div class="gallery-item"> -->
+<!-- 		                        <img class="img-fluid" src="img/mountain.jpg" alt="Gallery Image 1" style="width: 100%; height: 300px; object-fit: cover;"> -->
+<!-- 		                    </div> -->
+<!-- 		                </div> -->
+<!-- 		                Image 2 -->
+<!-- 		                <div class="col-lg-3 col-md-4 col-sm-6"> -->
+<!-- 		                    <div class="gallery-item"> -->
+<!-- 		                        <img class="img-fluid" src="img/destination-2.jpg" alt="Gallery Image 2" style="width: 100%; height: 300px; object-fit: cover;"> -->
+<!-- 		                    </div> -->
+<!-- 		                </div> -->
+<!-- 		                Image 3 -->
+<!-- 		                <div class="col-lg-3 col-md-4 col-sm-6"> -->
+<!-- 		                    <div class="gallery-item"> -->
+<!-- 		                        <img class="img-fluid" src="img/destination-3.jpg" alt="Gallery Image 3" style="width: 100%; height: 300px; object-fit: cover;"> -->
+<!-- 		                    </div> -->
+<!-- 		                </div> -->
+<!-- 		                Image 4 -->
+<!-- 		                <div class="col-lg-3 col-md-4 col-sm-6"> -->
+<!-- 		                    <div class="gallery-item"> -->
+<!-- 		                        <img class="img-fluid" src="img/destination-4.jpg" alt="Gallery Image 4" style="width: 100%; height: 300px; object-fit: cover;"> -->
+<!-- 		                    </div> -->
+<!-- 		                </div> -->
+<!-- 		            </div> -->
+<!-- 		        </div> -->
 
-		    </div>
+<div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner" id="galleryItems">
+        <!-- Dynamic Images will be inserted here -->
+    </div>
+</div>
+<!-- 		   </div> -->
 
 		    <!-- Carousel Controls -->
 		    <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
@@ -328,93 +334,96 @@
 </div>
 </div>
 			<!-- Footer Start -->
-		<div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s" style="padding-left: 0; padding-right: 0;">
-		    <div class="container py-5">
-		        <div class="row g-5">
-		            <!-- Company Section -->
-		            <div class="col-lg-3 col-md-6">
-		                <h4 class="text-white mb-3">Company</h4>
-		                <a class="btn btn-link text-light" href="" style="text-decoration: none;">About Us</a><br>
-		                <a class="btn btn-link text-light" href="" style="text-decoration: none;">Contact Us</a>
-		            </div>
+		<div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+		       <div class="container py-5">
+		           <div class="row g-5">
+		               <div class="col-lg-3 col-md-6">
+		                   <h4 class="text-white mb-3">Company</h4>
+		                   <a class="btn btn-link" href="about">About Us</a>
+		                   <a class="btn btn-link" href="contact">Contact Us</a>
 
-		            <!-- Contact Section -->
-		            <div class="col-lg-3 col-md-6">
-		                <h4 class="text-white mb-3">Contact</h4>
-		                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Shree Gajanan Yatra Company Pvt. Ltd, 123 Pilgrimage Road, Mumbai, India</p>
-		                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9552014476</p>
-		                <p class="mb-2"><i class="fa fa-envelope me-3"></i>shrigajananyatracompany@gmail.com</p>
-						
-						<div class="d-flex pt-2">
-						    <!-- Google Link -->
-						    <a class="btn btn-outline-light btn-social" href="https://g.co/kgs/rL9UQJa" target="_blank">
-						        <i class="fab fa-google fw-normal"></i>
-						    </a>
+		                  
+		               </div>
+		               <div class="col-lg-3 col-md-6">
+		                   <h4 class="text-white mb-3">Contact</h4>
+						<p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Shree Gajanan Yatra Company Pvt. Ltd, Front Of Allahbad Bank Mil Colony Stop Paratwada 444805</p>
+						                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9552014476</p>
+						                <p class="mb-2"><i class="fa fa-envelope me-3"></i>shrigajananyatracompany@gmail.com</p>
+		                   <div class="d-flex pt-2">
+							<a class="btn btn-outline-light btn-social" href="https://g.co/kgs/rL9UQJa"><i class="fab fa-google fw-normal"></i>	  
+				<a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+		                       <a class="btn btn-outline-light btn-social" href="https://youtu.be/chsYbQpY-cU"><i class="fab fa-youtube"></i></a>
+		                       <a class="btn btn-outline-light btn-social" href="https://instagram.com/shriajanan_yatra_company?"><i class="fab fa-instagram fw-normal"></i></a>
+		                   </div>
+		               </div>
+					   
+					   
+					   <div class="col-lg-3 col-md-6">
+					       <h4 class="text-white mb-3">Gallery</h4>
+					       <div class="row g-2 pt-2">
+					           <div class="col-4">
+					                <a href='about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
+					               </a>
+					           </div>
+					           <div class="col-4">
+					                <a href='about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
+					               </a>
+					           </div>
+					           <div class="col-4">
+					                <a href='about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
+					               </a>
+					           </div>
+					           <div class="col-4">
+					                <a href='about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
+					               </a>
+					           </div>
+					           <div class="col-4">
+					               <a href='about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
+					               </a>
+					           </div>
+					           <div class="col-4">
+					               <a href='about#detailedGallery'>
+					                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
+					               </a>
+					           </div>
+					       </div>
+					   </div>
 
-						    <!-- Facebook Link -->
-						    <a class="btn btn-outline-light btn-social" href="https://facebook.com" target="_blank">
-						        <i class="fab fa-facebook-f"></i>
-						    </a>
+					  
 
-						    <!-- YouTube Link -->
-						    <a class="btn btn-outline-light btn-social" href="https://youtu.be/chsYbQpY-cU" target="_blank">
-						        <i class="fab fa-youtube"></i>
-						    </a>
+		               <!-- Travel Inspiration Section -->
+	<div class="col-lg-3 col-md-6">
+	    <h4 class="text-white mb-3">Travel Inspiration</h4>
+	    <p class="text-light">
+	        Exploring new places helps break away from daily routines, reduces stress, and fosters mental clarity.
+	    </p>
+	   <!-- <a href="packages.html" class="btn btn-link text-decoration-underline text-light">Explore More</a>-->
+	</div>
 
-						    <!-- Instagram Link -->
-						    <a class="btn btn-outline-light btn-social" href="https://instagram.com/shriajanan_yatra_company" target="_blank">
-						        <i class="fab fa-instagram fw-normal"></i>
-						    </a>
-						</div>
-
-		            </div>
-
-		            <!-- Gallery Section -->
-		            <div class="col-lg-3 col-md-6" id="mainGallery">
-		                <h4 class="text-white mb-3">Gallery</h4>
-		                <div class="row g-2 pt-2">
-		                    <div class="col-4">
-		                        <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
-		                    </div>
-		                    <div class="col-4">
-		                        <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
-		                    </div>
-		                    <div class="col-4">
-		                        <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
-		                    </div>
-		                    <div class="col-4">
-		                        <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
-		                    </div>
-		                    <div class="col-4">
-		                        <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
-		                    </div>
-		                    <div class="col-4">
-		                        <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
-		                    </div>
-		                </div>
-		            </div>
-
-		            <!-- Travel Inspiration Section -->
-		            <div class="col-lg-3 col-md-6">
-		                <h4 class="text-white mb-3">Travel Inspiration</h4>
-		                <p>Exploring new places helps break away from daily routines, reduces stress, and fosters mental clarity.</p>
-		            
-		            </div>
-		        </div>
-		    </div>
-
-		    <!-- Copyright Section -->
-		    <div class="container-fluid bg-dark text-light py-3">
-		        <div class="row">
-		            <div class="col-md-12 text-center mb-2 mb-md-0">
-		                &copy; <a class="border-bottom text-light" href="#">Shree Gajanan Yatra Company Pvt. Ltd.</a>, All Rights Reserved Designed By
-		                <u>OCEANBERG TECHNOLOGIES PRIVATE LIMITED.</u>
-		            </div>
-		        </div>
-		    </div>
-		</div>
-
-
+	    </div>
+		               </div>
+		       <div class="container">
+		           <div class="copyright">
+					<div class="row">
+					    <div class="col-md-12 text-center text-md-start mb-3 mb-md-0">
+					        &copy; <a class="border-bottom" href="#">Shree Gajanan Yatra Company Pvt. Ltd.</a> All Rights Reserved. Designed By 
+					        <a class="border-bottom" href="https://oceanberg.org">OCEANBERG TECHNOLOGIES PRIVATE LIMITED</a>
+					        <!--
+					        /*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. 
+					        If you'd like to use the template without the footer author’s credit link/attribution link/backlink, 
+					        you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/
+					        -->
+					    </div>
+		                  
+		               </div>
+		           </div>
+		       </div>
+		   </div>
     <!-- Footer End -->
 
 
@@ -454,6 +463,56 @@
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
 	<script src="js/WebPage.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+    $(document).ready(function() {
+        // Fetch gallery data using AJAX
+        $.ajax({
+            url: 'auth/getGallery', // Your backend API endpoint
+            type: 'GET',
+            success: function(data) {
+                const galleryContainer = $('#galleryItems');
+                let isActive = true; // To set the first image as active
+                let imagesPerSlide = 4; // Number of images per carousel slide
+                let totalImages = data.length;
+
+                // Loop through the data and group images in sets of 4
+                for (let i = 0; i < totalImages; i += imagesPerSlide) {
+                    // Create a new carousel item (each slide)
+                    const carouselItem = $('<div></div>').addClass('carousel-item ' + (isActive ? 'active' : ''));
+                    isActive = false; // Mark subsequent items as not active
+
+                    const row = $('<div></div>').addClass('row g-4');
+
+                    // Add 4 images per carousel slide
+                    for (let j = i; j < i + imagesPerSlide && j < totalImages; j++) {
+                        const photo = data[j];
+
+                        // Create the individual image block
+                        const col = $('<div></div>').addClass('col-lg-3 col-md-4 col-sm-6');
+                        const galleryItem = $('<div></div>').addClass('gallery-item');
+
+                        // Create the image element
+                        const img = $('<img>').addClass('img-fluid')
+                            .attr('src', 'data:image/jpeg;base64,' + photo.imageData) // Assuming image is stored as Base64 string
+                            .attr('alt', photo.name)
+                            .css({width: '100%', height: '300px', objectFit: 'cover'});
+
+                        galleryItem.append(img);
+                        col.append(galleryItem);
+                        row.append(col);
+                    }
+
+                    carouselItem.append(row);
+                    galleryContainer.append(carouselItem);
+                }
+            },
+            error: function(error) {
+                console.error('Error fetching gallery data:', error);
+            }
+        });
+    });
+</script>
 </body>
 
 </html>

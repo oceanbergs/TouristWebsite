@@ -19,10 +19,9 @@ public class GalleryMangt {
     private String name;
     private String type;
     
-    @Lob
-   @Column(columnDefinition = "LONGTEXT")
     
-    //@Column(length = 1000000) 
+    
+    @Column(length = 1000000) 
     private String imageData;  // Store image as Base64 encoded string
 
 public GalleryMangt() {

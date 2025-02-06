@@ -3,7 +3,7 @@ $(document).ready(function() {
     function loadDestinations() {
         $.ajax({
             type: "GET",
-            url: '/TouristWebsite/getByNation',
+            url: 'getByNation',
             dataType: 'json',
             success: function(response) {
                 const dropdownMenu = $("#packageDropdown");
@@ -13,7 +13,7 @@ $(document).ready(function() {
                         $('<li>').append(
                             $('<a>', {
                                 class: 'dropdown-item',
-                                href: '/TouristWebsite/packageDetails?packageType=' + destination.packageType,
+                                href: 'packageDetails?packageType=' + destination.packageType,
                                 text: destination.packageType
                             }).on('click', function(event) {
                                 event.stopPropagation(); // Prevent Bootstrap interference

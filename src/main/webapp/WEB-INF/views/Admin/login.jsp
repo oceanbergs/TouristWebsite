@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,86 +7,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <style>
-        body {
-            font-family: 'Georgia', serif;
-           
-            background-size: cover;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+      body {
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #e9ebe5, #e6e8e3);
+    background-size: cover;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-        .login-container {
-            background-color: #fff;
-            padding: 40px;
-            box-shadow: 0 0 45px rgba(0, 0, 0, .08);
-            border-radius: 8px;
-            max-width: 400px;
-            width: 100%;
-        }
+.login-container {
+    background-color: #fff;
+    padding: 40px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+}
 
-        .login-header {
-            margin-bottom: 30px;
-            text-align: center;
-        }
+.login-header {
+    margin-bottom: 20px;
+    text-align: center;
+}
 
-        .login-header h2 {
-            margin: 0;
-            color: #333;
-            font-weight: 700;
-        }
+.login-header h2 {
+    margin: 0;
+    color: #333;
+    font-weight: bold;
+}
 
-        .login-form .form-group {
-            margin-bottom: 20px;
-        }
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
 
-        .login-form .form-control {
-            width: 100%;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid rgba(0, 0, 0, .1);
-            border-radius: 4px;
-            transition: .3s;
-        }
+.login-form .form-group {
+    margin-bottom: 15px;
+}
 
-        .login-form .form-control:focus {
-            border-color: #87be29;
-            outline: none;
-            box-shadow: 0 0 4px rgba(134, 184, 23, 0.3);
-        }
+.login-form .form-control {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 4px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+}
 
-        .btn-primary {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            background-color: #87be29;
-            color: #fff;
-            font-size: 18px;
-            font-weight: 600;
-            border-radius: 4px;
-            transition: .3s;
-        }
+.login-form .form-control:focus {
+    border-color: #6a9d21;
+    outline: none;
+    box-shadow: 0 0 8px rgba(106, 157, 33, 0.4);
+}
 
-        .btn-primary:hover {
-            background-color: #6a9d21;
-        }
+.btn-primary {
+    padding: 12px;
+    font-size: 18px;
+    background-color: #87be29;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
 
-        .login-footer {
-            margin-top: 20px;
-            text-align: center;
-        }
+.btn-primary:hover {
+    background-color: #6a9d21;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
 
-        .login-footer a {
-            color: #87be29;
-            text-decoration: none;
-            font-weight: 600;
-        }
+.login-footer {
+    margin-top: 20px;
+    text-align: center;
+}
 
-        .login-footer a:hover {
-            text-decoration: underline;
-        }
+.login-footer a {
+    color: #87be29;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+
+
     </style>
 </head>
 <body>
@@ -101,7 +113,7 @@
     <c:remove var="loginSuccess" scope="session"/> <!-- Clear the message after displaying it -->
 </c:if>
 
-       <form class="login-form" action="/TouristWebsite/auth/login" method="POST">
+       <form class="login-form" action="/auth/loginn" method="POST">
     <div class="form-group">
         <input type="text" class="form-control" placeholder="Username" name="username" id="username" required>
     </div>

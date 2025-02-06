@@ -15,10 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tourweb.TouristWeb.Model.AddPackageType;
+import com.tourweb.TouristWeb.Model.AllExclude;
+import com.tourweb.TouristWeb.Model.AllInclude;
 import com.tourweb.TouristWeb.Model.Enquiry;
+import com.tourweb.TouristWeb.Model.Gallery;
 import com.tourweb.TouristWeb.Model.Iternary;
 import com.tourweb.TouristWeb.Model.PackageDetails;
 import com.tourweb.TouristWeb.Repository.EnquiryRepo;
+import com.tourweb.TouristWeb.Repository.GalleryRepo;
 import com.tourweb.TouristWeb.Repository.IternaryRepo;
 import com.tourweb.TouristWeb.Repository.PackageDetailsRepo;
 import com.tourweb.TouristWeb.Service.PackageDetailsService;
@@ -41,6 +45,9 @@ public class WebPackageController {
 	
 	@Autowired
 	private IternaryRepo iternaryRepo;
+	
+	@Autowired
+	private GalleryRepo galleryRepo;
 	
 	@GetMapping("/getByNation")
 	@ResponseBody
@@ -100,26 +107,25 @@ public class WebPackageController {
 	  }
 
 	  
-	  @GetMapping("/getiternarybyPackageId/{packageId}")
-	    public ResponseEntity<List<Iternary>> getIternaryByPackageId(@PathVariable Long packageId) {
-	        // Fetch itineraries using the service layer
-	        List<Iternary> iternaryList = iternaryRepo.findIternaryByPackageId(packageId);
-
-	        // Check if the list is empty
-	        if (iternaryList.isEmpty()) {
-	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Return 404 if no data found
-	        }
-
-	        // Return the itineraries with a 200 OK status
-	        return ResponseEntity.ok(iternaryList);
-	    }
+//	  @GetMapping("/getiternarybyPackageId/{packageId}")
+//	    public ResponseEntity<List<Iternary>> getIternaryByPackageId(@PathVariable Long packageId) {
+//	        // Fetch itineraries using the service layer
+//	        List<Iternary> iternaryList = iternaryRepo.findIternaryByPackageId(packageId);
+//
+//	        // Check if the list is empty
+//	        if (iternaryList.isEmpty()) {
+//	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Return 404 if no data found
+//	        }
+//
+//	        // Return the itineraries with a 200 OK status
+//	        return ResponseEntity.ok(iternaryList);
+//	    }
 	
 	  
-	  @GetMapping("/getAllItianary")
-		@ResponseBody
-	    public ResponseEntity<List<Iternary>>  getAllIternaryData() {
-			return ResponseEntity.status(HttpStatus.OK).body(iternaryRepo.findAll());
-	       
+	  @GetMapping("/getAllItinerary/{packageId}")
+	    public ResponseEntity<List<Iternary>> getItineraryByPackageId(@PathVariable Long packageId) {
+	        List<Iternary> itineraries = packageDetailsService.getItineraryByPackageId(packageId);
+	        return ResponseEntity.ok(itineraries);
 	    }
 	  
 	  @GetMapping("/packagetype/{packageType}")
@@ -136,5 +142,30 @@ public class WebPackageController {
 		    // Return the list of package details with an OK status
 		    return ResponseEntity.ok(packageDetails);
 		}
+	  
+	 
+	  @GetMapping("/getAllincludes/{packageId}")
+	    public ResponseEntity<List<AllInclude>> getIncludes(@PathVariable Long packageId) {
+		  List<AllInclude> includes = packageDetailsService.getIncludesByPackageId(packageId);
+	        return ResponseEntity.ok(includes);
+	    }
+
+	    @GetMapping("/getAllexcludes/{packageId}")
+	    public ResponseEntity<List<AllExclude>> getExcludes(@PathVariable Long packageId) {
+	        List<AllExclude> excludes = packageDetailsService.getExcludesByPackageId(packageId);
+	        
+	        return ResponseEntity.ok(excludes);
+	    }
+	    
+	    @GetMapping("/getbyPackage/{packageId}")
+	    public ResponseEntity<List<Gallery>> getGalleryByPackage(@PathVariable Long packageId) {
+	        List<Gallery> galleries = galleryRepo.findByPackageDetailsId(packageId);
+	        
+	        if (galleries.isEmpty()) {
+	            return new ResponseEntity<>(HttpStatus.NO_CONTENT); // Return 204 if no images found
+	        }
+	        
+	        return new ResponseEntity<>(galleries, HttpStatus.OK); // Return 200 with gallery data
+	    }
 		
 }

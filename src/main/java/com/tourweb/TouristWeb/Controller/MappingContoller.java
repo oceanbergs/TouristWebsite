@@ -21,8 +21,14 @@ public class MappingContoller {
 	@Autowired
 	private DestinationRepo destinationRepo;
 	
-	 @GetMapping("/TouristWebsite")
+	 @GetMapping("/")
 	    public String homePage() {
+	        return "index"; // Return the view name (index.html or JSP)
+	    }
+	 
+	 
+	 @GetMapping("/login")
+	    public String LoginPage() {
 	        return "index"; // Return the view name (index.html or JSP)
 	    }
 	

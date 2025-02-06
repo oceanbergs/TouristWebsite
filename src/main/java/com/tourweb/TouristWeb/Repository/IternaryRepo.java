@@ -12,6 +12,5 @@ import com.tourweb.TouristWeb.Model.Iternary;
 @Repository
 public interface IternaryRepo extends JpaRepository<Iternary,Long> {
 
-	 @Query("SELECT i FROM Iternary i WHERE i.packageDetails.id = :packageId")
-	    List<Iternary> findIternaryByPackageId(@Param("packageId") Long packageId);
+	List<Iternary> findByPackageDetails_Id(Long packageId);
 }

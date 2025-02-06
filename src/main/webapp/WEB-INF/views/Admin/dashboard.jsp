@@ -58,9 +58,9 @@
 }
 
 .sidebar h2 {
-	text-align: left;
+	text-align: center;
 	margin-bottom: 20px;
-	font-size: 1.8em;
+	font-size: 1.4em;
 }
 
 .sidebar nav ul {
@@ -104,7 +104,7 @@
 	background-color: #86B817;
 	color: #fff;
 	flex: 1;
-	min-width: 250px;
+	min-width: 300px;
 	padding: 20px;
 	border-radius: 8px;
 	text-align: center;
@@ -330,9 +330,11 @@ tbody td .fa-trash {
 			</div>
 			<h2 class="companyname">Shri Gajanan Yatra Company Pvt. Ltd</h2>
 			<div class="actions">
-			 <img src="../img/logout.png"
-					alt="Logout">
-			</div>
+    <a href="logout">
+        <img src="../img/logout.png" alt="Logout">
+    </a>
+</div>
+
 		</header>
 
 
@@ -342,13 +344,13 @@ tbody td .fa-trash {
                 <!-- <h2>Shree Gajanan Yatra</h2> -->
                 <nav>
                     <ul>
-						<li><a href="/TouristWebsite/auth/notification">Enquiry</a></li>
-                        <li><a href="/TouristWebsite/auth/dashboard" class="active" style="background-color: #87be29;">Dashboard</a></li>
-                        <li><a href="/TouristWebsite/auth/packageType">Packages Type</a></li>
-                        <li><a href="/TouristWebsite/auth/managePackage">Manage Packages</a></li>
-                <li><a href="/TouristWebsite/auth/bookingView">Manage Bookings</a></li>
-                  <li><a href="/TouristWebsite/auth/manageGallary">Manage Gallary</a></li>
-<!--                        <li><a href="#users">User Management</a></li>-->
+						<li><a href="notification">Enquiry</a></li>
+                        <li><a href="dashboard" class="active" style="background-color: #87be29;">Dashboard</a></li>
+                        <li><a href="packageType">Packages Type</a></li>
+                        <li><a href="managePackage">Manage Packages</a></li>
+                <li><a href="manageBooking">Manage Bookings</a></li>
+                  <li><a href="manageGallery">Manage Gallary</a></li>
+                       <li><a href="bannerManagement">Banner Management</a></li>
                        
 <!--                        <li><a href="#settings">Settings</a></li>-->
                     </ul>
@@ -387,6 +389,15 @@ tbody td .fa-trash {
 						
 						
                     </div>
+                    
+                    <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('logout') === 'true') {
+        alert("You have been successfully logged out!");
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
                 </section>
             </main>
         </div>

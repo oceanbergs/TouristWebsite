@@ -21,7 +21,7 @@ public class AuthController {
     private AuthenticationManager authenticationManager;
 
     // This method handles the login POST request
-    @RequestMapping(value = "/TouristWebsite/auth/login", method = RequestMethod.POST)
+    @RequestMapping(value = "auth/loginn", method = RequestMethod.POST)
     public String login(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session) {
         try {
             // Authenticate the user with the provided username and password
@@ -36,10 +36,10 @@ public class AuthController {
             session.setAttribute("loginSuccess", "Login successful");
             
             // Redirect to the dashboard after successful login
-            return "redirect:/TouristWebsite/auth/dashboard";
+            return "redirect:auth/dashboard";
         } catch (Exception e) {
             // If authentication fails, redirect back to the login page with an error
-            return "redirect:/TouristWebsite/auth/login?error=true";
+            return "redirect:auth/login?error=true";
         }
     }
 

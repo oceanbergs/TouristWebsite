@@ -340,9 +340,9 @@ tbody td .fa-trash {
 			</div>
 			<h2 class="companyname">Shri Gajanan Yatra Company Pvt. Ltd</h2>
 			<div class="actions">
-				<img src="../img/profile.png" alt="Profile"> <img
-					src="../img/setting.png" alt="Setting"> <img src="../img/logout.png"
-					alt="Logout">
+				<a href="logout">
+        <img src="../img/logout.png" alt="Logout">
+    </a>
 			</div>
 		</header>
 
@@ -351,17 +351,13 @@ tbody td .fa-trash {
 			<aside class="sidebar">
 				<nav>
 					<ul>
-						<li><a href="/TouristWebsite/auth/dashboard">Dashboard</a></li>
-						<li><a href="/TouristWebsite/auth/packageType">Packages
-								Type</a></li>
-						<li><a href="managePackage"
-							class="active" style="background-color: #87be29;">Manage
-								Packages</a></li>
-<!--						<li><a href="#bookings">Bookings</a></li>-->
-<!--						<li><a href="#payments">Payments</a></li>-->
-<!--						<li><a href="#users">User Management</a></li>-->
-						 <li><a href="/TouristWebsite/auth/notification">Notifications</a></li>
-<!--						<li><a href="#settings">Settings</a></li>-->
+						 <li><a href="notification">Enquiry</a></li>
+		                    <li><a href="dashboard">Dashboard</a></li>
+		                    <li><a href="packageType">Packages Type</a></li>
+		                    <li><a href="managePackage">Manage Packages</a></li>
+		                    <li><a href="bookingView" class="active" style="background-color: #87be29;">Manage Bookings</a></li>
+		                    <li><a href="manageGallery">Manage Gallery</a></li>
+		                      <li><a href="bannerManagement">Banner Management</a></li>
 					</ul>
 				</nav>
 			</aside>
@@ -371,467 +367,186 @@ tbody td .fa-trash {
 			
 					
 							<main class="main-content" style="padding-top: 50px;">
-			  <section id="add-package">
-			    <div class="form-container" style="width: 100%; margin: auto; min-height: 250px;">
-			      <h2>Booking</h2>
-			<!--       <form id="fileUploadForm" enctype="multipart/form-data"> -->
-				<div style="display: flex; flex-direction: column; gap: 20px;">
+  <section id="add-package">
+    <div class="form-container" style="width: 100%; margin: auto; min-height: 250px;">
+      <h2>View Booking</h2>
+<!--       <form id="fileUploadForm" enctype="multipart/form-data"> -->
+	<div style="display: flex; flex-direction: column; gap: 20px;">
+ <input type="hidden" id="id" name="id">
+		<div style="display: flex; flex-direction: column; gap: 20px;">
 
-					<div style="display: flex; flex-direction: column; gap: 20px;">
+		  <!-- Row 1: Client Name and Email -->
+		  <div style="display: flex; gap: 20px; align-items: flex-start;">
+		    <div style="flex: 1;">
+		      <label for="customer_Name">Client Name</label>
+		      <input type="text" id="customer_Name" name="customer_Name" placeholder="Enter client name" required readonly
+		        style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
+		    </div>
+		    <div style="flex: 1;">
+		      <label for="email">Email</label>
+		      <input type="email" id="email" name="email" placeholder="Enter email" required
+		         style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
+		    </div>
+		  </div>
 
-					  <!-- Row 1: Client Name and Email -->
-					  <div style="display: flex; gap: 20px; align-items: flex-start;">
-					    <div style="flex: 1;">
-					      <label for="clientName">Client Name</label>
-					      <input type="text" id="clientName" name="clientName" placeholder="Enter client name" required
-					        style="width: 100%; padding: 8px; margin-top: 5px;">
-					    </div>
-					    <div style="flex: 1;">
-					      <label for="email">Email</label>
-					      <input type="email" id="email" name="email" placeholder="Enter email" required
-					        style="width: 100%; padding: 8px; margin-top: 5px;">
-					    </div>
-					  </div>
+		  <!-- Row 2: Contact and Package Name -->
+		  <div style="display: flex; gap: 20px; align-items: flex-start;">
+		    <div style="flex: 1;">
+		      <label for="mobile_Number">Contact</label>
+		      <input type="tel" id="mobile_Number" name="mobile_Number" placeholder="Enter contact number" required
+		        style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
+		    </div>
+		    <div style="flex: 1;">
+				<label for="destination">Package Name</label>
+				<input id="destination" name="destination" required style="width: 100%; padding: 8px; margin-top: 5px;">
+<!--				  <option value="" disabled selected>Select a package</option>-->
+<!--				  <option value="silver">Silver Package</option>-->
+<!--				  <option value="gold">Gold Package</option>-->
+<!--				  <option value="platinum">Platinum Package</option>-->
+				</select>
+		    </div>
+		  </div>
 
-					  <!-- Row 2: Contact and Package Name -->
-					  <div style="display: flex; gap: 20px; align-items: flex-start;">
-					    <div style="flex: 1;">
-					      <label for="contact">Contact</label>
-					      <input type="tel" id="contact" name="contact" placeholder="Enter contact number" required
-					        style="width: 100%; padding: 8px; margin-top: 5px;">
-					    </div>
-					    <div style="flex: 1;">
-							<label for="packageName">Package Name</label>
-							<select id="packageName" name="packageName" required style="width: 100%; padding: 8px; margin-top: 5px;">
-							  <option value="" disabled selected>Select a package</option>
-							  <option value="silver">Silver Package</option>
-							  <option value="gold">Gold Package</option>
-							  <option value="platinum">Platinum Package</option>
-							</select>
-					    </div>
-					  </div>
+		  <!-- Row 3: Start Date and End Date -->
+		  <div style="display: flex; gap: 20px; align-items: flex-start;">
+		    <div style="flex: 1;">
+		      <label for="start_Date">Start Date</label>
+		      <input type="date" id="start_Date" name="start_Date" required
+		         style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
+		    </div>
+		    <div style="flex: 1;">
+		      <label for="end_Date">End Date</label>
+		      <input type="date" id="end_Date" name="end_Date" required
+		         style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
+		    </div>
+		  </div>
 
-					  <!-- Row 3: Start Date and End Date -->
-					  <div style="display: flex; gap: 20px; align-items: flex-start;">
-					    <div style="flex: 1;">
-					      <label for="startDate">Start Date</label>
-					      <input type="date" id="startDate" name="startDate" required
-					        style="width: 100%; padding: 8px; margin-top: 5px;">
-					    </div>
-					    <div style="flex: 1;">
-					      <label for="endDate">End Date</label>
-					      <input type="date" id="endDate" name="endDate" required
-					        style="width: 100%; padding: 8px; margin-top: 5px;">
-					    </div>
-					  </div>
+		 
 
-					  <!-- Row 4: Special Request and Mode of Booking -->
-					  <!-- Row 4: Special Request -->
-					  <div style="margin-bottom: 20px;">
-					    <label for="specialRequest">Special Request</label>
-					    <textarea id="specialRequest" name="specialRequest" placeholder="Enter any special requests"
-					      style="width: 100%; height: 60px; padding: 8px; margin-top: 5px; resize: vertical;"></textarea>
-					  </div>
+		  <!-- Row 5: Client Address and Mode of Booking -->
+		  <div style="display: flex; gap: 20px; align-items: flex-start;">
+		    <!-- Client Address -->
+		    <div style="flex: 1;">
+		      <label for="address">Client Address</label>
+		      <input type="text" id="address" name="address" placeholder="Enter client address"
+		        style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
+		    </div>
 
-					  <!-- Row 5: Client Address and Mode of Booking -->
-					  <div style="display: flex; gap: 20px; align-items: flex-start;">
-					    <!-- Client Address -->
-					    <div style="flex: 1;">
-					      <label for="clientAddress">Client Address</label>
-					      <input type="text" id="clientAddress" name="clientAddress" placeholder="Enter client address"
-					        style="width: 100%; padding: 8px; margin-top: 5px;">
-					    </div>
-
-					    <!-- Mode of Booking -->
-					    <div style="flex: 1;">
-					      <label for="modeOfBooking">Mode of Booking</label>
-					      <select id="modeOfBooking" name="modeOfBooking" required style="width: 100%; padding: 8px; margin-top: 5px;">
-					        <option value="" disabled selected>Select mode of booking</option>
-					        <option value="online">Online</option>
-					        <option value="offline">Offline</option>
-					      </select>
-					    </div>
-					  </div>
+		    <!-- Mode of Booking -->
+		    <div style="flex: 1;">
+		      <label for="modOffBooking">Mode of Booking</label>
+		      <select id="modOffBooking" name="modOffBooking" required style="width: 100%; padding: 8px; margin-top: 5px;">
+		        <option value="" disabled selected>Select mode of booking</option>
+		        <option value="online">Online</option>
+		        <option value="offline">Offline</option>
+		      </select>
+		    </div>
+		  </div>
+		  
+		  
+		  <div style="margin-bottom: 20px;">
+		    <label for="special_Request">Special Request</label>
+		    <textarea id="special_Request" name="special_Request" placeholder="Enter any special requests"
+		      style="width: 100%; padding: 8px; margin-top: 5px; font-size: 1rem; height: 80px; resize: vertical;"></textarea>		  </div>
 
 
-					</div>
+		</div>
+
+					  
 					  
 
 			           
 
 
 	
-	<script type="text/javascript">
-    document.getElementById('packageImage').addEventListener('change', function(event) {
-        const fileInput = event.target;
-        const imagePreview = document.getElementById('imagePreview');
-        const errorElement = document.getElementById('imageError');
-        const file = fileInput.files[0];
-        
-        if (file) {
-            const fileType = file.type;
-            if (fileType !== 'image/jpeg') {
-                errorElement.textContent = 'Please upload a JPG image.';
-                fileInput.value = ''; // Clear the invalid file
-                imagePreview.style.display = 'none'; // Hide preview
-                imagePreview.src = ''; // Clear preview
-            } else {
-                errorElement.textContent = ''; // Clear error message
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    imagePreview.src = e.target.result;
-                    imagePreview.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        } else {
-            imagePreview.style.display = 'none';
-            imagePreview.src = '';
-            errorElement.textContent = '';
-        }
-    });
-</script>
+	
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script>
-<!--  // Function to fetch package details using AJAX-->
-<!--  function fetchPackageDetails(id) {-->
-<!--    // Alert when the function is called-->
-<!--    alert("Fetching package details for ID: " + id);-->
-<!--    console.log("Fetching package details for ID:", id);-->
-
-<!--    $.ajax({-->
-<!--      url: '/TouristWebsite/auth/getPackageDetails/' + id,  // Correct API endpoint URL-->
-<!--      method: 'GET',-->
-<!--      success: function(data) {-->
-<!--        // Alert and log data received from API-->
-<!--        alert('Data received: ' + JSON.stringify(data));-->
-<!--        console.log('Data received:', data);-->
-
-<!--        // Check if data is not empty and populate the form fields-->
-<!--        if (data) {-->
-<!--          alert('Populating the fields with the received data');-->
-<!--          $('#id').val(data.id);  // Fill in the ID field-->
-<!--          $('#packageName').val(data.packageName);  // Fill in the package name field-->
-<!--          $('#packageType').val(data.packageType);  // Fill in the package type field-->
-<!--          $('#duration').val(data.duration);  // Fill in the duration field-->
-<!--          $('#price').val(data.price);  // Fill in the price field-->
-<!--        } else {-->
-<!--          alert("No data received for this package.");-->
-<!--          console.log("No data received for this package.");-->
-<!--        }-->
-<!--      },-->
-<!--      error: function(xhr, status, error) {-->
-<!--        // Alert and log error details-->
-<!--        alert('AJAX error: ' + error);-->
-<!--        console.error('AJAX error:', error);-->
-<!--      }-->
-<!--    });-->
-<!--  }-->
-
-<!--  // Call the function with the desired package ID (example ID 1)-->
-<!--  alert("Calling fetchPackageDetails with ID 1");-->
-<!--  fetchPackageDetails(1); // Example: Fetch details for package with ID 1-->
-</script>
-
-
-	
-
-	  
-
 <script type="text/javascript">
+
 $(document).ready(function () {
     // Get packageId from the URL parameter
-	
-	
-    var packageId = getUrlParameter('id');
+    var bookingId = getUrlParameter('id');
 
-    if (packageId) {
-        getPackageDetails(packageId);
+    if (bookingId) {
+        getBookingDetails(bookingId);
     } else {
-        alert("Package ID is missing");
+        alert("Booking ID is missing");
     }
 
     // Function to fetch package details (including locations, days, and itinerary)
-    function getPackageDetails(id) {
+    function getBookingDetails(id) {
         $.ajax({
-            url: "/TouristWebsite/auth/getPackageDetails/" + id,
+            url: "getBookingDetails/" + id, // Ensure the correct endpoint is used
             type: "GET",
             contentType: "application/json",
             success: function (response) {
-                console.log(response); // Inspect the response
+                console.log("Server Response:", response); // Debugging
+
                 if (response) {
                     populateForm(response);
-                    if (response.locations && Array.isArray(response.locations)) {
-                        populateLocations(response.locations);
-                    } else {
-                        $('#locationContainer').html('<p>No locations available for this package.</p>');
-                    }
-                    if (response.iternary && Array.isArray(response.iternary)) {
-                        populateItinerary(response.iternary);
-                        
-                    } else {
-                        $('#itineraryContainer').html('<p>No itinerary available for this package.</p>');
-                    }
+                    // Additional logic for populating locations or other data can go here
                 } else {
-                    alert("No Package data found");
+                    alert("No Booking data found.");
                 }
             },
             error: function (jqXHR, status, errorThrown) {
                 if (jqXHR.status === 403) {
-                    alert("YOU DON'T HAVE PERMISSION");
+                    alert("You don't have permission to access this resource.");
+                } else if (jqXHR.status === 404) {
+                    alert("Package not found.");
                 } else {
-                    alert("Failed to communicate with the server");
+                    alert("Failed to communicate with the server. Please try again later.");
                 }
             }
         });
     }
 
-	function populateForm(packageDetails) {
-	    console.log("Package Data:", packageDetails); // Debugging
+    // Function to populate the form with package details
+    function populateForm(booking) {
+        console.log("Populating Form with Data:", booking); // Debugging
 
-	    // Populate text fields
-	    document.getElementById("id").value = packageDetails.id || '';
-	    document.getElementById("packageName").value = packageDetails.packageName || '';
-	    document.getElementById("duration").value = packageDetails.duration || '';
-	    document.getElementById("packageType").value = packageDetails.packageType || '';
-	    document.getElementById("price").value = packageDetails.price || '';
-	    document.getElementById("note").value = packageDetails.allInclude?.note || '';
-
-	    // Populate checkboxes
-	    if (packageDetails.allInclude) {
-	        console.log("All Include Data:", packageDetails.allInclude); // Debugging the data
-
-	        setCheckbox("hotel", packageDetails.allInclude.hotel);
-	        setCheckbox("meals", packageDetails.allInclude.meals);
-	        setCheckbox("transportation", packageDetails.allInclude.transportation);
-	        setCheckbox("flight", packageDetails.allInclude.flight);
-	        setCheckbox("sightseeing", packageDetails.allInclude.sightseeing);
-	        setCheckbox("visa", packageDetails.allInclude.visa);
-	    } else {
-	        console.warn("AllInclude data is missing or undefined");
-	        resetCheckboxes();
-	    }
-
-	    // Display image if present
-	    const imagePreview = document.getElementById("imagePreview"); // Target the img tag for preview
-
-	    if (packageDetails.packageImage) { 
-	        imagePreview.src = "data:image/jpeg;base64," + packageDetails.packageImage;  // Use directly without re-adding the prefix
-	        imagePreview.style.display = 'block'; // Show the image preview container
-	    } else {
-	        imagePreview.src = ''; // Clear the previous image
-	        imagePreview.style.display = 'none'; // Hide if no image
-	    }
-	}
+       
+        
+        document.getElementById("id").value = booking.id || '';
+	    document.getElementById("customer_Name").value = booking.customer_Name || '';
+	    document.getElementById("email").value = booking.email || '';
+	    document.getElementById("address").value = booking.address || '';
+	    document.getElementById("mobile_Number").value = booking.mobile_Number || '';
+	    document.getElementById("destination").value = booking.destination || '';
+	    document.getElementById("special_Request").value = booking.special_Request || '';
+	    document.getElementById("modOffBooking").value = booking.modOffBooking || '';
+	    document.getElementById("start_Date").value = booking.start_Date ? booking.start_Date.split('T')[0] : '';
+	    document.getElementById("end_Date").value = booking.end_Date ? booking.end_Date.split('T')[0] : '';
+	    $("#start_Date").val(booking.start_Date || '');
+        $("#end_Date").val(booking.end_Date || '');
 
 
-    // Function to dynamically populate locations
-    function populateLocations(locations) {
-        const locationContainer = document.getElementById('locationContainer');
-        locationContainer.innerHTML = ''; // Clear existing locations
-
-        // Check if locations are provided
-        if (Array.isArray(locations) && locations.length > 0) {
-            locations.forEach(location => {
-                const locationWrapper = document.createElement('div');
-                locationWrapper.style.display = 'flex';
-                locationWrapper.style.alignItems = 'center';
-                locationWrapper.style.gap = '5px';
-                locationWrapper.style.marginTop = '5px';
-
-                const locationInput = document.createElement('input');
-                locationInput.type = 'text';
-                locationInput.value = location.locationName || ''; // Access the correct location name field
-                locationInput.placeholder = 'Enter location';
-                locationInput.style.padding = '8px';
-                locationInput.style.border = '1px solid #ccc';
-                locationInput.style.borderRadius = '3px';
-                locationInput.style.flex = '1';
-                locationInput.style.fontSize = '0.9rem';
-                locationInput.name = 'location[]'; // Ensure proper naming for API
-
-                locationWrapper.appendChild(locationInput);
-                locationContainer.appendChild(locationWrapper);
-            });
-        } else {
-            locationContainer.innerHTML = '<p>No locations available for this package.</p>';
-        }
     }
 
-	function populateItinerary(itinerary) {
-	    const itineraryContainer = document.getElementById('itineraryContainer');
-	    itineraryContainer.innerHTML = ''; // Clear existing itinerary data
-
-	    if (Array.isArray(itinerary) && itinerary.length > 0) {
-	        itinerary.forEach((dayDetails, index) => {
-	            const dayWrapper = document.createElement('div');
-	            dayWrapper.style.marginBottom = '20px';
-	            dayWrapper.style.padding = '10px';
-	            dayWrapper.style.border = '1px solid #ddd';
-	            dayWrapper.style.borderRadius = '5px';
-
-	            // Day Number and Destination
-	            const dayDiv = document.createElement('div');
-	            dayDiv.style.display = 'flex';
-	            dayDiv.style.flexDirection = 'column';
-	            dayDiv.style.gap = '10px';
-	            dayDiv.style.marginBottom = '10px';
-
-	            // Day Number
-	            const dayNumberLabel = document.createElement('label');
-	            dayNumberLabel.innerText = 'Day Number:';
-	            dayNumberLabel.style.fontWeight = 'bold';
-
-	            const dayNumberInput = document.createElement('input');
-	            dayNumberInput.type = 'text';
-	            dayNumberInput.name = 'day[]';
-	            dayNumberInput.value = dayDetails.day || '';
-	            dayNumberInput.placeholder = 'Day Number';
-	            dayNumberInput.style.padding = '10px';
-	            dayNumberInput.style.border = '1px solid #ccc';
-	            dayNumberInput.style.borderRadius = '5px';
-
-	            // Destination
-	            const destinationLabel = document.createElement('label');
-	            destinationLabel.innerText = 'Destination:';
-	            destinationLabel.style.fontWeight = 'bold';
-
-	            const destinationInput = document.createElement('input');
-	            destinationInput.type = 'text';
-	            destinationInput.name = 'destination[]';
-	            destinationInput.value = dayDetails.destination || '';
-	            destinationInput.placeholder = 'Destination';
-	            destinationInput.style.padding = '10px';
-	            destinationInput.style.border = '1px solid #ccc';
-	            destinationInput.style.borderRadius = '5px';
-
-	            dayDiv.appendChild(dayNumberLabel);
-	            dayDiv.appendChild(dayNumberInput);
-	            dayDiv.appendChild(destinationLabel);
-	            dayDiv.appendChild(destinationInput);
-	            dayWrapper.appendChild(dayDiv);
-
-	            // Sightseeing Details
-	            const sightseeingContainer = document.createElement('div');
-	            sightseeingContainer.style.display = 'flex';
-	            sightseeingContainer.style.flexDirection = 'column';
-	            sightseeingContainer.style.gap = '10px';
-	            sightseeingContainer.style.marginTop = '10px';
-
-	            const sightseeingLabel = document.createElement('label');
-	            sightseeingLabel.innerText = 'Sightseeing Details:';
-	            sightseeingLabel.style.fontWeight = 'bold';
-	            sightseeingContainer.appendChild(sightseeingLabel);
-
-	            if (Array.isArray(dayDetails.sightseeingEntrie) && dayDetails.sightseeingEntrie.length > 0) {
-	                dayDetails.sightseeingEntrie.forEach((sight, sIndex) => {
-	                    const sightInput = document.createElement('input');
-	                    sightInput.type = 'text';
-	                    sightInput.name = `sightseeingDay[${index}][]`;
-	                    sightInput.value = sight.location || '';
-	                    sightInput.placeholder = `Sightseeing Location ${sIndex + 1}`;
-	                    sightInput.style.padding = '8px';
-	                    sightInput.style.border = '1px solid #ccc';
-	                    sightInput.style.borderRadius = '3px';
-
-	                    sightseeingContainer.appendChild(sightInput);
-	                });
-	            } else {
-	                const noSightseeing = document.createElement('p');
-	                noSightseeing.innerText = 'No sightseeing details available for this day.';
-	                sightseeingContainer.appendChild(noSightseeing);
-	            }
-
-	            dayWrapper.appendChild(sightseeingContainer);
-
-	            // Inclusions (checkboxes)
-	            const inclusionsDiv = document.createElement('div');
-	            inclusionsDiv.innerHTML = `
-	                <label><strong>Inclusions:</strong></label>
-	                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 5px;">
-	                    <label><input type="checkbox" id="breakfast_${index}" name="inclusions[${index}][breakfast]"> Breakfast</label>
-	                    <label><input type="checkbox" id="lunch_${index}" name="inclusions[${index}][lunch]"> Lunch</label>
-	                    <label><input type="checkbox" id="dinner_${index}" name="inclusions[${index}][dinner]"> Dinner</label>
-	                    <label><input type="checkbox" id="nightStay_${index}" name="inclusions[${index}][nightStay]"> Night Stay</label>
-	                    <label><input type="checkbox" id="hiTea_${index}" name="inclusions[${index}][hiTea]"> Hi-Tea</label>
-	                </div>
-	            `;
-	            dayWrapper.appendChild(inclusionsDiv);
-	            itineraryContainer.appendChild(dayWrapper);
-
-	            // Set checkbox values dynamically for each day
-	            setCheckbox(`breakfast_${index}`, dayDetails.breakfast);
-	            setCheckbox(`lunch_${index}`, dayDetails.lunch);
-	            setCheckbox(`dinner_${index}`, dayDetails.dinner);
-	            setCheckbox(`nightStay_${index}`, dayDetails.nightStay);
-	            setCheckbox(`hiTea_${index}`, dayDetails.hiTea);
-	        });
-	    } else {
-	        itineraryContainer.innerHTML = '<p>No itinerary available for this package.</p>';
-	    }
-	}
-
-	// Utility function to set checkbox based on value
-	function setCheckbox(id, value) {
-	    const checkbox = document.getElementById(id);
-	    if (checkbox) {
-	        checkbox.checked = Boolean(value);
-	    } else {
-	        console.warn(`Checkbox with id '${id}' not found`);
-	    }
-	}
-
-
-
-	// Call the function to populate itinerary
-	populateItinerary(itineraryData);
-
-
-
-
-    // Utility function to safely set checkbox
-    function setCheckbox(id, value) {
-    const checkbox = document.getElementById(id);
-    if (checkbox) {
-      checkbox.checked = Boolean(value);
-      
-      // Disable checkbox if not checked
-      checkbox.disabled = !Boolean(value);
-    } else {
-      console.warn(`Checkbox with id '${id}' not found`);
-    }
-  }
-
-    // Utility function to reset all checkboxes
-    function resetCheckboxes() {
-    ["hotel", "meals", "transportation", "flight", "sightseeing", "visa"].forEach(id => {
-      const checkbox = document.getElementById(id);
-      if (checkbox) {
-        checkbox.checked = false;
-        checkbox.disabled = true;  // Disable all checkboxes if no data is available
-      }
-        });
-    }
-
-    // Utility function to get URL parameters
+    // Function to get URL parameter by name
     function getUrlParameter(name) {
-        var results = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.href);
-        return results ? decodeURIComponent(results[1]) : null;
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     }
 });
 
-function getInclusions() {
-    const selectedCheckboxes = document.querySelectorAll('input[name="inclusions"]:checked');
-    const inclusions = Array.from(selectedCheckboxes).map(checkbox => checkbox.value);
-    console.log("Selected Inclusions:", inclusions);
-    return inclusions;
-}
-
-
-
+	    
 </script>
 
 
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
+</body>
+</html>
+
+	
+
+	  
 

@@ -72,16 +72,16 @@ public class PackageDetailsController {
  	
      @PutMapping("/updatePackageDetails/{id}")
      public ResponseEntity<?> updatePackageDetails(@PathVariable Long id, @RequestBody PackageDetails packageDetails) {
-         System.out.println("Received PUT request for ID: " + id);
+         //System.out.println("Received PUT request for ID: " + id);
 
          PackageDetails updatedPackage = packageDetailsService.updatePackageDetails(id, packageDetails);
 
          if (updatedPackage == null) {
-             System.out.println("No package found with ID: " + id);
+            // System.out.println("No package found with ID: " + id);
              return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Package not found with ID: " + id);
          }
 
-         System.out.println("Package updated successfully: " + updatedPackage);
+        // System.out.println("Package updated successfully: " + updatedPackage);
          return ResponseEntity.ok(updatedPackage);
      }
      

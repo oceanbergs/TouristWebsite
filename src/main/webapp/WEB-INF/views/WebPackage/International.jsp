@@ -53,16 +53,16 @@ x/* Parent Container for Packages */
 	    display: grid;
 	    grid-template-columns: repeat(3, 1fr); /* Create a 3-column layout */
 	    gap: 20px; /* Space between items */
-	    justify-items: center; /* Center items within each grid cell */
-	    align-items: center; /* Vertically center items */
-	    width: 100%;
-	    max-width: 1200px; /* Limit maximum width of the grid */
-	    margin: 0 auto; /* Center the grid within the container */
+/* 	    justify-items: center; /* Center items within each grid cell */ */
+/* 	    align-items: center; /* Vertically center items */ */
+/* 	    width: 100%; */
+/* 	    max-width: 1200px; /* Limit maximum width of the grid */ */
+/* 	    margin: 0 auto; /* Center the grid within the container */ */
 	}
 
 	/* Image Container */
 	.image-container {
-	    width: 350px; /* Fixed width for uniform images */
+	    width: 410px; /* Fixed width for uniform images */
 	    height: 200px; /* Fixed height for uniform images */
 	    overflow: hidden;
 	    border-radius: 5px; /* Rounded corners for the image container */
@@ -142,6 +142,62 @@ x/* Parent Container for Packages */
 		       #mainGallery {
 		           cursor: pointer; /* Make thumbnails appear interactive */
 		       }
+		       
+		        body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Popup Overlay */
+/* Popup Overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; /* Full screen width */
+    height: 100vh; /* Full screen height */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent dark overlay */
+    z-index: 1000;
+    display: flex;
+    justify-content: flex-end; /* Align content to the right */
+    align-items: stretch;
+}
+
+/* Popup Content (40% of the screen) */
+.popup-content {
+    width: 40%; /* 40% of the screen width */
+    height: 100%; /* Full height */
+    background: white; /* Solid white background */
+    border-left: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border for separation */
+    padding: 30px;
+    color: black; /* Adjusted text color for readability */
+    overflow-y: auto; /* Prevent overflow */
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+}
+
+/* Close Button */
+.btn-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: black; /* Adjusted for visibility on white background */
+    cursor: pointer;
+}
+
+/* Form Styling */
+.form-control {
+    border: 1px solid #ddd; /* Subtle border for input fields */
+    color: black; /* Adjusted text color */
+}
+label {
+    color: #555; /* Slightly darker label color */
+}
+button {
+    cursor: pointer;
+}
 </style>
 </head>
 </head>
@@ -191,8 +247,8 @@ x/* Parent Container for Packages */
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="/TouristWebsite" class="nav-item nav-link " style="font-family: 'Poppins', sans-serif;">Home</a>
-                <a href="/TouristWebsite/about" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">About</a>
+                <a href="login" class="nav-item nav-link " style="font-family: 'Poppins', sans-serif;">Home</a>
+                <a href="about" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">About</a>
                 <!-- All Tours India (Domestic) Dropdown -->
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" id="packageDropdownToggle" data-bs-toggle="dropdown" style="font-family: 'Poppins', sans-serif;">India</a>
@@ -202,10 +258,10 @@ x/* Parent Container for Packages */
                 </div>
 
                 <!-- All World Tours (International) Dropdown -->
-                <a href="/TouristWebsite/GetInternation" class="nav-item nav-link active" style="font-family: 'Poppins', sans-serif;">World</a>
+                <a href="GetInternation" class="nav-item nav-link active" style="font-family: 'Poppins', sans-serif;">World</a>
 
-                <a href="/TouristWebsite/packages" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Packages</a>
-                <a href="/TouristWebsite/contact" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Contact</a>
+                <a href="packages" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Packages</a>
+                <a href="contact" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Contact</a>
             </div>
         </div>
     </nav>
@@ -243,122 +299,93 @@ x/* Parent Container for Packages */
 			<div class="row g-2 justify-content-center">
 				<div class="parent-container">
 					<div id="packages-container">
-						<!-- Example Package Item -->
-<!--						<div class="package-item">-->
-<!--							<div class="image-container">-->
-<!--								<img class="fixed-size-image" src="img/agra.jpg" alt="Agra">-->
-<!--							</div>-->
-<!--							<div class="d-flex border-bottom">-->
-<!--								<small class="flex-fill text-center border-end py-2">-->
-<!--									<i class="fa fa-map-marker-alt text-primary me-2"></i>Delhi Agra-->
-<!--								</small>-->
-<!--								<small class="flex-fill text-center border-end py-2">-->
-<!--									<i class="fa fa-calendar-alt text-primary me-2"></i>5 days-->
-<!--								</small>-->
-<!--								<small class="flex-fill text-center py-2" style="position: relative;">-->
-<!--									<i class="fa fa-globe text-primary me-2"></i>-->
-<!--									<span>1 Country <i class="fa fa-building text-primary me-2"></i>4 Cities</span>-->
-<!--									<div class="hover-content">-->
-<!--										<p class="with-symbol"><span class="symbol"></span>You Will Visit 1 Country, 4 Cities</p>-->
-<!--										<p class="route-title india"><span class="symbol"></span>India</p>-->
-<!--										<p class="route-item">Agra</p>-->
-<!--										<p class="route-item">Mathura</p>-->
-<!--										<p class="route-item">Delhi</p>-->
-<!--										<p class="route-item">Vrindavan</p>-->
-<!--									</div>-->
-<!--								</small>-->
-<!--							</div>-->
-<!--							<div class="text-center p-4">-->
-<!--								<h3 class="mb-0">&#8377;36,000</h3>-->
-<!--								<div class="mb-3">-->
-<!--									<small class="fa fa-star text-primary"></small>-->
-<!--									<small class="fa fa-star text-primary"></small>-->
-<!--									<small class="fa fa-star text-primary"></small>-->
-<!--									<small class="fa fa-star text-primary"></small>-->
-<!--									<small class="fa fa-star text-primary"></small>-->
-<!--								</div>-->
-<!--								<h5 class="text-center">Tour Highlights</h5>-->
-<!--								<p class="tour-highlights">-->
-<!--									<span>Taj Mahal</span>, -->
-<!--									<span>Red Fort</span>, -->
-<!--									<span>Mathura</span>, -->
-<!--									<span>Vrindavan</span>-->
-<!--									<a href="#" id="more-highlights" style="color: #3CB371; margin-left: 10px;">More...</a>-->
-<!--								</p>-->
-<!--								<div id="all-highlights">-->
-<!--									<h5>All Tour Highlights</h5>-->
-<!--									<ul>-->
-<!--										<li>Taj Mahal</li>-->
-<!--										<li>Red Fort</li>-->
-<!--										<li>Mathura</li>-->
-<!--										<li>Vrindavan</li>-->
-<!--									</ul>-->
-<!--								</div>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--						 End of Example Package Item -->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
+					
 		</div>
 	</div>
 
 
 	<!-- Booking Start -->
-	<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-		<div class="container">
-			<div class="booking p-5">
-				<div class="row g-5 align-items-center">
-					<div class="col-md-6 text-white">
-						<!-- <h6 class="text-white text-uppercase">Booking</h6> -->
-						<h1 class="text-white mb-4">Online Booking</h1>
-									</div>
-					<div class="col-md-6 mx-auto" id="bookForm">
-        <h1 class="text-white mb-4">Book A Tour</h1>
-        <form>
+	
+<div id="bookForm" class="popup-overlay" style="display: none;">
+    <div class="popup-content">
+        <button id="closePopup" class="btn-close">&times;</button>
+        <h2 class="mb-4">Book Your Package</h2>
+<!--         <form id="bookingForm"> -->
             <div class="row g-3">
-                <div class="col-md-6">
+                <div class="col-12">
                     <div class="form-floating">
-                        <input type="text" class="form-control bg-transparent" id="name" placeholder="Your Name">
+                        <input type="text" class="form-control bg-transparent" id="customer_Name"  name ="customer_Name" placeholder="Your Name" required>
                         <label for="name">Your Name</label>
                     </div>
                 </div>
-                <div class="col-md-6">
+
+                <div class="col-12">
                     <div class="form-floating">
-                        <input type="email" class="form-control bg-transparent" id="email" placeholder="Your Email">
+                        <input type="email" class="form-control bg-transparent" id="email" name="email"  placeholder="Your Email" required>
                         <label for="email">Your Email</label>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-floating date" id="date3" data-target-input="nearest">
-                        <input type="text" class="form-control bg-transparent datetimepicker-input" id="datetime" placeholder="Date & Time" data-target="#date3" data-toggle="datetimepicker" />
-                        <label for="datetime">Date & Time</label>
-                    </div>
-                </div>
-                <div class="col-md-6"> 
-    <div class="form-floating">
-        <select class="form-select bg-transparent" id="designationDropdown">
-            <!-- Options will be dynamically loaded -->
-        </select>
-       <label for="designationDropdown">Destination</label>
-    </div>
-</div>
+
                 <div class="col-12">
                     <div class="form-floating">
-                        <textarea class="form-control bg-transparent" placeholder="Special Request" id="message" style="height: 100px"></textarea>
-                        <label for="message">Special Request</label>
+                        <input type="text" class="form-control bg-transparent" id="address" name="address" placeholder="Your Address" required>
+                        <label for="address">Your Address</label>
                     </div>
                 </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="tel" class="form-control bg-transparent" id="mobile_Number" name="mobile_Number" placeholder="Your Mobile" pattern="[0-9]{10}" required>
+                        <label for="mobile_Number">Your Mobile</label>
+                    </div>
+                </div>
+
+                <!-- Replace Destination Dropdown with Text Input for Destination -->
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control bg-transparent" id="destination" name="destination" placeholder="Destination" required>
+                        <label for="destination">Destination</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="date" class="form-control bg-transparent" id="start_Date"  name="start_Date" required>
+                        <label for="start_Date">Start Date</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="date" class="form-control bg-transparent" id="end_Date" name="end_Date" required>
+                        <label for="end_Date">End Date</label>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input type="hidden" class="form-control bg-transparent" id="modOffBooking" name="modOffBooking" value="online" >
+                        
+                    </div>
+                </div>
+
                 <div class="col-12">
-                    <button class="btn btn-outline-light w-100 py-3" type="submit">Book Now</button>
+                    <div class="form-floating">
+                        <textarea class="form-control bg-transparent" placeholder="Special Request" id="special_Request" name="special_Request" style="height: 100px"></textarea>
+                        <label for="special_Request">Special Request</label>
+                    </div>
+                </div>
+                
+                
+
+                <div class="col-12">
+                    <button id="saveButton" class="btn btn-outline-light w-100 py-3" style="background-color: #87be29;" >Book Now</button>
                 </div>
             </div>
-        </form>
+<!--         </form> -->
     </div>
-				</div>
-			</div>
-		</div>
-	</div>
+</div>
+
 	<!-- Booking Start -->
 </div>
 </div>
@@ -371,14 +398,15 @@ x/* Parent Container for Packages */
 		            <!-- Company Section -->
 		            <div class="col-lg-3 col-md-6">
 		                <h4 class="text-white mb-3">Company</h4>
-		                <a class="btn btn-link text-light" href="" style="text-decoration: none;">About Us</a><br>
-		                <a class="btn btn-link text-light" href="" style="text-decoration: none;">Contact Us</a>
+		               <a class="btn btn-link" href="about">About Us</a>
+		                   <a class="btn btn-link" href="contact">Contact Us</a>
+
 		            </div>
 
 		            <!-- Contact Section -->
 		            <div class="col-lg-3 col-md-6">
 		                <h4 class="text-white mb-3">Contact</h4>
-		                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Shree Gajanan Yatra Company Pvt. Ltd, 123 Pilgrimage Road, Mumbai, India</p>
+		                <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Shree Gajanan Yatra Company Pvt. Ltd, Front Of Allahbad Bank Mil Colony Stop Paratwada 444805</p>
 		                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9552014476</p>
 		                <p class="mb-2"><i class="fa fa-envelope me-3"></i>shrigajananyatracompany@gmail.com</p>
 						
@@ -410,32 +438,32 @@ x/* Parent Container for Packages */
 								       <h4 class="text-white mb-3">Gallery</h4>
 								       <div class="row g-2 pt-2">
 								           <div class="col-4">
-								                <a href='/TouristWebsite/about#detailedGallery'>
+								                <a href='about#detailedGallery'>
 								                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
 								               </a>
 								           </div>
 								           <div class="col-4">
-								                <a href='/TouristWebsite/about#detailedGallery'>
+								                <a href='about#detailedGallery'>
 								                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
 								               </a>
 								           </div>
 								           <div class="col-4">
-								                <a href='/TouristWebsite/about#detailedGallery'>
+								                <a href='about#detailedGallery'>
 								                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
 								               </a>
 								           </div>
 								           <div class="col-4">
-								                <a href='/TouristWebsite/about#detailedGallery'>
+								                <a href='about#detailedGallery'>
 								                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
 								               </a>
 								           </div>
 								           <div class="col-4">
-								               <a href='/TouristWebsite/about#detailedGallery'>
+								               <a href='about#detailedGallery'>
 								                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
 								               </a>
 								           </div>
 								           <div class="col-4">
-								               <a href='/TouristWebsite/about#detailedGallery'>
+								               <a href='about#detailedGallery'>
 								                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
 								               </a>
 								           </div>
@@ -551,36 +579,7 @@ x/* Parent Container for Packages */
             bookForm.scrollIntoView({ behavior: "smooth" }); // Scroll into view
         });
     </script>
-     <script type="text/javascript">
-    $(document).ready(function() {
-        // Function to load destinations into the dropdown
-        function loadDestinations() {
-            $.ajax({
-                type: "GET",
-                url: '/TouristWebsite/destination',
-                dataType: 'json',
-                success: function(response) {
-                    const designationDropdown = $("#designationDropdown");
-                    designationDropdown.empty(); // Clear existing options
-                    designationDropdown.append('<option value="">Select Destination</option>');
-                    response.forEach(function(destination) {
-                        designationDropdown.append($('<option>', {
-                            value: destination.id, // Assuming 'id' field exists in the response
-                            text: destination.destination // Assuming 'name' field exists in the response
-                        }));
-                    });
-                },
-                error: function(jqXHR, status, errorThrown) {
-                    alert("Failed to load destinations: " + errorThrown);
-                }
-            });
-        }
-        
-        // Call the function to load destinations
-        loadDestinations();
-    });
-</script>
-
+    
 <script type="text/javascript">
 	function getAllPackages() {
 		    $.ajax({
@@ -606,12 +605,12 @@ x/* Parent Container for Packages */
 		                            '<img class="img-fluid" src="data:image/jpeg;base64,' + pkg.packageImage + '" alt="Package Image">' +
 		                        '</div>' +
 		                        '<div class="d-flex border-bottom">' +
-		                            '<small class="flex-fill text-center border-end py-2">' +
-		                                '<i class="fa fa-map-marker-alt text-primary me-2"></i>' + pkg.packageName +
-		                            '</small>' +
-		                            '<small class="flex-fill text-center border-end py-2">' +
-		                                '<i class="fa fa-calendar-alt text-primary me-2"></i>' + pkg.duration + ' days' +
-		                            '</small>' +
+		                        '<small class="flex-fill text-center border-end py-2">' +
+                                '<i class="fa fa-calendar-alt text-primary me-2"></i>' + pkg.duration + ' days' +
+                            '</small>' +
+                           ' <small class="flex-fill text-center border-end py-2">'+
+                           ' <i class="fa fa-rupee-sign text-primary me-2"></i>'+ pkg.price + 
+                       ' </small>'+
 		<!--                            '<small class="flex-fill text-center py-2" style="position: relative; display: inline-block; cursor: pointer;">' +-->
 		<!--                                '<i class="fa fa-globe text-primary me-2"></i>' +-->
 		<!--                                '<span>' + pkg.locations + ' Country <i class="fa fa-building text-primary me-2"></i>' + pkg.cities + ' Cities</span>' +-->
@@ -621,7 +620,8 @@ x/* Parent Container for Packages */
 		<!--                            '</small>' +-->
 		                        '</div>' +
 		                        '<div class="text-center p-4">' +
-		                            '<h3 class="mb-0">&#8377;' + pkg.price + '</h3>' +
+		                        '<h5 class="mb-0">' + pkg.packageName + '</h5>' +
+// 		                            '<h3 class="mb-0">&#8377;' + pkg.price + '</h3>' +
 		                           '<div class="mb-3" style="display: none;" type="hidden">' + pkg.id + '</div>' +
 		                            '<div style="position: relative;">' +
 		<!--                                '<h5 class="text-center">Tour Highlights</h5>' +-->
@@ -636,8 +636,9 @@ x/* Parent Container for Packages */
 		                                '</div>' +
 		                            '</div>' +
 		                            '<div class="d-flex justify-content-center mb-2">' +
-		                                '<a   href="/TouristWebsite/delhiInformation" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;">View Tour Details</a>' +
-		                                '<a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;">Book Now</a>' +
+		                            '<a href="delhiInformation?id=' + pkg.id + '" class="btn btn-sm btn-primary px-3 border-end" style="border-radius: 30px 0 0 30px;" >View Tour Details</a>'+
+
+		                                '<a href="#" class="btn btn-sm btn-primary px-3" style="border-radius: 0 30px 30px 0;" onclick="showBookingForm(\'' + pkg.packageName + '\')">Book Now</a>' +
 		                            '</div>' +
 		                        '</div>' +
 		                    '</div>';
@@ -652,6 +653,20 @@ x/* Parent Container for Packages */
 		        }
 		    });
 		}
+		
+		function showBookingForm(packageName) {
+		    // Show the booking form
+		    document.getElementById('bookForm').style.display = 'flex';
+
+		    // Set the destination (package name) in the form
+		    document.getElementById('destination').value = packageName;
+		}
+
+		// Close the popup
+		document.getElementById('closePopup').addEventListener('click', function () {
+		    document.getElementById('bookForm').style.display = 'none';
+		});
+
 
 		$(document).ready(function() {
 		    getAllPackages(); // Fetch data when the page loads
@@ -661,6 +676,64 @@ x/* Parent Container for Packages */
 
 
 </script>
+
+<script>
+$(document).ready(function() {
+    // Click event handler for the save button
+    $("#saveButton").click(function() {
+        const customer_Name = $("#customer_Name").val();
+        const email = $("#email").val();
+        const address = $("#address").val();
+        const mobile_Number = $("#mobile_Number").val();
+        const destination = $("#destination").val();
+        const special_Request = $("#special_Request").val();
+        const modOffBooking = $("#modOffBooking").val();
+        
+        const start_Date = $("#start_Date").val();
+        const end_Date = $("#end_Date").val();
+        
+        
+       
+        // Construct batch data object
+        const batchData = {
+        		customer_Name: customer_Name,
+        		email: email,
+        		address: address,
+        		mobile_Number: mobile_Number,
+        		destination: destination,
+        		special_Request: special_Request,
+        		modOffBooking: modOffBooking,
+        		start_Date: start_Date,
+        		end_Date: end_Date
+        };
+        
+        if (!customer_Name || !email || !address || !mobile_Number || !destination || !special_Request  || !modOffBooking|| !start_Date || !end_Date) {
+            alert("Please fill all required fields.");
+            return;
+        }
+
+        // Send AJAX request to save batch data
+        $.ajax({
+            url: "auth/saveBooking",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(batchData),
+            success: function(response) {
+                alert("Booking Successfull...");
+                window.location.href = "packages";
+            },
+            error: function(jqXHR, status, errorThrown) {
+                if (jqXHR.status === 403) {
+                    alert("YOU DON'T HAVE THE PERMISSION");
+                } else {
+                    alert("Failed to communicate with the server");
+                }
+            }
+        });
+    });
+});
+
+	</script>
 <script>
 	   				       document.addEventListener('DOMContentLoaded', function () {
 	   				           // Check if the page has a hash value for smooth scrolling

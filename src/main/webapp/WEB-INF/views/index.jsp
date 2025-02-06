@@ -117,8 +117,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                    <a href="/TouristWebsite" class="nav-item nav-link active" style="font-family: 'Poppins', sans-serif;">Home</a>
-                    <a href="/TouristWebsite/about" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">About</a>
+                    <a href="login" class="nav-item nav-link active" style="font-family: 'Poppins', sans-serif;">Home</a>
+                    <a href="about" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">About</a>
 
                     <!-- All Tours India (Domestic) Dropdown -->
                     <div class="nav-item dropdown">
@@ -129,10 +129,10 @@
                     </div>
 
                     <!-- All World Tours (International) Dropdown -->
-                    <a href="/TouristWebsite/GetInternation" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">World</a>
+                    <a href="GetInternation" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">World</a>
 
-                    <a href="/TouristWebsite/packages" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Packages</a>
-                    <a href="/TouristWebsite/contact" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Contact</a>
+                    <a href="packages" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Packages</a>
+                    <a href="contact" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Contact</a>
                 </div>
             </div>
         </nav>
@@ -231,108 +231,191 @@
 </div>
 <!-- About End -->
 
-   
+
+<br>
+<!-- Single Banner Auto-Slider -->
+<!-- <div class="banner-container" style="width: 100%; max-width: 1200px; height: 400px; margin: 20px auto; overflow: hidden; position: relative; font-family: 'Poppins', sans-serif; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);"> -->
+<!--     Banner Wrapper -->
+<!--     <div id="banner-slider" style="display: flex; width: 200%; height: 100%; transition: transform 1s ease-in-out;"> -->
+<!--         Single Banner -->
+<!--         <img src="img/banner.jpg" alt="Banner Image" style="width: 100%; height: 100%; object-fit: cover;"> -->
+<!--         <img src="img/banner.jpg" alt="Banner Image Duplicate" style="width: 100%; height: 100%; object-fit: cover;"> -->
+<!--     </div> -->
+<!-- </div> -->
+
+
+<div class="banner-container" style="width: 100%; max-width: 1200px; height: 400px; margin: 20px auto; overflow: hidden; position: relative; font-family: 'Poppins', sans-serif; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);">
+    <!-- Banner Wrapper -->
+    <div id="banner-slider" style="display: flex; width: 200%; height: 100%; transition: transform 1s ease-in-out;">
+        <!-- Banner images will be injected here dynamically -->
+    </div>
+</div>
+
+
+<!-- Inline JavaScript -->
+<script>
+    const bannerSlider = document.getElementById('banner-slider');
+    let currentBannerIndex = 0;
+
+    // Auto-slide function
+    setInterval(() => {
+        currentBannerIndex = (currentBannerIndex + 1) % 2; // Cycles between 0 and 1
+        bannerSlider.style.transform = `translateX(-${currentBannerIndex * 100}%)`;
+    }, 4000); // Changes every 4 seconds
+</script>
+
+
+
+
 
 <!-- Service Start -->
+
 <div class="container-xxl py-5">
     <div class="container">
         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
             <h4 class="section-title bg-white text-center text-primary px-3">Our Services</h4>
-         <br>
-         <hr>
+            <br>
+            <hr>
+        </div>
         <div class="row g-4">
-            <!-- Adventure Tours -->
+            <!-- Domestic Tour -->
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item rounded pt-3">
+                <div class="service-item rounded pt-3" style="height: 300px;">
                     <div class="p-4">
-                        <i class="fa fa-3x fa-mountain text-primary mb-4"></i> <!-- Adventure Tour Icon -->
-                        <h5>Adventure Tours</h5>
-                        <p>Experience thrilling adventures with trekking, climbing, and exploring the wilderness with our tailored adventure tours.</p>
+                        <i class="fa fa-3x fa-home text-primary mb-4"></i>
+                        <h5>Domestic Tour</h5>
+                        <p>Explore beautiful destinations across the country with our exclusive domestic tour packages.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Educational Tours -->
+            <!-- International Tour -->
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="service-item rounded pt-3">
+                <div class="service-item rounded pt-3" style="height: 300px;">
                     <div class="p-4">
-                        <i class="fa fa-3x fa-graduation-cap text-primary mb-4"></i> <!-- Educational Tour Icon -->
-                        <h5>Educational Tours</h5>
-                        <p>Enhance learning through immersive educational tours to historical sites, museums, and cultural landmarks.</p>
+                        <i class="fa fa-3x fa-globe text-primary mb-4"></i>
+                        <h5>International Tour</h5>
+                        <p>Experience the world with our thoughtfully curated international travel packages.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Wildlife Safari -->
+            <!-- Group & Family Tour -->
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="service-item rounded pt-3">
+                <div class="service-item rounded pt-3" style="height: 300px;">
                     <div class="p-4">
-                        <i class="fa fa-3x fa-paw text-primary mb-4"></i> <!-- Wildlife Safari Icon -->
-                        <h5>Wildlife Safari</h5>
-                        <p>Embark on a wildlife safari and discover nature’s most fascinating creatures in their natural habitat.</p>
+                        <i class="fa fa-3x fa-users text-primary mb-4"></i>
+                        <h5>Group & Family Tour</h5>
+                        <p>Create lifelong memories with group and family tours tailored to your preferences.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Honeymoon Services -->
+            <!-- Special Packages -->
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="service-item rounded pt-3">
+                <div class="service-item rounded pt-3" style="height: 300px;">
                     <div class="p-4">
-                        <i class="fa fa-3x fa-heart text-primary mb-4"></i> <!-- Honeymoon Icon -->
-                        <h5>Honeymoon Services</h5>
-                        <p>Celebrate love with our romantic honeymoon packages, designed to provide unforgettable experiences.</p>
+                        <i class="fa fa-3x fa-gift text-primary mb-4"></i>
+                        <h5>Special Packages</h5>
+                        <p>Enjoy exclusive deals and tailor-made travel experiences with our special packages.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Corporate Tours -->
+            <!-- Honeymoon Package -->
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="service-item rounded pt-3">
+                <div class="service-item rounded pt-3" style="height: 300px;">
                     <div class="p-4">
-                        <i class="fa fa-3x fa-briefcase text-primary mb-4"></i> <!-- Corporate Tour Icon -->
-                        <h5>Corporate Tours</h5>
-                        <p>Plan your business trips with our corporate tour packages that ensure productivity and relaxation.</p>
+                        <i class="fa fa-3x fa-heart text-primary mb-4"></i>
+                        <h5>Honeymoon Package</h5>
+                        <p>Celebrate love and romance with our customized honeymoon packages for couples.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Luxury Travel -->
+            <!-- Government Tour Packages -->
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="service-item rounded pt-3">
+                <div class="service-item rounded pt-3" style="height: 300px;">
                     <div class="p-4">
-                        <i class="fa fa-3x fa-crown text-primary mb-4"></i> <!-- Luxury Travel Icon -->
-                        <h5>Luxury Travel</h5>
-                        <p>Indulge in opulent travel experiences, from private jet charters to five star accommodations and exotic destinations.</p>
+                        <i class="fa fa-3x fa-building text-primary mb-4"></i>
+                        <h5>Government Tour Packages</h5>
+                        <p>Specialized travel packages designed for government employees and officials.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Cruise Tours -->
+            <!-- School & College Tour -->
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="service-item rounded pt-3">
+                <div class="service-item rounded pt-3" style="height: 300px;">
                     <div class="p-4">
-                        <i class="fa fa-3x fa-ship text-primary mb-4"></i> <!-- Cruise Tour Icon -->
-                        <h5>Cruise Tours</h5>
-                        <p>Set sail on an unforgettable cruise journey, exploring new destinations while enjoying luxury and comfort on the sea.</p>
+                        <i class="fa fa-3x fa-graduation-cap text-primary mb-4"></i>
+                        <h5>School & College Tour</h5>
+                        <p>Fun and educational tours for schools and colleges to exciting and enriching destinations.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Family Packages -->
+            <!-- Passport and Visa Assistance -->
             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="service-item rounded pt-3">
+                <div class="service-item rounded pt-3" style="height: 300px;">
                     <div class="p-4">
-                        <i class="fa fa-3x fa-users text-primary mb-4"></i> <!-- Family Tour Icon -->
-                        <h5>Family Packages</h5>
-                        <p>Enjoy a perfect family vacation with customized packages that cater to every members needs.</p>
+                        <i class="fa fa-3x fa-passport text-primary mb-4"></i>
+                        <h5>Passport & Visa</h5>
+                        <p>Get hassle-free assistance for passport applications and visa processing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Air Ticket Booking -->
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item rounded pt-3" style="height: 300px;">
+                    <div class="p-4">
+                        <i class="fa fa-3x fa-plane text-primary mb-4"></i>
+                        <h5>Air Ticket</h5>
+                        <p>Book domestic and international flights at the best prices with us.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Train Tickets -->
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="service-item rounded pt-3" style="height: 300px;">
+                    <div class="p-4">
+                        <i class="fa fa-3x fa-train text-primary mb-4"></i>
+                        <h5>Train Ticket</h5>
+                        <p>Convenient and quick train ticket booking services for your journeys.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Helicopter Services -->
+         
+
+            <!-- Cruise Ticket Booking -->
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="service-item rounded pt-3" style="height: 300px;">
+                    <div class="p-4">
+                        <i class="fa fa-3x fa-ship text-primary mb-4"></i>
+                        <h5>Cruise Ticket</h5>
+                        <p>Sail in luxury and explore the seas with our cruise ticket booking services.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bus & Taxi Rental -->
+            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="service-item rounded pt-3" style="height: 300px;">
+                    <div class="p-4">
+                        <i class="fa fa-3x fa-bus text-primary mb-4"></i>
+                        <h5>Bus & Taxi for Rent</h5>
+                        <p>Convenient rental services for buses and taxis to suit all your travel needs.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Service End -->
-
+<!-- Services Section End -->
 
     <!-- Destination Start -->
     <div class="container-xxl py-5 destination">
@@ -473,8 +556,8 @@
                     <div class="col-md-6 text-white">
 <!--                        <h6 class="text-white text-uppercase" style="font-family: 'Georgia', serif;">Booking</h6>-->
                         <h1 class="text-white mb-4" style="font-family: 'Georgia', serif;">Enquiry</h1>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos.</p>
-                        <p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+<!--                         <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos.</p> -->
+<!--                         <p class="mb-4">Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit.</p> -->
 <!--                        <a class="btn btn-outline-light py-3 px-5 mt-2" href="#">Read More</a>-->
                     </div>
                     <div class="col-md-6">
@@ -537,13 +620,14 @@
 		           <div class="row g-5">
 		               <div class="col-lg-3 col-md-6">
 		                   <h4 class="text-white mb-3">Company</h4>
-		                   <a class="btn btn-link" href="">About Us</a>
-		                   <a class="btn btn-link" href="">Contact Us</a>
+		                   <a class="btn btn-link" href="about">About Us</a>
+		                   <a class="btn btn-link" href="contact">Contact Us</a>
+
 		                  
 		               </div>
 		               <div class="col-lg-3 col-md-6">
 		                   <h4 class="text-white mb-3">Contact</h4>
-						<p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Shree Gajanan Yatra Company Pvt. Ltd, 123 Pilgrimage Road, Mumbai, India</p>
+						<p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Shree Gajanan Yatra Company Pvt. Ltd, Front Of Allahbad Bank Mil Colony Stop Paratwada 444805</p>
 						                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9552014476</p>
 						                <p class="mb-2"><i class="fa fa-envelope me-3"></i>shrigajananyatracompany@gmail.com</p>
 		                   <div class="d-flex pt-2">
@@ -559,32 +643,32 @@
 					       <h4 class="text-white mb-3">Gallery</h4>
 					       <div class="row g-2 pt-2">
 					           <div class="col-4">
-					                <a href='/TouristWebsite/about#detailedGallery'>
+					                <a href='about#detailedGallery'>
 					                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
 					               </a>
 					           </div>
 					           <div class="col-4">
-					                <a href='/TouristWebsite/about#detailedGallery'>
+					                <a href='about#detailedGallery'>
 					                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
 					               </a>
 					           </div>
 					           <div class="col-4">
-					                <a href='/TouristWebsite/about#detailedGallery'>
+					                <a href='about#detailedGallery'>
 					                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
 					               </a>
 					           </div>
 					           <div class="col-4">
-					                <a href='/TouristWebsite/about#detailedGallery'>
+					                <a href='about#detailedGallery'>
 					                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
 					               </a>
 					           </div>
 					           <div class="col-4">
-					               <a href='/TouristWebsite/about#detailedGallery'>
+					               <a href='about#detailedGallery'>
 					                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
 					               </a>
 					           </div>
 					           <div class="col-4">
-					               <a href='/TouristWebsite/about#detailedGallery'>
+					               <a href='about#detailedGallery'>
 					                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
 					               </a>
 					           </div>
@@ -676,7 +760,7 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-	<script src="js/domestic.js"></script>
+	<script src="js/WebPage.js"></script>
 
 
     <script>
@@ -743,13 +827,13 @@
 
 	        // Send AJAX request to save batch data
 	        $.ajax({
-	            url: "/TouristWebsite/saveEnquiry",
+	            url: "saveEnquiry",
 	            type: "POST",
 	            contentType: "application/json",
 	            data: JSON.stringify(batchData),
 	            success: function(response) {
-	                alert(response);
-	                window.location.href = "/TouristWebsite";
+	                alert("Data Save Successfully");
+	                window.location.href = "/";
 	            },
 	            error: function(jqXHR, status, errorThrown) {
 	                if (jqXHR.status === 403) {
@@ -763,6 +847,47 @@
 	});
 
 		</script>
+		
+		<script>
+// Function to fetch the active banner using AJAX and display it
+function loadBanners() {
+    $.ajax({
+        url: 'auth/getbanner',  // Your API endpoint to fetch all banners
+        type: 'GET',
+        success: function (banners) {
+            if (banners && banners.length > 0) {
+                const bannerContainer = document.getElementById('banner-slider');
+                
+                // Clear the existing content
+                bannerContainer.innerHTML = '';
+
+                // Loop through the banners and display them
+                banners.forEach(banner => {
+                    const bannerImage = document.createElement('img');
+                    bannerImage.src = 'data:image/jpeg;base64,' + banner.banner;  // Assuming the banner is a Base64 string
+                    bannerImage.alt = banner.name || 'Banner';
+                    bannerImage.style.width = "1200px";
+                    bannerImage.style.height = "400px";
+                    bannerImage.style.objectFit = "cover";
+
+                    // Append the image to the container
+                    bannerContainer.appendChild(bannerImage);
+                });
+            } else {
+                console.error("No banners found.");
+            }
+        },
+        error: function (error) {
+            console.error('Error fetching banners:', error);
+        }
+    });
+}
+
+// Call the function to load banners on page load
+$(document).ready(function() {
+    loadBanners();
+});
+</script>
 		
 
 

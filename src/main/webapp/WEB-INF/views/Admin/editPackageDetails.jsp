@@ -325,7 +325,7 @@ tbody td .fa-trash {
 		text-align: left;
 		padding-left: 0px;
 	}
-	      
+	Â Â Â Â Â Â 
 	
 	
 }
@@ -341,9 +341,9 @@ tbody td .fa-trash {
 			</div>
 			<h2 class="companyname">Shri Gajanan Yatra Company Pvt. Ltd</h2>
 			<div class="actions">
-				<img src="../img/profile.png" alt="Profile"> <img
-					src="../img/setting.png" alt="Setting"> <img
-					src="../img/logout.png" alt="Logout">
+				<a href="logout">
+        <img src="../img/logout.png" alt="Logout">
+    </a>
 			</div>
 		</header>
 
@@ -352,15 +352,17 @@ tbody td .fa-trash {
 			<aside class="sidebar">
 				<nav>
 					<ul>
-						<li><a href="/TouristWebsite/auth/dashboard">Dashboard</a></li>
-						<li><a href="/TouristWebsite/auth/packageType">Packages
+					 <li><a href="notification">Notifications</a></li>
+						<li><a href="dashboard">Dashboard</a></li>
+						<li><a href="packageType">Packages
 								Type</a></li>
 						<li><a href="managePackage" class="active"
 							style="background-color: #87be29;">  Manage Packages</a></li>
-<!--						<li><a href="#bookings">Bookings</a></li>-->
-<!--						<li><a href="#payments">Payments</a></li>-->
-<!--						<li><a href="#users">User Management</a></li>-->
-					 <li><a href="/TouristWebsite/auth/notification">Notifications</a></li>
+					<li><a href="bookingView">Manage Bookings</a></li>
+						<li><a href="manageGallery">Manage Gallery</a></li>
+						  <li><a href="bannerManagement">Banner Management</a></li>
+<!--						<li><a href="#users">User Management</a></li>
+					
 <!--						<li><a href="#settings">Settings</a></li>-->
 					</ul>
 				</nav>
@@ -416,9 +418,9 @@ tbody td .fa-trash {
 
 						            <!-- Package Image Field -->
 						            <div style="min-width: 100%;">
-						              <label for="packageImage">Package Image</label>
-						              <input type="file" id="packageImage" name="packageImage" accept="image/jpeg" required
-						                style="width: 100%; padding: 8px; margin-top: 5px;">
+						              <label for="packageHidden">Package Image</label>
+						              <input type="file" id="packageHidden" name="packageHidden" accept="image/jpeg" required
+						                style="width: 100%; padding: 8px; margin-top: 5px; " >
 						              <p id="imageError" style="color: red; font-size: 14px; margin-top: 5px;"></p>
 						            </div>
 						          </div>
@@ -430,6 +432,8 @@ tbody td .fa-trash {
 						              style="display: none; width: 100%; height: 100%; object-fit: cover;">
 						          </div>
 						        </div>
+						        
+						        <input type="hidden" id="packageImage" name="packageImage" readonly>
 
 						       <div style="min-width: 100%; margin-bottom: 20px;">
 				    <!-- Label and Button container -->
@@ -620,9 +624,6 @@ tbody td .fa-trash {
 								            return;
 								        }
 
-								        const fileInput = document.getElementById('packageImage');
-								        const file = fileInput.files[0]; // Get the first file (if any)
-
 								        // Collect includes
 								        const includesInputs = document.querySelectorAll('input[name="includes[]"]');
 								        let allIncludes = [];
@@ -661,15 +662,21 @@ tbody td .fa-trash {
 								        const itinerary = [];
 								        const dayBlocks = document.querySelectorAll('.day-block');
 								        dayBlocks.forEach((dayBlock, index) => {
-								            const day = dayBlock.querySelector('input[id="day' + (index + 1) + '"]').value;
-								            const destination = dayBlock.querySelector('input[id="destination' + (index + 1) + '"]').value;
-								            const details = dayBlock.querySelector('input[id="details' + (index + 1) + '"]').value;
+								            const dayInput = dayBlock.querySelector('input[id="day' + (index + 1) + '"]');
+								            const destinationInput = dayBlock.querySelector('input[id="destination' + (index + 1) + '"]');
+								            const detailsInput = dayBlock.querySelector('input[id="details' + (index + 1) + '"]');
+
+								            const day = dayInput ? dayInput.value : '';
+								            const destination = destinationInput ? destinationInput.value : '';
+								            const details = detailsInput ? detailsInput.value : '';
 
 								            const sightseeingEntries = [];
 								            const sightseeingWrappers = dayBlock.querySelectorAll('.sightseeingWrapper');
 								            sightseeingWrappers.forEach(wrapper => {
-								                const sightseeingLocation = wrapper.querySelector('input[name="sightseeingLocation[' + (index + 1) + '][]"]').value;
-								                sightseeingEntries.push({ location: sightseeingLocation, day: 'Day ' + day });
+								                const sightseeingInput = wrapper.querySelector('input[name="sightseeingLocation[' + (index + 1) + '][]"]');
+								                if (sightseeingInput) {
+								                    sightseeingEntries.push({ location: sightseeingInput.value, day: 'Day ' + day });
+								                }
 								            });
 
 								            itinerary.push({
@@ -724,41 +731,30 @@ tbody td .fa-trash {
 								                duration: document.getElementById('duration').value.trim(),
 								                price: document.getElementById('price').value.trim(),
 								                packageType: document.getElementById('packageType').value.trim(),
+								                packageImage: document.getElementById('packageImage').value.trim(),
 								                gallery: gallery,
 								                locations: locations, // Includes `id` for updates
 								                allIncludes: allIncludes,
 								                allExcludes: allExcludes,
-								                iternary: itinerary
+								                itinerary: itinerary
 								            };
 
-								            // If file is selected, include it in the data
-								            if (file) {
-								                const reader = new FileReader();
-								                reader.onloadend = function () {
-								                    const base64String = reader.result.split(",")[1]; // Extract base64 part
-								                    packageData.packageImage = base64String;
-
-								                    // Send data via AJAX for update
-								                    sendUpdateRequest(packageData, id);
-								                };
-								                reader.readAsDataURL(file);
-								            } else {
-								                // Send data without the image file
-								                sendUpdateRequest(packageData, id);
-								            }
+								            // Send the data to the server
+								            sendUpdateRequest(packageData, id);
 								        });
+
 								    });
 
 								    // Function to send update request
 								    function sendUpdateRequest(packageData, id) {
 								        $.ajax({
-								            url: "/TouristWebsite/auth/updatePackageDetails/" + id,
+								            url: "updatePackageDetails/" + id,
 								            type: 'PUT',
 								            contentType: 'application/json',
 								            data: JSON.stringify(packageData),
 								            success: function (response) {
 								                alert('Update successful! Response: ' + response);
-								                window.location.href = '/TouristWebsite/auth/managePackage';
+								                window.location.href = 'managePackage';
 								            },
 								            error: function (error) {
 								                console.error('Error sending data:', error);
@@ -767,7 +763,6 @@ tbody td .fa-trash {
 								        });
 								    }
 								});
-
 
 </script>
 
@@ -778,7 +773,7 @@ tbody td .fa-trash {
 function getCourseData() {
     $.ajax({
         type: "GET",
-        url: '/TouristWebsite/auth/getAllPackageTypeData',
+        url: 'getAllPackageTypeData',
         dataType: 'json', 
         success: function(response) {
             console.log("Full Response:", response); // Log the full response
@@ -815,167 +810,115 @@ getCourseData();
 			
 
 			<script type="text/javascript">
-    document.getElementById('packageImage').addEventListener('change', function(event) {
-        const fileInput = event.target;
-        const imagePreview = document.getElementById('imagePreview');
-        const errorElement = document.getElementById('imageError');
-        const file = fileInput.files[0];
+//     document.getElementById('packageImage').addEventListener('change', function(event) {
+//         const fileInput = event.target;
+//         const imagePreview = document.getElementById('imagePreview');
+//         const errorElement = document.getElementById('imageError');
+//         const file = fileInput.files[0];
         
-        if (file) {
-            const fileType = file.type;
-            if (fileType !== 'image/jpeg') {
-                errorElement.textContent = 'Please upload a JPG image.';
-                fileInput.value = ''; // Clear the invalid file
-                imagePreview.style.display = 'none'; // Hide preview
-                imagePreview.src = ''; // Clear preview
-            } else {
-                errorElement.textContent = ''; // Clear error message
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    imagePreview.src = e.target.result;
-                    imagePreview.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
+//         if (file) {
+//             const fileType = file.type;
+//             if (fileType !== 'image/jpeg') {
+//                 errorElement.textContent = 'Please upload a JPG image.';
+//                 fileInput.value = ''; // Clear the invalid file
+//                 imagePreview.style.display = 'none'; // Hide preview
+//                 imagePreview.src = ''; // Clear preview
+//             } else {
+//                 errorElement.textContent = ''; // Clear error message
+//                 const reader = new FileReader();
+//                 reader.onload = function(e) {
+//                     imagePreview.src = e.target.result;
+//                     imagePreview.style.display = 'block';
+//                 };
+//                 reader.readAsDataURL(file);
+//             }
+//         } else {
+//             imagePreview.style.display = 'none';
+//             imagePreview.src = '';
+//             errorElement.textContent = '';
+//         }
+//     });
+</script>
+
+<script type="text/javascript">
+document.getElementById('packageHidden').addEventListener('change', function(event) {
+    const fileInput = event.target;
+    const imagePreview = document.getElementById('imagePreview');
+    const errorElement = document.getElementById('imageError');
+    const hiddenInput = document.getElementById('packageImage');
+    const file = fileInput.files[0];
+
+    // Clear previous values
+    imagePreview.style.display = 'none';
+    imagePreview.src = '';
+    errorElement.textContent = '';
+    hiddenInput.value = ''; // Clear the hidden input field
+
+    if (file) {
+        const fileType = file.type;
+
+        // Allow only JPG and PNG images
+        if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
+            errorElement.textContent = 'Please upload a JPG or PNG image.';
+            fileInput.value = ''; // Clear invalid file
         } else {
-            imagePreview.style.display = 'none';
-            imagePreview.src = '';
-            errorElement.textContent = '';
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const base64String = e.target.result; // Get the Base64 string with prefix
+                const base64Content = base64String.split(',')[1]; // Remove the prefix part (data:image/jpeg;base64, or data:image/png;base64,)
+                
+                imagePreview.src = base64String;
+                imagePreview.style.display = 'block';
+
+                // Store the Base64 string without the prefix in the hidden input
+                hiddenInput.value = base64Content;
+
+                // Log the Base64 string (without prefix)
+                console.log("Stored Base64 (without prefix):", base64Content);
+            };
+            reader.readAsDataURL(file);
         }
-    });
+    }
+});
+
+// Function to load an existing image if available
+function loadExistingImage() {
+    const hiddenInputValue = document.getElementById('packageImage').value;
+
+    if (hiddenInputValue) {
+        const imagePreview = document.getElementById('imagePreview');
+
+        // Assuming you have an image URL based on the file name (update this logic as needed)
+        const imageUrl = 'uploads/' + hiddenInputValue; // Modify this path as per your server setup
+
+        imagePreview.src = imageUrl;
+        imagePreview.style.display = 'block';
+
+        // Log the file name used for the preview (optional)
+        console.log("Loaded Image from File Name:", hiddenInputValue);
+    }
+}
+
+// Call function when the page loads to show an existing image if available
+window.onload = function() {
+    loadExistingImage();
+};
+
+// Function to get the Base64 string (without prefix) from the hidden field
+function getBase64String() {
+    const base64String = document.getElementById('packageImage').value;
+    
+    if (base64String) {
+        console.log("Retrieved Base64 (without prefix):", base64String);
+        return base64String;
+    } else {
+        console.log("No image selected.");
+        return null;
+    }
+}
+
+
 </script>
-
-
-
-<script>
-//     const addDayBtn = document.getElementById('addDayBtn');
-//     const daysContainer = document.getElementById('days-container');
-
-//     let dayCount = 0;
-
-//     addDayBtn.addEventListener('click', () => {
-//         const newDayBlock = document.createElement('div');
-//         newDayBlock.classList.add('day-block');
-//         newDayBlock.style.display = 'flex';
-//         newDayBlock.style.flexWrap = 'wrap';
-//         newDayBlock.style.justifyContent = 'space-between';
-//         newDayBlock.style.border = '1px solid #ccc';
-//         newDayBlock.style.padding = '10px';
-//         newDayBlock.style.marginBottom = '10px';
-//         newDayBlock.style.borderRadius = '5px';
-//         newDayBlock.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
-//         newDayBlock.style.position = 'relative';
-
-//         // Increment day count
-//         dayCount++;
-
-//         // Add fields for Day Number and Destination
-//         newDayBlock.innerHTML = `
-//             <div style="flex: 1 1 calc(50% - 10px); margin: 5px;">
-//                 <label for="day`+dayCount+`" style="display: block; margin-bottom: 5px; font-weight: bold;">Day Number:</label>
-//                 <input type="text" id="day`+dayCount+`" name="day[]" placeholder="E.g., 1"
-//                     style="width: 100%; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
-//             </div>
-//             <div style="flex: 1 1 calc(50% - 10px); margin: 5px;">
-//                 <label for="destination`+dayCount+`" style="display: block; margin-bottom: 5px; font-weight: bold;">Destination:</label>
-//                 <input type="text" id="destination`+dayCount+`" name="destination[]" placeholder="E.g., Amravati - Pune"
-//                     style="width: 100%; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
-//             </div>
-//             <div style="flex: 1 1 100%; margin: 5px;">
-//                 <div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px;">
-//                     <label for="sightseeing`+dayCount+`" style="font-weight: bold; margin-right: 10px;">
-//                         Sightseeing Details:
-//                     </label>
-//                     <button type="button" class="addSightseeingBtn"
-//                         style="background-color: #007bff; color: white; border: none; padding: 4px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
-//                         <i class="fas fa-plus"></i>
-//                     </button>
-//                 </div>
-//                 <div class="sightseeingContainer" style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
-//                 </div>
-//                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-//                     <label><input type="checkbox" name="breakfast[`+dayCount+`]" value="1">Breakfast</label>
-//                     <label><input type="checkbox" name="lunch[`+dayCount+`]" value="1">Lunch</label>
-//                     <label><input type="checkbox" name="dinner[`+dayCount+`]" value="1">Dinner</label>
-//                     <label><input type="checkbox" name="nightStay[`+dayCount+`]" value="1">Night Stay</label>
-//                     <label><input type="checkbox" name="hiTea[`+dayCount+`]" value="1">Hi-Tea</label>
-//                 </div>
-//                 <div style="width: 100%; display: flex; align-items: center;">
-//                     <button class="deleteDayBtn" style="background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; height: 30px; width: 100px; display: flex; justify-content: center; align-items: center; font-size: 1rem; margin-left: auto;">
-//                         Delete Day
-//                     </button>
-//                 </div>
-//             </div>
-//         `;
-
-//         daysContainer.appendChild(newDayBlock);
-
-//         const addSightseeingBtn = newDayBlock.querySelector('.addSightseeingBtn');
-//         const sightseeingContainer = newDayBlock.querySelector('.sightseeingContainer');
-
-//         addSightseeingBtn.addEventListener('click', () => {
-//             const sightseeingWrapper = document.createElement('div');
-//             sightseeingWrapper.classList.add('sightseeingWrapper');
-//             sightseeingWrapper.style.display = 'flex';
-//             sightseeingWrapper.style.gap = '10px';
-//             sightseeingWrapper.style.alignItems = 'center';
-
-//             const sightseeingInput = document.createElement('input');
-//             sightseeingInput.type = 'text';
-//             sightseeingInput.placeholder = 'Enter details of sightseeing...';
-//             sightseeingInput.style.flex = '1 1 calc(85% - 10px)';
-//             sightseeingInput.style.height = '40px';
-//             sightseeingInput.style.padding = '10px';
-//             sightseeingInput.style.fontSize = '1rem';
-//             sightseeingInput.style.border = '1px solid #ccc';
-//             sightseeingInput.style.borderRadius = '5px';
-//             sightseeingInput.style.boxSizing = 'border-box';
-//             sightseeingInput.name = `sightseeingLocation[`+dayCount+`][]`;
-
-//             const deleteBtn = document.createElement('button');
-//             deleteBtn.classList.add('deleteBtn');
-//             deleteBtn.style.backgroundColor = '#e74c3c';
-//             deleteBtn.style.color = 'white';
-//             deleteBtn.style.border = 'none';
-//             deleteBtn.style.padding = '10px';
-//             deleteBtn.style.borderRadius = '5px';
-//             deleteBtn.style.cursor = 'pointer';
-//             deleteBtn.style.height = '30px';
-//             deleteBtn.style.width = '30px';
-//             deleteBtn.style.display = 'flex';
-//             deleteBtn.style.justifyContent = 'center';
-//             deleteBtn.style.alignItems = 'center';
-//             deleteBtn.style.fontSize = '1rem';
-//             deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-
-//             deleteBtn.style.position = 'relative';
-//             deleteBtn.style.top = '-7px';
-
-//             deleteBtn.addEventListener('click', () => {
-//                 sightseeingContainer.removeChild(sightseeingWrapper);
-//             });
-
-//             sightseeingWrapper.appendChild(sightseeingInput);
-//             sightseeingWrapper.appendChild(deleteBtn);
-//             sightseeingContainer.appendChild(sightseeingWrapper);
-//         });
-//     });
-
-//     document.getElementById('days-container').addEventListener('click', function(e) {
-//         if (e.target && e.target.classList.contains('deleteDayBtn')) {
-//             e.target.closest('.day-block').remove();
-//         }
-
-//         if (e.target && e.target.classList.contains('deleteBtn')) {
-//             e.target.closest('.sightseeingWrapper').remove();
-//         }
-//     });
-</script>
-
-
-
-		
-
 
 
 <script type="text/javascript">
@@ -994,7 +937,7 @@ $(document).ready(function () {
     // Function to fetch package details (including locations, days, and itinerary)
     function getPackageDetails(id) {
         $.ajax({
-            url: "/TouristWebsite/auth/getPackageDetails/" + id,
+            url: "getPackageDetails/" + id,
             type: "GET",
             contentType: "application/json",
 			success: function (response) {
@@ -1058,6 +1001,7 @@ $(document).ready(function () {
 	    document.getElementById("duration").value = packageDetails.duration || '';
 	    document.getElementById("packageType").value = packageDetails.packageType || '';
 	    document.getElementById("price").value = packageDetails.price || '';
+	    document.getElementById("packageImage").value = packageDetails.packageImage || '';
 	    
 
 	    // Populate checkboxes
@@ -1065,15 +1009,20 @@ $(document).ready(function () {
 
 	    // Display image if present
 	    const imagePreview = document.getElementById("imagePreview"); // Target the img tag for preview
+	    const packageImage = document.getElementById("packageImage"); 
+	    
 
 	    if (packageDetails.packageImage) { 
 	        imagePreview.src = "data:image/jpeg;base64," + packageDetails.packageImage;  // Use directly without re-adding the prefix
+	        packageImage.text=packageDetails.packageImage;
 	        imagePreview.style.display = 'block'; // Show the image preview container
 	    } else {
 	        imagePreview.src = ''; // Clear the previous image
 	        imagePreview.style.display = 'none'; // Hide if no image
 	    }
 	}
+	
+	
 
 
     // Function to dynamically populate locations
@@ -1255,7 +1204,7 @@ $(document).ready(function () {
 	            dayNumberInput.style.padding = '10px';
 	            dayNumberInput.style.border = '1px solid #ccc';
 	            dayNumberInput.style.borderRadius = '5px';
-	            dayNumberInput.disabled = true;
+	            //dayNumberInput.disabled = true;
 
 	            dayNumberWrapper.appendChild(dayNumberLabel);
 	            dayNumberWrapper.appendChild(dayNumberInput);
@@ -1277,7 +1226,7 @@ $(document).ready(function () {
 	            destinationInput.style.padding = '10px';
 	            destinationInput.style.border = '1px solid #ccc';
 	            destinationInput.style.borderRadius = '5px';
-	            destinationInput.disabled = true;
+	            //destinationInput.disabled = true;
 
 	            destinationWrapper.appendChild(destinationLabel);
 	            destinationWrapper.appendChild(destinationInput);
@@ -1303,7 +1252,7 @@ $(document).ready(function () {
 	            detailsInput.style.border = '1px solid #ccc';
 	            detailsInput.style.borderRadius = '5px';
 	            detailsInput.style.resize = 'vertical';
-	            detailsInput.disabled = true;
+	            //detailsInput.disabled = true;
 
 	            detailsWrapper.appendChild(detailsLabel);
 	            detailsWrapper.appendChild(detailsInput);
@@ -1313,35 +1262,159 @@ $(document).ready(function () {
 	            dayWrapper.appendChild(detailsWrapper);
 
 	            // Sightseeing Details
-	            const sightseeingContainer = document.createElement('div');
-	            sightseeingContainer.style.marginTop = '10px';
+	        const sightseeingContainer = document.createElement('div');
+sightseeingContainer.style.marginTop = '10px';
 
-	            const sightseeingLabel = document.createElement('label');
-	            sightseeingLabel.innerText = 'Meals:';
-	            sightseeingLabel.style.fontWeight = 'bold';
-	            sightseeingContainer.appendChild(sightseeingLabel);
+// Wrapper for the label and buttons
+const sightseeingLabelWrapper = document.createElement('div');
+sightseeingLabelWrapper.style.display = 'flex';
+sightseeingLabelWrapper.style.alignItems = 'center';
+sightseeingLabelWrapper.style.gap = '10px';
 
-	            if (Array.isArray(dayDetails.sightseeingEntrie) && dayDetails.sightseeingEntrie.length > 0) {
-	                dayDetails.sightseeingEntrie.forEach((sight, sIndex) => {
-	                    const sightInput = document.createElement('input');
-	                    sightInput.type = 'text';
-	                    sightInput.name = `sightseeingDay[${index}][]`;
-	                    sightInput.value = sight.location || '';
-	                    sightInput.placeholder = `Sightseeing Location ${sIndex + 1}`;
-	                    sightInput.style.padding = '8px';
-	                    sightInput.style.border = '1px solid #ccc';
-	                    sightInput.style.borderRadius = '3px';
-	                    sightInput.style.marginTop = '5px';
-	                    sightInput.disabled = true;
+// Create and style the "Meals" label
+const sightseeingLabel = document.createElement('label');
+sightseeingLabel.innerText = 'Meals:';
+sightseeingLabel.style.fontWeight = 'bold';
+sightseeingLabelWrapper.appendChild(sightseeingLabel);
 
-	                    sightseeingContainer.appendChild(sightInput);
-	                });
-	            } else {
-	                const noSightseeing = document.createElement('p');
-	                noSightseeing.innerText = 'No sightseeing details available for this day.';
-	                noSightseeing.style.marginTop = '5px';
-	                sightseeingContainer.appendChild(noSightseeing);
-	            }
+// Create the Add button with square shape and icon
+const addMealBtn = document.createElement('button');
+addMealBtn.type = 'button';
+addMealBtn.style.backgroundColor = '#007bff';
+addMealBtn.style.color = 'white';
+addMealBtn.style.border = 'none';
+addMealBtn.style.padding = '0'; // Remove padding to maintain square shape
+addMealBtn.style.borderRadius = '5px';
+addMealBtn.style.cursor = 'pointer';
+addMealBtn.style.fontSize = '1rem';
+addMealBtn.style.height = '30px';
+addMealBtn.style.width = '30px';
+addMealBtn.style.display = 'flex';
+addMealBtn.style.justifyContent = 'center';
+addMealBtn.style.alignItems = 'center';
+addMealBtn.style.boxSizing = 'border-box';
+
+// Add the icon (plus sign) inside the Add button
+const addIcon = document.createElement('i');
+addIcon.classList.add('fas', 'fa-plus'); // FontAwesome plus icon
+addMealBtn.appendChild(addIcon);
+
+// Create the Fetch Data button
+
+
+// Append both buttons to the wrapper
+sightseeingLabelWrapper.appendChild(addMealBtn);
+
+
+sightseeingContainer.appendChild(sightseeingLabelWrapper);
+
+// Add event listener to the "Add Meal" button
+addMealBtn.addEventListener('click', () => {
+    const mealWrapper = document.createElement('div');
+    mealWrapper.style.display = 'flex';
+    mealWrapper.style.alignItems = 'center';
+    mealWrapper.style.gap = '10px';
+    mealWrapper.style.marginTop = '10px';
+
+    // Create input for the new meal
+    const mealInput = document.createElement('input');
+    mealInput.type = 'text';
+    mealInput.placeholder = 'Enter meal ';
+    mealInput.style.padding = '8px';
+    mealInput.style.border = '1px solid #ccc';
+    mealInput.style.borderRadius = '3px';
+    mealInput.style.flex = '1';
+    mealInput.name = `sightseeingLocation[`+index+`][]`;
+
+    // Create the delete button for this meal entry
+    const deleteMealBtn = document.createElement('button');
+    deleteMealBtn.type = 'button';
+    deleteMealBtn.innerHTML = '<i class="fas fa-trash"></i>';
+    deleteMealBtn.style.backgroundColor = '#e74c3c';
+    deleteMealBtn.style.color = 'white';
+    deleteMealBtn.style.border = 'none';
+    deleteMealBtn.style.padding = '0';
+   
+    deleteMealBtn.style.cursor = 'pointer';
+    deleteMealBtn.style.fontSize = '1rem';
+    deleteMealBtn.style.height = '30px';
+    deleteMealBtn.style.width = '30px';
+    deleteMealBtn.style.display = 'flex';
+    deleteMealBtn.style.justifyContent = 'center';
+    deleteMealBtn.style.alignItems = 'center';
+    deleteMealBtn.style.boxSizing = 'border-box';
+    deleteMealBtn.style.position = 'relative';
+    deleteMealBtn.style.top = '-7px'; 
+
+
+    // Event listener to delete the meal entry
+    deleteMealBtn.addEventListener('click', () => {
+        sightseeingContainer.removeChild(mealWrapper);
+    });
+
+    // Append the meal input and delete button to the wrapper
+    mealWrapper.appendChild(mealInput);
+    mealWrapper.appendChild(deleteMealBtn);
+
+    // Append the wrapper to the sightseeing container
+    sightseeingContainer.appendChild(mealWrapper);
+});
+
+// If sightseeing entries are available, display them
+if (Array.isArray(dayDetails.sightseeingEntrie) && dayDetails.sightseeingEntrie.length > 0) {
+    dayDetails.sightseeingEntrie.forEach((sight, sIndex) => {
+        // Create a wrapper for each input and delete button to keep them in the same row
+        const sightInputWrapper = document.createElement('div');
+        sightInputWrapper.style.display = 'flex';
+        sightInputWrapper.style.alignItems = 'center';
+        sightInputWrapper.style.gap = '10px'; // Adds space between input and button
+
+        // Create sight input field
+        const sightInput = document.createElement('input');
+        sightInput.type = 'text';
+        sightInput.name = `sightseeingLocation[` +index +`][]`;
+        sightInput.value = sight.location || '';
+        sightInput.placeholder = `Enter Meal `;
+        sightInput.style.padding = '8px';
+        sightInput.style.border = '1px solid #ccc';
+        sightInput.style.borderRadius = '3px';
+        sightInput.style.marginTop = '5px';
+        sightInputWrapper.appendChild(sightInput); // Add the input to the wrapper
+
+        // Create delete button for the input
+        const deleteSightBtn = document.createElement('button');
+        deleteSightBtn.type = 'button';
+        deleteSightBtn.innerHTML = '<i class="fas fa-trash"></i>';
+        deleteSightBtn.style.backgroundColor = '#e74c3c';
+        deleteSightBtn.style.color = 'white';
+        deleteSightBtn.style.border = 'none';
+        deleteSightBtn.style.padding = '0';
+        deleteSightBtn.style.cursor = 'pointer';
+        deleteSightBtn.style.fontSize = '1rem';
+        deleteSightBtn.style.height = '30px';
+        deleteSightBtn.style.width = '30px';
+        deleteSightBtn.style.display = 'flex';
+        deleteSightBtn.style.justifyContent = 'center';
+        deleteSightBtn.style.alignItems = 'center';
+        deleteSightBtn.style.position = 'relative';
+        deleteSightBtn.style.top = '-7px'; 
+        sightInputWrapper.appendChild(deleteSightBtn); // Add the delete button to the wrapper
+
+        // Event listener to delete each sightseeing input
+        deleteSightBtn.addEventListener('click', () => {
+            sightseeingContainer.removeChild(sightInputWrapper); // Remove the entire wrapper (input + button)
+        });
+
+        // Append the sight input wrapper to the main container
+        sightseeingContainer.appendChild(sightInputWrapper);
+    });
+}
+ else {
+    const noSightseeing = document.createElement('p');
+    noSightseeing.innerText = 'No sightseeing details available for this day.';
+    noSightseeing.style.marginTop = '5px';
+    sightseeingContainer.appendChild(noSightseeing);
+}
 
 	            dayWrapper.appendChild(sightseeingContainer);
 	            itineraryContainer.appendChild(dayWrapper);
@@ -1403,12 +1476,12 @@ $(document).ready(function () {
                 <input type="text" id="destination`+dayCount+`" name="destination[]" placeholder="E.g., Amravati - Pune"
                     style="width: 100%; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
             </div>
-			<div style="margin-top: 10px; min-width: 100%;">
-			    <label for="details`+dayCount+`" style="font-weight: bold; color: #34495e;">Enter Details</label>
-			    <textarea id="details`+dayCount+`" name="details[]" placeholder="Enter additional information"
-			      style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; resize: none; overflow: hidden;"
-			      rows="1" oninput="adjustHeight(this)"></textarea>
-			</div>				 
+            <div style="margin-top: 10px; min-width: 100%;">
+		    <label for="details`+dayCount+`" style="font-weight: bold; color: #34495e;">Enter Details</label>
+		    <input id="details`+dayCount+`" name="details[]" placeholder="Enter additional information"
+		      style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; resize: none; overflow: hidden;"
+		      rows="1" oninput="adjustHeight(this)">
+		</div>				 
             <div style="flex: 1 1 100%; margin: 5px;">
                 <div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px;">
                     <label for="sightseeing`+dayCount+`" style="font-weight: bold; margin-right: 10px;">
@@ -1665,6 +1738,30 @@ deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift
     // Append wrapper to the container
     excludesContainer.appendChild(locationWrapper);
   });
+</script>
+
+<script>
+//   function previewImage(event) {
+// 	  alert("hii");
+//     const file = event.target.files[0]; // Get the selected file
+//     const imageError = document.getElementById("imageError"); // Error message element
+//     const imagePreview = document.getElementById("imagePreview"); // Image preview element
+
+//     if (file && file.type.startsWith("image/")) {
+//       const reader = new FileReader();
+//       reader.onload = function (e) {
+//         const imageUrl = e.target.result; // Base64 image URL
+//         imagePreview.src = imageUrl; // Set the preview image source
+//         imagePreview.style.display = 'block'; // Show the preview
+//         imageError.textContent = ""; // Clear any error message
+//       };
+//       reader.readAsDataURL(file); // Convert the file to Base64
+//     } else {
+//       imagePreview.src = ''; // Clear the preview
+//       imagePreview.style.display = 'none'; // Hide the preview
+//       imageError.textContent = "Please upload a valid image."; // Display error message
+//     }
+//   }
 </script>
 
 

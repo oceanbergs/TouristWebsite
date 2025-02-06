@@ -29,38 +29,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
             .dataSource(dataSource)
             .usersByUsernameQuery("SELECT username, password, enabled FROM user WHERE username = ?")
-            .authoritiesByUsernameQuery("SELECT u.username, r.role_name FROM user u JOIN roles r ON u.id = r.user_id WHERE u.username = ?")
+            .authoritiesByUsernameQuery(
+                "SELECT u.username, r.role_name FROM user u JOIN roles r ON u.id = r.user_id WHERE u.username = ?")
             .passwordEncoder(passwordEncoder);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .csrf().disable() // Disable CSRF for simplicity (enable in production with proper configuration)
+            .csrf().disable() // Disable CSRF for simplicity (enable properly in production)
             .authorizeRequests()
-                // Allow unrestricted access to all URLs under /TouristWebsite/
-            
-                .antMatchers("/TouristWebsite/**").permitAll()
-                
-                // Restrict access to URLs under /auth/
-                .antMatchers("/auth/**").authenticated()
-                
-                // Any other paths (optional, can be omitted if no other paths exist)
-                .anyRequest().permitAll()
+                .antMatchers("/**").permitAll() // Allow unrestricted access
+                .antMatchers("/auth/**").authenticated() // Restrict access to authenticated users
+                .anyRequest().permitAll() // Optional: apply other rules
             .and()
             .formLogin()
                 .loginPage("/auth/login") // Custom login page
-                .loginProcessingUrl("/auth/login") // URL for login POST requests
+                .loginProcessingUrl("/auth/loginn") // URL for login POST requests
                 .defaultSuccessUrl("/auth/dashboard", true) // Redirect after successful login
                 .failureUrl("/auth/login?error=true") // Redirect on failed login
                 .permitAll()
             .and()
             .logout()
-                .logoutUrl("/auth/logout")
-                .logoutSuccessUrl("/auth/login?logout=true") // Redirect to login page after logout
+                .logoutUrl("/logout") // URL for logout
+                .logoutSuccessUrl("/auth/login?logout=true") // Redirect after logout
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID") // Clear session cookies
                 .permitAll();
     }
-
 
     @Bean
     @Override
@@ -72,4 +69,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-}
+}  

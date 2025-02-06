@@ -59,4 +59,19 @@ public class AdminMapping {
 		public String viewBooking() {
 			return "Admin/viewbooking";
 		}
+		
+		@GetMapping("/manageBooking")
+		public String getManageBooking() {
+			return "Package/booking";
+		}
+		
+		@GetMapping("/manageGallery")
+		public String getmanageGallery() {
+			return "Admin/manage_gallery";
+		}
+		
+		@GetMapping("/bannerManagement")
+		public String getBanner() {
+			return "Admin/Banner";
+		}
 }

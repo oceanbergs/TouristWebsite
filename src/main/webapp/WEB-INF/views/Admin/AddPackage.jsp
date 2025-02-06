@@ -342,9 +342,9 @@ tbody td .fa-trash {
 			</div>
 			<h2 class="companyname">Shri Gajanan Yatra Company Pvt. Ltd</h2>
 			<div class="actions">
-				<img src="../img/profile.png" alt="Profile"> <img
-					src="../img/setting.png" alt="Setting"> <img src="../img/logout.png"
-					alt="Logout">
+				<a href="logout">
+        <img src="../img/logout.png" alt="Logout">
+    </a>
 			</div>
 		</header>
 
@@ -353,13 +353,13 @@ tbody td .fa-trash {
 			<aside class="sidebar">
 				<nav>
 					<ul>
-						<li><a href="/TouristWebsite/auth/notification">Enquiry</a></li>
-						<li><a href="/TouristWebsite/auth/dashboard">Dashboard</a></li>
-						<li><a href="/TouristWebsite/auth/packageType">Packages Type</a></li>
+						<li><a href="notification">Enquiry</a></li>
+						<li><a href="dashboard">Dashboard</a></li>
+						<li><a href="packageType">Packages Type</a></li>
 						<li><a href="managePackage" class="active" style="background-color: #87be29;">Manage Packages</a></li>
-					<li><a href="#bookings">Manage Bookings</a></li>
-						<li><a href="#payments">Manage Gallery</a></li>
-<!--						<li><a href="#users">User Management</a></li>-->
+					<li><a href="bookingView">Manage Bookings</a></li>
+						<li><a href="manageGallery">Manage Gallery</a></li>
+<!--						<li><a href="#viewAddPackage">User Management</a></li>-->
 						 <!--<li><a href="/TouristWebsite/auth/notification">Notifications</a></li>-->
 <!--						<li><a href="#settings">Settings</a></li>-->
 					</ul>
@@ -613,7 +613,7 @@ tbody td .fa-trash {
 function getCourseData() {
     $.ajax({
         type: "GET",
-        url: '/TouristWebsite/auth/getAllPackageTypeData',
+        url: 'getAllPackageTypeData',
         dataType: 'json', 
         success: function(response) {
             console.log("Full Response:", response); // Log the full response
@@ -891,9 +891,9 @@ deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift
             </div>
 			<div style="margin-top: 10px; min-width: 100%;">
 			    <label for="details`+dayCount+`" style="font-weight: bold; color: #34495e;">Enter Details</label>
-			    <textarea id="details`+dayCount+`" name="details[]" placeholder="Enter additional information"
+			    <input id="details`+dayCount+`" name="details[]" placeholder="Enter additional information"
 			      style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; resize: none; overflow: hidden;"
-			      rows="1" oninput="adjustHeight(this)"></textarea>
+			      rows="1" oninput="adjustHeight(this)">
 			</div>				 
             <div style="flex: 1 1 100%; margin: 5px;">
                 <div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px;">
@@ -1025,27 +1025,34 @@ deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift
 	    });
 
 	    // Collect itinerary
-	    const itinerary = [];
-	    const dayBlocks = document.querySelectorAll('.day-block');
-	    dayBlocks.forEach((dayBlock, index) => {
-	        const day = dayBlock.querySelector('input[id="day' + (index + 1) + '"]').value;
-	        const destination = dayBlock.querySelector('input[id="destination' + (index + 1) + '"]').value;
-	        const details = dayBlock.querySelector('input[id="details' + (index + 1) + '"]').value;
+	   const itinerary = [];
+const dayBlocks = document.querySelectorAll('.day-block');
+dayBlocks.forEach((dayBlock, index) => {
+    const dayInput = dayBlock.querySelector('input[id="day' + (index + 1) + '"]');
+    const destinationInput = dayBlock.querySelector('input[id="destination' + (index + 1) + '"]');
+    const detailsInput = dayBlock.querySelector('input[id="details' + (index + 1) + '"]');
 
-	        const sightseeingEntries = [];
-	        const sightseeingWrappers = dayBlock.querySelectorAll('.sightseeingWrapper');
-	        sightseeingWrappers.forEach(wrapper => {
-	            const sightseeingLocation = wrapper.querySelector('input[name="sightseeingLocation[' + (index + 1) + '][]"]').value;
-	            sightseeingEntries.push({ location: sightseeingLocation, day: 'Day ' + day });
-	        });
+    const day = dayInput ? dayInput.value : '';
+    const destination = destinationInput ? destinationInput.value : '';
+    const details = detailsInput ? detailsInput.value : '';
 
-	        itinerary.push({
-	            day: 'Day ' + day,
-	            destination: destination,
-	            details: details,
-	            sightseeingEntrie: sightseeingEntries,
-	        });
-	    });
+    const sightseeingEntries = [];
+    const sightseeingWrappers = dayBlock.querySelectorAll('.sightseeingWrapper');
+    sightseeingWrappers.forEach(wrapper => {
+        const sightseeingInput = wrapper.querySelector('input[name="sightseeingLocation[' + (index + 1) + '][]"]');
+        if (sightseeingInput) {
+            sightseeingEntries.push({ location: sightseeingInput.value, day: 'Day ' + day });
+        }
+    });
+
+    itinerary.push({
+        day: 'Day ' + day,
+        destination: destination,
+        details: details,
+        sightseeingEntrie: sightseeingEntries,
+    });
+});
+
 
 	    // Collect gallery images
 		const galleryInputs = document.querySelectorAll('input[name="gallery[]"]');
@@ -1096,7 +1103,7 @@ deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift
 		                alert('Failed to process gallery images. Please try again.');
 		            });
 		    } else {
-		        alert("No gallery images selected.");
+		       // alert("No gallery images selected.");
 		        return Promise.resolve(); // No gallery images to process
 		    }
 		};
@@ -1131,7 +1138,7 @@ deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift
 
 	                // Send data via AJAX
 	                $.ajax({
-	                    url: '/TouristWebsite/auth/addPackageDetails',
+	                    url: 'addPackageDetails',
 	                    type: 'POST',
 	                    contentType: 'application/json',
 	                    data: JSON.stringify(packageData),

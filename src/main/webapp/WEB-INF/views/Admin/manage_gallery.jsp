@@ -329,8 +329,9 @@ tbody td .fa-trash {
 			</div>
 			<h2 class="companyname">Shri Gajanan Yatra Company Pvt. Ltd</h2>
 			<div class="actions">
-				 <img src="../img/logout.png"
-					alt="Logout">
+				 <a href="logout">
+        <img src="../img/logout.png" alt="Logout">
+    </a>
 			</div>
 		</header>
 
@@ -341,12 +342,13 @@ tbody td .fa-trash {
                 <!-- <h2>Shree Gajanan Yatra</h2> -->
                 <nav>
                     <ul>
-						<li><a href="/TouristWebsite/auth/notification">Enquiry</a></li>
-                        <li><a href="/TouristWebsite/auth/dashboard" >Dashboard</a></li>
-                        <li><a href="/TouristWebsite/auth/packageType">Packages Type</a></li>
-                        <li><a href="/TouristWebsite/auth/managePackage">Manage Packages</a></li>
-                <li><a href="/TouristWebsite/auth/bookingView" >Manage Bookings</a></li>
-                  <li><a href="/TouristWebsite/auth/manageGallary" class="active" style="background-color: #87be29;">Manage Gallary</a></li>
+						<li><a href="notification">Enquiry</a></li>
+                        <li><a href="dashboard" >Dashboard</a></li>
+                        <li><a href="packageType">Packages Type</a></li>
+                        <li><a href="managePackage">Manage Packages</a></li>
+                <li><a href="bookingView" >Manage Bookings</a></li>
+                  <li><a href="manageGallery" class="active" style="background-color: #87be29;">Manage Gallary</a></li>
+                    <li><a href="bannerManagement">Banner Management</a></li>
 <!--                        <li><a href="#users">User Management</a></li>-->
                        
 <!--                        <li><a href="#settings">Settings</a></li>-->
@@ -371,113 +373,248 @@ tbody td .fa-trash {
     <h1 style="font-size: 36px; font-weight: bold; text-align: center; color: #000000; margin-bottom: 32px;">Gallery Management</h1>
 
     <div style="background-color: #ffffff; padding: 24px; border-radius: 8px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); margin-bottom: 24px;">
-      <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #000000;">Add New Photo</h2>
-      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center;">
-        <input id="photo-url" type="text" placeholder="Enter Photo URL (optional)" style="border: 1px solid #6b9e12; outline: none; padding: 8px; border-radius: 4px; flex: 1; min-width: 200px;" />
-        <input id="photo-alt" type="text" placeholder="Enter Alt Text (use ,, to separate keywords)" style="border: 1px solid #6b9e12; outline: none; padding: 8px; border-radius: 4px; flex: 1; min-width: 200px;" />
-        <input id="photo-upload" type="file" accept="image	" style="border: 1px solid #6b9e12; outline: none; padding: 8px; border-radius: 4px; flex: 1; min-width: 200px;" />
-        <button onclick="addPhoto()" style="background-color: #6b9e12; color: #ffffff; padding: 8px 16px; border-radius: 4px; border: none; cursor: pointer;">Add Photo</button>
-      </div>
-    </div>
-
-    <div style="background-color: #ffffff; padding: 24px; border-radius: 8px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); overflow-x: auto;">
-      <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #6b9e12;">Gallery</h2>
-      <div id="gallery-container" style="display: flex; gap: 16px; white-space: nowrap; overflow-x: auto;">
-        <!-- Photos will be dynamically added here -->
-      </div>
-    </div>
+  <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #000000;">Add New Photo</h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center;">
+    <input id="photo-upload" type="file" accept="image/*" style="border: 1px solid #6b9e12; outline: none; padding: 8px; border-radius: 4px; flex: 1; min-width: 200px;" />
+    <button onclick="uploadPhoto();" style="background-color: #6b9e12; color: #ffffff; padding: 8px 16px; border-radius: 4px; border: none; cursor: pointer;">Add Photo</button>
   </div>
+</div>
+<div style="background-color: #ffffff; padding: 24px; border-radius: 8px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); overflow-x: auto;">
+  <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #6b9e12;">Gallery</h2>
+  <div id="gallery-container" style="display: flex; gap: 16px; white-space: nowrap; overflow-x: auto;">
+    <!-- Photos will be dynamically added here -->
+  </div>
+</div>
 
   <script>
-    const gallery = [];
+//     const gallery = [];
 
-    function renderGallery() {
-      const galleryContainer = document.getElementById('gallery-container');
-      galleryContainer.innerHTML = '';
-      gallery.forEach((photo, index) => {
-        const photoElement = document.createElement('div');
-        photoElement.style.position = 'relative';
-        photoElement.style.width = '150px';
-        photoElement.style.height = '150px';
-        photoElement.style.display = 'inline-block';
+//     function renderGallery() {
+//       const galleryContainer = document.getElementById('gallery-container');
+//       galleryContainer.innerHTML = '';
+//       gallery.forEach((photo, index) => {
+//         const photoElement = document.createElement('div');
+//         photoElement.style.position = 'relative';
+//         photoElement.style.width = '150px';
+//         photoElement.style.height = '150px';
+//         photoElement.style.display = 'inline-block';
 
-        photoElement.innerHTML = `
-          <img src="${photo.url}" alt="${photo.alt}" style="border-radius: 8px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); width: 100%; height: 100%; object-fit: cover;">
-          <div style="position: absolute; top: 8px; right: 8px; display: flex; gap: 4px;">
-            <button onclick="updatePhoto(${index})" style="background-color: #007bff; color: #ffffff; padding: 4px; border-radius: 4px; border: none; cursor: pointer;"><i class="fas fa-edit"></i></button>
-            <button onclick="deletePhoto(${index})" style="background-color: #dc3545; color: #ffffff; padding: 4px; border-radius: 4px; border: none; cursor: pointer;"><i class="fas fa-trash"></i></button>
-          </div>
-        `;
+//         photoElement.innerHTML = `
+//           <img src="${photo.url}" alt="${photo.alt}" style="border-radius: 8px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); width: 100%; height: 100%; object-fit: cover;">
+//           <div style="position: absolute; top: 8px; right: 8px; display: flex; gap: 4px;">
+//             <button onclick="updatePhoto(${index})" style="background-color: #007bff; color: #ffffff; padding: 4px; border-radius: 4px; border: none; cursor: pointer;"><i class="fas fa-edit"></i></button>
+//             <button onclick="deletePhoto(${index})" style="background-color: #dc3545; color: #ffffff; padding: 4px; border-radius: 4px; border: none; cursor: pointer;"><i class="fas fa-trash"></i></button>
+//           </div>
+//         `;
 
-        galleryContainer.appendChild(photoElement);
-      });
-    }
+//         galleryContainer.appendChild(photoElement);
+//       });
+//     }
 
-    function addPhoto() {
-      const photoUrl = document.getElementById('photo-url').value.trim();
-      const photoAlt = document.getElementById('photo-alt').value.trim();
-      const photoUpload = document.getElementById('photo-upload').files[0];
+//     function addPhoto() {
+//       const photoUrl = document.getElementById('photo-url').value.trim();
+//       const photoAlt = document.getElementById('photo-alt').value.trim();
+//       const photoUpload = document.getElementById('photo-upload').files[0];
 
-      if (!photoAlt) {
-        alert('Alt Text is required.');
-        return;
-      }
+//       if (!photoAlt) {
+//         alert('Alt Text is required.');
+//         return;
+//       }
 
-      if (photoUpload) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          gallery.push({ url: e.target.result, alt: photoAlt });
-          renderGallery();
-          resetInputs();
-        };
-        reader.readAsDataURL(photoUpload);
-      } else if (photoUrl) {
-        gallery.push({ url: photoUrl, alt: photoAlt });
-        renderGallery();
-        resetInputs();
-      } else {
-        alert('Please provide a URL or upload a photo.');
-      }
-    }
+//       if (photoUpload) {
+//         const reader = new FileReader();
+//         reader.onload = function (e) {
+//           gallery.push({ url: e.target.result, alt: photoAlt });
+//           renderGallery();
+//           resetInputs();
+//         };
+//         reader.readAsDataURL(photoUpload);
+//       } else if (photoUrl) {
+//         gallery.push({ url: photoUrl, alt: photoAlt });
+//         renderGallery();
+//         resetInputs();
+//       } else {
+//         alert('Please provide a URL or upload a photo.');
+//       }
+//     }
 
-    function deletePhoto(index) {
-      if (confirm('Are you sure you want to delete this photo?')) {
-        gallery.splice(index, 1);
-        renderGallery();
-      }
-    }
+//     function deletePhoto(index) {
+//       if (confirm('Are you sure you want to delete this photo?')) {
+//         gallery.splice(index, 1);
+//         renderGallery();
+//       }
+//     }
 
-    function updatePhoto(index) {
-      const newAlt = prompt('Enter new Alt Text (required, use ,, to separate keywords):', gallery[index].alt);
+//     function updatePhoto(index) {
+//       const newAlt = prompt('Enter new Alt Text (required, use ,, to separate keywords):', gallery[index].alt);
 
-      if (!newAlt) {
-        alert('Alt Text is required.');
-        return;
-      }
+//       if (!newAlt) {
+//         alert('Alt Text is required.');
+//         return;
+//       }
 
-      const fileInput = document.createElement('input');
-      fileInput.type = 'file';
-      fileInput.accept = 'image';
-      fileInput.onchange = function (event) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          gallery[index].url = e.target.result;
-          gallery[index].alt = newAlt;
-          renderGallery();
-        };
-        reader.readAsDataURL(event.target.files[0]);
-      };
-      fileInput.click();
-    }
+//       const fileInput = document.createElement('input');
+//       fileInput.type = 'file';
+//       fileInput.accept = 'image';
+//       fileInput.onchange = function (event) {
+//         const reader = new FileReader();
+//         reader.onload = function (e) {
+//           gallery[index].url = e.target.result;
+//           gallery[index].alt = newAlt;
+//           renderGallery();
+//         };
+//         reader.readAsDataURL(event.target.files[0]);
+//       };
+//       fileInput.click();
+//     }
 
-    function resetInputs() {
-      document.getElementById('photo-url').value = '';
-      document.getElementById('photo-alt').value = '';
-      document.getElementById('photo-upload').value = '';
-    }
+//     function resetInputs() {
+// //       document.getElementById('photo-url').value = '';
+// //       document.getElementById('photo-alt').value = '';
+//       document.getElementById('photo-upload').value = '';
+//     }
 
-    renderGallery();
+//     renderGallery();
   </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+  function uploadPhoto() {
+    const fileInput = document.getElementById("photo-upload");
+    const file = fileInput.files[0];
+    if (!file) {
+      alert("Please select an image!");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const base64Image = e.target.result.split(",")[1]; // Extract Base64 string
+      const payload = {
+//         name: file.name,
+//         type: file.type,
+        imageData: base64Image,
+      };
+
+      $.ajax({
+        url: "upload",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(payload),
+        success: function (data) {
+        	//alert(Image Upload Successfully...);
+          displayPhoto(data);
+          fileInput.value = ""; // Clear input
+        },
+        error: function (error) {
+          console.error("Error:", error);
+        },
+      });
+    };
+
+    reader.readAsDataURL(file); // Read file as Base64 string
+  }
+
+  function displayPhoto(image) {
+	  const galleryContainer = document.getElementById("gallery-container");
+
+	  if (!galleryContainer) {
+	    console.error("Gallery container not found.");
+	    return;
+	  }
+
+	  if (!image || !image.imageData || !image.id) {
+	    console.error("Invalid image data provided.");
+	    return;
+	  }
+
+	  // Create a container for the photo
+	  const photoDiv = document.createElement("div");
+	  photoDiv.style.position = "relative";
+	  photoDiv.style.display = "inline-block";
+	  photoDiv.style.margin = "10px";
+
+	  // Construct the Base64 image source
+	  const base64Image = "data:image/jpeg;base64," + image.imageData;
+
+	  // Create the image element
+	  const imgElement = document.createElement("img");
+	  imgElement.src = base64Image;
+	  imgElement.alt = image.name;
+	  imgElement.style.width = "150px";
+	  imgElement.style.height = "150px";
+	  imgElement.style.borderRadius = "8px";
+	  imgElement.style.objectFit = "cover";
+
+	  // Create the delete button
+	  const deleteButton = document.createElement("button");
+	  deleteButton.textContent = "X";
+	  deleteButton.style.position = "absolute";
+	  deleteButton.style.top = "5px";
+	  deleteButton.style.right = "5px";
+	  deleteButton.style.background = "red";
+	  deleteButton.style.color = "white";
+	  deleteButton.style.border = "none";
+	  deleteButton.style.borderRadius = "50%";
+	  deleteButton.style.cursor = "pointer";
+
+	  // Attach the ID to the button and add delete functionality
+	  deleteButton.dataset.id = image.id; // Set image ID as a data attribute
+	  deleteButton.onclick = () => {
+	    const imageId = deleteButton.dataset.id; // Retrieve the ID
+	    deleteBatch(imageId); // Call delete function
+	    galleryContainer.removeChild(photoDiv); // Remove photo from the UI
+	  };
+
+	  // Append the image and button to the photoDiv
+	  photoDiv.appendChild(imgElement);
+	  photoDiv.appendChild(deleteButton);
+
+	  // Append the photoDiv to the gallery container
+	  galleryContainer.appendChild(photoDiv);
+	}
+
+
+  function deleteBatch(id) {
+	  $.ajax({
+	    url: "getGalleryBy/" + id, // Use the ID in the endpoint
+	    type: "POST",              // Use POST as required
+	    success: function (response) {
+	      if (response === "Data Deleted Successfully") {
+	        alert("Image deleted successfully!");
+	        // Optionally reload or update the gallery here
+	      } else {
+	        alert("Failed to delete image: " + response);
+	      }
+	    },
+	    error: function (jqXHR, status, errorThrown) {
+	      alert("Error: Failed to delete the image");
+	      console.error("Error details:", status, errorThrown);
+	    }
+	  });
+	}
+
+
+	function loadGallery() {
+	  $.ajax({
+	    url: "getGallery",
+	    type: "GET",
+	    success: function (images) {
+	      const galleryContainer = document.getElementById("gallery-container");
+	      galleryContainer.innerHTML = ""; // Clear the container before reloading
+	      images.forEach((image) => displayPhoto(image)); // Display all fetched images
+	    },
+	    error: function (error) {
+	      console.error("Error:", error);
+	    },
+	  });
+	}
+
+	// Load gallery on page load
+	$(document).ready(function () {
+	  loadGallery(); // Initial gallery load
+	});
+
+</script>
 
                 </section>
             </main>

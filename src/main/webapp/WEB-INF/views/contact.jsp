@@ -87,8 +87,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="/TouristWebsite" class="nav-item nav-link " style="font-family: 'Poppins', sans-serif;">Home</a>
-                <a href="/TouristWebsite/about" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">About</a>
+                <a href="login" class="nav-item nav-link " style="font-family: 'Poppins', sans-serif;">Home</a>
+                <a href="/about" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">About</a>
                 <!-- All Tours India (Domestic) Dropdown -->
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" id="packageDropdownToggle" data-bs-toggle="dropdown" style="font-family: 'Poppins', sans-serif;">India</a>
@@ -98,10 +98,10 @@
                 </div>
 
                 <!-- All World Tours (International) Dropdown -->
-                <a href="/TouristWebsite/GetInternation" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">World</a>
+                <a href="GetInternation" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">World</a>
 
-                <a href="/TouristWebsite/packages" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Packages</a>
-                <a href="/TouristWebsite/contact" class="nav-item nav-link active" style="font-family: 'Poppins', sans-serif;">Contact</a>
+                <a href="packages" class="nav-item nav-link" style="font-family: 'Poppins', sans-serif;">Packages</a>
+                <a href="contact" class="nav-item nav-link active" style="font-family: 'Poppins', sans-serif;">Contact</a>
             </div>
         </div>
     </nav>
@@ -144,7 +144,7 @@
                         </div>
                         <div class="ms-3">
                             <h5 class="text-primary">Office</h5>
-                            <p class="mb-0">Shree Gajanan Yatra Company Pvt. Ltd, 123 Pilgrimage Road, Mumbai, India</p>
+                            <p class="mb-0">Shree Gajanan Yatra Company Pvt. Ltd, Front Of Allahbad Bank Mil Colony Stop Paratwada 444805</p>
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-4">
@@ -251,7 +251,7 @@
 		               </div>
 		               <div class="col-lg-3 col-md-6">
 		                   <h4 class="text-white mb-3">Contact</h4>
-						<p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Shree Gajanan Yatra Company Pvt. Ltd, 123 Pilgrimage Road, Mumbai, India</p>
+						<p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Shree Gajanan Yatra Company Pvt. Ltd, Front Of Allahbad Bank Mil Colony Stop Paratwada 444805</p>
 						                <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 9552014476</p>
 						                <p class="mb-2"><i class="fa fa-envelope me-3"></i>shrigajananyatracompany@gmail.com</p>
 		                   <div class="d-flex pt-2">
@@ -267,32 +267,32 @@
 					       <h4 class="text-white mb-3">Gallery</h4>
 					       <div class="row g-2 pt-2">
 					           <div class="col-4">
-					                <a href='/TouristWebsite/about#detailedGallery'>
+					                <a href='about#detailedGallery'>
 					                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
 					               </a>
 					           </div>
 					           <div class="col-4">
-					                <a href='/TouristWebsite/about#detailedGallery'>
+					                <a href='about#detailedGallery'>
 					                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
 					               </a>
 					           </div>
 					           <div class="col-4">
-					                <a href='/TouristWebsite/about#detailedGallery'>
+					                <a href='about#detailedGallery'>
 					                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
 					               </a>
 					           </div>
 					           <div class="col-4">
-					                <a href='/TouristWebsite/about#detailedGallery'>
+					                <a href='about#detailedGallery'>
 					                   <img class="img-fluid bg-light p-1" src="img/package-2.jpg" alt="">
 					               </a>
 					           </div>
 					           <div class="col-4">
-					               <a href='/TouristWebsite/about#detailedGallery'>
+					               <a href='about#detailedGallery'>
 					                   <img class="img-fluid bg-light p-1" src="img/package-3.jpg" alt="">
 					               </a>
 					           </div>
 					           <div class="col-4">
-					               <a href='/TouristWebsite/about#detailedGallery'>
+					               <a href='about#detailedGallery'>
 					                   <img class="img-fluid bg-light p-1" src="img/package-1.jpg" alt="">
 					               </a>
 					           </div>

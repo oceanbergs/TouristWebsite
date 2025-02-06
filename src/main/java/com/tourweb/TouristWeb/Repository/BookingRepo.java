@@ -32,6 +32,13 @@ public interface BookingRepo extends JpaRepository<Booking, Long>{
 		       "FUNCTION('DATE_FORMAT', b.start_Date, '%Y-%m-%d') LIKE :keyword OR " +
 		       "FUNCTION('DATE_FORMAT', b.end_Date, '%Y-%m-%d') LIKE :keyword")
 		List<Booking> globalSearch(@Param("keyword") String keyword);
+	
+	
+	
+	
+//	 List<Booking> findByStart_DateBetween(String startDate, String endDate);
+
+
 
 }
 

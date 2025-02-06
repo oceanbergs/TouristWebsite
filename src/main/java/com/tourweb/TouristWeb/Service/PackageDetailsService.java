@@ -14,6 +14,9 @@ import com.tourweb.TouristWeb.Model.Iternary;
 import com.tourweb.TouristWeb.Model.Location;
 import com.tourweb.TouristWeb.Model.PackageDetails;
 import com.tourweb.TouristWeb.Model.SightseeingEntry;
+import com.tourweb.TouristWeb.Repository.AllExcludeRepo;
+import com.tourweb.TouristWeb.Repository.AllIncludeRepo;
+import com.tourweb.TouristWeb.Repository.IternaryRepo;
 import com.tourweb.TouristWeb.Repository.PackageDetailsRepo;
 import com.tourweb.TouristWeb.Service.Interface.PackageDetailsServiceInterface;
 
@@ -23,6 +26,15 @@ public class PackageDetailsService  implements PackageDetailsServiceInterface{
 	
 	@Autowired
 	private PackageDetailsRepo packageDetailsRepo;
+	
+	@Autowired 
+	private IternaryRepo iternaryRepo;
+	
+	@Autowired
+	private AllIncludeRepo allIncludeRepo ;
+	
+	@Autowired
+	private AllExcludeRepo allExcludeRepo;
 
 	// Get all packages
    
@@ -210,4 +222,24 @@ public class PackageDetailsService  implements PackageDetailsServiceInterface{
     return packageDetailsRepo.findByPackageType(packageType);
 }
 
+	
+	public List<PackageDetails> getBasicPackageDetails() {
+	    return packageDetailsRepo.findBasicPackageDetails();
+	}
+	
+	
+	 @Override
+	    public List<Iternary> getItineraryByPackageId(Long packageId) {
+	        return iternaryRepo.findByPackageDetails_Id(packageId);
+	    }
+
+	 @Override
+	    public List<AllInclude> getIncludesByPackageId(Long packageId) {
+	        return allIncludeRepo.findByPackageDetails_Id(packageId);
+	    }
+	 
+	 @Override
+	    public List<AllExclude> getExcludesByPackageId(Long packageId) {
+	        return allExcludeRepo.findByPackageDetails_Id(packageId);
+	    }
 }

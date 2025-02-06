@@ -340,9 +340,9 @@ tbody td .fa-trash {
 			</div>
 			<h2 class="companyname">Shri Gajanan Yatra Company Pvt. Ltd</h2>
 			<div class="actions">
-				<img src="../img/profile.png" alt="Profile"> <img
-					src="../img/setting.png" alt="Setting"> <img src="../img/logout.png"
-					alt="Logout">
+				<a href="logout">
+        <img src="../img/logout.png" alt="Logout">
+    </a>
 			</div>
 		</header>
 
@@ -351,16 +351,18 @@ tbody td .fa-trash {
 			<aside class="sidebar">
 				<nav>
 					<ul>
-						<li><a href="/TouristWebsite/auth/dashboard">Dashboard</a></li>
-						<li><a href="/TouristWebsite/auth/packageType">Packages
+						 <li><a href="notification">Enquiry</a></li>
+						<li><a href="dashboard">Dashboard</a></li>
+						<li><a href="packageType">Packages
 								Type</a></li>
-						<li><a href="managePackage"
-							class="active" style="background-color: #87be29;">Manage
-								Packages</a></li>
-<!--						<li><a href="#bookings">Bookings</a></li>-->
-<!--						<li><a href="#payments">Payments</a></li>-->
+						<li><a href="managePackage" class="active"
+							style="background-color: #87be29;">  Manage Packages</a></li>
+							<li><a href="bookingView">Manage Bookings</a></li>
+					 <li><a href="manageGallery">Manage Gallery</a></li>
+					   <li><a href="bannerManagement">Banner Management</a></li>
+<!-- 						<li><a href="manageGallery">Manage Gallery</a></li> -->
 <!--						<li><a href="#users">User Management</a></li>-->
-						 <li><a href="/TouristWebsite/auth/notification">Notifications</a></li>
+					
 <!--						<li><a href="#settings">Settings</a></li>-->
 					</ul>
 				</nav>
@@ -572,7 +574,7 @@ $(document).ready(function () {
     // Function to fetch package details (including locations, days, and itinerary)
     function getPackageDetails(id) {
         $.ajax({
-            url: "/TouristWebsite/auth/getPackageDetails/" + id,
+            url: "getPackageDetails/" + id,
             type: "GET",
             contentType: "application/json",
 			success: function (response) {

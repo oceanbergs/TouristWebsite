@@ -150,20 +150,31 @@
                 <img src="../img/logout.png" alt="Logout" title="Logout">
             </div>
         </header>
+        
+<!--         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center" style="display: none;"> -->
+<!--     <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status"> -->
+<!--         <span class="sr-only">Loading...</span> -->
+<!--     </div> -->
+<!-- </div> -->
+        
 
         <!-- Sidebar -->
         <aside class="sidebar">
             <nav>
                 <ul>
-                    <li><a href="/TouristWebsite/auth/notification">Enquiry</a></li>
-                    <li><a href="/TouristWebsite/auth/dashboard">Dashboard</a></li>
-                    <li><a href="/TouristWebsite/auth/packageType">Packages Type</a></li>
-                    <li><a href="/TouristWebsite/auth/managePackage" class="active" style="background-color: #87be29;">Manage Packages</a></li>
-                    <li><a href="/TouristWebsite/auth/bookingView">Manage Bookings</a></li>
-                    <li><a href="/TouristWebsite/auth/manageGallary">Manage Gallery</a></li>
+                    <li><a href="notification">Enquiry</a></li>
+                    <li><a href="dashboard">Dashboard</a></li>
+                    <li><a href="packageType">Packages Type</a></li>
+                    <li><a href="managePackage" class="active" style="background-color: #87be29;">Manage Packages</a></li>
+                    <li><a href="bookingView">Manage Bookings</a></li>
+                    <li><a href="manageGallary">Manage Gallery</a></li>
+                     <li><a href="bannerManagement">Banner Management</a></li>
                 </ul>
             </nav>
         </aside>
+        
+        
+        
 
         <!-- Main Content -->
         <main class="main-content">
@@ -171,7 +182,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2 class="text-center" style="color: #2c3e50; font-weight: bold;">Manage Travel Packages</h2>
                     <div>
-                        <button class="btn btn-success" onclick="window.location.href='/TouristWebsite/auth/addPackageType'" style="background-color: #86B817; border-color: #86B817;">+ Add New Package</button>
+                        <button class="btn btn-success" onclick="window.location.href='addPackageType'" style="background-color: #86B817; border-color: #86B817;">+ Add New Package</button>
                         <button class="btn btn-primary" style="background-color: #86B817; border-color: #86B817;">Export to Excel</button>
                     </div>
                 </div>
@@ -180,6 +191,9 @@
                 <div class="mb-3">
                     <input type="text" id="search" class="form-control" placeholder="Search Packages..." style="border: 2px solid #86B817; border-radius: 5px;">
                 </div>
+                
+                <!-- Spinner HTML -->
+
 
                 <!-- Table -->
                 <table id="packageTable" class="table table-striped" style="background: #ffffff; border-radius: 10px; overflow: hidden;">
@@ -195,11 +209,19 @@
                     </thead>
                     <tbody>
                         <!-- Data will be dynamically loaded here -->
+                        
+                        
                     </tbody>
                 </table>
+                
+                <div id="loadingSpinner" style="display:none; text-align: center;">
+    <i class="fa fa-spinner fa-spin" style="font-size: 24px;"></i> Loading...
+</div>
             </div>
         </main>
     </div>
+    
+    
 
     <!-- Modal for Update (if required) -->
     <!-- Add your modal structure here -->
@@ -208,32 +230,36 @@
 
 <script>
 $(document).ready(function () {
-    fetchAllBatches();
+    fetchAllBatches(); // Fetch all batches from the server
 
     // Fetch all packages from the server
     function fetchAllBatches() {
+        // Show the loading spinner
+        $('#loadingSpinner').show();
+
         $.ajax({
-            url: "/TouristWebsite/auth/getAllPackages",
+            url: "getAllPackages", // Ensure this is the correct URL
             type: "GET",
             contentType: "application/json",
             success: function (response) {
+                console.log(response); // Log response to check if data is received
+                $('#loadingSpinner').hide(); // Hide the spinner after data is received
+
                 if (response && response.length > 0) {
                     populateTable(response);
                 } else {
-                    //alert("No data found");
+                    console.log("No data found");
                 }
             },
             error: function (jqXHR, status, errorThrown) {
-                if (jqXHR.status === 403) {
-                    alert("YOU DON'T HAVE THE PERMISSION");
-                } else {
-                    alert("Failed to communicate with the server");
-                }
+                console.log("AJAX Error:", status, errorThrown);
+                $('#loadingSpinner').hide(); // Hide the spinner on error
+                alert("Failed to communicate with the server");
             }
         });
     }
 
-    // Populate the table with data
+    // Populate the table with batches
     function populateTable(batches) {
         var tableBody = $("#packageTable tbody");
         tableBody.empty();
@@ -283,157 +309,36 @@ $(document).ready(function () {
 
     // View Details
     function viewBatchDetails(id) {
-        window.location.href = "/TouristWebsite/auth/viewAddPackage?id=" + id;
+        window.location.href = "viewAddPackage?id=" + id;
     }
 
     // Edit Batch
     function editBatch(id) {
-        window.location.href = "/TouristWebsite/auth/editBatch?id=" + id;
+        window.location.href = "editAddPackage?id=" + id;
     }
 
     // Delete Batch
     function deleteBatch(id) {
         $.ajax({
-            url: "/TouristWebsite/auth/deletepackageDetails/" + id,
+            url: "deletepackageDetails/" + id,
             type: "POST",
             contentType: "application/json",
             success: function (response) {
                 if (response === "Data Deleted Successfully") {
                     alert("Package deleted successfully!");
-                    fetchAllBatches(); // Refresh table after deletion
+                    window.location.href = 'managePackage';
+                   // fetchAllBatches(); // Refresh table after deletion
                 } else {
                     alert("Failed to delete batch: " + response);
                 }
             },
             error: function (jqXHR, status, errorThrown) {
-                if (jqXHR.status === 403) {
-                    alert("YOU DON'T HAVE THE PERMISSION");
-                } else {
-                    alert("Package deleted successfully");
-                    location.reload();
-                }
+                alert("Failed to delete Package");
             }
         });
     }
 });
-$(document).ready(function () {
-    fetchAllBatches();
 
-    // Fetch all packages from the server
-    function fetchAllBatches() {
-        $.ajax({
-            url: "/TouristWebsite/auth/getAllPackages",
-            type: "GET",
-            contentType: "application/json",
-            success: function (response) {
-                if (response && response.length > 0) {
-                    populateTable(response);
-                } else {
-                    alert("No data found");
-                }
-            },
-            error: function (jqXHR, status, errorThrown) {
-                if (jqXHR.status === 403) {
-                    alert("YOU DON'T HAVE THE PERMISSION");
-                } else {
-                    alert("Failed to communicate with the server");
-                }
-            }
-        });
-    }
-
-    // Populate the table with data
-    function populateTable(batches) {
-        var tableBody = $("#packageTable tbody");
-        tableBody.empty();
-
-        batches.forEach(function (batch, index) {
-            var row = $("<tr>");
-            row.append($("<td>").text(index + 1));
-            row.append($("<td>").text(batch.packageName || "N/A"));
-            row.append($("<td>").text(batch.duration || "N/A"));
-            row.append($("<td>").text(batch.price || "N/A"));
-            row.append($("<td>").text(batch.packageType || "N/A"));
-
-            var actionCell = $("<td>");
-
-            // View Icon
-            var viewIcon = $("<i>")
-                .addClass("fa-solid fa-eye")
-                .attr("title", "View")
-                .css({ color: "#007BFF", cursor: "pointer", fontSize: "18px", marginRight: "10px" })
-                .click(function () {
-                    viewBatchDetails(batch.id);
-                });
-
-            // Edit Icon
-            var updateIcon = $("<i>")
-                .addClass("fa-regular fa-pen-to-square")
-                .attr("title", "Edit")
-                .css({ color: "#12e068", cursor: "pointer", fontSize: "18px", marginRight: "10px" })
-                .click(function () {
-                    editBatch(batch.id);
-                });
-
-            // Delete Icon
-            var deleteIcon = $("<i>")
-                .addClass("fa-solid fa-trash")
-                .attr("title", "Delete")
-                .css({ color: "#eb070f", cursor: "pointer", fontSize: "18px" })
-                .click(function () {
-                    deleteBatch(batch.id);
-                });
-
-            actionCell.append(viewIcon).append(updateIcon).append(deleteIcon);
-            row.append(actionCell);
-            tableBody.append(row);
-        });
-    }
-
-    // View Details
-    function viewBatchDetails(id) {
-        window.location.href = "/TouristWebsite/auth/viewAddPackage?id=" + id;
-    }
-
-    // Edit Batch
-    function editBatch(id) {
-        window.location.href = "/TouristWebsite/auth/editAddPackage?id=" + id;
-    }
-
-    // Delete Batch
-	function deleteBatch(id) {
-	    // Show confirmation popup
-	    const userConfirmed = confirm("Are you sure you want to delete this package?");
-
-	    if (userConfirmed) {
-	        // Proceed with deletion if the user clicked 'Yes'
-	        $.ajax({
-	            url: "/TouristWebsite/auth/deletepackageDetails/" + id,
-	            type: "POST",
-	            contentType: "application/json",
-	            success: function (response) {
-	                if (response === "Data Deleted Successfully") {
-	                    alert("Package deleted successfully!");
-	                    location.reload(); // Refresh the page after successful deletion
-	                } else {
-	                    alert("Failed to delete package: " + response);
-	                }
-	            },
-	            error: function (jqXHR, status, errorThrown) {
-	                if (jqXHR.status === 403) {
-	                    alert("YOU DON'T HAVE THE PERMISSION");
-	                } else {
-	                    alert("Failed to communicate with the server: " + errorThrown);
-	                }
-	            }
-	        });
-	    } else {
-	        // User clicked 'No'
-	        alert("Package deletion was canceled.");
-	    }
-	}
-
-});
 
 
 </script>

@@ -3,6 +3,7 @@ package com.tourweb.TouristWeb.Service.Interface;
 import java.util.List;
 import java.util.Optional;
 
+import com.tourweb.TouristWeb.Model.AllExclude;
 import com.tourweb.TouristWeb.Model.AllInclude;
 import com.tourweb.TouristWeb.Model.Iternary;
 import com.tourweb.TouristWeb.Model.Location;
@@ -24,6 +25,13 @@ public interface PackageDetailsServiceInterface {
 	String UpdatePackage(PackageDetails packageDetails, AllInclude allInclude, List<Location> locations, List<Iternary> iternaries);
 	
 	PackageDetails updatePackageDetails(Long id, PackageDetails packageDetails);
+	
+	
+	 List<Iternary> getItineraryByPackageId(Long packageId);
+	 
+	 List<AllInclude> getIncludesByPackageId(Long packageId);
+	 
+	 List<AllExclude> getExcludesByPackageId(Long packageId);
 
 
 }

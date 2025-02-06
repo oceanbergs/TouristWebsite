@@ -2,6 +2,7 @@ package com.tourweb.TouristWeb.Service;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -31,8 +32,13 @@ public interface BookingService {
 	
 	List<Booking> globalSearchh(String keyword);
 	//modeofBooking d
+
+	Optional<Booking> findById(Long id);
+
+//	 List<Booking> getBookingsByDateRange(String startDate, String endDate);
 	
-	 
+	Booking updateBookingDetails(Long id, Booking booking);
+
 	
 	
 	

@@ -1,5 +1,8 @@
 package com.tourweb.TouristWeb.Controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -45,7 +48,7 @@ public class AdminController {
             session.setAttribute("loginSuccess", "Login successful");
             
             // Redirect to the dashboard after successful login
-            return "redirect:/TouristWebsite/auth/dashboard";
+            return "Admin/dashborad";
         } catch (Exception e) {
             // If authentication fails, redirect back to the login page with an error
             model.addAttribute("error", "Invalid username or password");
@@ -61,7 +64,24 @@ public class AdminController {
 
     // Handle GET request for logging out
     @GetMapping("/logout")
-    public String logout() {
-        return "redirect:/TouristWebsite/auth/login?logout=true"; // Redirect to login page after logout
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        // Invalidate the session
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate(); // Ends the user session
+        }
+
+        // Clear authentication context
+        SecurityContextHolder.clearContext();
+
+        // Optional: Remove any cookies, if applicable
+        Cookie cookie = new Cookie("JSESSIONID", null);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        // Redirect to login page with a logout query parameter
+        return "Admin/login";
     }
-}
+
+} 

@@ -331,7 +331,7 @@ tbody td .fa-trash {
 }
 </style>
 </head>
-<body>
+<body onload="getCourseData();">
 	<div class="dashboard">
 		<!-- Header -->
 		<header class="header">
@@ -340,9 +340,9 @@ tbody td .fa-trash {
 			</div>
 			<h2 class="companyname">Shri Gajanan Yatra Company Pvt. Ltd</h2>
 			<div class="actions">
-				<img src="../img/profile.png" alt="Profile"> <img
-					src="../img/setting.png" alt="Setting"> <img src="../img/logout.png"
-					alt="Logout">
+				<a href="logout">
+        <img src="../img/logout.png" alt="Logout">
+    </a>
 			</div>
 		</header>
 
@@ -351,15 +351,12 @@ tbody td .fa-trash {
 			<aside class="sidebar">
 				<nav>
 					<ul>
-						<li><a href="/TouristWebsite/auth/notification">Enquiry</a></li>
-						<li><a href="/TouristWebsite/auth/dashboard">Dashboard</a></li>
-						<li><a href="/TouristWebsite/auth/packageType">Packages Type</a></li>
-						<li><a href="managePackage" class="active" style="background-color: #87be29;">Manage Packages</a></li>
-					<li><a href="#bookings">Manage Bookings</a></li>
-						<li><a href="#payments">Manage Gallery</a></li>
-<!--						<li><a href="#users">User Management</a></li>-->
-						 <!--<li><a href="/TouristWebsite/auth/notification">Notifications</a></li>-->
-<!--						<li><a href="#settings">Settings</a></li>-->
+						 <li><a href="notification">Enquiry</a></li>
+		                    <li><a href="dashboard">Dashboard</a></li>
+		                    <li><a href="packageType">Packages Type</a></li>
+		                    <li><a href="managePackage">Manage Packages</a></li>
+		                    <li><a href="bookingView" class="active" style="background-color: #87be29;">Manage Bookings</a></li>
+		                    <li><a href="manageGallery">Manage Gallery</a></li>
 					</ul>
 				</nav>
 			</aside>
@@ -379,76 +376,79 @@ tbody td .fa-trash {
 		  <!-- Row 1: Client Name and Email -->
 		  <div style="display: flex; gap: 20px; align-items: flex-start;">
 		    <div style="flex: 1;">
-		      <label for="clientName">Client Name</label>
-		      <input type="text" id="clientName" name="clientName" placeholder="Enter client name" required
-		        style="width: 100%; padding: 8px; margin-top: 5px;">
+		      <label for="customer_Name">Client Name</label>
+		      <input type="text" id="customer_Name" name="customer_Name" placeholder="Enter client name" required
+		        style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
 		    </div>
 		    <div style="flex: 1;">
 		      <label for="email">Email</label>
 		      <input type="email" id="email" name="email" placeholder="Enter email" required
-		        style="width: 100%; padding: 8px; margin-top: 5px;">
+		         style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
 		    </div>
 		  </div>
 
 		  <!-- Row 2: Contact and Package Name -->
 		  <div style="display: flex; gap: 20px; align-items: flex-start;">
 		    <div style="flex: 1;">
-		      <label for="contact">Contact</label>
-		      <input type="tel" id="contact" name="contact" placeholder="Enter contact number" required
-		        style="width: 100%; padding: 8px; margin-top: 5px;">
+		      <label for="mobile_Number">Contact</label>
+		      <input type="tel" id="mobile_Number" name="mobile_Number" placeholder="Enter contact number" required
+		        style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
 		    </div>
 		    <div style="flex: 1;">
-				<label for="packageName">Package Name</label>
-				<select id="packageName" name="packageName" required style="width: 100%; padding: 8px; margin-top: 5px;">
-				  <option value="" disabled selected>Select a package</option>
-				  <option value="silver">Silver Package</option>
-				  <option value="gold">Gold Package</option>
-				  <option value="platinum">Platinum Package</option>
+				<label for="destination">Package Name</label>
+				<select id="destination" name="destination" required style="width: 100%; padding: 8px; margin-top: 5px;">
+<!--				  <option value="" disabled selected>Select a package</option>-->
+<!--				  <option value="silver">Silver Package</option>-->
+<!--				  <option value="gold">Gold Package</option>-->
+<!--				  <option value="platinum">Platinum Package</option>-->
 				</select>
 		    </div>
 		  </div>
 
 		  <!-- Row 3: Start Date and End Date -->
-		  <div style="display: flex; gap: 20px; align-items: flex-start;">
-		    <div style="flex: 1;">
-		      <label for="startDate">Start Date</label>
-		      <input type="date" id="startDate" name="startDate" required
-		        style="width: 100%; padding: 8px; margin-top: 5px;">
-		    </div>
-		    <div style="flex: 1;">
-		      <label for="endDate">End Date</label>
-		      <input type="date" id="endDate" name="endDate" required
-		        style="width: 100%; padding: 8px; margin-top: 5px;">
-		    </div>
-		  </div>
-
-		  <!-- Row 4: Special Request and Mode of Booking -->
-		  <!-- Row 4: Special Request -->
-		  <div style="margin-bottom: 20px;">
-		    <label for="specialRequest">Special Request</label>
-		    <textarea id="specialRequest" name="specialRequest" placeholder="Enter any special requests"
-		      style="width: 100%; height: 60px; padding: 8px; margin-top: 5px; resize: vertical;"></textarea>
-		  </div>
+		  
+		 
 
 		  <!-- Row 5: Client Address and Mode of Booking -->
 		  <div style="display: flex; gap: 20px; align-items: flex-start;">
 		    <!-- Client Address -->
 		    <div style="flex: 1;">
-		      <label for="clientAddress">Client Address</label>
-		      <input type="text" id="clientAddress" name="clientAddress" placeholder="Enter client address"
-		        style="width: 100%; padding: 8px; margin-top: 5px;">
+		      <label for="address">Client Address</label>
+		      <input type="text" id="address" name="address" placeholder="Enter client address"
+		        style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
 		    </div>
 
 		    <!-- Mode of Booking -->
 		    <div style="flex: 1;">
-		      <label for="modeOfBooking">Mode of Booking</label>
-		      <select id="modeOfBooking" name="modeOfBooking" required style="width: 100%; padding: 8px; margin-top: 5px;">
+		      <label for="modOffBooking">Mode of Booking</label>
+		      <select id="modOffBooking" name="modOffBooking" required style="width: 100%; padding: 8px; margin-top: 5px;">
 		        <option value="" disabled selected>Select mode of booking</option>
 		        <option value="online">Online</option>
 		        <option value="offline">Offline</option>
 		      </select>
 		    </div>
 		  </div>
+		  
+		  
+		  <div style="display: flex; gap: 20px; align-items: flex-start;">
+		    <div style="flex: 1;">
+		      <label for="start_Date">Start Date</label>
+		      <input type="date" id="start_Date" name="start_Date" required
+		         style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
+		    </div>
+		    <div style="flex: 1;">
+		      <label for="end_Date">End Date</label>
+		      <input type="date" id="end_Date" name="end_Date" required
+		         style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
+		    </div>
+		  </div>
+		  
+		  
+		  
+		  <div style="margin-bottom: 20px;">
+		    <label for="special_Request">Special Request</label>
+		    <textarea id="special_Request" name="special_Request" placeholder="Enter any special requests"
+		      style="width: 100%; padding: 8px; margin-top: 5px; font-size: 1rem; height: 80px; resize: vertical;"></textarea>		  </div>
 
 
 		</div>
@@ -456,13 +456,131 @@ tbody td .fa-trash {
 
               <!-- Submit Button -->
         <div style="margin-top: 20px;">
-          <button id="submitBtn"
+          <button id="saveButton"
             style="width: 100%; background-color: #87be29; color: white; padding: 14px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 1rem;">
             Book Package
           </button>
         </div>
 <!--       </form> -->
     </div>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	  	<script
+	  		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	  	<script src="lib/wow/wow.min.js"></script>
+	  	<script src="lib/easing/easing.min.js"></script>
+	  	<script src="lib/waypoints/waypoints.min.js"></script>
+	  	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+	  	<script src="lib/tempusdominus/js/moment.min.js"></script>
+	  	<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+	  	<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+	  	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+	  	<!-- Template Javascript -->
+	  	<script src="js/main.js"></script>
+<!--	  <script src="js/booking.js"></script>-->
+	  <script>
+		function getCourseData() {
+		   // alert("hii0"); // Debugging alert to check if the function is called
+		    $.ajax({
+		        type: "GET",
+		        url: ' getAllPackages',  // Your API endpoint
+		        dataType: 'json',  // Expected response type
+		        success: function(response) {
+		           // alert("Response: " + JSON.stringify(response)); // Debugging alert to see the full response
+
+		            var appenddata1 = ""; // Accumulating the options here
+					
+					appenddata1 += "<option value='' disabled selected>Select a Package</option>";
+
+		            // Check if the 'data' array exists in the response and contains elements
+		            if (response && response.length > 0) {  // Directly check response array if there's no 'data' key
+		                // Loop through the response data and build options
+		                for (var i = 0; i < response.length; i++) {
+		                    appenddata1 += "<option value='" + response[i].packageName + "'>" + response[i].packageName + "</option>";
+		                }
+
+		                // Append options to the #packageName dropdown
+		                $("#destination").html(appenddata1); // Use .html() to replace all options
+		            } else {
+		                alert("No package data found.");
+		            }
+		        },
+		        error: function (jqXHR, status, errorThrown) {
+		            // Handle errors based on status code
+		            if (jqXHR.status === 403) {
+		                alert("YOU DON'T HAVE THE PERMISSION");
+		            } else {
+		                alert("Failed to communicate with the server");
+		            }
+		        }
+		    });
+		}
+
+		// Call the function when you need to load the data, for example:
+		$(document).ready(function() {
+		    getCourseData(); // Load the course data when the document is ready
+		});
+
+
+	  </script>
   </section>
+  <script>
+$(document).ready(function() {
+    // Click event handler for the save button
+    $("#saveButton").click(function() {
+        const customer_Name = $("#customer_Name").val();
+        const email = $("#email").val();
+        const address = $("#address").val();
+        const mobile_Number = $("#mobile_Number").val();
+        const destination = $("#destination").val();
+        const special_Request = $("#special_Request").val();
+        const modOffBooking = $("#modOffBooking").val();
+        
+        const start_Date = $("#start_Date").val();
+        const end_Date = $("#end_Date").val();
+        
+        
+       
+        // Construct batch data object
+        const batchData = {
+        		customer_Name: customer_Name,
+        		email: email,
+        		address: address,
+        		mobile_Number: mobile_Number,
+        		destination: destination,
+        		special_Request: special_Request,
+        		modOffBooking: modOffBooking,
+        		start_Date: start_Date,
+        		end_Date: end_Date
+        };
+        
+        if (!customer_Name || !email || !address || !mobile_Number || !destination || !special_Request  || !modOffBooking|| !start_Date || !end_Date) {
+            alert("Please fill all required fields.");
+            return;
+        }
+
+        // Send AJAX request to save batch data
+        $.ajax({
+            url: "saveBooking",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(batchData),
+            success: function(response) {
+                alert("Booking Save Successfully");
+                window.location.href = "manageBooking";
+            },
+            error: function(jqXHR, status, errorThrown) {
+                if (jqXHR.status === 403) {
+                    alert("YOU DON'T HAVE THE PERMISSION");
+                } else {
+                    alert("Failed to communicate with the server");
+                }
+            }
+        });
+    });
+});
+
+	</script>
+  
 </main>
 </body>

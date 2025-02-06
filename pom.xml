@@ -44,7 +44,32 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-        
+        <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>5.2.3</version> <!-- Use the latest version -->
+    </dependency>
+    
+    <!-- Apache POI - POI for working with older Excel file formats (xls) -->
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>5.2.3</version>
+    </dependency>
+
+    <!-- Apache POI - Common utilities for POI -->
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml-schemas</artifactId>
+        <version>4.1.2</version>
+    </dependency>
+    
+    <!-- Apache Commons Logging, required by Apache POI -->
+    <dependency>
+        <groupId>commons-logging</groupId>
+        <artifactId>commons-logging</artifactId>
+        <version>1.2</version>
+    </dependency>
         <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-devtools</artifactId>
@@ -92,7 +117,8 @@
             <artifactId>itextpdf</artifactId>
             <version>5.5.13.3</version>
         </dependency>
-        
+
+       
     </dependencies>
 
     <build>

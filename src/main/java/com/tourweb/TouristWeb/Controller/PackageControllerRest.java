@@ -27,6 +27,10 @@ public class PackageControllerRest {
 	        return ResponseEntity.status(HttpStatus.OK).body(packages);
 	    }
 	    
-	    //
+	    @GetMapping("/getAllPackageName")
+	    public ResponseEntity<List<PackageDetails>> getAllPackageName() {
+	        List<PackageDetails> packages = packageDetailsService.getBasicPackageDetails();
+	        return ResponseEntity.status(HttpStatus.OK).body(packages);
+	    }
 
 }

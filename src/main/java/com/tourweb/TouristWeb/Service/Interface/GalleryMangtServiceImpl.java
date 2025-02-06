@@ -2,6 +2,7 @@ package com.tourweb.TouristWeb.Service.Interface;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,67 +20,86 @@ public class GalleryMangtServiceImpl implements GalleryMangtService{
 	private GalleryMangtRepo galleryMangtRepo ;
 	 //private final Path root = Paths.get("uploads");
 
+//	@Override
+	
+//	public void uploadImage(MultipartFile file) throws IOException {
+//        // Get original file name and content type
+//        String name = file.getOriginalFilename();
+//        String type = file.getContentType();
+//
+//        // Convert image to Base64 encoded string
+//        byte[] fileBytes = file.getBytes();
+//        String imageData = Base64.getEncoder().encodeToString(fileBytes);
+//
+//        // Check if the Base64 string is too large (optional)
+//        if (imageData.length() > 1000000) {  // Set a reasonable limit (e.g., 1MB)
+//            throw new IOException("File is too large to be processed.");
+//        }
+//
+//        // Create GalleryMangt object and set the properties
+//        GalleryMangt imageDataObj = new GalleryMangt();
+//        imageDataObj.setName(name);
+//        imageDataObj.setType(type);
+//        imageDataObj.setImageData(imageData);
+//
+//        // Save the entity to the database
+//        try {
+//            galleryMangtRepo.save(imageDataObj);
+//        } catch (Exception e) {
+//            throw new IOException("Failed to upload image: " + e.getMessage(), e);
+//        }
+//    }
+//	
+//	
+//	/*
+//	 * // Download image public String downloadImage(Long imageId) throws Exception
+//	 * { GalleryMangt image = galleryMangtRepo.findById(imageId) .orElseThrow(() ->
+//	 * new MyFileNotFoundException("Image not found"));
+//	 * 
+//	 * return image.getImageData(); }
+//	 */
+//    
+//    
+//    
+// // Delete image by ID
+//    @Override
+//    public void deleteImage(Long imageId) throws Exception {
+//    	    
+//            if (!galleryMangtRepo.existsById(imageId)) {
+//                throw new MyFileNotFoundException("Image not found");
+//            }
+//
+//            // Delete image from the database
+//            galleryMangtRepo.deleteById(imageId);
+//        }
+//    
+//    
+//	
+//	  // Download image as raw byte array 
+//		public byte[] downloadImageAsBytes(Long imageId) throws Exception {
+//			GalleryMangt image = galleryMangtRepo.findById(imageId).orElseThrow(() ->
+//			                    new MyFileNotFoundException("Image not found"));
+//
+//			return Base64.getDecoder().decode(image.getImageData());
+//		}
+	
 	@Override
-	
-	public void uploadImage(MultipartFile file) throws IOException {
-        // Get original file name and content type
-        String name = file.getOriginalFilename();
-        String type = file.getContentType();
-
-        // Convert image to Base64 encoded string
-        byte[] fileBytes = file.getBytes();
-        String imageData = Base64.getEncoder().encodeToString(fileBytes);
-
-        // Check if the Base64 string is too large (optional)
-        if (imageData.length() > 1000000) {  // Set a reasonable limit (e.g., 1MB)
-            throw new IOException("File is too large to be processed.");
-        }
-
-        // Create GalleryMangt object and set the properties
-        GalleryMangt imageDataObj = new GalleryMangt();
-        imageDataObj.setName(name);
-        imageDataObj.setType(type);
-        imageDataObj.setImageData(imageData);
-
-        // Save the entity to the database
-        try {
-            galleryMangtRepo.save(imageDataObj);
-        } catch (Exception e) {
-            throw new IOException("Failed to upload image: " + e.getMessage(), e);
-        }
+    public GalleryMangt savePhoto(GalleryMangt galleryMangt) {
+        return galleryMangtRepo.save(galleryMangt);
     }
-	
-	
-	/*
-	 * // Download image public String downloadImage(Long imageId) throws Exception
-	 * { GalleryMangt image = galleryMangtRepo.findById(imageId) .orElseThrow(() ->
-	 * new MyFileNotFoundException("Image not found"));
-	 * 
-	 * return image.getImageData(); }
-	 */
-    
-    
-    
- // Delete image by ID
+
     @Override
-    public void deleteImage(Long imageId) throws Exception {
-    	    
-            if (!galleryMangtRepo.existsById(imageId)) {
-                throw new MyFileNotFoundException("Image not found");
-            }
+    public List<GalleryMangt> getAllPhotos() {
+        return galleryMangtRepo.findAll();
+    }
 
-            // Delete image from the database
-            galleryMangtRepo.deleteById(imageId);
-        }
-    
-    
-	
-	  // Download image as raw byte array 
-		public byte[] downloadImageAsBytes(Long imageId) throws Exception {
-			GalleryMangt image = galleryMangtRepo.findById(imageId).orElseThrow(() ->
-			                    new MyFileNotFoundException("Image not found"));
-
-			return Base64.getDecoder().decode(image.getImageData());
-		}
+    @Override
+	 public boolean deleteGallery(Long id) {
+	     if(galleryMangtRepo.existsById(id)) {
+	    	 galleryMangtRepo.deleteById(id);
+	         return true;  // Return true if deletion is successful
+	     }
+	     return false;  // Return false if the package doesn't exist
+	 }
 
 }

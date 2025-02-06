@@ -341,9 +341,9 @@ tbody td .fa-trash {
 			</div>
 			<h2 class="companyname">Shri Gajanan Yatra Company Pvt. Ltd</h2>
 			<div class="actions">
-				<img src="../img/profile.png" alt="Profile"> <img
-					src="../img/setting.png" alt="Setting"> <img
-					src="../img/logout.png" alt="Logout">
+				<a href="logout">
+        <img src="../img/logout.png" alt="Logout">
+    </a>
 			</div>
 		</header>
 
@@ -352,14 +352,14 @@ tbody td .fa-trash {
 			<aside class="sidebar">
 				<nav>
 					<ul>
-						<li><a href="/TouristWebsite/auth/notification">Enquiry</a></li>
-						<li><a href="/TouristWebsite/auth/dashboard">Dashboard</a></li>
-						<li><a href="/TouristWebsite/auth/packageType">Packages
+						<li><a href="notification">Enquiry</a></li>
+						<li><a href="dashboard">Dashboard</a></li>
+						<li><a href="packageType">Packages
 								Type</a></li>
-						<li><a href="managePackage" class="active"
-							style="background-color: #87be29;">  Manage Packages</a></li>
-						<li><a href="#bookings">Manage Booking</a></li>
-						<li><a href="#payments">Manage Gallery</a></li>-->
+						<li><a href="managePackage" >  Manage Packages</a></li>
+						<li><a href="bookingView">Manage Booking</a></li>
+						<li><a href="manageGallery">Manage Gallery</a></li>
+						  <li><a href="bannerManagement">Banner Management</a></li>
 <!--						<li><a href="#users">User Management</a></li>-->
 					 
 <!--						<li><a href="#settings">Settings</a></li>-->
@@ -371,90 +371,93 @@ tbody td .fa-trash {
 
 					
 							<main class="main-content" style="padding-top: 50px;">
-			  <section id="add-package">
-			    <div class="form-container" style="width: 100%; margin: auto; min-height: 250px;">
-			      <h2>Booking</h2>
-			<!--       <form id="fileUploadForm" enctype="multipart/form-data"> -->
-				<div style="display: flex; flex-direction: column; gap: 20px;">
+  <section id="add-package">
+    <div class="form-container" style="width: 100%; margin: auto; min-height: 250px;">
+      <h2>Update Booking</h2>
+      
+      <input type="hidden" id="id" name="id">
+<!--       <form id="fileUploadForm" enctype="multipart/form-data"> -->
+	<div style="display: flex; flex-direction: column; gap: 20px;">
 
-					<div style="display: flex; flex-direction: column; gap: 20px;">
+		<div style="display: flex; flex-direction: column; gap: 20px;">
 
-					  <!-- Row 1: Client Name and Email -->
-					  <div style="display: flex; gap: 20px; align-items: flex-start;">
-					    <div style="flex: 1;">
-					      <label for="clientName">Client Name</label>
-					      <input type="text" id="clientName" name="clientName" placeholder="Enter client name" required
-					        style="width: 100%; padding: 8px; margin-top: 5px;">
-					    </div>
-					    <div style="flex: 1;">
-					      <label for="email">Email</label>
-					      <input type="email" id="email" name="email" placeholder="Enter email" required
-					        style="width: 100%; padding: 8px; margin-top: 5px;">
-					    </div>
-					  </div>
+		  <!-- Row 1: Client Name and Email -->
+		  <div style="display: flex; gap: 20px; align-items: flex-start;">
+		    <div style="flex: 1;">
+		      <label for="customer_Name">Client Name</label>
+		      <input type="text" id="customer_Name" name="customer_Name" placeholder="Enter client name" required
+		        style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
+		    </div>
+		    <div style="flex: 1;">
+		      <label for="email">Email</label>
+		      <input type="email" id="email" name="email" placeholder="Enter email" required
+		         style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
+		    </div>
+		  </div>
 
-					  <!-- Row 2: Contact and Package Name -->
-					  <div style="display: flex; gap: 20px; align-items: flex-start;">
-					    <div style="flex: 1;">
-					      <label for="contact">Contact</label>
-					      <input type="tel" id="contact" name="contact" placeholder="Enter contact number" required
-					        style="width: 100%; padding: 8px; margin-top: 5px;">
-					    </div>
-					    <div style="flex: 1;">
-							<label for="packageName">Package Name</label>
-							<select id="packageName" name="packageName" required style="width: 100%; padding: 8px; margin-top: 5px;">
-							  <option value="" disabled selected>Select a package</option>
-							  <option value="silver">Silver Package</option>
-							  <option value="gold">Gold Package</option>
-							  <option value="platinum">Platinum Package</option>
-							</select>
-					    </div>
-					  </div>
+		  <!-- Row 2: Contact and Package Name -->
+		  <div style="display: flex; gap: 20px; align-items: flex-start;">
+		    <div style="flex: 1;">
+		      <label for="mobile_Number">Contact</label>
+		      <input type="tel" id="mobile_Number" name="mobile_Number" placeholder="Enter contact number" required
+		        style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
+		    </div>
+		    <div style="flex: 1;">
+				<label for="destination">Package Name</label>
+				<select id="destination" name="destination" required style="width: 100%; padding: 8px; margin-top: 5px;">
+<!--				  <option value="" disabled selected>Select a package</option>-->
+<!--				  <option value="silver">Silver Package</option>-->
+<!--				  <option value="gold">Gold Package</option>-->
+<!--				  <option value="platinum">Platinum Package</option>-->
+				</select>
+		    </div>
+		  </div>
 
-					  <!-- Row 3: Start Date and End Date -->
-					  <div style="display: flex; gap: 20px; align-items: flex-start;">
-					    <div style="flex: 1;">
-					      <label for="startDate">Start Date</label>
-					      <input type="date" id="startDate" name="startDate" required
-					        style="width: 100%; padding: 8px; margin-top: 5px;">
-					    </div>
-					    <div style="flex: 1;">
-					      <label for="endDate">End Date</label>
-					      <input type="date" id="endDate" name="endDate" required
-					        style="width: 100%; padding: 8px; margin-top: 5px;">
-					    </div>
-					  </div>
+		  <!-- Row 3: Start Date and End Date -->
+		  <div style="display: flex; gap: 20px; align-items: flex-start;">
+		    <div style="flex: 1;">
+		      <label for="start_Date">Start Date</label>
+		      <input type="date" id="start_Date" name="start_Date" required
+		         style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
+		    </div>
+		    <div style="flex: 1;">
+		      <label for="end_Date">End Date</label>
+		      <input type="date" id="end_Date" name="end_Date" required
+		         style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
+		    </div>
+		  </div>
 
-					  <!-- Row 4: Special Request and Mode of Booking -->
-					  <!-- Row 4: Special Request -->
-					  <div style="margin-bottom: 20px;">
-					    <label for="specialRequest">Special Request</label>
-					    <textarea id="specialRequest" name="specialRequest" placeholder="Enter any special requests"
-					      style="width: 100%; height: 60px; padding: 8px; margin-top: 5px; resize: vertical;"></textarea>
-					  </div>
+		 
 
-					  <!-- Row 5: Client Address and Mode of Booking -->
-					  <div style="display: flex; gap: 20px; align-items: flex-start;">
-					    <!-- Client Address -->
-					    <div style="flex: 1;">
-					      <label for="clientAddress">Client Address</label>
-					      <input type="text" id="clientAddress" name="clientAddress" placeholder="Enter client address"
-					        style="width: 100%; padding: 8px; margin-top: 5px;">
-					    </div>
+		  <!-- Row 5: Client Address and Mode of Booking -->
+		  <div style="display: flex; gap: 20px; align-items: flex-start;">
+		    <!-- Client Address -->
+		    <div style="flex: 1;">
+		      <label for="address">Client Address</label>
+		      <input type="text" id="address" name="address" placeholder="Enter client address"
+		        style="width: 100%; padding: 8px; margin-top: 5px; height: 40px; font-size: 1rem;">
+		    </div>
 
-					    <!-- Mode of Booking -->
-					    <div style="flex: 1;">
-					      <label for="modeOfBooking">Mode of Booking</label>
-					      <select id="modeOfBooking" name="modeOfBooking" required style="width: 100%; padding: 8px; margin-top: 5px;">
-					        <option value="" disabled selected>Select mode of booking</option>
-					        <option value="online">Online</option>
-					        <option value="offline">Offline</option>
-					      </select>
-					    </div>
-					  </div>
+		    <!-- Mode of Booking -->
+		    <div style="flex: 1;">
+		      <label for="modOffBooking">Mode of Booking</label>
+		      <select id="modOffBooking" name="modOffBooking" required style="width: 100%; padding: 8px; margin-top: 5px;">
+		        <option value="" disabled selected>Select mode of booking</option>
+		        <option value="online">Online</option>
+		        <option value="offline">Offline</option>
+		      </select>
+		    </div>
+		  </div>
+		  
+		  
+		  <div style="margin-bottom: 20px;">
+		    <label for="special_Request">Special Request</label>
+		    <textarea id="special_Request" name="special_Request" placeholder="Enter any special requests"
+		      style="width: 100%; padding: 8px; margin-top: 5px; font-size: 1rem; height: 80px; resize: vertical;"></textarea>		  </div>
 
 
-					</div>
+		</div>
+
 					  
 
 						        <!-- Submit Button -->
@@ -464,871 +467,206 @@ tbody td .fa-trash {
 								        Update Booking
 								    </button>
 								</div>
-								<script type="text/javascript">
-									document.addEventListener('DOMContentLoaded', function () {
-									    document.getElementById('submitBtn').addEventListener('click', function (event) {
-									        event.preventDefault(); // Prevent default form submission
-									       // alert('Button clicked!');
-
-									        // ✅ Get Package ID (Make sure it's present in your HTML form)
-									        const id = document.getElementById('id') ? document.getElementById('id').value : null;
-									        if (!id) {
-									            alert('Error: Package ID not found!');
-									            return;
-									        }
-									       // alert('Package ID: ' + id);
-
-									        const fileInput = document.getElementById('packageImage');
-									        const file = fileInput.files[0];
-									       // alert('File selected: ' + (file ? file.name : 'None'));
-
-									        const locationInputs = document.querySelectorAll('input[name="location[]"]');
-									        let locations = [];
-									        locationInputs.forEach(input => {
-									            const locationName = input.value.trim();
-									            if (locationName) {
-									                locations.push({ locationName });
-									            }
-									        });
-									       // alert('Locations collected: ' + locations.length);
-
-									        const itinerary = [];
-									        const dayBlocks = document.querySelectorAll('.day-block');
-									       // alert('Day blocks count: ' + dayBlocks.length);
-
-									        dayBlocks.forEach((dayBlock, index) => {
-									            const day = dayBlock.querySelector('input[id="day' + (index + 1) + '"]').value;
-									            const destination = dayBlock.querySelector('input[id="destination' + (index + 1) + '"]').value;
-									            const breakfast = dayBlock.querySelector('input[name="breakfast[' + (index + 1) + ']"]').checked;
-									            const lunch = dayBlock.querySelector('input[name="lunch[' + (index + 1) + ']"]').checked;
-									            const dinner = dayBlock.querySelector('input[name="dinner[' + (index + 1) + ']"]').checked;
-									            const nightStay = dayBlock.querySelector('input[name="nightStay[' + (index + 1) + ']"]').checked;
-									            const hiTea = dayBlock.querySelector('input[name="hiTea[' + (index + 1) + ']"]').checked;
-
-									            const sightseeingEntries = [];
-									            const sightseeingWrappers = dayBlock.querySelectorAll('.sightseeingWrapper');
-									            alert('Sightseeing wrappers in day ' + (index + 1) + ': ' + sightseeingWrappers.length);
-
-									            sightseeingWrappers.forEach(wrapper => {
-									                const sightseeingLocation = wrapper.querySelector('input[name="sightseeingLocation[' + (index + 1) + '][]"]').value;
-									                sightseeingEntries.push({ location: sightseeingLocation, day: 'Day ' + day });
-									            });
-
-									            itinerary.push({
-									                day: 'Day ' + day,
-									                destination: destination,
-									                dinner: dinner,
-									                breakfast: breakfast,
-									                hiTea: hiTea,
-									                nightStay: nightStay,
-									                lunch: lunch,
-									                sightseeingEntries: sightseeingEntries
-									            });
-									        });
-									       // alert('Itinerary created with ' + itinerary.length + ' days');
-
-									        if (file) {
-									            const reader = new FileReader();
-									            reader.onloadend = function () {
-									                const base64String = reader.result.replace("data:", "").replace(/^.+,/, "");
-									                alert('Image file loaded as base64');
-
-									                const packageData = {
-									                    id: id, // ✅ Ensure ID is included in the data
-									                    packageName: $('#packageName').val(),
-									                    duration: $('#duration').val(),
-									                    price: $('#price').val(),
-									                    packageType: $('#packageType').val(),
-									                    packageImage: base64String,
-									                    //locations: locations,
-<!--									                    allInclude: {-->
-<!--									                        hotel: document.getElementById('hotel').checked,-->
-<!--									                        meals: document.getElementById('meals').checked,-->
-<!--									                        transportation: document.getElementById('transport').checked,-->
-<!--									                        flight: document.getElementById('flight').checked,-->
-<!--									                        sightseeing: document.getElementById('sightseeing').checked,-->
-<!--									                        visa: document.getElementById('visa').checked,-->
-<!--									                        note: $('#note').val()-->
-<!--									                    },-->
-									                    itinerary: itinerary
-									                };
-
-									                // ✅ Send data via AJAX for update
-									                alert('Sending data via AJAX');
-									                $.ajax({
-									                    url: "/TouristWebsite/auth/updatePackageDetails/"+id, // Ensure ID is in the URL
-									                    type: 'PUT',
-									                    contentType: 'application/json',
-									                    data: JSON.stringify(packageData),
-									                    success: function (response) {
-									                        alert('Update successful! Response: ' + response);
-															window.location.href = '/TouristWebsite/auth/managePackage';
-									                    },
-									                    error: function (error) {
-									                        console.error('Error sending data:', error);
-									                        alert('Error: Could not update package details.');
-									                    }
-									                });
-									            };
-									            reader.readAsDataURL(file);
-									        } else {
-									            alert("Please select an image file first.");
-									        }
-									    });
-									});
-
-								</script>
+								
 					</div>
 				</section>
 			</main>
-			<script>
-function getCourseData() {
-    $.ajax({
-        type: "GET",
-        url: '/TouristWebsite/auth/getAllPackageTypeData',
-        dataType: 'json', 
-        success: function(response) {
-            console.log("Full Response:", response); // Log the full response
-            if (Array.isArray(response)) {
-                var appenddata1 = "";
-                for (var i = 0; i < response.length; i++) {
-                    appenddata1 += "<option value='" + response[i].packageType + "'>" + response[i].packageType + "</option>";
-                }
-                $("#packageType").append(appenddata1);
-            } else {
-                alert("Data is not in the expected format.");
-            }
-        },
-        error: function (jqXHR, status, errorThrown) {
-            if (jqXHR.status === 403) {
-                alert("YOU DON'T HAVE THE PERMISSION");
-            } else {
-                alert("Failed to communicate with the server. Please try again later.");
-            }
-        }
-    });
-}
-
-// Call the function after its declaration
-getCourseData();
-</script>
-
-
-
-
 			
-
-
-			
-
-			<script type="text/javascript">
-    document.getElementById('packageImage').addEventListener('change', function(event) {
-        const fileInput = event.target;
-        const imagePreview = document.getElementById('imagePreview');
-        const errorElement = document.getElementById('imageError');
-        const file = fileInput.files[0];
-        
-        if (file) {
-            const fileType = file.type;
-            if (fileType !== 'image/jpeg') {
-                errorElement.textContent = 'Please upload a JPG image.';
-                fileInput.value = ''; // Clear the invalid file
-                imagePreview.style.display = 'none'; // Hide preview
-                imagePreview.src = ''; // Clear preview
-            } else {
-                errorElement.textContent = ''; // Clear error message
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    imagePreview.src = e.target.result;
-                    imagePreview.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        } else {
-            imagePreview.style.display = 'none';
-            imagePreview.src = '';
-            errorElement.textContent = '';
-        }
-    });
-</script>
-
-<script>
-<!--    const addLocationBtn = document.getElementById('addLocationBtn');-->
-<!--    const locationContainer = document.getElementById('locationContainer');-->
-
-<!--    addLocationBtn.addEventListener('click', () => {-->
-<!--        // Create a wrapper div-->
-<!--        const locationWrapper = document.createElement('div');-->
-<!--        locationWrapper.style.display = 'flex';-->
-<!--        locationWrapper.style.alignItems = 'center';-->
-<!--        locationWrapper.style.gap = '5px';-->
-<!--        locationWrapper.style.marginTop = '0px';-->
-
-<!--        // Create the input field-->
-<!--        const locationInput = document.createElement('input');-->
-<!--        locationInput.type = 'text';-->
-<!--        locationInput.placeholder = 'Enter location';-->
-<!--        locationInput.style.padding = '8px';-->
-<!--        locationInput.style.border = '1px solid #ccc';-->
-<!--        locationInput.style.borderRadius = '3px';-->
-<!--        locationInput.style.flex = '1';-->
-<!--        locationInput.style.fontSize = '0.9rem';-->
-        
-<!--        locationInput.id = 'location'; // Set a unique id if needed-->
-<!--        locationInput.name = 'location[]'; // Set name attribute to match model API-->
-
-<!--        // Create the delete button-->
-<!--       const deleteBtn = document.createElement('button');-->
-<!--deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';-->
-<!--deleteBtn.style.backgroundColor = '#e74c3c';-->
-<!--deleteBtn.style.color = 'white';-->
-<!--deleteBtn.style.border = 'none';-->
-<!--deleteBtn.style.padding = '8px';-->
-<!--deleteBtn.style.borderRadius = '3px';-->
-<!--deleteBtn.style.cursor = 'pointer';-->
-<!--deleteBtn.style.display = 'flex';-->
-<!--deleteBtn.style.alignItems = 'center';-->
-<!--deleteBtn.style.justifyContent = 'center';-->
-<!--deleteBtn.style.fontSize = '1rem';-->
-
-<!--// Align the delete button correctly-->
-<!--deleteBtn.style.height = '30px';-->
-<!--deleteBtn.style.width = '30px';-->
-
-<!--// Shift the button slightly upward-->
-<!--deleteBtn.style.position = 'relative';-->
-<!--deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift-->
-
-<!--        // Delete functionality-->
-<!--        deleteBtn.addEventListener('click', () => {-->
-<!--            locationContainer.removeChild(locationWrapper);-->
-<!--        });-->
-
-<!--        // Append input and delete button to wrapper-->
-<!--        locationWrapper.appendChild(locationInput);-->
-<!--        locationWrapper.appendChild(deleteBtn);-->
-
-<!--        // Append wrapper to the container-->
-<!--        locationContainer.appendChild(locationWrapper);-->
-<!--    });-->
-<!--</script>-->
-
-
-<script>
-    const addDayBtn = document.getElementById('addDayBtn');
-    const daysContainer = document.getElementById('days-container');
-
-    let dayCount = 0;
-
-    addDayBtn.addEventListener('click', () => {
-        const newDayBlock = document.createElement('div');
-        newDayBlock.classList.add('day-block');
-        newDayBlock.style.display = 'flex';
-        newDayBlock.style.flexWrap = 'wrap';
-        newDayBlock.style.justifyContent = 'space-between';
-        newDayBlock.style.border = '1px solid #ccc';
-        newDayBlock.style.padding = '10px';
-        newDayBlock.style.marginBottom = '10px';
-        newDayBlock.style.borderRadius = '5px';
-        newDayBlock.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
-        newDayBlock.style.position = 'relative';
-
-        // Increment day count
-        dayCount++;
-
-        // Add fields for Day Number and Destination
-        newDayBlock.innerHTML = `
-            <div style="flex: 1 1 calc(50% - 10px); margin: 5px;">
-                <label for="day`+dayCount+`" style="display: block; margin-bottom: 5px; font-weight: bold;">Day Number:</label>
-                <input type="text" id="day`+dayCount+`" name="day[]" placeholder="E.g., 1"
-                    style="width: 100%; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
-            </div>
-            <div style="flex: 1 1 calc(50% - 10px); margin: 5px;">
-                <label for="destination`+dayCount+`" style="display: block; margin-bottom: 5px; font-weight: bold;">Destination:</label>
-                <input type="text" id="destination`+dayCount+`" name="destination[]" placeholder="E.g., Amravati - Pune"
-                    style="width: 100%; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
-            </div>
-            <div style="flex: 1 1 100%; margin: 5px;">
-                <div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px;">
-                    <label for="sightseeing`+dayCount+`" style="font-weight: bold; margin-right: 10px;">
-                        Sightseeing Details:
-                    </label>
-                    <button type="button" class="addSightseeingBtn"
-                        style="background-color: #007bff; color: white; border: none; padding: 4px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div>
-                <div class="sightseeingContainer" style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
-                </div>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <label><input type="checkbox" name="breakfast[`+dayCount+`]" value="1">Breakfast</label>
-                    <label><input type="checkbox" name="lunch[`+dayCount+`]" value="1">Lunch</label>
-                    <label><input type="checkbox" name="dinner[`+dayCount+`]" value="1">Dinner</label>
-                    <label><input type="checkbox" name="nightStay[`+dayCount+`]" value="1">Night Stay</label>
-                    <label><input type="checkbox" name="hiTea[`+dayCount+`]" value="1">Hi-Tea</label>
-                </div>
-                <div style="width: 100%; display: flex; align-items: center;">
-                    <button class="deleteDayBtn" style="background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; height: 30px; width: 100px; display: flex; justify-content: center; align-items: center; font-size: 1rem; margin-left: auto;">
-                        Delete Day
-                    </button>
-                </div>
-            </div>
-        `;
-
-        daysContainer.appendChild(newDayBlock);
-
-        const addSightseeingBtn = newDayBlock.querySelector('.addSightseeingBtn');
-        const sightseeingContainer = newDayBlock.querySelector('.sightseeingContainer');
-
-        addSightseeingBtn.addEventListener('click', () => {
-            const sightseeingWrapper = document.createElement('div');
-            sightseeingWrapper.classList.add('sightseeingWrapper');
-            sightseeingWrapper.style.display = 'flex';
-            sightseeingWrapper.style.gap = '10px';
-            sightseeingWrapper.style.alignItems = 'center';
-
-            const sightseeingInput = document.createElement('input');
-            sightseeingInput.type = 'text';
-            sightseeingInput.placeholder = 'Enter details of sightseeing...';
-            sightseeingInput.style.flex = '1 1 calc(85% - 10px)';
-            sightseeingInput.style.height = '40px';
-            sightseeingInput.style.padding = '10px';
-            sightseeingInput.style.fontSize = '1rem';
-            sightseeingInput.style.border = '1px solid #ccc';
-            sightseeingInput.style.borderRadius = '5px';
-            sightseeingInput.style.boxSizing = 'border-box';
-            sightseeingInput.name = `sightseeingLocation[`+dayCount+`][]`;
-
-            const deleteBtn = document.createElement('button');
-            deleteBtn.classList.add('deleteBtn');
-            deleteBtn.style.backgroundColor = '#e74c3c';
-            deleteBtn.style.color = 'white';
-            deleteBtn.style.border = 'none';
-            deleteBtn.style.padding = '10px';
-            deleteBtn.style.borderRadius = '5px';
-            deleteBtn.style.cursor = 'pointer';
-            deleteBtn.style.height = '30px';
-            deleteBtn.style.width = '30px';
-            deleteBtn.style.display = 'flex';
-            deleteBtn.style.justifyContent = 'center';
-            deleteBtn.style.alignItems = 'center';
-            deleteBtn.style.fontSize = '1rem';
-            deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-
-            deleteBtn.style.position = 'relative';
-            deleteBtn.style.top = '-7px';
-
-            deleteBtn.addEventListener('click', () => {
-                sightseeingContainer.removeChild(sightseeingWrapper);
-            });
-
-            sightseeingWrapper.appendChild(sightseeingInput);
-            sightseeingWrapper.appendChild(deleteBtn);
-            sightseeingContainer.appendChild(sightseeingWrapper);
-        });
-    });
-
-    document.getElementById('days-container').addEventListener('click', function(e) {
-        if (e.target && e.target.classList.contains('deleteDayBtn')) {
-            e.target.closest('.day-block').remove();
-        }
-
-        if (e.target && e.target.classList.contains('deleteBtn')) {
-            e.target.closest('.sightseeingWrapper').remove();
-        }
-    });
-</script>
-
-
-
-			<script type="text/javascript">
-    // Initialize an empty array to store locations
-  
-
-<!--    document.getElementById('submitBtn').addEventListener('click', function() {-->
-<!--		alert(hii);-->
-   
-<!--    const fileInput = document.getElementById('packageImage');-->
-<!--    const file = fileInput.files[0];-->
-    
-<!--    const locationInputs = document.querySelectorAll('input[name="location[]"]');-->
-<!--    let locations = [];-->
-
-<!--    locationInputs.forEach(input => {-->
-<!--        const locationName = input.value.trim();-->
-<!--        if (locationName) {-->
-<!--            locations.push({ locationName });-->
-<!--        }-->
-<!--    });-->
-
-<!--   // console.log(locations)-->
-
-<!--   const itinerary = [];-->
-<!--const dayBlocks = document.querySelectorAll('.day-block');-->
-
-<!--dayBlocks.forEach((dayBlock, index) => {-->
-<!--    const day = dayBlock.querySelector('input[id="day'+(index + 1)+'"]').value;-->
-<!--    const destination = dayBlock.querySelector('input[id="destination'+(index + 1)+'"]').value;-->
-<!--    const breakfast = dayBlock.querySelector('input[name="breakfast['+(index + 1)+']"]').checked;-->
-<!--    const lunch = dayBlock.querySelector('input[name="lunch['+(index + 1)+']"]').checked;-->
-<!--    const dinner = dayBlock.querySelector('input[name="dinner['+(index + 1)+']"]').checked;-->
-<!--    const nightStay = dayBlock.querySelector('input[name="nightStay['+(index + 1)+']"]').checked;-->
-<!--    const hiTea = dayBlock.querySelector('input[name="hiTea['+(index + 1)+']"]').checked;-->
-
-<!--    const sightseeingEntries = [];-->
-<!--    const sightseeingWrappers = dayBlock.querySelectorAll('.sightseeingWrapper');-->
-
-<!--    sightseeingWrappers.forEach(wrapper => {-->
-<!--        const sightseeingLocation = wrapper.querySelector('input[name="sightseeingLocation['+(index + 1)+'][]"]').value;-->
-<!--        sightseeingEntries.push({ location: sightseeingLocation, day: 'Day '+day });-->
-<!--    });-->
-
-<!--    itinerary.push({-->
-<!--        day: 'Day '+day,-->
-<!--        destination: destination,-->
-<!--        dinner: dinner,-->
-<!--        breakfast: breakfast,-->
-<!--        hiTea: hiTea,-->
-<!--        nightStay: nightStay,-->
-<!--        lunch: lunch,-->
-<!--        sightseeingEntrie: sightseeingEntries-->
-<!--    });-->
-<!--});-->
-  
-
-<!--    if (file) {-->
-<!--        const reader = new FileReader();-->
-<!--        reader.onloadend = function() {-->
-<!--            const base64String = reader.result.replace("data:", "").replace(/^.+,/, "");-->
-
-<!--            const packageData = {-->
-<!--                packageName: $('#packageName').val(),-->
-<!--                duration: $('#duration').val(),-->
-<!--                price: $('#price').val(),-->
-<!--                packageType: $('#packageType').val(),-->
-<!--                packageImage: base64String,-->
-<!--                locations: locations,-->
-<!--                allInclude : {-->
-<!--                	hotel: document.getElementById('hotel').checked,-->
-<!--                    meals: document.getElementById('meals').checked,-->
-<!--                    transportation: document.getElementById('transport').checked,-->
-<!--                    flight: document.getElementById('flight').checked,-->
-<!--                    sightseeing: document.getElementById('sightseeing').checked,-->
-<!--                    visa: document.getElementById('visa').checked,-->
-<!--                    note: $('#note').val()-->
-<!--                },-->
-<!--                iternary : itinerary-->
-<!--            };-->
-
-           
-            
-<!--            // Convert packageData to JSON string-->
-<!--            const jsonData = JSON.stringify(packageData);-->
-<!--            //console.log(jsonData);-->
-
-<!--            // Send data via AJAX-->
-<!--            $.ajax({-->
-<!--                url: '/TouristWebsite/auth/updatePackageDetails/'+id, // Replace with your API endpoint-->
-<!--                type: 'POST',-->
-<!--                contentType: 'application/json',-->
-<!--                data: jsonData,-->
-<!--                success: function(response) {-->
-<!--                    alert(response);-->
-<!--                    //windows.href='addPackageType';-->
-<!--                },-->
-<!--                error: function(error) {-->
-<!--                    console.error('Error sending data:', error);-->
-<!--                }-->
-<!--            });-->
-<!--        };-->
-<!--        reader.readAsDataURL(file);-->
-<!--    } else {-->
-<!--        alert("Please select an image file first.");-->
-<!--    }-->
-<!--});-->
-</script>
-
-
-
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	  	<script src="lib/wow/wow.min.js"></script>
+	  	<script src="lib/easing/easing.min.js"></script>
+	  	<script src="lib/waypoints/waypoints.min.js"></script>
+	  	<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+	  	<script src="lib/tempusdominus/js/moment.min.js"></script>
+	  	<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+	  	<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+	  	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
-	
-	
-	
-	
-	
-$(document).ready(function () {
-    // Get packageId from the URL parameter
-	
-	
-    var packageId = getUrlParameter('id');
 
-    if (packageId) {
-        getPackageDetails(packageId);
+$(document).ready(function () {
+    // Get bookingId from the URL parameter
+    var bookingId = getUrlParameter('id');
+    var bookingDestination = ''; // To hold booking's destination
+
+    if (bookingId) {
+        getBookingDetails(bookingId);
     } else {
-        alert("Package ID is missing");
+        alert("Booking ID is missing");
     }
 
-    // Function to fetch package details (including locations, days, and itinerary)
-    function getPackageDetails(id) {
+    // Load course data for package selection dropdown
+    getCourseData();
+
+    // Function to fetch booking details (including locations, days, and itinerary)
+    function getBookingDetails(id) {
         $.ajax({
-            url: "/TouristWebsite/auth/getPackageDetails/" + id,
+            url: "getBookingDetails/" + id, // Ensure the correct endpoint is used
             type: "GET",
             contentType: "application/json",
             success: function (response) {
-                console.log(response); // Inspect the response
+                console.log("Server Response:", response); // Debugging
+
                 if (response) {
+                    bookingDestination = response.destination || ''; // Store the destination
                     populateForm(response);
-                    if (response.locations && Array.isArray(response.locations)) {
-                        populateLocations(response.locations);
-                    } else {
-                        $('#locationContainer').html('<p>No locations available for this package.</p>');
-                    }
-                    if (response.iternary && Array.isArray(response.iternary)) {
-                        populateItinerary(response.iternary);
-                        
-                    } else {
-                        $('#days-container').html('<p>No itinerary available for this package.</p>');
-                    }
                 } else {
-                    alert("No Package data found");
+                    alert("No Booking data found.");
                 }
             },
             error: function (jqXHR, status, errorThrown) {
                 if (jqXHR.status === 403) {
-                    alert("YOU DON'T HAVE PERMISSION");
+                    alert("You don't have permission to access this resource.");
+                } else if (jqXHR.status === 404) {
+                    alert("Booking not found.");
                 } else {
-                    alert("Failed to communicate with the server");
+                    alert("Failed to communicate with the server. Please try again later.");
                 }
             }
         });
     }
 
-	function populateForm(packageDetails) {
-	    console.log("Package Data:", packageDetails); // Debugging
+    // Function to populate the form with booking details
+    function populateForm(booking) {
+        console.log("Populating Form with Data:", booking); // Debugging
 
-	    // Populate text fields
-	    document.getElementById("id").value = packageDetails.id || '';
-	    document.getElementById("packageName").value = packageDetails.packageName || '';
-	    document.getElementById("duration").value = packageDetails.duration || '';
-	    document.getElementById("packageType").value = packageDetails.packageType || '';
-	    document.getElementById("price").value = packageDetails.price || '';
-	    document.getElementById("note").value = packageDetails.allInclude?.note || '';
-
-	    // Populate checkboxes
-	    if (packageDetails.allInclude) {
-	        console.log("All Include Data:", packageDetails.allInclude); // Debugging the data
-
-	        setCheckbox("hotel", packageDetails.allInclude.hotel);
-	        setCheckbox("meals", packageDetails.allInclude.meals);
-	        setCheckbox("transportation", packageDetails.allInclude.transportation);
-	        setCheckbox("flight", packageDetails.allInclude.flight);
-	        setCheckbox("sightseeing", packageDetails.allInclude.sightseeing);
-	        setCheckbox("visa", packageDetails.allInclude.visa);
-	    } else {
-	        console.warn("AllInclude data is missing or undefined");
-	        resetCheckboxes();
-	    }
-
-	    // Display image if present
-	    const imagePreview = document.getElementById("imagePreview"); // Target the img tag for preview
-
-	    if (packageDetails.packageImage) { 
-	        imagePreview.src = "data:image/jpeg;base64," + packageDetails.packageImage;  // Use directly without re-adding the prefix
-	        imagePreview.style.display = 'block'; // Show the image preview container
-	    } else {
-	        imagePreview.src = ''; // Clear the previous image
-	        imagePreview.style.display = 'none'; // Hide if no image
-	    }
-	}
-
-
-    // Function to dynamically populate locations
-	function populateLocations(locations) {
-	    const locationContainer = document.getElementById('locationContainer');
-	    locationContainer.innerHTML = ''; // Clear existing locations
-
-	    // Check if locations are provided
-	    if (Array.isArray(locations) && locations.length > 0) {
-	        locations.forEach((location) => {
-	            const locationWrapper = document.createElement('div');
-	            locationWrapper.style.display = 'flex';
-	            locationWrapper.style.alignItems = 'center';
-	            locationWrapper.style.gap = '5px';
-	            locationWrapper.style.marginTop = '5px';
-
-	            // Location Input
-	            const locationInput = document.createElement('input');
-	            locationInput.type = 'text';
-	            locationInput.value = location.locationName || '';
-	            locationInput.placeholder = 'Enter location';
-	            locationInput.style.padding = '8px';
-	            locationInput.style.border = '1px solid #ccc';
-	            locationInput.style.borderRadius = '3px';
-	            locationInput.style.flex = '1';
-	            locationInput.style.fontSize = '0.9rem';
-				locationInput.id = 'location'; // Set a unique id if needed
-	            locationInput.name = 'location[]';
-
-	            // Create the delete button
-	            const deleteBtn = document.createElement('button');
-	            deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-	            deleteBtn.style.backgroundColor = '#e74c3c';
-	            deleteBtn.style.color = 'white';
-	            deleteBtn.style.border = 'none';
-	            deleteBtn.style.padding = '8px';
-	            deleteBtn.style.borderRadius = '3px';
-	            deleteBtn.style.cursor = 'pointer';
-	            deleteBtn.style.display = 'flex';
-	            deleteBtn.style.alignItems = 'center';
-	            deleteBtn.style.justifyContent = 'center';
-	            deleteBtn.style.fontSize = '1rem';
-
-	            // Align the delete button correctly
-	            deleteBtn.style.height = '30px';
-	            deleteBtn.style.width = '30px';
-
-	            // Shift the button slightly upward
-	            deleteBtn.style.position = 'relative';
-	            deleteBtn.style.top = '-7px'; // Adjust this value to control the upward shift
-
-	            // Delete functionality
-	            deleteBtn.addEventListener('click', () => {
-	                locationContainer.removeChild(locationWrapper);
-	            });
-
-	            // Append input and delete button to wrapper
-	            locationWrapper.appendChild(locationInput);
-	            locationWrapper.appendChild(deleteBtn);
-
-	            // Append wrapper to container
-	            locationContainer.appendChild(locationWrapper);
-	        });
-	    } else {
-	        locationContainer.innerHTML = '<p>No locations available for this package.</p>';
-	    }
-	}
-
-
-	function populateItinerary(itinerary) {
-	    const daysContainer = document.getElementById('days-container');
-	    let dayCount = 0;
-
-	    // Clear the previous content (in case the function is called multiple times)
-	    daysContainer.innerHTML = '';
-
-	    // Loop through the fetched data to populate each day
-	    itinerary.forEach(day => {
-	        dayCount++;
-
-	        const newDayBlock = document.createElement('div');
-	        newDayBlock.classList.add('day-block');
-	        newDayBlock.style.display = 'flex';
-	        newDayBlock.style.flexWrap = 'wrap';
-	        newDayBlock.style.justifyContent = 'space-between';
-	        newDayBlock.style.border = '1px solid #ccc';
-	        newDayBlock.style.padding = '10px';
-	        newDayBlock.style.marginBottom = '10px';
-	        newDayBlock.style.borderRadius = '5px';
-	        newDayBlock.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.1)';
-	        newDayBlock.style.position = 'relative';
-
-	        // Add fields for Day Number and Destination
-	        newDayBlock.innerHTML = `
-	            <div style="flex: 1 1 calc(50% - 10px); margin: 5px;">
-	                <label for="day${dayCount}" style="display: block; margin-bottom: 5px; font-weight: bold;">Day Number:</label>
-	                <input type="text" id="day`+dayCount+`" name="day[]" value="${day.day ? day.day : ''}" placeholder="E.g., 1"
-	                    style="width: 100%; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
-	            </div>
-	            <div style="flex: 1 1 calc(50% - 10px); margin: 5px;">
-	                <label for="destination${dayCount}" style="display: block; margin-bottom: 5px; font-weight: bold;">Destination:</label>
-	                <input type="text" id="destination`+dayCount+`" name="destination[]" value="${day.destination || ''}" placeholder="E.g., Amravati - Pune"
-	                    style="width: 100%; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
-	            </div>
-	            <div style="flex: 1 1 100%; margin: 5px;">
-	                <div style="display: flex; justify-content: flex-start; align-items: center; gap: 10px;">
-	                    <label for="sightseeing${dayCount}" style="font-weight: bold; margin-right: 10px;">
-	                        Sightseeing Details:
-	                    </label>
-	                    <button type="button" class="addSightseeingBtn"
-	                        style="background-color: #007bff; color: white; border: none; padding: 4px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
-	                        <i class="fas fa-plus"></i>
-	                    </button>
-	                </div>
-	                <div class="sightseeingContainer" style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
-	                </div>
-	                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-	                    <label><input type="checkbox" name="breakfast[`+dayCount+`]" value="1" ${day.meals.breakfast ? 'checked' : ''}>Breakfast</label>
-	                    <label><input type="checkbox"  name="lunch[`+dayCount+`]" value="1" ${day.meals.lunch ? 'checked' : ''}>Lunch</label>
-	                    <label><input type="checkbox" name="dinner[${dayCount}]" value="1" ${day.meals.dinner ? 'checked' : ''}>Dinner</label>
-	                    <label><input type="checkbox" name="nightStay[`+dayCount+`]" value="1" ${day.nightStay ? 'checked' : ''}>Night Stay</label>
-	                    <label><input type="checkbox" name="hiTea[`+dayCount+`]" value="1" ${day.hiTea ? 'checked' : ''}>Hi-Tea</label>
-	                </div>
-	                <div style="width: 100%; display: flex; align-items: center;">
-	                    <button class="deleteDayBtn" style="background-color: #e74c3c; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; height: 30px; width: 100px; display: flex; justify-content: center; align-items: center; font-size: 1rem; margin-left: auto;">
-	                        Delete Day
-	                    </button>
-	                </div>
-	            </div>
-	        `;
-
-	        // Append the new day block to the container
-	        daysContainer.appendChild(newDayBlock);
-
-	        const addSightseeingBtn = newDayBlock.querySelector('.addSightseeingBtn');
-	        const sightseeingContainer = newDayBlock.querySelector('.sightseeingContainer');
-
-	        // Loop through and add sightseeing details if any
-	        if (Array.isArray(day.sightseeing)) {
-	            day.sightseeing.forEach(sight => {
-	                const sightseeingWrapper = document.createElement('div');
-	                sightseeingWrapper.classList.add('sightseeingWrapper');
-	                sightseeingWrapper.style.display = 'flex';
-	                sightseeingWrapper.style.gap = '10px';
-	                sightseeingWrapper.style.alignItems = 'center';
-
-	                const sightseeingInput = document.createElement('input');
-	                sightseeingInput.type = 'text';
-	                sightseeingInput.value = sight;
-	                sightseeingInput.placeholder = 'Enter details of sightseeing...';
-	                sightseeingInput.style.flex = '1 1 calc(85% - 10px)';
-	                sightseeingInput.style.height = '40px';
-	                sightseeingInput.style.padding = '10px';
-	                sightseeingInput.style.fontSize = '1rem';
-	                sightseeingInput.style.border = '1px solid #ccc';
-	                sightseeingInput.style.borderRadius = '5px';
-	                sightseeingInput.style.boxSizing = 'border-box';
-	                sightseeingInput.name = `sightseeingLocation[`+dayCount+`][]`;
-
-	                const deleteBtn = document.createElement('button');
-	                deleteBtn.classList.add('deleteBtn');
-	                deleteBtn.style.backgroundColor = '#e74c3c';
-	                deleteBtn.style.color = 'white';
-	                deleteBtn.style.border = 'none';
-	                deleteBtn.style.padding = '10px';
-	                deleteBtn.style.borderRadius = '5px';
-	                deleteBtn.style.cursor = 'pointer';
-	                deleteBtn.style.height = '30px';
-	                deleteBtn.style.width = '30px';
-	                deleteBtn.style.display = 'flex';
-	                deleteBtn.style.justifyContent = 'center';
-	                deleteBtn.style.alignItems = 'center';
-	                deleteBtn.style.fontSize = '1rem';
-	                deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-
-	                deleteBtn.style.position = 'relative';
-	                deleteBtn.style.top = '-7px';
-
-	                deleteBtn.addEventListener('click', () => {
-	                    sightseeingContainer.removeChild(sightseeingWrapper);
-	                });
-
-	                sightseeingWrapper.appendChild(sightseeingInput);
-	                sightseeingWrapper.appendChild(deleteBtn);
-	                sightseeingContainer.appendChild(sightseeingWrapper);
-	            });
-	        }
-
-	        // Add a new sightseeing entry if the button is clicked
-	        addSightseeingBtn.addEventListener('click', () => {
-	            const sightseeingWrapper = document.createElement('div');
-	            sightseeingWrapper.classList.add('sightseeingWrapper');
-	            sightseeingWrapper.style.display = 'flex';
-	            sightseeingWrapper.style.gap = '10px';
-	            sightseeingWrapper.style.alignItems = 'center';
-
-	            const sightseeingInput = document.createElement('input');
-	            sightseeingInput.type = 'text';
-	            sightseeingInput.placeholder = 'Enter details of sightseeing...';
-	            sightseeingInput.style.flex = '1 1 calc(85% - 10px)';
-	            sightseeingInput.style.height = '40px';
-	            sightseeingInput.style.padding = '10px';
-	            sightseeingInput.style.fontSize = '1rem';
-	            sightseeingInput.style.border = '1px solid #ccc';
-	            sightseeingInput.style.borderRadius = '5px';
-	            sightseeingInput.style.boxSizing = 'border-box';
-	            sightseeingInput.name = `sightseeingLocation[${dayCount}][]`;
-
-	            const deleteBtn = document.createElement('button');
-	            deleteBtn.classList.add('deleteBtn');
-	            deleteBtn.style.backgroundColor = '#e74c3c';
-	            deleteBtn.style.color = 'white';
-	            deleteBtn.style.border = 'none';
-	            deleteBtn.style.padding = '10px';
-	            deleteBtn.style.borderRadius = '5px';
-	            deleteBtn.style.cursor = 'pointer';
-	            deleteBtn.style.height = '30px';
-	            deleteBtn.style.width = '30px';
-	            deleteBtn.style.display = 'flex';
-	            deleteBtn.style.justifyContent = 'center';
-	            deleteBtn.style.alignItems = 'center';
-	            deleteBtn.style.fontSize = '1rem';
-	            deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-
-	            deleteBtn.style.position = 'relative';
-	            deleteBtn.style.top = '-7px';
-
-	            deleteBtn.addEventListener('click', () => {
-	                sightseeingContainer.removeChild(sightseeingWrapper);
-	            });
-
-	            sightseeingWrapper.appendChild(sightseeingInput);
-	            sightseeingWrapper.appendChild(deleteBtn);
-	            sightseeingContainer.appendChild(sightseeingWrapper);
-	        });
-
-	        // Add delete day functionality
-	        const deleteDayBtn = newDayBlock.querySelector('.deleteDayBtn');
-	        deleteDayBtn.addEventListener('click', () => {
-	            daysContainer.removeChild(newDayBlock);
-	        });
-	    });
-	}
-
-
-
-	// Utility function to safely set checkbox
-	function setCheckbox(id, value) {
-	    const checkbox = document.getElementById(id);
-	    if (checkbox) {
-	        checkbox.checked = Boolean(value);
-
-	        // Disable checkbox if not checked
-	       
-	    } else {
-	        console.warn(`Checkbox with id '${id}' not found`);
-	    }
-	}
-
-	// Utility function to reset all checkboxes
-	function resetCheckboxes() {
-	    // Enable all checkboxes
-	    ["hotel", "meals", "transportation", "flight", "sightseeing", "visa"].forEach(id => {
-	        const checkbox = document.getElementById(id);
-	        if (checkbox) {
-	            checkbox.disabled = false;  // Enable the checkbox
-	        }
-	    });
-	}
-
-
-    // Utility function to get URL parameters
-    function getUrlParameter(name) {
-        var results = new RegExp('[?&]' + name + '=([^&#]*)').exec(window.location.href);
-        return results ? decodeURIComponent(results[1]) : null;
+        document.getElementById("id").value = booking.id || '';
+        document.getElementById("customer_Name").value = booking.customer_Name || '';
+        document.getElementById("email").value = booking.email || '';
+        document.getElementById("address").value = booking.address || '';
+        document.getElementById("mobile_Number").value = booking.mobile_Number || '';
+        document.getElementById("destination").value = booking.destination || '';
+        document.getElementById("special_Request").value = booking.special_Request || '';
+        document.getElementById("modOffBooking").value = booking.modOffBooking || '';
+        document.getElementById("start_Date").value = booking.start_Date ? booking.start_Date.split('T')[0] : '';
+        document.getElementById("end_Date").value = booking.end_Date ? booking.end_Date.split('T')[0] : '';
+        $("#start_Date").val(booking.start_Date || '');
+        $("#end_Date").val(booking.end_Date || '');
     }
-});
 
-function getInclusions() {
-    const selectedCheckboxes = document.querySelectorAll('input[name="inclusions"]:checked');
-    const inclusions = Array.from(selectedCheckboxes).map(checkbox => checkbox.value);
-    console.log("Selected Inclusions:", inclusions);
-    return inclusions;
+    // Function to load package data for the dropdown
+   function getCourseData() {
+    $.ajax({
+        type: "GET",
+        url: 'getAllPackages', // API endpoint
+        dataType: 'json', // Expected response type
+        success: function (response) {
+            console.log("Course Data Response:", response); // Debugging
+
+            // Clear existing options
+            $("#destination").empty();
+
+            // Add default "Select a Package" option
+            var appenddata1 = "<option value='' disabled selected>Select a Package</option>";
+
+            // Add the selected destination if available
+            if (bookingDestination) {
+                appenddata1 += "<option value='" + bookingDestination + "' selected>" + bookingDestination + "</option>";
+            }
+
+            if (response && response.length > 0) {
+                for (var i = 0; i < response.length; i++) {
+                    appenddata1 += "<option value='" + response[i].packageName + "'>" + response[i].packageName + "</option>";
+                }
+
+                $("#destination").html(appenddata1); // Populate the dropdown
+            } else {
+                console.warn("No package data found.");
+                alert("No packages available at the moment.");
+            }
+        },
+        error: function (jqXHR, status, errorThrown) {
+            console.error("Error fetching package data:", errorThrown); // Debugging
+            if (jqXHR.status === 403) {
+                alert("You don't have permission to access this resource.");
+            } else {
+                alert("Failed to load packages. Please try again later.");
+            }
+        }
+    });
 }
 
 
- 
 
+    // Function to get URL parameter by name
+    function getUrlParameter(name) {
+        name = name.replace(/[[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+});
+
+	  </script>
+	  
+	  
+	<script type="text/javascript">
+    $(document).ready(function () {
+        // Listen for the 'Update Booking' button click event
+        $('#submitBtn').click(function () {
+            updateBookingDetails();
+        });
+
+        // Function to update booking details
+        function updateBookingDetails() {
+            // Get the booking ID (make sure the ID is retrieved correctly)
+            var id = $("#id").val();
+
+            // Construct the booking object with form values
+            var booking = {
+                id: id,
+                customer_Name: $("#customer_Name").val(),
+                email: $("#email").val(),
+                address: $("#address").val(),
+                mobile_Number: $("#mobile_Number").val(),
+                destination: $("#destination").val(),
+                special_Request: $("#special_Request").val(),
+                modOffBooking: $("#modOffBooking").val(),
+                start_Date: $("#start_Date").val(),
+                end_Date: $("#end_Date").val()
+            };
+
+            // Send the updated booking details to the server via AJAX
+            $.ajax({
+                url: 'updateBookingDetails/' + id, // Ensure the correct API endpoint
+                type: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(booking),
+                success: function () {
+                    alert("Booking updated successfully!");
+                    // Optionally, redirect to a different page or refresh the page
+                    window.location.reload(); // Refresh the page
+                },
+                error: function (jqXHR, status, errorThrown) {
+                    // Handle error cases
+                    if (jqXHR.status === 404) {
+                        alert("Booking not found.");
+                    } else if (jqXHR.status === 403) {
+                        alert("You don't have permission to update this booking.");
+                    } else {
+                        alert("Failed to update booking. Please try again.");
+                    }
+                }
+            });
+        }
+    });
 </script>
+
+</body>
+</html>
+
+
+			
+
+
+			
+
+		
+
+			
+
 
 
 
