@@ -51,18 +51,18 @@
     </dependency>
     
     <!-- Apache POI - POI for working with older Excel file formats (xls) -->
-    <dependency>
-        <groupId>org.apache.poi</groupId>
-        <artifactId>poi</artifactId>
-        <version>5.2.3</version>
-    </dependency>
+<!--    <dependency>-->
+<!--        <groupId>org.apache.poi</groupId>-->
+<!--        <artifactId>poi</artifactId>-->
+<!--        <version>5.2.3</version>-->
+<!--    </dependency>-->
 
     <!-- Apache POI - Common utilities for POI -->
-    <dependency>
-        <groupId>org.apache.poi</groupId>
-        <artifactId>poi-ooxml-schemas</artifactId>
-        <version>4.1.2</version>
-    </dependency>
+<!--    <dependency>-->
+<!--        <groupId>org.apache.poi</groupId>-->
+<!--        <artifactId>poi-ooxml-schemas</artifactId>-->
+<!--        <version>4.1.2</version>-->
+<!--    </dependency>-->
     
     <!-- Apache Commons Logging, required by Apache POI -->
     <dependency>
@@ -70,18 +70,18 @@
         <artifactId>commons-logging</artifactId>
         <version>1.2</version>
     </dependency>
-        <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-devtools</artifactId>
-    <scope>runtime</scope>
-    <optional>true</optional>
-</dependency>
+<!--        <dependency>-->
+<!--    <groupId>org.springframework.boot</groupId>-->
+<!--    <artifactId>spring-boot-devtools</artifactId>-->
+<!--    <scope>runtime</scope>-->
+<!--    <optional>true</optional>-->
+<!--</dependency>-->
 
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>4.1.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.poi</groupId>-->
+<!--            <artifactId>poi-ooxml</artifactId>-->
+<!--            <version>4.1.0</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -117,16 +117,23 @@
             <artifactId>itextpdf</artifactId>
             <version>5.5.13.3</version>
         </dependency>
+        
+      
 
        
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+   <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.10.1</version>
+            <configuration>
+                <source>1.8</source>
+                <target>1.8</target>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 </project>

@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .csrf().disable() // Disable CSRF for simplicity (enable properly in production)
             .authorizeRequests()
-                .antMatchers("/**").permitAll() // Allow unrestricted access
+                //.antMatchers("/").permitAll() // Allow unrestricted access
                 .antMatchers("/auth/**").authenticated() // Restrict access to authenticated users
                 .anyRequest().permitAll() // Optional: apply other rules
             .and()
