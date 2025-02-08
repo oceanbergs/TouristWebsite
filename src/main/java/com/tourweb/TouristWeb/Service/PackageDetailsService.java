@@ -136,7 +136,7 @@ public class PackageDetailsService  implements PackageDetailsServiceInterface{
 	    System.out.println("Fetching package details with ID: " + id);
 	    Optional<PackageDetails> optionalDetails = packageDetailsRepo.findById(id);
 
-	    if (optionalDetails.isEmpty()) {
+	    if (optionalDetails.isPresent()) {
 	        System.out.println("Package not found with ID: " + id);
 	        return null;
 	    }
